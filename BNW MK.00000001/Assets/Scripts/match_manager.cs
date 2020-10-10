@@ -13,6 +13,7 @@ public class match_manager : MonoBehaviour
         importManager = GameObject.Find("network_manager").GetComponent<import_manager>();
     }
 
+    // this is only for testing purposes before the menu UI is in place.
     void Update()
     {
         // Easter egg to test the nextworking with.
