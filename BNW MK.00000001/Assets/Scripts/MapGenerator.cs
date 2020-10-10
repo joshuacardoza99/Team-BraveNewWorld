@@ -6,7 +6,7 @@ public class MapGenerator : MonoBehaviour
 {
     public GameObject ground;
     public int width = 10;
-    public string baseName = "terrain-world-lake";
+    public string baseName = "ground";
     public float xScale = 25;
     public float yScale = 1;
     public float zScale = 25;
