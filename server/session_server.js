@@ -11,10 +11,11 @@ let socketOptions = {      "host": "0.0.0.0",
 	                }
 let server        = new web_socket.Server(socketOptions);
 let matches       = [];
+let matchNumber   = 0;
 let players       = [];
 
 // Finds the match the player is in.
-let find_match = function(player)
+let find_players_match = function(player)
 {
 	let match = null;
 
@@ -27,6 +28,31 @@ let find_match = function(player)
 	return match;
 }
 
+// Finds a match for the player to join.
+let find_match  = function (player)
+{
+	let matchFound = null;
+
+	if (matches.length > 0)
+	{
+		matches.forEach((match) =>
+		{
+			if (!match.is_full())
+			{
+				matchFound = match.get_id();
+			}
+		})
+	}
+	
+	if (matchFound == null)
+	{
+		matchFound = matchNumber;
+		matches.push(new match(matchNumber++));
+	}
+
+	return matchFound;
+}
+
 // Handles new incomming messages for this match.
 let message_handler = function(message, sender)
 {
@@ -34,19 +60,15 @@ let message_handler = function(message, sender)
 	// Parameter = [string name]
 	if (message.gameObject == "server_functions" && message.function == "add_player")
 	{
-		if (matches.length == 0)
-		{
-			matches.push(new match(0));
-		}
 
-		players.push(new player(message.parameters[0], sender._socket.remoteAddress, 0, sender))
-		matches[0].add_player(sender);
+		players.push(new player(message.parameters[0], message.parameters[1], sender._socket.remoteAddress, 0, sender))
+		matches[find_match()].add_player(sender);
 
 		console.log(message.parameters[0] + " is connected now.");
 	}
 	else
 	{
-		find_match(sender).message_handler(message, sender);
+		find__players_match(sender).message_handler(message, sender);
 	}
 }
 
