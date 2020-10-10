@@ -18,7 +18,7 @@ let find_match = function(player)
 {
 	let match = null;
 
-	this.players.forEach((nextPlayer) =>
+	players.forEach((nextPlayer) =>
 	{
 		if (nextPlayer.socket == player)
 			match = player.match;
@@ -34,13 +34,15 @@ let message_handler = function(message, sender)
 	// Parameter = [string name]
 	if (message.gameObject == "server_functions" && message.function == "add_player")
 	{
-		if (this.matches == [])
+		if (matches.length == 0)
 		{
-			this.matches.push(new match(0));
+			matches.push(new match(0));
 		}
 
-		this.players.push(new player(message.parameters[0], sender._socket.remoteAddress, 0, sender))
-		this.matches[0].add_player(sender);
+		players.push(new player(message.parameters[0], sender._socket.remoteAddress, 0, sender))
+		matches[0].add_player(sender);
+
+		console.log(message.parameters[0] + " is connected now.");
 	}
 	else
 	{
@@ -52,10 +54,11 @@ let message_handler = function(message, sender)
 server.on("connection", (socket) =>
 {
 	let currentPlayer = socket;
+	console.log("connected");
 
 	try
 	{
-	    this.players.push(currentPlayer);
+	    players.push(currentPlayer);
 
 	    socket.on("message", (message) =>
 		{
@@ -76,7 +79,7 @@ server.on("connection", (socket) =>
 
 		socket.on("close", () =>
 		{
-			this.players = this.players.filter(player => player != currentPlayer);
+			players = players.filter(player => player != currentPlayer);
 		})
 	}
 	catch (error)
