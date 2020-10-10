@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NativeWebSocket;
+using UnityEditor.Networking.PlayerConnection;
 
 public class server_manager : MonoBehaviour
 {
@@ -68,12 +69,6 @@ public class server_manager : MonoBehaviour
         #if !UNITY_WEBGL || UNITY_EDITOR
                 webSocket.DispatchMessageQueue();
         #endif
-
-        // Easter egg to test the nextworking with.
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            webSocket.SendText("Hi!Hi!Hi!");
-        }
     }
 
     // Private Functions
