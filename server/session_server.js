@@ -34,13 +34,15 @@ let message_handler = function(message, sender)
 	// Parameter = [string name]
 	if (message.gameObject == "server_functions" && message.function == "add_player")
 	{
-		if (matches == [])
+		if (matches.length == 0)
 		{
 			matches.push(new match(0));
 		}
 
 		players.push(new player(message.parameters[0], sender._socket.remoteAddress, 0, sender))
 		matches[0].add_player(sender);
+
+		console.log(message.parameters[0] + " is connected now.");
 	}
 	else
 	{
@@ -52,6 +54,7 @@ let message_handler = function(message, sender)
 server.on("connection", (socket) =>
 {
 	let currentPlayer = socket;
+	console.log("connected");
 
 	try
 	{

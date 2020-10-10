@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +28,14 @@ public class import_manager : MonoBehaviour
     // Runs the given function on the local machine and all machines in the current match.
     public void run_function_all(string gameObject, string function, string[] parameters)
     {
-        run_function(gameObject, function, parameters);
-        serverManager.send(gameObject, function, parameters);
+        if (gameObject == "server_functions")
+        {
+            serverManager.send(gameObject, function, parameters);
+        }
+        else
+        {
+            run_function(gameObject, function, parameters);
+            serverManager.send(gameObject, function, parameters);
+        }
     }
 }
