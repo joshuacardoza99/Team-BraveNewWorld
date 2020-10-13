@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class match_manager : MonoBehaviour
 {
-    // Global Variables //
-    import_manager importManager;
+    // External Classes//
+    import_manager import_manager;
 
     // Start is called before the first frame update
     void Start()
     {
-        importManager = GameObject.Find("network_manager").GetComponent<import_manager>();
+        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
     }
 
     // this is only for testing purposes before the menu UI is in place.
@@ -20,6 +20,8 @@ public class match_manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             start_network_game(new string[2] { "ElijahHero", "Asian" });
+
+            import_manager.run_function_all("server_functions", "print_from_database_api", new string[] {});
         }
     }
   
@@ -29,7 +31,7 @@ public class match_manager : MonoBehaviour
     // parameters = [string name, string civilization]
     public void start_network_game(string[] parameters)
     {
-        importManager.run_function_all("server_functions", "add_player", parameters);
+        import_manager.run_function_all("server_functions", "add_player", parameters);
     }
 
     // Starts a single player game locally.

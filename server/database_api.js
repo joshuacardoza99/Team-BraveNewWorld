@@ -9,7 +9,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    let mySql = require('mysql');
    
    // Global Variables
-   let connectionOptions = {
+ /*  let connectionOptions = {
                               host: serverName,
                               user: username,
                               password: password
@@ -19,5 +19,11 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    connection.connect((error) => 
    {
       console.log("Connected");
-   })
+   })*/
+
+
+   this.print_from_database_api = function ()
+   {
+      console.log("Ran from the database api.");
+   }
 }

@@ -15,7 +15,7 @@ let matchNumber   = 0;
 let players       = [];
 
 // Finds the match the player is in.
-let find_players_match = function(player)
+let find_player_match = function(player)
 {
 	let match = null;
 
@@ -68,7 +68,7 @@ let message_handler = function(message, sender)
 	}
 	else
 	{
-		find__players_match(sender).message_handler(message, sender);
+		find_player_match(sender).message_handler(message, sender);
 	}
 }
 

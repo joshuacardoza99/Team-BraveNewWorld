@@ -1,6 +1,11 @@
 exports.match = function(id = 0)
 {
-	let databaseApi = require("../server/database_api").database_api:
+	// External Class.
+	let database_api = require("../server/database_api").database_api;
+	console.log(database_api);
+	//	database_api = new database_api.database_api();
+
+	// Global Variables.
 	let players = [];
 
 	// Add a new player to the match.
@@ -33,7 +38,7 @@ exports.match = function(id = 0)
 	{
 		if (message.gameObject == "server_functions")
 		{
-
+			database_api[message.function](message.parameters);
 		}
 		else
 		{
