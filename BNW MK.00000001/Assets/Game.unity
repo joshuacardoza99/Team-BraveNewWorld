@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742b42d3a18c8f849a1aaed47e31306c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ground: {fileID: 0}
+  ground: {fileID: 1000013996404026, guid: 7f1b282f38132324e8fd0fc3a592d693, type: 3}
   width: 10
   baseName: ground
   xScale: 25
