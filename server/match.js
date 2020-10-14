@@ -2,16 +2,15 @@ exports.match = function(id = 0)
 {
 	// External Class.
 	let database_api = require("../server/database_api").database_api;
-	console.log(database_api);
-	//	database_api = new database_api.database_api();
-
+	    database_api = new database_api();
+	    
 	// Global Variables.
 	let players = [];
+	let matchId = id;
 
 	// Add a new player to the match.
 	this.add_player = function(player = null)
 	{
-		database_api = new database_api();
 		players.push(player);
 	}
 
@@ -30,7 +29,7 @@ exports.match = function(id = 0)
 	// Returns the match's id.
 	this.get_id = function()
 	{
-		return id;
+		return matchId;
 	}
 
 	// Handles new incomming messages for this match.

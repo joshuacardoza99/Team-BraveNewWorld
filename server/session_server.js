@@ -17,15 +17,17 @@ let players       = [];
 // Finds the match the player is in.
 let find_player_match = function(player)
 {
-	let match = null;
+	let playerMatch = null;
 
 	players.forEach((nextPlayer) =>
 	{
 		if (nextPlayer.socket == player)
-			match = player.match;
+		{
+			playerMatch = nextPlayer.match;
+		}
 	})
 
-	return match;
+	return matches.filter((match) => match.get_id() == playerMatch)[0];
 }
 
 // Finds a match for the player to join.
@@ -39,15 +41,15 @@ let find_match  = function (player)
 		{
 			if (!match.is_full())
 			{
-				matchFound = match.get_id();
+				matchFound = match;
 			}
 		})
 	}
 	
 	if (matchFound == null)
 	{
-		matchFound = matchNumber;
-		matches.push(new match(matchNumber++));
+		matchFound = new match(matchNumber++);
+		matches.push(matchFound);
 	}
 
 	return matchFound;
@@ -57,14 +59,14 @@ let find_match  = function (player)
 let message_handler = function(message, sender)
 {
 	// server_function.add_player function
-	// Parameter = [string name]
+	// Parameter = [string name, string civilization]
 	if (message.gameObject == "server_functions" && message.function == "add_player")
 	{
+		let match = find_match();
+		let newPlayer = new player(message.parameters[0], message.parameters[1], sender._socket.remoteAddress, match.get_id(), sender);
 
-		players.push(new player(message.parameters[0], message.parameters[1], sender._socket.remoteAddress, 0, sender))
-		matches[find_match()].add_player(sender);
-
-		console.log(message.parameters[0] + " is connected now.");
+		players.push(newPlayer)
+		match.add_player(sender);
 	}
 	else
 	{
