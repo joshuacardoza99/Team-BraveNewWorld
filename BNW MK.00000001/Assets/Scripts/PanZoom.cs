@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PanZoom : MonoBehaviour
 {
-    private static readonly float PanSpeed = 20f;
-    private static readonly float ZoomSpeedTouch = 0.1f;
-    private static readonly float ZoomSpeedMouse = 0.5f;
+    private static readonly float PanSpeed = 60f;
+    private static readonly float ZoomSpeedTouch = 5f;
+    private static readonly float ZoomSpeedMouse = 5f;
 
-    private static readonly float[] BoundsX = new float[] { -100f, 550f };
-    private static readonly float[] BoundsZ = new float[] { -180f, -200f };
-    private static readonly float[] ZoomBounds = new float[] { 250f, 1000f };
+    private static readonly float[] BoundsX    = new float[] { -1000f,  1000f };
+    private static readonly float[] BoundsZ    = new float[] { -1000f,  1000f };
+    private static readonly float[] ZoomBounds = new float[] { -10000f, 10000f};
 
     private Camera cam;
 

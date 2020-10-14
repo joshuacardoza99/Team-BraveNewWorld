@@ -58,6 +58,7 @@
     <Compile Include="Assets\Scripts\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\import_manager.cs" />
     <Compile Include="Assets\Scripts\match_manager.cs" />
+    <Compile Include="Assets\Scripts\PanZoom.cs" />
     <Compile Include="Assets\Scripts\server_manager.cs" />
     <Compile Include="Assets\Packages\WebSocket\WebSocket.cs" />
     <Compile Include="Assets\Scripts\PanZoom.cs" />
