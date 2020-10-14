@@ -8,9 +8,9 @@ public class PanZoom : MonoBehaviour
     private static readonly float ZoomSpeedTouch = 0.1f;
     private static readonly float ZoomSpeedMouse = 0.5f;
 
-    private static readonly float[] BoundsX = new float[] { -10f, 5f };
-    private static readonly float[] BoundsZ = new float[] { -18f, -4f };
-    private static readonly float[] ZoomBounds = new float[] { 25f, 100f };
+    private static readonly float[] BoundsX = new float[] { -100f, 550f };
+    private static readonly float[] BoundsZ = new float[] { -180f, -200f };
+    private static readonly float[] ZoomBounds = new float[] { 250f, 1000f };
 
     private Camera cam;
 
