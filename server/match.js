@@ -37,7 +37,22 @@ exports.match = function(id = 0)
 	{
 		if (message.gameObject == "server_functions")
 		{
-			database_api[message.function](message.parameters);
+			if (message.function == "get_player")
+			{
+				database_api.get_player((data) =>
+				{
+					this response = {
+										gameObject = message.parameters[0],
+										function   = message.parameters[1],
+										parameters = data
+									};
+
+					sender.send(JSON.stringify(response));
+				})
+			}
+			else
+				database_api[message.function](message.parameters);
+			}
 		}
 		else
 		{

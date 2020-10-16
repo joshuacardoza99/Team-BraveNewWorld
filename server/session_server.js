@@ -27,7 +27,8 @@ let find_player_match = function(player)
 		}
 	})
 
-	return matches.filter((match) => match.get_id() == playerMatch)[0];
+	console.log(matches.filter((match) => match.get_id() == playerMatch));
+	return matches.filter((match) => match.get_id() == playerMatch);
 }
 
 // Finds a match for the player to join.
