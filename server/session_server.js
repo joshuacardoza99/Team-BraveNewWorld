@@ -11,42 +11,66 @@ let socketOptions = {      "host": "0.0.0.0",
 	                }
 let server        = new web_socket.Server(socketOptions);
 let matches       = [];
+let matchNumber   = 0;
 let players       = [];
 
 // Finds the match the player is in.
-let find_match = function(player)
+let find_player_match = function(player)
 {
-	let match = null;
+	let playerMatch = null;
 
 	players.forEach((nextPlayer) =>
 	{
 		if (nextPlayer.socket == player)
-			match = player.match;
+		{
+			playerMatch = nextPlayer.match;
+		}
 	})
 
-	return match;
+	return matches.filter((match) => match.get_id() == playerMatch)[0];
+}
+
+// Finds a match for the player to join.
+let find_match  = function (player)
+{
+	let matchFound = null;
+
+	if (matches.length > 0)
+	{
+		matches.forEach((match) =>
+		{
+			if (!match.is_full())
+			{
+				matchFound = match;
+			}
+		})
+	}
+	
+	if (matchFound == null)
+	{
+		matchFound = new match(matchNumber++);
+		matches.push(matchFound);
+	}
+
+	return matchFound;
 }
 
 // Handles new incomming messages for this match.
 let message_handler = function(message, sender)
 {
 	// server_function.add_player function
-	// Parameter = [string name]
+	// Parameter = [string name, string civilization]
 	if (message.gameObject == "server_functions" && message.function == "add_player")
 	{
-		if (matches.length == 0)
-		{
-			matches.push(new match(0));
-		}
+		let match = find_match();
+		let newPlayer = new player(message.parameters[0], message.parameters[1], sender._socket.remoteAddress, match.get_id(), sender);
 
-		players.push(new player(message.parameters[0], sender._socket.remoteAddress, 0, sender))
-		matches[0].add_player(sender);
-
-		console.log(message.parameters[0] + " is connected now.");
+		players.push(newPlayer)
+		match.add_player(sender);
 	}
 	else
 	{
-		find_match(sender).message_handler(message, sender);
+		find_player_match(sender).message_handler(message, sender);
 	}
 }
 

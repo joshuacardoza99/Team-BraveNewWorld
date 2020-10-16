@@ -22,20 +22,20 @@ public class import_manager : MonoBehaviour
     // Runs the given function on the local machine.
     public void run_function(string gameObject, string function, string[] parameters)
     {
-        GameObject.Find(gameObject).SendMessage(function, parameters);
+        try
+        {
+            GameObject.Find(gameObject).SendMessage(function, parameters);
+        }
+        catch
+        {
+            Debug.Log("Not a local function.");
+        }
     }
 
     // Runs the given function on the local machine and all machines in the current match.
     public void run_function_all(string gameObject, string function, string[] parameters)
     {
-        if (gameObject == "server_functions")
-        {
-            serverManager.send(gameObject, function, parameters);
-        }
-        else
-        {
-            run_function(gameObject, function, parameters);
-            serverManager.send(gameObject, function, parameters);
-        }
+        run_function(gameObject, function, parameters);
+        serverManager.send(gameObject, function, parameters);
     }
 }
