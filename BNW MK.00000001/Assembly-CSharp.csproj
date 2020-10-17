@@ -55,43 +55,43 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\MenuScene.cs" />
      <Compile Include="Assets\Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\MapGenerator.cs" />
      <Compile Include="Assets\Scripts\import_manager.cs" />
+     <Compile Include="Assets\Scripts\ChangeScene.cs" />
+     <Compile Include="Assets\Scripts\Preload.cs" />
      <Compile Include="Assets\Scripts\match_manager.cs" />
      <Compile Include="Assets\Scripts\server_manager.cs" />
      <Compile Include="Assets\Packages\WebSocket\WebSocket.cs" />
-     <Compile Include="Assets\Scripts\MenuScene.cs" />
-     <Compile Include="Assets\Scripts\ChangeScene.cs" />
-     <Compile Include="Assets\Scripts\Preload.cs" />
      <Compile Include="Assets\Scripts\PopUpPanel.cs" />
      <Compile Include="Assets\Scripts\SwipeMenu.cs" />
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/Users/Elaya/Desktop/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>D:/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>C:/Users/Elaya/Desktop/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>D:/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/Elaya/Desktop/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>D:/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Users/Elaya/Desktop/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>D:/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>C:/Users/Elaya/Desktop/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>D:/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>C:/Users/Elaya/Desktop/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>D:/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualStudio.Editor">
- <HintPath>C:/Users/Elaya/Desktop/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+ <HintPath>D:/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/Elaya/Desktop/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>D:/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>C:/Users/Elaya/Desktop/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>D:/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.6f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
