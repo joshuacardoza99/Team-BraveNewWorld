@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
 {
+    // External Classes//
+    import_manager import_manager;
+
+    // Public Global Vairables
     public GameObject ground;
     public int width = 10;
     public string baseName = "ground";
@@ -13,9 +17,25 @@ public class MapGenerator : MonoBehaviour
 
     void Start()
     {
-        create_ground_area(new string[4] { "0", "0", width.ToString(), width.ToString() });
+        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
+
+        
         //find_nearby(new string[2]{transform.GameObject.name, "1"})
-        find_nearby(new string[2] { "ground_1_0_1", "1" });
+        //find_nearby(new string[2] { "ground_1_0_1", "1" });
+    }
+
+    // Create a new map for a game.
+    // Parameters = []
+    public void generate_map(string[] parameters)
+    {
+        import_manager.run_function_all("Map", "create_ground_area", new string[4] {"0", "0", width.ToString(), width.ToString()});
+    }
+    
+    // Loads an existing map for a game.
+    // Parameters = []
+    public void load_map(string[] parameters)
+    {
+        create_ground_area(new string[4] {"0", "0", width.ToString(), width.ToString()});
     }
 
     // Create a strip of ground objects.
