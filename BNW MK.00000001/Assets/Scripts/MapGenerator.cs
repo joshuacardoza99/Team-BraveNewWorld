@@ -25,13 +25,15 @@ public class MapGenerator : MonoBehaviour
     }
 
     // Create a new map for a game.
-    public void generate_map()
+    // Parameters = []
+    public void generate_map(string[] parameters)
     {
-        import_manager.run_function_all("MapGenerator", "create_ground_area", new string[4] {"0", "0", width.ToString(), width.ToString()});
+        import_manager.run_function_all("Map", "create_ground_area", new string[4] {"0", "0", width.ToString(), width.ToString()});
     }
     
     // Loads an existing map for a game.
-    public void load_map()
+    // Parameters = []
+    public void load_map(string[] parameters)
     {
         create_ground_area(new string[4] {"0", "0", width.ToString(), width.ToString()});
     }

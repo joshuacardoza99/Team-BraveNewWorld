@@ -15,11 +15,6 @@ public class match_manager : MonoBehaviour
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
     }
 
-    void Awake()
-    {
-        DontDestroyOnLoad(transform.gameObject);
-    }
-
     // this is only for testing purposes before the menu UI is in place.
     void Update()
     {
@@ -49,7 +44,7 @@ public class match_manager : MonoBehaviour
     // parameters = [string name, string civilization]
     public void start_local_game(string[] parameters)
     {
-        import_manager.run_function_all("server_functions", "add_player", parameters);
+        import_manager.run_function("Map", "load_map", parameters);
     }
 
     // Starts a multiplayer game over a private host.
