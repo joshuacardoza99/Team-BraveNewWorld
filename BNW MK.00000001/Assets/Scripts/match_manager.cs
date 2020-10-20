@@ -10,14 +10,33 @@ public class match_manager : MonoBehaviour
     // External Classes//
     import_manager import_manager;
 
+    // Private Global Variables.
+    match currentMatch = null;
+
+    // Private Classes //
+    // Class that holds the data for a match.
     private class match
     {
         private int  matchId;
         private bool isHost;
 
-        public void getId ()
+        // Returns the match Id.
+        public int getId ()
         {
             return matchId;
+        }
+
+        // Determins if the player is the match host.
+        public bool isMatchHost()
+        {
+            return isHost;
+        }
+
+        // Contructor function for the match class.
+        public match(int id, bool isHost)
+        {
+            this.matchId = id;
+            this.isHost  = isHost;
         }
     }
 
@@ -56,7 +75,11 @@ public class match_manager : MonoBehaviour
     // parameters = [string name, string civilization]
     public void start_local_game(string[] parameters)
     {
-        import_manager.run_function("Map", "load_map", parameters);
+        if (currentMatch == null)
+        {
+            currentMatch = new match(1, true);
+            import_manager.run_function("Map", "load_map", parameters);
+        }
     }
 
     // Starts a multiplayer game over a private host.
@@ -71,5 +94,13 @@ public class match_manager : MonoBehaviour
     public void join_host_game(string[] parameters)
     {
 
+    }
+
+    // Sets the match data from the server for network games.
+    // Parameters = [int id, bool isHost]
+    public void set_match (string[] parameters)
+    {
+        currentMatch = new match(int.Parse(parameters[0]), bool.Parse(parameters[1]));
+        Debug.Log("Match is set to " + parameters[0]);
     }
 }

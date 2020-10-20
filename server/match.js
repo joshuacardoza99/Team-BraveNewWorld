@@ -7,10 +7,16 @@ exports.match = function(id = 0)
 	// Global Variables.
 	let players = [];
 	let matchId = id;
+	let host    = null;
 
 	// Add a new player to the match.
 	this.add_player = function(player = null)
 	{
+		if (players.length == 0)
+		{
+			host = player;
+		}
+
 		players.push(player);
 	}
 
@@ -32,6 +38,12 @@ exports.match = function(id = 0)
 		return matchId;
 	}
 
+	// Determine if the match has a host or not.
+	this.has_host = function()
+	{
+		return host != null;
+	}
+
 	// Handles new incomming messages for this match.
 	this.message_handler = function(message, sender)
 	{
@@ -41,16 +53,17 @@ exports.match = function(id = 0)
 			{
 				database_api.get_player((data) =>
 				{
-					this response = {
-										gameObject = message.parameters[0],
-										function   = message.parameters[1],
-										parameters = data
+					let response = {
+										gameObject: message.parameters[0],
+										function: message.parameters[1],
+										parameters: data
 									};
 
 					sender.send(JSON.stringify(response));
 				})
 			}
 			else
+			{
 				database_api[message.function](message.parameters);
 			}
 		}
