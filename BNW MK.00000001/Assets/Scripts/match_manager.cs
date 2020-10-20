@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Windows.WebCam;
 
 public class match_manager : MonoBehaviour
@@ -13,6 +14,11 @@ public class match_manager : MonoBehaviour
     {
         private int  matchId;
         private bool isHost;
+
+        public void getId ()
+        {
+            return matchId;
+        }
     }
 
     // Start is called before the first frame update
