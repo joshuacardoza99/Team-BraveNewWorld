@@ -9,6 +9,12 @@ public class match_manager : MonoBehaviour
     // External Classes//
     import_manager import_manager;
 
+    private class match
+    {
+        private int  matchId;
+        private bool isHost;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

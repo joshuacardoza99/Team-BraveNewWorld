@@ -56,12 +56,15 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\MapGenerator.cs" />
+     <Compile Include="Assets\Scripts\TileMove.cs" />
      <Compile Include="Assets\Scripts\import_manager.cs" />
      <Compile Include="Assets\Scripts\ChangeScene.cs" />
+     <Compile Include="Assets\Scripts\click_handlers.cs" />
      <Compile Include="Assets\Scripts\match_manager.cs" />
      <Compile Include="Assets\Scripts\server_manager.cs" />
+     <Compile Include="Assets\Scripts\PlayerMove.cs" />
      <Compile Include="Assets\Packages\WebSocket\WebSocket.cs" />
-     <Compile Include="Assets\Scripts\click_handlers.cs" />
+     <Compile Include="Assets\Scripts\Tile.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/elija/OneDrive/Documents/College/CS 451/Project/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

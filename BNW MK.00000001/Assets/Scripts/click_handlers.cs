@@ -29,7 +29,8 @@ public class click_handlers : MonoBehaviour
 
         activeButton = Instantiate(button) as GameObject;
         activeButton.transform.SetParent(canvas.transform, false);
-        activeButton.GetComponent<Button>().onClick.AddListener(() => { import_manager.run_function("button_manager", clickAction, new string[0] { }); });
+        activeButton.GetComponent<Button>().onClick.AddListener(() => { import_manager.run_function("button_manager", clickAction, new string[0] { });});
+    
     }
 
     // Starts a Local game when clicked.
