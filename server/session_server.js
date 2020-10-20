@@ -68,6 +68,14 @@ let message_handler = function(message, sender)
 
 		players.push(newPlayer)
 		match.add_player(sender);
+
+		sender.send(JSON.stringify(
+					{
+						gameObject: "network_manager",
+						  function: "set_match",
+						parameters: [newPlayer.match, !match.has_host()]
+					}));
+		console.log("sent match data");
 	}
 	else
 	{
