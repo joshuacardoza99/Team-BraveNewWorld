@@ -26,12 +26,10 @@ public class match_manager : MonoBehaviour
         // Easter egg to test the nextworking with.
         if (Input.GetKeyDown(KeyCode.Space))
         {
-           start_network_game(new string[2] { "ElijahHero", "Asian" });
+            start_network_game(new string[2] { "ElijahHero", "Asian" });
 
-           // import_manager.run_function_all("server_functions", "get_player", new string[2] {"match_manager", "receive_test_data"});
-           import_manager.run_function_all("server_functions", "get_player", new string[4] {"0", "apple", "0", "banana"});
+            import_manager.run_function_all("server_functions", "get_player", new string[2] {"match_manager", "receive_test_data"});
         }
-        
     }
   
     public void receive_test_data(string[] parameters)

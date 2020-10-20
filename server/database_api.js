@@ -1,11 +1,11 @@
 exports.database_api = function(serverName = "", username = "", password = "", databaseName = "")
 {  
-
-   /*let serverName = "localhost";
+/*
+   let serverName = "localhost";
    let userName   = "root"; // In phpMyAdmin root is used
    let password   = "";
-   let dbname     = "unitybackend";*/
-   
+   let dbname     = "unitybackend";
+*/
    // External Classes
    let mySQL = require('mysql');
    
