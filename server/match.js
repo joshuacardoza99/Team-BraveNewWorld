@@ -41,17 +41,16 @@ exports.match = function(id = 0)
 			{
 				database_api.get_player((data) =>
 				{
-					let response = {
-										gameObject: message.parameters[0],
-										function: message.parameters[1],
-										parameters: data
+					this response = {
+										gameObject = message.parameters[0],
+										function   = message.parameters[1],
+										parameters = data
 									};
 
 					sender.send(JSON.stringify(response));
 				})
 			}
 			else
-			{
 				database_api[message.function](message.parameters);
 			}
 		}

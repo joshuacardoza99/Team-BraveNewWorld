@@ -43,12 +43,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
+<<<<<<< HEAD
     width: 1366
     height: 635
   m_MinSize: {x: 679, y: 342}
   m_MaxSize: {x: 12004, y: 8042}
   vertical: 0
   controlID: 101
+=======
+    width: 1280
+    height: 587.3333
+  m_MinSize: {x: 678, y: 492}
+  m_MaxSize: {x: 14002, y: 14042}
+  vertical: 0
+  controlID: 27
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -66,8 +75,13 @@ MonoBehaviour:
     serializedVersion: 2
     x: 1090
     y: 0
+<<<<<<< HEAD
     width: 276
     height: 635
+=======
+    width: 302.6667
+    height: 587.3333
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
@@ -92,10 +106,17 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 290
     height: 364
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
+=======
+    width: 230
+    height: 316.66666
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -111,12 +132,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ConsoleWindow
+  m_Name: ProjectBrowser
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 364
     width: 1090
     height: 271
@@ -128,6 +150,19 @@ MonoBehaviour:
   - {fileID: 17}
   m_Selected: 1
   m_LastSelected: 0
+=======
+    y: 316.66666
+    width: 977.3333
+    height: 270.66666
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 12}
+  m_Panes:
+  - {fileID: 12}
+  - {fileID: 17}
+  m_Selected: 0
+  m_LastSelected: 1
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -221,12 +256,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1090
     height: 635
   m_MinSize: {x: 403, y: 342}
   m_MaxSize: {x: 8003, y: 8042}
   vertical: 1
   controlID: 102
+=======
+    width: 977.3333
+    height: 587.3333
+  m_MinSize: {x: 402, y: 492}
+  m_MaxSize: {x: 10001, y: 14042}
+  vertical: 1
+  controlID: 28
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -246,12 +290,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1090
     height: 364
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
   controlID: 103
+=======
+    width: 977.3333
+    height: 316.66666
+  m_MinSize: {x: 402, y: 221}
+  m_MaxSize: {x: 8002, y: 4021}
+  vertical: 0
+  controlID: 29
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -269,6 +322,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 290
     y: 0
+<<<<<<< HEAD
     width: 800
     height: 364
   m_MinSize: {x: 202, y: 221}
@@ -279,6 +333,18 @@ MonoBehaviour:
   - {fileID: 16}
   m_Selected: 1
   m_LastSelected: 0
+=======
+    width: 747.3333
+    height: 316.66666
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 15}
+  m_Panes:
+  - {fileID: 15}
+  - {fileID: 16}
+  m_Selected: 0
+  m_LastSelected: 1
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -329,9 +395,15 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: 86370000
     m_LastClickedID: 14214
     m_ExpandedIDs: 000000005a3700005c3700005e37000060370000623700006437000066370000683700006a3700006c3700006e37000000ca9a3b
+=======
+    m_SelectedIDs: 403f0000
+    m_LastClickedID: 16192
+    m_ExpandedIDs: 00000000203f0000223f0000243f0000263f0000283f00002a3f00002c3f00002e3f0000303f0000323f0000343f000000ca9a3b
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -359,7 +431,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 000000005a3700005c3700005e37000060370000623700006437000066370000683700006a3700006c3700006e370000
+=======
+    m_ExpandedIDs: 00000000203f0000223f0000243f0000263f0000283f00002a3f00002c3f00002e3f0000303f0000323f0000343f0000
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -386,7 +462,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -481,9 +557,15 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
       m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: 56fbffff
+=======
+      m_SelectedIDs: 4c480000
+      m_LastClickedID: 18508
+      m_ExpandedIDs: 92e1feff92e3feff94e1ffff26e2ffff104700003a480000
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 

@@ -5,6 +5,10 @@
     "\\BNW MK.00000001\\Assets",
     "\\BNW MK.00000001\\Assets\\Scripts"
   ],
+<<<<<<< HEAD
   "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\server_manager.cs",
+=======
+  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\match_manager.cs",
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
   "PreviewInSolutionExplorer": false
 }
