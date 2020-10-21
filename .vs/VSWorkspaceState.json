@@ -3,8 +3,9 @@
     "",
     "\\BNW MK.00000001",
     "\\BNW MK.00000001\\Assets",
-    "\\BNW MK.00000001\\Assets\\Scripts"
+    "\\BNW MK.00000001\\Assets\\Scripts",
+    "\\server"
   ],
-  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\server_manager.cs",
+  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\Tile.cs",
   "PreviewInSolutionExplorer": false
 }

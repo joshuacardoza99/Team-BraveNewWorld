@@ -15,13 +15,13 @@ let matchNumber   = 0;
 let players       = [];
 
 // Finds the match the player is in.
-let find_player_match = function(player)
+let find_player_match = function(player_socket)
 {
 	let playerMatch = null;
 
 	players.forEach((nextPlayer) =>
 	{
-		if (nextPlayer.socket == player)
+		if (nextPlayer.socket == player_socket)
 		{
 			playerMatch = nextPlayer.match;
 		}
