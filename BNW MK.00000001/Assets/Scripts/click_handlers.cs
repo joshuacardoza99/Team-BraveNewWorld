@@ -37,7 +37,7 @@ public class click_handlers : MonoBehaviour
     // Parameters = [];
     public void click_local (string[] parameters)
     {
-        import_manager.run_function("network_manager", "start_network_game", new string[0] { });
+        import_manager.run_function("network_manager", "start_local_game", new string[0] { });
         detroy_menu();
     }
 

@@ -28,7 +28,7 @@ public class import_manager : MonoBehaviour
         }
         catch
         {
-            Debug.Log(gameObject + "." + function + " is not a local function.");
+            Debug.Log("Not a local function.");
         }
     }
 
