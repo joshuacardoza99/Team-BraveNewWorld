@@ -9,10 +9,29 @@ public class match_manager : MonoBehaviour
     // External Classes//
     import_manager import_manager;
 
+<<<<<<< HEAD
+=======
+    private class match
+    {
+        private int  matchId;
+        private bool isHost;
+
+        public void getId ()
+        {
+            return matchId;
+        }
+    }
+
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
     // Start is called before the first frame update
     void Start()
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
+    }
+
+    void Awake()
+    {
+        DontDestroyOnLoad(transform.gameObject);
     }
 
     // this is only for testing purposes before the menu UI is in place.
@@ -44,7 +63,11 @@ public class match_manager : MonoBehaviour
     // parameters = [string name, string civilization]
     public void start_local_game(string[] parameters)
     {
+<<<<<<< HEAD
+        import_manager.run_function_all("server_functions", "add_player", parameters);
+=======
         import_manager.run_function("Map", "load_map", parameters);
+>>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
     }
 
     // Starts a multiplayer game over a private host.
