@@ -1,27 +1,29 @@
+// This program launches a new session_server to manage players connecting to different matches.
+
 // External classes.
-let player     = require("../server/player").player;
-let match      = require("../server/match").match;
-let web_socket = require("ws");
+let player     = require("../server/player").player;   // Player Class that holds connection and game information for a player.
+let match      = require("../server/match").match;     // Match Class that holds the information and functions to connect all the players in a game together.
+let web_socket = require("ws");                        // WS Class that allows to start connections with the players.
 
 // Global variables.
-let socketOptions = {      "host": "0.0.0.0",
+let socketOptions = {      "host": "0.0.0.0",             // Holds the options for the WebSocket server.
 	                       "port": 5678,
 	                       "path": "/",
 	                 "maxPayload": 10e7
 	                }
-let server        = new web_socket.Server(socketOptions);
-let matches       = [];
-let matchNumber   = 0;
-let players       = [];
+let server        = new web_socket.Server(socketOptions); // Holds the WebSocket server.
+let matches       = [];                                   // All matches on this server.
+let matchNumber   = 0;                                    // Next match id.
+let players       = [];                                   // All the players connected to this server.
 
 // Finds the match the player is in.
-let find_player_match = function(player)
+let find_player_match = function(playerSocket)
 {
-	let playerMatch = null;
+	let playerMatch = null; // The match id for the match the player is playing in.
 
 	players.forEach((nextPlayer) =>
 	{
-		if (nextPlayer.socket == player)
+		if (nextPlayer.socket == playerSocket)
 		{
 			playerMatch = nextPlayer.match;
 		}
@@ -32,9 +34,9 @@ let find_player_match = function(player)
 }
 
 // Finds a match for the player to join.
-let find_match  = function (player)
+let find_match  = function ()
 {
-	let matchFound = null;
+	let matchFound = null; // Match Object for the next player to join.
 
 	if (matches.length > 0)
 	{
@@ -57,35 +59,38 @@ let find_match  = function (player)
 }
 
 // Handles new incomming messages for this match.
-let message_handler = function(message, sender)
+let message_handler = function(message, playerSocket)
 {
 	// server_function.add_player function
 	// Parameter = [string name, string civilization]
 	if (message.gameObject == "server_functions" && message.function == "add_player")
 	{
-		let match = find_match();
-		let newPlayer = new player(message.parameters[0], message.parameters[1], sender._socket.remoteAddress, match.get_id(), sender);
+		let match     = find_match();                                   // Match object that the new player will join.
+		let newPlayer = new player(message.parameters[0],               // Player object for the new player.
+			                       message.parameters[1],
+			                       playerSocket._socket.remoteAddress,
+			                       match.get_id(), playerSocket);
 
 		players.push(newPlayer)
-		match.add_player(sender);
+		match.add_player(playerSocket);
 	}
 	else
 	{
-		find_player_match(sender).message_handler(message, sender);
+		find_player_match(playerSocket).message_handler(message, playerSocket);
 	}
 }
 
 // Starts the match server listing for connections.
-server.on("connection", (socket) =>
+server.on("connection", (playerSocket) =>
 {
-	let currentPlayer = socket;
+	let currentPlayer = playerSocket; // Socket connected to the current player.
 	console.log("connected");
 
 	try
 	{
 	    players.push(currentPlayer);
 
-	    socket.on("message", (message) =>
+	    playerSocket.on("message", (message) =>
 		{
 			try
 			{
@@ -97,12 +102,12 @@ server.on("connection", (socket) =>
 			}
 		})
 
-		socket.on("error", (error) =>
+		playerSocket.on("error", (error) =>
 		{
 			console.log(error);
 		})
 
-		socket.on("close", () =>
+		playerSocket.on("close", () =>
 		{
 			players = players.filter(player => player != currentPlayer);
 		})
