@@ -11,54 +11,6 @@ public class match_manager : MonoBehaviour
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
 
-<<<<<<< HEAD
-=======
-    // Private Class //
-
-    // This class holds all the match data.
-    private class match
-    {
-        private int    matchId; // Id for the current match.
-        private bool   host;    // Determines if the player's computer is hosting the match.
-        private string type;    // Type of game the match consist of.
-
-        // Returns the current match's id.
-        public int getId ()
-        {
-            return this.matchId;
-        }
-
-        // Determines if the player's computer is hosting the match.
-        public bool isHost ()
-        {
-            return this.host;
-        }
-
-        // Sets the player's computer to host the current match.
-        public void setHost ()
-        {
-            this.host = true;
-        }
-
-        // Gets the type of game the match is managing.
-        public string getType ()
-        {
-            return this.type;
-        }
-
-        // Constructor function for the match class.
-        public match (int id, bool host, string type)
-        {
-            this.matchId = id;
-            this.host    = host;
-            this.type    = type;
-        }
-    }
-
-    // Private Global Variables //
-    match currentMatch; // The current match object storing the data for the current game.
-
->>>>>>> Tests
     // Start is called before the first frame update
     void Start()
     {
@@ -93,14 +45,8 @@ public class match_manager : MonoBehaviour
     // Starts a single player game locally.
     // parameters = [string name, string civilization]
     public void start_local_game(string[] parameters)
-<<<<<<< HEAD
     {
         import_manager.run_function_all("server_functions", "add_player", parameters);
-=======
-    {   
-        currentMatch = new match(0, true, "local");
-        import_manager.run_function("Map", "load_map", parameters);
->>>>>>> Tests
     }
 
     // Starts a multiplayer game over a private host.
@@ -121,7 +67,7 @@ public class match_manager : MonoBehaviour
     // parameters = [int id, bool host, string type]
     public void setup_match (string[] parameters)
     {
-        currentMatch = new match(int.Parse(parameters[0]), bool.Parse(parameters[1]), parameters[2]);
-        Debug.Log(JsonUtility.ToJson(currentMatch));
+       // currentMatch = new match(int.Parse(parameters[0]), bool.Parse(parameters[1]), parameters[2]);
+       // Debug.Log(JsonUtility.ToJson(currentMatch));
     }
 }
