@@ -6,6 +6,10 @@
     "\\BNW MK.00000001\\Assets\\Scripts",
     "\\server"
   ],
+<<<<<<< HEAD
   "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\Tile.cs",
+=======
+  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\import_manager.cs",
+>>>>>>> Tests
   "PreviewInSolutionExplorer": false
 }

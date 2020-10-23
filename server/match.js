@@ -1,16 +1,23 @@
+// This class holds the information and functions to connect all the players in a game together.
 exports.match = function(id = 0)
 {
 	// External Class.
-	let database_api = require("../server/database_api").database_api;
+	let database_api = require("../server/database_api").database_api; // Database_Api Class that enables communication to the database.
 	    database_api = new database_api();
 	    
 	// Global Variables.
-	let players = [];
-	let matchId = id;
+	let players = [];   // All players in this match.
+	let matchId = id;   // Id of the match.
 
 	// Add a new player to the match.
 	this.add_player = function(player = null)
 	{
+		player.send(JSON.stringify(
+		{
+			gameObject: "network_manager",
+			  function: "setup_match",
+			parameters: [matchId.toString(), players.length > 1 ? "false" : "true", "network"]
+		}));
 		players.push(player);
 	}
 
@@ -33,7 +40,7 @@ exports.match = function(id = 0)
 	}
 
 	// Handles new incomming messages for this match.
-	this.message_handler = function(message, sender)
+	this.message_handler = function(message, playerSocket)
 	{
 		if (message.gameObject == "server_functions")
 		{
@@ -41,33 +48,34 @@ exports.match = function(id = 0)
 			{
 				database_api.get_player((data) =>
 				{
-					this response = {
-										gameObject = message.parameters[0],
-										function   = message.parameters[1],
-										parameters = data
+					let response = {   // JSON message to send to a player.
+										gameObject: message.parameters[0],
+										  function: message.parameters[1],
+										parameters: data
 									};
 
-					sender.send(JSON.stringify(response));
+					playerSocket.send(JSON.stringify(response));
 				})
 			}
 			else
+			{
 				database_api[message.function](message.parameters);
 			}
 		}
 		else
 		{
-			broadcast(message, sender);
+			broadcast(message, playerSocket);
 		}
 	}
 
 	// Sends the message to all other players in this match.
-	let broadcast = function (message, sender)
+	let broadcast = function (message, playerSocket)
 	{
-		this.players.forEach((player) =>
+		this.players.forEach((nextPlayerSocket) =>
 		{
-			if (player !== sender)
+			if (nextPlayerSocket !== playerSocket)
 			{
-				player.send(JSON.stringify(message));
+				nextPlayerSocket.send(JSON.stringify(message));
 			}
 		})
 	}

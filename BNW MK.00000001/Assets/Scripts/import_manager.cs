@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 
 public class import_manager : MonoBehaviour
 {
     // Global Variables //
-    server_manager serverManager;
+    server_manager serverManager; // Import_Manager Class that facilitates cross class, player, and server function calls.
 
     // Unity Triggured Functions //
 
@@ -14,7 +15,7 @@ public class import_manager : MonoBehaviour
     // Style Exception: This function's name must be styled like this so Unity will run it.
     void Start()
     {
-        serverManager = GameObject.Find("network_manager").GetComponent<server_manager>();
+        serverManager = GameObject.Find("network_manager").GetComponent<server_manager>(); // Connects to the import_manager.
     }
 
     // Public Funtions //
@@ -35,7 +36,10 @@ public class import_manager : MonoBehaviour
     // Runs the given function on the local machine and all machines in the current match.
     public void run_function_all(string gameObject, string function, string[] parameters)
     {
-        run_function(gameObject, function, parameters);
+        if (gameObject != "server_functions")
+        {
+            run_function(gameObject, function, parameters);
+        }
         serverManager.send(gameObject, function, parameters);
     }
 }

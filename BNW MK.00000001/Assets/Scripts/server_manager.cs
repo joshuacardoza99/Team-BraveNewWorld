@@ -11,22 +11,22 @@ public class server_manager : MonoBehaviour
     public string url = "ws://localhost:5678/"; // Public global variables that can be changed in the Unity UI.
 
     // Private Global Variables //
-    private WebSocket webSocket;
+    private WebSocket webSocket;  // WebSocket Class that allows to start connections with the players.
 
-    // Classes //
+    // Private Classes //
 
     // This class wraps messages that are to be send to other players or the server.
     private class update_message
     {
-        public string gameObject;
-        public string function;
-        public string[] parameters;
+        public string gameObject;   // GameObject's name that the function being called is in.
+        public string function;     // Function's name for the function being called.
+        public string[] parameters; // List of parameters the function being called need.
 
         // Contructor for update_message class.
         public update_message(string gameObject, string function, string[] parameters)
         {
             this.gameObject = gameObject;
-            this.function = function;
+            this.function   = function;
             this.parameters = parameters;
         }
     }
@@ -37,7 +37,7 @@ public class server_manager : MonoBehaviour
     // Style Exception: This function's name must be styled like this so Unity will run it.
     async void Start()
     {
-        webSocket = new WebSocket(url);
+        webSocket = new WebSocket(url); // 
 
         webSocket.OnOpen += () =>
         {
