@@ -12,6 +12,12 @@ exports.match = function(id = 0)
 	// Add a new player to the match.
 	this.add_player = function(player = null)
 	{
+		player.send(JSON.stringify(
+		{
+			gameObject: "network_manager",
+			  function: "setup_match",
+			parameters: [matchId.toString(), players.length > 1 ? "false" : "true", "network"]
+		}));
 		players.push(player);
 	}
 

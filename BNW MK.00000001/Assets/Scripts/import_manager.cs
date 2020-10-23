@@ -29,14 +29,17 @@ public class import_manager : MonoBehaviour
         }
         catch
         {
-            Debug.Log("Not a local function.");
+            Debug.Log(gameObject + "." + function + " is not a local function.");
         }
     }
 
     // Runs the given function on the local machine and all machines in the current match.
     public void run_function_all(string gameObject, string function, string[] parameters)
     {
-        run_function(gameObject, function, parameters);
+        if (gameObject != "server_functions")
+        {
+            run_function(gameObject, function, parameters);
+        }
         serverManager.send(gameObject, function, parameters);
     }
 }

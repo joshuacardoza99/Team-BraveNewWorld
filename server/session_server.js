@@ -29,8 +29,7 @@ let find_player_match = function(playerSocket)
 		}
 	})
 
-	console.log(matches.filter((match) => match.get_id() == playerMatch));
-	return matches.filter((match) => match.get_id() == playerMatch);
+	return matches.filter((match) => match.get_id() == playerMatch)[0];
 }
 
 // Finds a match for the player to join.
