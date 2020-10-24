@@ -2,36 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Windows.WebCam;
 
+// This class facilitates connected to and interacting with a match.
 public class match_manager : MonoBehaviour
 {
     // External Classes//
-    import_manager import_manager;
+    import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
 
-<<<<<<< HEAD
-=======
-    private class match
-    {
-        private int  matchId;
-        private bool isHost;
-
-        public void getId ()
-        {
-            return matchId;
-        }
-    }
-
->>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
     // Start is called before the first frame update
     void Start()
     {
-        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
-    }
-
-    void Awake()
-    {
-        DontDestroyOnLoad(transform.gameObject);
+        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
     }
 
     // this is only for testing purposes before the menu UI is in place.
@@ -41,7 +24,6 @@ public class match_manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             start_network_game(new string[2] { "ElijahHero", "Asian" });
-
             import_manager.run_function_all("server_functions", "get_player", new string[2] {"match_manager", "receive_test_data"});
         }
     }
@@ -50,6 +32,7 @@ public class match_manager : MonoBehaviour
     {
         Debug.Log(parameters[0]);
     }
+
     // Public Functions //
 
     // Starts a multiplayer game over the network.
@@ -63,11 +46,7 @@ public class match_manager : MonoBehaviour
     // parameters = [string name, string civilization]
     public void start_local_game(string[] parameters)
     {
-<<<<<<< HEAD
         import_manager.run_function_all("server_functions", "add_player", parameters);
-=======
-        import_manager.run_function("Map", "load_map", parameters);
->>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
     }
 
     // Starts a multiplayer game over a private host.
@@ -82,5 +61,13 @@ public class match_manager : MonoBehaviour
     public void join_host_game(string[] parameters)
     {
 
+    }
+
+    // Sets up the match class data for the current game.
+    // parameters = [int id, bool host, string type]
+    public void setup_match (string[] parameters)
+    {
+       // currentMatch = new match(int.Parse(parameters[0]), bool.Parse(parameters[1]), parameters[2]);
+       // Debug.Log(JsonUtility.ToJson(currentMatch));
     }
 }

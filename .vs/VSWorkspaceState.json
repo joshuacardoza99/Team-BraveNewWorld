@@ -3,12 +3,13 @@
     "",
     "\\BNW MK.00000001",
     "\\BNW MK.00000001\\Assets",
-    "\\BNW MK.00000001\\Assets\\Scripts"
+    "\\BNW MK.00000001\\Assets\\Scripts",
+    "\\server"
   ],
 <<<<<<< HEAD
-  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\server_manager.cs",
+  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\Tile.cs",
 =======
-  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\match_manager.cs",
->>>>>>> parent of 1adad588... Work On the Match_manager and the match_manager support in the session server
+  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\import_manager.cs",
+>>>>>>> Tests
   "PreviewInSolutionExplorer": false
 }
