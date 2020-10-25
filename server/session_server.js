@@ -6,7 +6,7 @@ let match      = require("../server/match").match;     // Match Class that holds
 let web_socket = require("ws");                        // WS Class that allows to start connections with the players.
 
 // Global variables.
-let socketOptions = {      "host": "0.0.0.0",             // Holds the options for the WebSocket server.
+let socketOptions = {      "host": '0.0.0.0',//"172.31.7.174",             // Holds the options for the WebSocket server.
 	                       "port": 5678,
 	                       "path": "/",
 	                 "maxPayload": 10e7
@@ -17,21 +17,13 @@ let matchNumber   = 0;                                    // Next match id.
 let players       = [];                                   // All the players connected to this server.
 
 // Finds the match the player is in.
-<<<<<<< HEAD
-let find_player_match = function(player_socket)
-=======
 let find_player_match = function(playerSocket)
->>>>>>> Tests
 {
 	let playerMatch = null; // The match id for the match the player is playing in.
 
 	players.forEach((nextPlayer) =>
 	{
-<<<<<<< HEAD
-		if (nextPlayer.socket == player_socket)
-=======
 		if (nextPlayer.socket == playerSocket)
->>>>>>> Tests
 		{
 			playerMatch = nextPlayer.match;
 		}
