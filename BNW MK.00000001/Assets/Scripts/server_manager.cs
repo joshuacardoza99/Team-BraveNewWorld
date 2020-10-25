@@ -8,7 +8,7 @@ using UnityEditor.Networking.PlayerConnection;
 public class server_manager : MonoBehaviour
 {
     // Public Global Variables //
-    public string url = "ws://localhost:5678/"; // Public global variables that can be changed in the Unity UI.
+    private string url = "ws://ec2-3-128-226-91.us-east-2.compute.amazonaws.com:5678"; // Public global variables that can be changed in the Unity UI.
 
     // Private Global Variables //
     private WebSocket webSocket;  // WebSocket Class that allows to start connections with the players.
@@ -46,6 +46,7 @@ public class server_manager : MonoBehaviour
 
         webSocket.OnError += (e) =>
         {
+            Debug.Log(e);
             Debug.Log("Error! " + e);
         };
 
