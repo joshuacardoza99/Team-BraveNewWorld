@@ -1,15 +1,16 @@
+// Export the database api
 exports.database_api = function(serverName = "", username = "", password = "", databaseName = "")
 {  
 /*
    let serverName = "localhost";
    let userName   = "root"; // In phpMyAdmin root is used
-   let password   = "";
-   let dbname     = "unitybackend";
+   let password   = "unitybackend";
+   let dbname     = "team-bravenewworld";
 */
    // External Classes
    let mySQL = require('mysql');
    
-   // Global Variables
+   // Connect the database to the server
    let connectionOptions = {
                               host: serverName,
                               user: username,
@@ -21,7 +22,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
       console.log("Connected");
    })
 
-   // Private functions, string of arrays
+   // Insert data into the database
    var insert_data = function(tableName = "", tableColumns = [""], tableData = [""])
    {
       var sql = "INSERT INTO   " + tableName + "(" + tableColumns.toString() + 
@@ -35,7 +36,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
             }
          });
    }
-
+   // Select data from a certain table
    var select_data = function(tableName = "", receiver = (result) =>{})
    {
       var sql = "SELECT * FROM" + tableName + ";";
@@ -53,6 +54,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
          });
    }
 
+   // Get the player
    this.get_player = function (parameters)
    {
       var sql = "SELECT * FROM " + tableName + " ";
@@ -66,13 +68,13 @@ exports.database_api = function(serverName = "", username = "", password = "", d
       });
    }
 
-   // List of parameters starting with ip, username, match, civilization
+   // Add the players with parameters starting with ip, username, match, civilization
    this.add_player = function(parameters)
    {
       insert_data("players", ["ip, username, match, civilization"], parameters);
    }
 
-   // List of parameters startingp
+   // Receive the player
    // Parameter = [GameObject, function]
    this.get_player = function(receiver)
    {
