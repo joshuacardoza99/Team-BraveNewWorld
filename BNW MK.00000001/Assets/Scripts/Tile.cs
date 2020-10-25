@@ -1,13 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UI;
+
 
 public class Tile : MonoBehaviour 
 {
+
+    // External Classes//
+    import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
+
     public bool walkable = true;
     public bool current = false;
     public bool target = false;
     public bool selectable = false;
+
 
     public List<Tile> adjacencyList = new List<Tile>();
 
@@ -24,31 +33,32 @@ public class Tile : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-
-	}
+        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
+    }
 	
 	// Update is called once per frame
 	void Update () 
 	{
         if (current)
         {
-            GetComponent<Renderer>().material.color = Color.magenta;
+            this.GetComponent<Renderer>().material.color = Color.magenta;
         }
         else if (target)
         {
-            GetComponent<Renderer>().material.color = Color.green;
+            this.GetComponent<Renderer>().material.color = Color.green;
         }
         else if (selectable)
         {
-            GetComponent<Renderer>().material.color = Color.blue;
+            this.GetComponent<Renderer>().material.color = Color.blue;
         }
         else
         {
-            GetComponent<Renderer>().material.color = Color.white;
+            this.GetComponent<Renderer>().material.color = Color.white;
         }
-	}
+    }
 
-    public void Reset()
+
+public void Reset()
     {
         adjacencyList.Clear();
 
@@ -62,6 +72,22 @@ public class Tile : MonoBehaviour
 
         f = g = h = 0;
     }
+
+    // Set current to this tile when it gets clicked
+    public void OnMouseDown()
+    {
+        import_manager.run_function("Map", "unselect_tile", new string[0] { });
+        import_manager.run_function("Map", "set_current", new string[1] { this.name });
+        current = true;
+    }
+
+    // Unselect this tile
+    // parameter = empty array (not used)
+    public void unselect(string [] parameter) 
+    {
+        current = false;
+    }
+    
 
     public void FindNeighbors(float jumpHeight, Tile target)
     {
