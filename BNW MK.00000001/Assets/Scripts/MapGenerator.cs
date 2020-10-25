@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using UnityEngine;
 
 public class MapGenerator : MonoBehaviour
@@ -14,6 +15,28 @@ public class MapGenerator : MonoBehaviour
     public float xScale = 25;
     public float yScale = 1;
     public float zScale = 25;
+    public string currentSelected = "ground_1_0_1"; // stores what tile is currently selected
+
+    // Get the name of the current selected tile
+    public string get_current()
+    {
+        return currentSelected;
+    }
+    // Set current selected tile
+    // parameters = setcurrent(this.name)
+    public void set_current(string[] input)
+    {
+        this.currentSelected = input[0];
+    }
+
+    //Unselect previously selected tile
+    // string parameter = empty (not used)
+    public void unselect_tile(string[] parameter)
+    {
+        //Debug.Log("Tile name" + get_current());
+        import_manager.run_function(get_current(), "unselect", new string[0] { });
+    }
+
 
     void Start()
     {

@@ -160,11 +160,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 140916347407893552, guid: 1c01ace4b689dba46a79bd02fb67b57e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Game
+      value: ChooseCiv
       objectReference: {fileID: 0}
     - target: {fileID: 140916347407893566, guid: 1c01ace4b689dba46a79bd02fb67b57e, type: 3}
       propertyPath: m_Name
-      value: local_game_button
+      value: SinglePlayer
       objectReference: {fileID: 0}
     - target: {fileID: 140916347407893567, guid: 1c01ace4b689dba46a79bd02fb67b57e, type: 3}
       propertyPath: m_LocalPosition.x
