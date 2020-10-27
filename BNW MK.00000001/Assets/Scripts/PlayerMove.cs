@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove : TacticsMove 
+public class PlayerMove : TileMove 
 {
 
 	// Use this for initialization

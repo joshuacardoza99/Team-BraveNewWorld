@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TacticsMove : MonoBehaviour 
+public class TileMove : MonoBehaviour 
 {
     public bool turn = false;
 
@@ -42,7 +42,7 @@ public class TacticsMove : MonoBehaviour
     public void GetCurrentTile()
     {
         currentTile = GetTargetTile(gameObject);
-        currentTile.current = true;
+        currentTile.occupied = true;
     }
 
     public Tile GetTargetTile(GameObject target)
@@ -165,7 +165,7 @@ public class TacticsMove : MonoBehaviour
     {
         if (currentTile != null)
         {
-            currentTile.current = false;
+            currentTile.occupied = false;
             currentTile = null;
         }
 

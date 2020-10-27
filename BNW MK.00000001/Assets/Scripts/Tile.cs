@@ -13,7 +13,8 @@ public class Tile : MonoBehaviour
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
 
     public bool walkable = true;
-    public bool current = false;
+    public bool current = false; // if the player is currently using this tile
+    public bool occupied = false; // if there is a character currently on this tile
     public bool target = false;
     public bool selectable = false;
 

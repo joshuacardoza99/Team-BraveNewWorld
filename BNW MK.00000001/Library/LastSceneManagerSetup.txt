@@ -1,16 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/ChooseCiv.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0
-- path: Assets/Scenes/Preload.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0
-- path: Assets/Scenes/MainMenu.unity
-  isLoaded: 0
-  isActive: 0
-  isSubScene: 0
 - path: Assets/Scenes/Game.unity
   isLoaded: 1
   isActive: 1
