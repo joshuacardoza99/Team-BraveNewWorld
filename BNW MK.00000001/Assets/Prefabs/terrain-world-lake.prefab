@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1111338123383117695}
   - component: {fileID: 1142481464255227089}
   - component: {fileID: 1532387186341795320}
-  - component: {fileID: -4470638865730778844}
+  - component: {fileID: -7275455985605838498}
   m_Layer: 0
   m_Name: terrain-world-lake
   m_TagString: Tile
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkable: 1
   current: 0
+  occupied: 0
   target: 0
   selectable: 0
   adjacencyList: []
@@ -122,22 +123,16 @@ MonoBehaviour:
   f: 0
   g: 0
   h: 0
---- !u!114 &-4470638865730778844
-MonoBehaviour:
+--- !u!65 &-7275455985605838498
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097411014649984543}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ad6634a3949d594bae0acc06618a827, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turn: 0
-  moving: 0
-  move: 3
-  jumpHeight: 2
-  moveSpeed: 2
-  jumpVelocity: 4.5
-  actualTargetTile: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 30.000002, y: 6.4500804, z: 30.000015}
+  m_Center: {x: 0.0000009536743, y: -2.7749646, z: 0.00006771088}

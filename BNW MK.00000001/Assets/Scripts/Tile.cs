@@ -40,7 +40,7 @@ public class Tile : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-        if (current)
+        if (current || occupied)
         {
             this.GetComponent<Renderer>().material.color = Color.magenta;
         }
