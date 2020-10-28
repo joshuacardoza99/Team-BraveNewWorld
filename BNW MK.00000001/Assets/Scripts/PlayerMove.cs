@@ -16,11 +16,6 @@ public class PlayerMove : TileMove
 	{
         Debug.DrawRay(transform.position, transform.forward);
 
-        if (!turn)
-        {
-            return;
-        }
-
         if (!moving)
         {
             FindSelectableTiles();

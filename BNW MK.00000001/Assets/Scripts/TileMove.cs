@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TileMove : MonoBehaviour 
 {
-    public bool turn = false;
 
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
@@ -36,7 +35,6 @@ public class TileMove : MonoBehaviour
 
         halfHeight = GetComponent<Collider>().bounds.extents.y;
 
-        //TurnManager.AddUnit(this);
     }
 
     public void GetCurrentTile()
@@ -60,7 +58,6 @@ public class TileMove : MonoBehaviour
 
     public void ComputeAdjacencyLists(float jumpHeight, Tile target)
     {
-        //tiles = GameObject.FindGameObjectsWithTag("Tile");
 
         foreach (GameObject tile in tiles)
         {
@@ -383,15 +380,5 @@ public class TileMove : MonoBehaviour
 
         //todo - what do you do if there is no path to the target tile?
         Debug.Log("Path not found");
-    }
-
-    public void BeginTurn()
-    {
-        turn = true;
-    }
-
-    public void EndTurn()
-    {
-        turn = false;
     }
 }

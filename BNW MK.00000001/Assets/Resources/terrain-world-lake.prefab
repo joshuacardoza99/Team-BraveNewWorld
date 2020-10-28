@@ -135,7 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad6634a3949d594bae0acc06618a827, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turn: 0
   moving: 0
   move: 3
   jumpHeight: 2
