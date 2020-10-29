@@ -106,7 +106,7 @@ public class MapGenerator : MonoBehaviour
 
     // Find near by objects
     // parameters = [string groundName, int radius, string function, string[] parameters]
-    public void find_nearby(string[] parameters)
+    /*public void find_nearby(string[] parameters)
     {
         string[] groundName = parameters[0].Split('_');
         float xAxis = float.Parse(groundName[1]);
@@ -131,11 +131,5 @@ public class MapGenerator : MonoBehaviour
         }
         catch
         { }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    }*/
 }

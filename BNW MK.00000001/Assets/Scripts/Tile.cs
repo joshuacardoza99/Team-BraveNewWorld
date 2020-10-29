@@ -40,13 +40,21 @@ public class Tile : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-        if (current || occupied)
+        if (current && occupied)
         {
             this.GetComponent<Renderer>().material.color = Color.magenta;
         }
+        else if (current)
+        {
+            this.GetComponent<Renderer>().material.color = Color.cyan;
+        }
+        else if (occupied)
+        {
+            this.GetComponent<Renderer>().material.color = Color.red;
+        }
         else if (target)
         {
-            this.GetComponent<Renderer>().material.color = Color.green;
+            this.GetComponent<Renderer>().material.color = Color.white;
         }
         else if (selectable)
         {
@@ -54,7 +62,7 @@ public class Tile : MonoBehaviour
         }
         else
         {
-            this.GetComponent<Renderer>().material.color = Color.white;
+            this.GetComponent<Renderer>().material.color = Color.green;
         }
     }
 
