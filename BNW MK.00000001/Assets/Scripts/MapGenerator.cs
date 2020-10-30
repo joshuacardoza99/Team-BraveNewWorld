@@ -47,6 +47,11 @@ public class MapGenerator : MonoBehaviour
         //find_nearby(new string[2] { "ground_1_0_1", "1" });
     }
 
+
+  /*  public string[][] make_map_plan(string[] parameter)
+    {
+        return new string[1] {new string[0]{}};
+    }*/
     // Create a new map for a game.
     // Parameters = []
     public void generate_map(string[] parameters)
