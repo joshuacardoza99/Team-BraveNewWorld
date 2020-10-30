@@ -83,7 +83,7 @@ let message_handler = function(message, playerSocket)
 
 // Starts the HTTP server to listen for request.
 App.use("/game", Express.static(__dirname + "/WebBuild/"));
-App.listen(2500);
+App.listen(80);
 
 // Starts the match server listing for connections.
 server.on("connection", (playerSocket) =>
