@@ -252,9 +252,9 @@ MonoBehaviour:
   ground: {fileID: 1344572429207624, guid: a9ad4cca1ea0c47039bcce50b1f7cfcb, type: 3}
   width: 10
   baseName: ground
-  xScale: 25
+  xScale: 30
   yScale: 1
-  zScale: 25
+  zScale: 30
   currentSelected: ground_1_0_1
 --- !u!4 &567795107
 Transform:
