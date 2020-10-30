@@ -15,7 +15,7 @@ public class MapGenerator : MonoBehaviour
     public float xScale = 25;
     public float yScale = 1;
     public float zScale = 25;
-    public string currentSelected = "ground_1_0_1"; // stores what tile is currently selected
+    public string currentSelected; // stores what tile is currently selected
 
     // Get the name of the current selected tile
     public string get_current()
@@ -101,7 +101,8 @@ public class MapGenerator : MonoBehaviour
         float xAxis = float.Parse(parameters[0]);
         float zAxis = float.Parse(parameters[1]);
         ground.name = baseName + "_" + xAxis.ToString() + "_0_" + zAxis.ToString();
-        Instantiate(ground, new Vector3(xAxis * xScale, 0, zAxis * zScale), Quaternion.identity);
+        Instantiate(ground, new Vector3(xAxis * xScale, 0, zAxis * zScale), Quaternion.identity); // create the tile
+        
     }
 
     // Find near by objects

@@ -1,11 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using UnityEngine;
 
 // this recieves a tile name, and character object, then places that character on that tile.
-public class addcharacter : MonoBehaviour
+public class add_character : MonoBehaviour
 {
-    public void add(string[] parameters, object character)
+    // External Classes//
+    import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
+
+    // model prefabs
+    public static Object testPrefab = Resources.Load("Assets/Prefabs/character");
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
+    }
+    public void add(string[] parameters, Object character)
     {
         // get the x and y axis from the tile's name
         string[] tileName    = parameters[0].Split('_');
@@ -13,6 +25,15 @@ public class addcharacter : MonoBehaviour
         float    zAxis = float.Parse(parameters[1]);
 
         // create the character object on the tile
+        Instantiate(character, new Vector3(xAxis, 1, zAxis), Quaternion.identity);
     }
 
+    string[] v = { "ground_1_0_1" }; // temp for testing
+    void update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            add(v, testPrefab);
+        }
+    }
 }
