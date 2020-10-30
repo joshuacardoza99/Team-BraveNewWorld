@@ -48,10 +48,10 @@ public class MapGenerator : MonoBehaviour
     }
 
 
-    public string[][] make_map_plan(string[] parameter)
+  /*  public string[][] make_map_plan(string[] parameter)
     {
         return new string[1] {new string[0]{}};
-    }
+    }*/
     // Create a new map for a game.
     // Parameters = []
     public void generate_map(string[] parameters)
