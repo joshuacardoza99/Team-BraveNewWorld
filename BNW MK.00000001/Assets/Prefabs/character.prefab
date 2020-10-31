@@ -59,11 +59,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdfb57c639781a438bc2f6fd21e1554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTile: {fileID: 0}
   moving: 0
-  move: 3
+  move: 1
   jumpHeight: 2
-  moveSpeed: 2
-  jumpVelocity: 4.5
+  moveSpeed: 20
   actualTargetTile: {fileID: 0}
 --- !u!1001 &7259186375634500070
 PrefabInstance:

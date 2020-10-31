@@ -9,13 +9,13 @@ public class TileMove : MonoBehaviour
     GameObject[] tiles;
 
     Stack<Tile> path = new Stack<Tile>();
-    Tile currentTile;
+    public Tile currentTile;
 
     public bool moving = false;
     public int move = 3;
     public float jumpHeight = 2;
-    public float moveSpeed = 2;
-    public float jumpVelocity = 4.5f;
+    public float moveSpeed = 20;
+    //public float jumpVelocity = 4.5f;
 
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
@@ -48,7 +48,7 @@ public class TileMove : MonoBehaviour
         RaycastHit hit;
         Tile tile = null;
         
-        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 3))
+        if (Physics.Raycast(target.transform.position, (-Vector3.up), out hit, 3))
         {
             tile = hit.collider.GetComponent<Tile>();
         }
@@ -62,7 +62,7 @@ public class TileMove : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
-            t.FindNeighbors(jumpHeight, target);
+            t.FindNeighbors(jumpHeight * 30, target);
         }
     }
 
@@ -88,10 +88,10 @@ public class TileMove : MonoBehaviour
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
-                    if (!tile.visited)
+                    if (tile != currentTile)
                     {
                         tile.parent = t;
-                        tile.visited = true;
+                        //tile.visited = true;
                         tile.distance = 1 + t.distance;
                         process.Enqueue(tile);
                     }
@@ -128,11 +128,11 @@ public class TileMove : MonoBehaviour
             {
                 bool jump = transform.position.y != target.y;
 
-                if (jump)
+                /*if (jump)
                 {
                     Jump(target);
                 }
-                else
+                else*/
                 {
                     CalculateHeading(target);
                     SetHorizotalVelocity();
@@ -182,9 +182,10 @@ public class TileMove : MonoBehaviour
 
     void SetHorizotalVelocity()
     {
-        velocity = heading * moveSpeed;
+        velocity = heading * moveSpeed * 30;
     }
 
+    /* commenting out all jump-related code
     void Jump(Vector3 target)
     {
         if (fallingDown)
@@ -277,7 +278,7 @@ public class TileMove : MonoBehaviour
             velocity /= 5.0f;
             velocity.y = 1.5f;
         }
-    }
+    }*/
 
     protected Tile FindLowestF(List<Tile> list)
     {
@@ -295,6 +296,7 @@ public class TileMove : MonoBehaviour
 
         return lowest;
     }
+    
 
     protected Tile FindEndTile(Tile t)
     {

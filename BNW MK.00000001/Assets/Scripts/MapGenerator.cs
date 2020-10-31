@@ -12,9 +12,9 @@ public class MapGenerator : MonoBehaviour
     public GameObject ground;
     public int width = 10;
     public string baseName = "ground";
-    public float xScale = 25;
+    public float xScale = 30;
     public float yScale = 1;
-    public float zScale = 25;
+    public float zScale = 30;
     public string currentSelected; // stores what tile is currently selected
 
     // Get the name of the current selected tile

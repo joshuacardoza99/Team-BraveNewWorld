@@ -16,15 +16,17 @@ public class PlayerMove : TileMove
 	{
         Debug.DrawRay(transform.position, transform.forward);
 
-        if (!moving)
-        {
-            FindSelectableTiles();
-            CheckMouse();
-        }
-        else
-        {
-            Move();
-        }
+
+            if (!moving)
+            {
+                FindSelectableTiles();
+                CheckMouse();
+            }
+            else
+            {
+                Move();
+            }
+        
 	}
 
     void CheckMouse()
