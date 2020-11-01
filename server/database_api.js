@@ -2,8 +2,8 @@
 exports.database_api = function(serverName = "", username = "", password = "", databaseName = "")
 {  
 /*
-   let serverName = "localhost";
-   let userName   = "root"; // In phpMyAdmin root is used
+   let serverName = "unitybackend";
+   let userName   = "root"; 
    let password   = "unitybackend";
    let dbname     = "team-bravenewworld";
 */
@@ -14,7 +14,8 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    let connectionOptions = {
                               host: serverName,
                               user: username,
-                              password: password
+                              password: password,
+                              database: databaseName
                            };
    var connection = mySQL.createConnection(connectionOptions);
    connection.connect((error) => 
@@ -23,11 +24,11 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    })
 
    // Insert data into the database
-   var insert_data = function(tableName = "", tableColumns = [""], tableData = [""])
+   var insert_data = function(tableName = "", tableData = [""])
    {
-      var sql = "INSERT INTO   " + tableName + "(" + tableColumns.toString() + 
-                ") VALUES (" + tableData.toString() + ");";
-
+      var sql = "INSERT INTO " + tableName +  " VALUES (" + tableData.toString() + ");";
+     
+         console.log(sql)
          connection.query(sql, (error) =>
          {
             if (error)
@@ -39,7 +40,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    // Select data from a certain table
    var select_data = function(tableName = "", receiver = (result) =>{})
    {
-      var sql = "SELECT * FROM" + tableName + ";";
+      var sql = "SELECT * FROM " + tableName + ";";
 
          connection.query(sql, (error, result) =>
          {
@@ -54,30 +55,20 @@ exports.database_api = function(serverName = "", username = "", password = "", d
          });
    }
 
-   // Get the player
-   this.get_player = function (parameters)
-   {
-      var sql = "SELECT * FROM " + tableName + " ";
-
-      connection.query(sql, (error) =>
-      {
-         if (error)
-         {
-            console.log("Select statement failed with the following error:" + error);
-         }
-      });
-   }
-
    // Add the players with parameters starting with ip, username, match, civilization
    this.add_player = function(parameters)
    {
-      insert_data("players", ["ip, username, match, civilization"], parameters);
+      let ip           =       parameters[0]
+      let username     = "'" + parameters[1] + "'"
+      let match        =       parameters[2]
+      let civilization = "'" + parameters[3] + "'"
+      insert_data("player",  [ip, username, match, civilization]);
    }
 
    // Receive the player
    // Parameter = [GameObject, function]
    this.get_player = function(receiver)
    {
-      select_data("players", receiver);
+      select_data("player", receiver);
    }
 }
