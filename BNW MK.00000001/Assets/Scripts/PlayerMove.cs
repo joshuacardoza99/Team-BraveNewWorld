@@ -19,9 +19,11 @@ public class PlayerMove : TileMove
 
             if (!moving)
             {
+                GetCurrentTile();
                 FindSelectableTiles();
                 CheckMouse();
             }
+
             else
             {
                 Move();

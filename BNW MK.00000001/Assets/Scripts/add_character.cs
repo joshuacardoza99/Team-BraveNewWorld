@@ -21,8 +21,8 @@ public class add_character : MonoBehaviour
     {
         // get the x and y axis from the tile's name
         string[] tileName    = parameters[0].Split('_');
-        float    xAxis = float.Parse(parameters[1]);
-        float    zAxis = float.Parse(parameters[3]);
+        float xAxis = float.Parse(parameters[1]);
+        float zAxis = float.Parse(parameters[3]);
 
         // create the character object on the tile
         Instantiate(character, new Vector3(xAxis, 1, zAxis), Quaternion.identity);

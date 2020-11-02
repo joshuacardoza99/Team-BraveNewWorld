@@ -69,7 +69,7 @@ public class TileMove : MonoBehaviour
     public void FindSelectableTiles()
     {
         ComputeAdjacencyLists(jumpHeight, null);
-        GetCurrentTile();
+        //GetCurrentTile(); moved to playermove.update
 
         Queue<Tile> process = new Queue<Tile>();
 
