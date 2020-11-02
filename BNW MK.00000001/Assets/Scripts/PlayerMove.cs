@@ -16,6 +16,11 @@ public class PlayerMove : TileMove
 	{
         Debug.DrawRay(transform.position, transform.forward);
 
+        if (!turn)
+        {
+            return;
+        }
+
         if (!moving)
         {
             FindSelectableTiles();
@@ -29,6 +34,7 @@ public class PlayerMove : TileMove
 
     void CheckMouse()
     {
+        // Registers clicks  
         if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -39,7 +45,7 @@ public class PlayerMove : TileMove
                 if (hit.collider.tag == "Tile")
                 {
                     Tile t = hit.collider.GetComponent<Tile>();
-
+                    // if tile clicked 
                     if (t.selectable)
                     {
                         MoveToTile(t);

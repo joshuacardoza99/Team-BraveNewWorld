@@ -4,28 +4,24 @@ using UnityEngine;
 
 public class TileMove : MonoBehaviour 
 {
+    public bool turn = false;
 
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
 
     Stack<Tile> path = new Stack<Tile>();
+    // Tile char is on
     Tile currentTile;
 
     public bool moving = false;
     public int move = 3;
-    public float jumpHeight = 2;
     public float moveSpeed = 2;
-    public float jumpVelocity = 4.5f;
 
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
-
+    
+    // gets the center of the player
     float halfHeight = 0;
-
-    bool fallingDown = false;
-    bool jumpingUp = false;
-    bool movingEdge = false;
-    Vector3 jumpTarget;
 
     public Tile actualTargetTile;
 
@@ -34,21 +30,25 @@ public class TileMove : MonoBehaviour
         tiles = GameObject.FindGameObjectsWithTag("Tile");
 
         halfHeight = GetComponent<Collider>().bounds.extents.y;
+        TurnManager.AddUnit(this);
 
     }
 
+    // Finds current tile 
     public void GetCurrentTile()
     {
         currentTile = GetTargetTile(gameObject);
-        currentTile.occupied = true;
+        currentTile.current = true;
     }
 
+    // Finds target tile 
     public Tile GetTargetTile(GameObject target)
     {
         RaycastHit hit;
         Tile tile = null;
         
-        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 3))
+        // Get target tile assuming tile heights are 1 
+        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1))
         {
             tile = hit.collider.GetComponent<Tile>();
         }
@@ -56,26 +56,26 @@ public class TileMove : MonoBehaviour
         return tile;
     }
 
-    public void ComputeAdjacencyLists(float jumpHeight, Tile target)
+    public void ComputeAdjacencyLists()
     {
+        tiles = GameObject.FindGameObjectsWithTag("Tile");
 
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
-            t.FindNeighbors(jumpHeight, target);
+            t.FindNeighbors();
         }
     }
 
     public void FindSelectableTiles()
     {
-        ComputeAdjacencyLists(jumpHeight, null);
+        ComputeAdjacencyLists();
         GetCurrentTile();
 
         Queue<Tile> process = new Queue<Tile>();
 
         process.Enqueue(currentTile);
         currentTile.visited = true;
-        //currentTile.parent = ??  leave as null 
 
         while (process.Count > 0)
         {
@@ -126,17 +126,9 @@ public class TileMove : MonoBehaviour
 
             if (Vector3.Distance(transform.position, target) >= 0.05f)
             {
-                bool jump = transform.position.y != target.y;
-
-                if (jump)
-                {
-                    Jump(target);
-                }
-                else
-                {
-                    CalculateHeading(target);
-                    SetHorizotalVelocity();
-                }
+                CalculateHeading(target);
+                SetHorizotalVelocity();
+                
 
                 //Locomotion
                 transform.forward = heading;
@@ -153,8 +145,7 @@ public class TileMove : MonoBehaviour
         {
             RemoveSelectableTiles();
             moving = false;
-
-            //TurnManager.EndTurn();
+            TurnManager.EndTurn();
         }
     }
 
@@ -162,7 +153,7 @@ public class TileMove : MonoBehaviour
     {
         if (currentTile != null)
         {
-            currentTile.occupied = false;
+            currentTile.current = false;
             currentTile = null;
         }
 
@@ -185,101 +176,7 @@ public class TileMove : MonoBehaviour
         velocity = heading * moveSpeed;
     }
 
-    void Jump(Vector3 target)
-    {
-        if (fallingDown)
-        {
-            FallDownward(target);
-        }
-        else if (jumpingUp)
-        {
-            JumpUpward(target);
-        }
-        else if (movingEdge)
-        {
-            MoveToEdge();
-        }
-        else
-        {
-            PrepareJump(target);
-        }
-    }
-
-    void PrepareJump(Vector3 target)
-    {
-        float targetY = target.y;
-        target.y = transform.position.y;
-
-        CalculateHeading(target);
-
-        if (transform.position.y > targetY)
-        {
-            fallingDown = false;
-            jumpingUp = false;
-            movingEdge = true;
-
-            jumpTarget = transform.position + (target - transform.position) / 2.0f;
-        }
-        else
-        {
-            fallingDown = false;
-            jumpingUp = true;
-            movingEdge = false;
-
-            velocity = heading * moveSpeed / 3.0f;
-
-            float difference = targetY - transform.position.y;
-
-            velocity.y = jumpVelocity * (0.5f + difference / 2.0f);
-        }
-    }
-
-    void FallDownward(Vector3 target)
-    {
-        velocity += Physics.gravity * Time.deltaTime;
-
-        if (transform.position.y <= target.y)
-        {
-            fallingDown = false;
-            jumpingUp = false;
-            movingEdge = false;
-
-            Vector3 p = transform.position;
-            p.y = target.y;
-            transform.position = p;
-
-            velocity = new Vector3();
-        }
-    }
-
-    void JumpUpward(Vector3 target)
-    {
-        velocity += Physics.gravity * Time.deltaTime;
-
-        if (transform.position.y > target.y)
-        {
-            jumpingUp = false;
-            fallingDown = true;
-        }
-    }
-
-    void MoveToEdge()
-    {
-        if (Vector3.Distance(transform.position, jumpTarget) >= 0.05f)
-        {
-            SetHorizotalVelocity();
-        }
-        else
-        {
-            movingEdge = false;
-            fallingDown = true;
-
-            velocity /= 5.0f;
-            velocity.y = 1.5f;
-        }
-    }
-
-    protected Tile FindLowestF(List<Tile> list)
+  /*  protected Tile FindLowestF(List<Tile> list)
     {
         Tile lowest = list[0];
 
@@ -380,5 +277,15 @@ public class TileMove : MonoBehaviour
 
         //todo - what do you do if there is no path to the target tile?
         Debug.Log("Path not found");
+    } */
+
+    public void BeginTurn()
+    {
+        turn = true;
+    }
+
+    public void EndTurn()
+    {
+        turn = false;
     }
 }
