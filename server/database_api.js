@@ -1,12 +1,13 @@
+/*
+   How to connect to the database:
+   serverName = "unitybackend";
+   userName   = "root"; 
+   password   = "unitybackend";
+   dbname     = "team-bravenewworld";
+*/
 // Export the database api
 exports.database_api = function(serverName = "", username = "", password = "", databaseName = "")
 {  
-/*
-   let serverName = "unitybackend";
-   let userName   = "root"; 
-   let password   = "unitybackend";
-   let dbname     = "team-bravenewworld";
-*/
    // External Classes
    let mySQL = require('mysql');
    
@@ -54,21 +55,52 @@ exports.database_api = function(serverName = "", username = "", password = "", d
             }
          });
    }
-
-   // Add the players with parameters starting with ip, username, match, civilization
-   this.add_player = function(parameters)
+   
+   // Add the match with the following parameters
+   this.add_match = function(parameters)
    {
-      let ip           =       parameters[0]
-      let username     = "'" + parameters[1] + "'"
-      let match        =       parameters[2]
-      let civilization = "'" + parameters[3] + "'"
-      insert_data("player",  [ip, username, match, civilization]);
+      let matchID = parameters[0]
+      let map     = parameters[1]
+      insert_data("match",  [matchID, map]);
    }
 
-   // Receive the player
-   // Parameter = [GameObject, function]
+   // Receive the match and select the match
+   this.get_match = function(receiver)
+   {
+      select_data("match", receiver);
+   }
+
+   // Add the players with the following parameters
+   this.add_player = function(parameters)
+   {
+      let playerID     =       parameters[0]
+      let ipAddress    =       parameters[1]
+      let championName = "'" + parameters[2] + "'"
+      let civilization = "'" + parameters[3] + "'"
+      let matchID      =       parameters[4]
+      insert_data("player",  [playerID, ipAddress, championName, civilization, matchID]);
+   }
+
+   // Receive the player and select the player game object and receiver function
    this.get_player = function(receiver)
    {
       select_data("player", receiver);
+   }
+
+   // Add the characters with the following parameters
+   this.add_character = function(parameters)
+   {
+      let characterID   =       parameters[0]
+      let champion      = "'" + parameters[1] + "'"
+      let characterType = "'" + parameters[2] + "'"
+      let tileName      = "'" + parameters[3] + "'"
+      let playerID      =       parameters[4]
+      insert_data("character",  [characterID, champion, characterType, tileName, playerID]);
+   }
+
+   // Receive the character and select the character
+   this.get_character = function(receiver)
+   {
+      select_data("character", receiver);
    }
 }
