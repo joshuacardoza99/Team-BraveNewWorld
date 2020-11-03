@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Preload : MonoBehaviour
+public class preload : MonoBehaviour
 {
     private CanvasGroup fadeGroup;
     private float loadTime;               // Load time
