@@ -16,7 +16,6 @@ public class PlayerMove : TileMove
 	{
         Debug.DrawRay(transform.position, transform.forward);
 
-<<<<<<< HEAD
 
             if (!moving)
             {
@@ -29,18 +28,7 @@ public class PlayerMove : TileMove
             {
                 Move();
             }
-        
-=======
-        if (!moving)
-        {
-            FindSelectableTiles();
-            CheckMouse();
-        }
-        else
-        {
-            Move();
-        }
->>>>>>> parent of 8157387c... mhm
+
 	}
 
     void CheckMouse()
