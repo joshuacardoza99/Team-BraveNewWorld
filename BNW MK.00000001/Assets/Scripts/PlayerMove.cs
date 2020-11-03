@@ -17,6 +17,7 @@ public class PlayerMove : TileMove
         Debug.DrawRay(transform.position, transform.forward);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             if (!moving)
             {
@@ -31,6 +32,8 @@ public class PlayerMove : TileMove
             }
         
 =======
+=======
+>>>>>>> parent of 8157387c... mhm
         if (!moving)
         {
             FindSelectableTiles();
