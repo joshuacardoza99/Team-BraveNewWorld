@@ -125,6 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkable: 0
   current: 0
+  occupied: 0
   target: 0
   selectable: 1
   adjacencyList: []

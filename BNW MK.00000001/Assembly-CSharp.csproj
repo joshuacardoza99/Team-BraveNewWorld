@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\TileMove.cs" />
     <Compile Include="Assets\Scripts\server_manager.cs" />
     <Compile Include="Assets\Scripts\change_button.cs" />
+    <Compile Include="Assets\Scripts\map_manager.cs" />
     <Compile Include="Assets\Scripts\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\civ_description.cs" />

@@ -15,7 +15,7 @@ public class TileMove : MonoBehaviour
     public int move = 3;
     public float jumpHeight = 2;
     public float moveSpeed = 2;
-    public float jumpVelocity = 4.5f;
+    //public float jumpVelocity = 4.5f;
 
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
@@ -23,7 +23,7 @@ public class TileMove : MonoBehaviour
     float halfHeight = 0;
 
     
-    bool movingEdge = false;
+    //bool movingEdge = false;
     
 
     public Tile actualTargetTile;
@@ -61,7 +61,7 @@ public class TileMove : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
-            t.FindNeighbors(jumpHeight, target);
+            t.FindNeighbors();
         }
     }
 
@@ -99,7 +99,7 @@ public class TileMove : MonoBehaviour
         }
     }
 
-    public void MoveToTile(Tile tile)
+    /*public void MoveToTile(Tile tile)
     {
         path.Clear();
         tile.target = true;
@@ -192,7 +192,7 @@ public class TileMove : MonoBehaviour
             velocity /= 5.0f;
             velocity.y = 1.5f;
         }
-    }*/
+    }
 
     protected Tile FindLowestF(List<Tile> list)
     {
@@ -296,5 +296,5 @@ public class TileMove : MonoBehaviour
 
         //todo - what do you do if there is no path to the target tile?
         Debug.Log("Path not found");
-    }
+    }*/
 }
