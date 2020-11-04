@@ -230,8 +230,9 @@ GameObject:
   m_Component:
   - component: {fileID: 567795107}
   - component: {fileID: 567795106}
+  - component: {fileID: 567795108}
   m_Layer: 0
-  m_Name: Map
+  m_Name: Old_Map
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -244,7 +245,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 567795105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 742b42d3a18c8f849a1aaed47e31306c, type: 3}
   m_Name: 
@@ -252,9 +253,9 @@ MonoBehaviour:
   ground: {fileID: 1344572429207624, guid: a9ad4cca1ea0c47039bcce50b1f7cfcb, type: 3}
   width: 10
   baseName: ground
-  xScale: 30
+  xScale: 25
   yScale: 1
-  zScale: 30
+  zScale: 25
   currentSelected: ground_1_0_1
 --- !u!4 &567795107
 Transform:
@@ -270,6 +271,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &567795108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567795105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25c6e3c3085cde4c9cfcf886ed03d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapWidth: 10
+  water: {fileID: 0}
+  vikingLand: {fileID: 0}
+  greeceLand: {fileID: 0}
+  asianLand: {fileID: 0}
 --- !u!1001 &888417821
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -327,6 +345,54 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8530a2ab98eab147b233548f7d8efc5, type: 3}
+--- !u!1 &1933821403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1933821405}
+  - component: {fileID: 1933821404}
+  m_Layer: 0
+  m_Name: map
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1933821404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933821403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25c6e3c3085cde4c9cfcf886ed03d35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapWidth: 30
+  water: {fileID: 1590608983609173639, guid: c923e0107c6fb184bbe3081289560780, type: 3}
+  vikingLand: {fileID: 6639488620538686953, guid: f92086fee053a8f45aff25213fef8ceb, type: 3}
+  greeceLand: {fileID: 4317716896113133201, guid: 2f7e87437d0440745ac5314672cc48e5, type: 3}
+  asianLand: {fileID: 7003437812670713215, guid: b5bbf7d6d0a88724ab6f66cfb6db6f0a, type: 3}
+--- !u!4 &1933821405
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933821403}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -475.58203, y: -2658.1199, z: -2413.0776}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1938341835
 GameObject:
   m_ObjectHideFlags: 0
