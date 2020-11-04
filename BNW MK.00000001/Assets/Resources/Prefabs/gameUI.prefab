@@ -207,7 +207,7 @@ MonoBehaviour:
   ground: {fileID: 1344572429207624, guid: 3bbd851bf0e48c2468e8f3a7c050eb05, type: 3}
   width: 10
   baseName: ground
-  xScale: 25
+  xScale: 30
   yScale: 1
-  zScale: 25
+  zScale: 30
   currentSelected: 

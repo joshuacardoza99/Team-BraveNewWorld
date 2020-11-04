@@ -22,10 +22,9 @@ public class TileMove : MonoBehaviour
 
     float halfHeight = 0;
 
-    bool fallingDown = false;
-    bool jumpingUp = false;
+    
     bool movingEdge = false;
-    Vector3 jumpTarget;
+    
 
     public Tile actualTargetTile;
 
@@ -128,11 +127,7 @@ public class TileMove : MonoBehaviour
             {
                 bool jump = transform.position.y != target.y;
 
-                if (jump)
-                {
-                    Jump(target);
-                }
-                else
+                
                 {
                     CalculateHeading(target);
                     SetHorizotalVelocity();
@@ -153,8 +148,6 @@ public class TileMove : MonoBehaviour
         {
             RemoveSelectableTiles();
             moving = false;
-
-            //TurnManager.EndTurn();
         }
     }
 
@@ -185,85 +178,7 @@ public class TileMove : MonoBehaviour
         velocity = heading * moveSpeed * 30;
     }
 
-    void Jump(Vector3 target)
-    {
-        if (fallingDown)
-        {
-            FallDownward(target);
-        }
-        else if (jumpingUp)
-        {
-            JumpUpward(target);
-        }
-        else if (movingEdge)
-        {
-            MoveToEdge();
-        }
-        else
-        {
-            PrepareJump(target);
-        }
-    }
-
-    void PrepareJump(Vector3 target)
-    {
-        float targetY = target.y;
-        target.y = transform.position.y;
-
-        CalculateHeading(target);
-
-        if (transform.position.y > targetY)
-        {
-            fallingDown = false;
-            jumpingUp = false;
-            movingEdge = true;
-
-            jumpTarget = transform.position + (target - transform.position) / 2.0f;
-        }
-        else
-        {
-            fallingDown = false;
-            jumpingUp = true;
-            movingEdge = false;
-
-            velocity = heading * moveSpeed / 3.0f;
-
-            float difference = targetY - transform.position.y;
-
-            velocity.y = jumpVelocity * (0.5f + difference / 2.0f);
-        }
-    }
-
-    void FallDownward(Vector3 target)
-    {
-        velocity += Physics.gravity * Time.deltaTime;
-
-        if (transform.position.y <= target.y)
-        {
-            fallingDown = false;
-            jumpingUp = false;
-            movingEdge = false;
-
-            Vector3 p = transform.position;
-            p.y = target.y;
-            transform.position = p;
-
-            velocity = new Vector3();
-        }
-    }
-
-    void JumpUpward(Vector3 target)
-    {
-        velocity += Physics.gravity * Time.deltaTime;
-
-        if (transform.position.y > target.y)
-        {
-            jumpingUp = false;
-            fallingDown = true;
-        }
-    }
-
-    void MoveToEdge()
+    /*void MoveToEdge()
     {
         if (Vector3.Distance(transform.position, jumpTarget) >= 0.05f)
         {
@@ -272,12 +187,12 @@ public class TileMove : MonoBehaviour
         else
         {
             movingEdge = false;
-            fallingDown = true;
+            
 
             velocity /= 5.0f;
             velocity.y = 1.5f;
         }
-    }
+    }*/
 
     protected Tile FindLowestF(List<Tile> list)
     {

@@ -102,10 +102,10 @@ public void Reset()
     {
         Reset();
 
-        CheckTile(Vector3.forward, jumpHeight, target);
-        CheckTile(-Vector3.forward, jumpHeight, target);
-        CheckTile(Vector3.right, jumpHeight, target);
-        CheckTile(-Vector3.right, jumpHeight, target);
+        CheckTile(Vector3.forward * 30, jumpHeight, target);
+        CheckTile(-Vector3.forward * 30, jumpHeight, target);
+        CheckTile(Vector3.right * 30, jumpHeight, target);
+        CheckTile(-Vector3.right * 30, jumpHeight, target);
     }
 
     public void CheckTile(Vector3 direction, float jumpHeight, Tile target)
