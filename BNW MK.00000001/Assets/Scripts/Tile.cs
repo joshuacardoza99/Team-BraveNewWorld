@@ -127,7 +127,7 @@ public void Reset()
             {
                 RaycastHit hit;
 
-                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target))
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 30) || (tile == target))
                 {
                     adjacencyList.Add(tile);
                 }

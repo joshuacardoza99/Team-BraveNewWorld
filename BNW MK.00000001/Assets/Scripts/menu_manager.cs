@@ -30,4 +30,9 @@ public class menu_manager : MonoBehaviour
             }
         }
     }
+
+    public void removeWaitPanel (string[] parameter)
+    {
+        //ChangeGroup(gameplay);
+    }
 }

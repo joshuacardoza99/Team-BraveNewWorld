@@ -4,24 +4,27 @@ using UnityEngine;
 
 public class TileMove : MonoBehaviour 
 {
-    public bool turn = false;
 
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
 
     Stack<Tile> path = new Stack<Tile>();
-    // Tile char is on
     Tile currentTile;
 
     public bool moving = false;
     public int move = 3;
+    public float jumpHeight = 2;
     public float moveSpeed = 2;
+    //public float jumpVelocity = 4.5f;
 
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
-    
-    // gets the center of the player
+
     float halfHeight = 0;
+
+    
+    //bool movingEdge = false;
+    
 
     public Tile actualTargetTile;
 
@@ -30,25 +33,21 @@ public class TileMove : MonoBehaviour
         tiles = GameObject.FindGameObjectsWithTag("Tile");
 
         halfHeight = GetComponent<Collider>().bounds.extents.y;
-        TurnManager.AddUnit(this);
 
     }
 
-    // Finds current tile 
     public void GetCurrentTile()
     {
         currentTile = GetTargetTile(gameObject);
-        currentTile.current = true;
+        currentTile.occupied = true;
     }
 
-    // Finds target tile 
     public Tile GetTargetTile(GameObject target)
     {
         RaycastHit hit;
         Tile tile = null;
         
-        // Get target tile assuming tile heights are 1 
-        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1))
+        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 3))
         {
             tile = hit.collider.GetComponent<Tile>();
         }
@@ -56,9 +55,8 @@ public class TileMove : MonoBehaviour
         return tile;
     }
 
-    public void ComputeAdjacencyLists()
+    public void ComputeAdjacencyLists(float jumpHeight, Tile target)
     {
-        tiles = GameObject.FindGameObjectsWithTag("Tile");
 
         foreach (GameObject tile in tiles)
         {
@@ -69,13 +67,14 @@ public class TileMove : MonoBehaviour
 
     public void FindSelectableTiles()
     {
-        ComputeAdjacencyLists();
+        ComputeAdjacencyLists(jumpHeight, null);
         GetCurrentTile();
 
         Queue<Tile> process = new Queue<Tile>();
 
         process.Enqueue(currentTile);
         currentTile.visited = true;
+        //currentTile.parent = ??  leave as null 
 
         while (process.Count > 0)
         {
@@ -88,10 +87,10 @@ public class TileMove : MonoBehaviour
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
-                    if (!tile.visited)
+                    if (tile != currentTile)
                     {
                         tile.parent = t;
-                        tile.visited = true;
+                        //tile.visited = true;
                         tile.distance = 1 + t.distance;
                         process.Enqueue(tile);
                     }
@@ -100,7 +99,7 @@ public class TileMove : MonoBehaviour
         }
     }
 
-    public void MoveToTile(Tile tile)
+    /*public void MoveToTile(Tile tile)
     {
         path.Clear();
         tile.target = true;
@@ -126,9 +125,13 @@ public class TileMove : MonoBehaviour
 
             if (Vector3.Distance(transform.position, target) >= 0.05f)
             {
-                CalculateHeading(target);
-                SetHorizotalVelocity();
+                bool jump = transform.position.y != target.y;
+
                 
+                {
+                    CalculateHeading(target);
+                    SetHorizotalVelocity();
+                }
 
                 //Locomotion
                 transform.forward = heading;
@@ -145,7 +148,6 @@ public class TileMove : MonoBehaviour
         {
             RemoveSelectableTiles();
             moving = false;
-            TurnManager.EndTurn();
         }
     }
 
@@ -153,7 +155,7 @@ public class TileMove : MonoBehaviour
     {
         if (currentTile != null)
         {
-            currentTile.current = false;
+            currentTile.occupied = false;
             currentTile = null;
         }
 
@@ -173,10 +175,26 @@ public class TileMove : MonoBehaviour
 
     void SetHorizotalVelocity()
     {
-        velocity = heading * moveSpeed;
+        velocity = heading * moveSpeed * 30;
     }
 
-  /*  protected Tile FindLowestF(List<Tile> list)
+    /*void MoveToEdge()
+    {
+        if (Vector3.Distance(transform.position, jumpTarget) >= 0.05f)
+        {
+            SetHorizotalVelocity();
+        }
+        else
+        {
+            movingEdge = false;
+            
+
+            velocity /= 5.0f;
+            velocity.y = 1.5f;
+        }
+    }
+
+    protected Tile FindLowestF(List<Tile> list)
     {
         Tile lowest = list[0];
 
@@ -192,6 +210,7 @@ public class TileMove : MonoBehaviour
 
         return lowest;
     }
+    
 
     protected Tile FindEndTile(Tile t)
     {
@@ -277,15 +296,5 @@ public class TileMove : MonoBehaviour
 
         //todo - what do you do if there is no path to the target tile?
         Debug.Log("Path not found");
-    } */
-
-    public void BeginTurn()
-    {
-        turn = true;
-    }
-
-    public void EndTurn()
-    {
-        turn = false;
-    }
+    }*/
 }

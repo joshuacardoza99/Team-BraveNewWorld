@@ -82,10 +82,11 @@ public class match_manager : MonoBehaviour
         // Easter egg to test the nextworking with.
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            start_network_game(new string[2] { "ElijahHero", "Asian" });
+            //start_network_game(new string[2] { "ElijahHero", "Asian" });
             import_manager.run_function("map", "load_map", new string[1]{"1500"});
+            //import_manager.run_function("Map", "generate_map", new string[0]{ });
             //import_manager.run_function_all("server_functions", "get_player", new string[2] {"match_manager", "receive_test_data"});
-
+            //import_manager.run_function_all("add_character", "add", new string[] {"ground_1_0_1, ninja"});
         }
     }
   
@@ -98,9 +99,9 @@ public class match_manager : MonoBehaviour
 
     // Starts a multiplayer game over the network.
     // parameters = [string name, string civilization]
-    public void start_network_game(string[] parameters)
+    public void start_network_game()
     {
-        import_manager.run_function_all("server_functions", "add_player", parameters);
+        import_manager.run_function_all("server_functions", "add_player", new string[0]{});
     }
 
     // Starts a single player game locally.
