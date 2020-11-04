@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
 using UnityEngine;
@@ -30,10 +31,17 @@ public class Tile : MonoBehaviour
     public float g = 0;
     public float h = 0;
 
+
+    // Private Global Variables //
+    private Color realColor; // Stores the main material for the tile.
+
 	// Use this for initialization
 	void Start () 
 	{
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
+   
+        // Asigning the tiles material to startMaterial.
+        realColor = this.GetComponent<Renderer>().material.color;
     }
 	
 	// Update is called once per frame
@@ -41,19 +49,21 @@ public class Tile : MonoBehaviour
 	{
         if (current)
         {
-            this.GetComponent<Renderer>().material.color = Color.magenta;
+            this.GetComponent<Renderer>().material.color = Color.red;
         }
         else if (target)
         {
-            this.GetComponent<Renderer>().material.color = Color.green;
+            //this.GetComponent<Renderer>().material.color = Color.green;
+            this.GetComponent<Renderer>().material.color = realColor;
         }
         else if (selectable)
         {
-            this.GetComponent<Renderer>().material.color = Color.blue;
+            //this.GetComponent<Renderer>().material.color = Color.blue;
+            this.GetComponent<Renderer>().material.color = realColor;
         }
         else
         {
-            this.GetComponent<Renderer>().material.color = Color.white;
+            this.GetComponent<Renderer>().material.color = realColor;
         }
     }
 
@@ -76,8 +86,8 @@ public void Reset()
     // Set current to this tile when it gets clicked
     public void OnMouseDown()
     {
-        import_manager.run_function("Map", "unselect_tile", new string[0] { });
-        import_manager.run_function("Map", "set_current", new string[1] { this.name });
+        import_manager.run_function("map", "unselect_tile", new string[0] { });
+        import_manager.run_function("map", "set_current", new string[1] { this.name });
         current = true;
     }
 
