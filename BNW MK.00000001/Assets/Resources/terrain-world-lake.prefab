@@ -8,19 +8,20 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4851420109806920}
+  - component: {fileID: 707529064353049307}
   - component: {fileID: 33562225905747050}
   - component: {fileID: 23163702904432936}
   - component: {fileID: 64431071641606790}
+  - component: {fileID: -4602478800984025654}
   m_Layer: 0
   m_Name: terrain-world-lake
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4851420109806920
-Transform:
+--- !u!224 &707529064353049307
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -33,6 +34,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 74.3, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &33562225905747050
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -40,7 +46,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1344572429207624}
-  m_Mesh: {fileID: 4300000, guid: 49f5caa7f3c854f17941064263104b28, type: 3}
+  m_Mesh: {fileID: 2622963713794578152, guid: fec8f802e6a69ee4e952bed294b2f146, type: 3}
 --- !u!23 &23163702904432936
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -56,11 +62,12 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb045539f4b18a242aca8e57e88c5cd7, type: 2}
-  - {fileID: 2100000, guid: 3b20fc9e84b968641b7312bdcdd1ffd8, type: 2}
+  - {fileID: 2100000, guid: 50792ddbb647892418e0aecaee2a0e39, type: 2}
+  - {fileID: 2100000, guid: 3ed73c752718158459770afcb26f640b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -81,6 +88,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!64 &64431071641606790
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -94,4 +102,28 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 49f5caa7f3c854f17941064263104b28, type: 3}
+  m_Mesh: {fileID: 2622963713794578152, guid: fec8f802e6a69ee4e952bed294b2f146, type: 3}
+--- !u!114 &-4602478800984025654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344572429207624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65bcc07ddafeccc4b948b4fda7b86645, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkable: 1
+  current: 0
+  occupied: 0
+  target: 0
+  selectable: 0
+  adjacencyList: []
+  visited: 0
+  parent: {fileID: 0}
+  distance: 0
+  f: 0
+  g: 0
+  h: 0

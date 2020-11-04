@@ -1,9 +1,10 @@
 // This class holds the information and functions to connect all the players in a game together.
-exports.match = function(id = 0)
+let match = function(id = 0)
 {
 	// External Class.
 	let database_api = require("../server/database_api").database_api; // Database_Api Class that enables communication to the database.
-	    database_api = new database_api();
+		database_api = new database_api("team-bravenewworld.csp1omydlp3q.us-east-2.rds.amazonaws.com",
+		                                "root", "unitybackend", "team-bravenewworld");
 	    
 	// Global Variables.
 	let players = [];   // All players in this match.
@@ -46,7 +47,7 @@ exports.match = function(id = 0)
 		{
 			if (message.function == "get_player")
 			{
-				database_api.get_player((data) =>
+				/*database_api.get_player((data) =>
 				{
 					let response = {   // JSON message to send to a player.
 										gameObject: message.parameters[0],
@@ -55,11 +56,11 @@ exports.match = function(id = 0)
 									};
 
 					playerSocket.send(JSON.stringify(response));
-				})
+				})*/
 			}
 			else
 			{
-				database_api[message.function](message.parameters);
+				console.log("Not Implemented yet?"); //database_api[message.function](message.parameters);
 			}
 		}
 		else

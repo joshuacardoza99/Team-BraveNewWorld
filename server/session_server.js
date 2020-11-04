@@ -4,9 +4,11 @@
 let player     = require("../server/player").player;   // Player Class that holds connection and game information for a player.
 let match      = require("../server/match").match;     // Match Class that holds the information and functions to connect all the players in a game together.
 let web_socket = require("ws");                        // WS Class that allows to start connections with the players.
+var Express = require("express");
+var App     = Express();
 
 // Global variables.
-let socketOptions = {      "host": "0.0.0.0",             // Holds the options for the WebSocket server.
+let socketOptions = {      "host": '0.0.0.0',//"172.31.7.174",             // Holds the options for the WebSocket server.
 	                       "port": 5678,
 	                       "path": "/",
 	                 "maxPayload": 10e7
@@ -17,21 +19,13 @@ let matchNumber   = 0;                                    // Next match id.
 let players       = [];                                   // All the players connected to this server.
 
 // Finds the match the player is in.
-<<<<<<< HEAD
-let find_player_match = function(player_socket)
-=======
 let find_player_match = function(playerSocket)
->>>>>>> Tests
 {
 	let playerMatch = null; // The match id for the match the player is playing in.
 
 	players.forEach((nextPlayer) =>
 	{
-<<<<<<< HEAD
-		if (nextPlayer.socket == player_socket)
-=======
 		if (nextPlayer.socket == playerSocket)
->>>>>>> Tests
 		{
 			playerMatch = nextPlayer.match;
 		}
@@ -86,6 +80,10 @@ let message_handler = function(message, playerSocket)
 		find_player_match(playerSocket).message_handler(message, playerSocket);
 	}
 }
+
+// Starts the HTTP server to listen for request.
+App.use("/game", Express.static(__dirname + "/WebBuild/"));
+App.listen(80);
 
 // Starts the match server listing for connections.
 server.on("connection", (playerSocket) =>

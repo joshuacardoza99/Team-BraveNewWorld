@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TacticsMove : MonoBehaviour 
+public class TileMove : MonoBehaviour 
 {
-    public bool turn = false;
 
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
@@ -16,17 +15,16 @@ public class TacticsMove : MonoBehaviour
     public int move = 3;
     public float jumpHeight = 2;
     public float moveSpeed = 2;
-    public float jumpVelocity = 4.5f;
+    //public float jumpVelocity = 4.5f;
 
     Vector3 velocity = new Vector3();
     Vector3 heading = new Vector3();
 
     float halfHeight = 0;
 
-    bool fallingDown = false;
-    bool jumpingUp = false;
-    bool movingEdge = false;
-    Vector3 jumpTarget;
+    
+    //bool movingEdge = false;
+    
 
     public Tile actualTargetTile;
 
@@ -36,21 +34,20 @@ public class TacticsMove : MonoBehaviour
 
         halfHeight = GetComponent<Collider>().bounds.extents.y;
 
-        //TurnManager.AddUnit(this);
     }
 
     public void GetCurrentTile()
     {
         currentTile = GetTargetTile(gameObject);
-        currentTile.current = true;
+        currentTile.occupied = true;
     }
 
     public Tile GetTargetTile(GameObject target)
     {
         RaycastHit hit;
         Tile tile = null;
-
-        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1))
+        
+        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 3))
         {
             tile = hit.collider.GetComponent<Tile>();
         }
@@ -60,12 +57,11 @@ public class TacticsMove : MonoBehaviour
 
     public void ComputeAdjacencyLists(float jumpHeight, Tile target)
     {
-        //tiles = GameObject.FindGameObjectsWithTag("Tile");
 
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
-            t.FindNeighbors(jumpHeight, target);
+            t.FindNeighbors();
         }
     }
 
@@ -91,10 +87,10 @@ public class TacticsMove : MonoBehaviour
             {
                 foreach (Tile tile in t.adjacencyList)
                 {
-                    if (!tile.visited)
+                    if (tile != currentTile)
                     {
                         tile.parent = t;
-                        tile.visited = true;
+                        //tile.visited = true;
                         tile.distance = 1 + t.distance;
                         process.Enqueue(tile);
                     }
@@ -103,7 +99,7 @@ public class TacticsMove : MonoBehaviour
         }
     }
 
-    public void MoveToTile(Tile tile)
+    /*public void MoveToTile(Tile tile)
     {
         path.Clear();
         tile.target = true;
@@ -131,11 +127,7 @@ public class TacticsMove : MonoBehaviour
             {
                 bool jump = transform.position.y != target.y;
 
-                if (jump)
-                {
-                    Jump(target);
-                }
-                else
+                
                 {
                     CalculateHeading(target);
                     SetHorizotalVelocity();
@@ -156,8 +148,6 @@ public class TacticsMove : MonoBehaviour
         {
             RemoveSelectableTiles();
             moving = false;
-
-            //TurnManager.EndTurn();
         }
     }
 
@@ -165,7 +155,7 @@ public class TacticsMove : MonoBehaviour
     {
         if (currentTile != null)
         {
-            currentTile.current = false;
+            currentTile.occupied = false;
             currentTile = null;
         }
 
@@ -185,88 +175,10 @@ public class TacticsMove : MonoBehaviour
 
     void SetHorizotalVelocity()
     {
-        velocity = heading * moveSpeed;
+        velocity = heading * moveSpeed * 30;
     }
 
-    void Jump(Vector3 target)
-    {
-        if (fallingDown)
-        {
-            FallDownward(target);
-        }
-        else if (jumpingUp)
-        {
-            JumpUpward(target);
-        }
-        else if (movingEdge)
-        {
-            MoveToEdge();
-        }
-        else
-        {
-            PrepareJump(target);
-        }
-    }
-
-    void PrepareJump(Vector3 target)
-    {
-        float targetY = target.y;
-        target.y = transform.position.y;
-
-        CalculateHeading(target);
-
-        if (transform.position.y > targetY)
-        {
-            fallingDown = false;
-            jumpingUp = false;
-            movingEdge = true;
-
-            jumpTarget = transform.position + (target - transform.position) / 2.0f;
-        }
-        else
-        {
-            fallingDown = false;
-            jumpingUp = true;
-            movingEdge = false;
-
-            velocity = heading * moveSpeed / 3.0f;
-
-            float difference = targetY - transform.position.y;
-
-            velocity.y = jumpVelocity * (0.5f + difference / 2.0f);
-        }
-    }
-
-    void FallDownward(Vector3 target)
-    {
-        velocity += Physics.gravity * Time.deltaTime;
-
-        if (transform.position.y <= target.y)
-        {
-            fallingDown = false;
-            jumpingUp = false;
-            movingEdge = false;
-
-            Vector3 p = transform.position;
-            p.y = target.y;
-            transform.position = p;
-
-            velocity = new Vector3();
-        }
-    }
-
-    void JumpUpward(Vector3 target)
-    {
-        velocity += Physics.gravity * Time.deltaTime;
-
-        if (transform.position.y > target.y)
-        {
-            jumpingUp = false;
-            fallingDown = true;
-        }
-    }
-
-    void MoveToEdge()
+    /*void MoveToEdge()
     {
         if (Vector3.Distance(transform.position, jumpTarget) >= 0.05f)
         {
@@ -275,7 +187,7 @@ public class TacticsMove : MonoBehaviour
         else
         {
             movingEdge = false;
-            fallingDown = true;
+            
 
             velocity /= 5.0f;
             velocity.y = 1.5f;
@@ -298,6 +210,7 @@ public class TacticsMove : MonoBehaviour
 
         return lowest;
     }
+    
 
     protected Tile FindEndTile(Tile t)
     {
@@ -383,15 +296,5 @@ public class TacticsMove : MonoBehaviour
 
         //todo - what do you do if there is no path to the target tile?
         Debug.Log("Path not found");
-    }
-
-    public void BeginTurn()
-    {
-        turn = true;
-    }
-
-    public void EndTurn()
-    {
-        turn = false;
-    }
+    }*/
 }

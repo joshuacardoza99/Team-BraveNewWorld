@@ -1,13 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UIElements;
+
 
 public class Tile : MonoBehaviour 
 {
+
+    // External Classes//
+    import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
+
     public bool walkable = true;
-    public bool current = false;
+    public bool current = false; // if the player is currently using this tile
+    public bool occupied = false; // if there is a character currently on this tile
     public bool target = false;
     public bool selectable = false;
+
 
     public List<Tile> adjacencyList = new List<Tile>();
 
@@ -24,31 +34,40 @@ public class Tile : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-
-	}
+        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
+    }
 	
 	// Update is called once per frame
 	void Update () 
 	{
-        if (current)
+        if (current && occupied)
         {
-            GetComponent<Renderer>().material.color = Color.magenta;
+            this.GetComponent<Renderer>().material.color = Color.magenta;
+        }
+        else if (current)
+        {
+            this.GetComponent<Renderer>().material.color = Color.cyan;
+        }
+        else if (occupied)
+        {
+            this.GetComponent<Renderer>().material.color = Color.red;
         }
         else if (target)
         {
-            GetComponent<Renderer>().material.color = Color.green;
+            this.GetComponent<Renderer>().material.color = Color.white;
         }
         else if (selectable)
         {
-            GetComponent<Renderer>().material.color = Color.blue;
+            this.GetComponent<Renderer>().material.color = Color.blue;
         }
         else
         {
-            GetComponent<Renderer>().material.color = Color.white;
+            this.GetComponent<Renderer>().material.color = Color.green;
         }
-	}
+    }
 
-    public void Reset()
+
+public void Reset()
     {
         adjacencyList.Clear();
 
@@ -63,19 +82,35 @@ public class Tile : MonoBehaviour
         f = g = h = 0;
     }
 
-    public void FindNeighbors(float jumpHeight, Tile target)
+    // Set current to this tile when it gets clicked
+    public void OnMouseDown()
+    {
+        import_manager.run_function("map", "unselect_tile", new string[0] { });
+        import_manager.run_function("map", "set_current", new string[1] { this.name });
+        current = true;
+    }
+
+    // Unselect this tile
+    // parameter = empty array (not used)
+    public void unselect(string [] parameter) 
+    {
+        current = false;
+    }
+    
+
+    public void FindNeighbors()
     {
         Reset();
 
-        CheckTile(Vector3.forward, jumpHeight, target);
-        CheckTile(-Vector3.forward, jumpHeight, target);
-        CheckTile(Vector3.right, jumpHeight, target);
-        CheckTile(-Vector3.right, jumpHeight, target);
+        CheckTile(Vector3.forward);
+        CheckTile(-Vector3.forward);
+        CheckTile(Vector3.right);
+        CheckTile(-Vector3.right);
     }
 
-    public void CheckTile(Vector3 direction, float jumpHeight, Tile target)
+    public void CheckTile(Vector3 direction)
     {
-        Vector3 halfExtents = new Vector3(0.25f, (1 + jumpHeight) / 2.0f, 0.25f);
+        Vector3 halfExtents = new Vector3(0.25f, 0.25f, 0.25f);
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
 
         foreach (Collider item in colliders)
@@ -85,7 +120,7 @@ public class Tile : MonoBehaviour
             {
                 RaycastHit hit;
 
-                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target))
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 30) || (tile == target))
                 {
                     adjacencyList.Add(tile);
                 }
