@@ -31,10 +31,15 @@ public class Tile : MonoBehaviour
     public float g = 0;
     public float h = 0;
 
+    // Private Variables //
+    private Color realColor; // The color the tile should be without any highlights.
+
 	// Use this for initialization
 	void Start () 
 	{
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
+    
+        realColor = this.GetComponent<Renderer>().material.color;
     }
 	
 	// Update is called once per frame
@@ -50,7 +55,8 @@ public class Tile : MonoBehaviour
         }
         else if (occupied)
         {
-            this.GetComponent<Renderer>().material.color = Color.red;
+            //this.GetComponent<Renderer>().material.color = Color.red;
+             this.GetComponent<Renderer>().material.color = realColor;
         }
         else if (target)
         {
@@ -58,11 +64,12 @@ public class Tile : MonoBehaviour
         }
         else if (selectable)
         {
-            this.GetComponent<Renderer>().material.color = Color.blue;
+            //this.GetComponent<Renderer>().material.color = Color.blue;
+             this.GetComponent<Renderer>().material.color = realColor;
         }
         else
         {
-            this.GetComponent<Renderer>().material.color = Color.green;
+            this.GetComponent<Renderer>().material.color = realColor;
         }
     }
 

@@ -17,6 +17,7 @@ public class add_character : MonoBehaviour
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
     }
+
     public void add(string[] parameters, Object character)
     {
         // get the x and y axis from the tile's name
