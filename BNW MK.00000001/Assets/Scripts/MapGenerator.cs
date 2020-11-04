@@ -33,7 +33,6 @@ public class MapGenerator : MonoBehaviour
     // string parameter = empty (not used)
     public void unselect_tile(string[] parameter)
     {
-        //Debug.Log("Tile name" + get_current());
         import_manager.run_function(get_current(), "unselect", new string[0] { });
     }
 

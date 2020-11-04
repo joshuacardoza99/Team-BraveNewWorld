@@ -83,7 +83,7 @@ public class match_manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             start_network_game(new string[2] { "ElijahHero", "Asian" });
-            import_manager.run_function_all("Map", "generate_map", new string[0]{ });
+            import_manager.run_function("map", "load_map", new string[1]{"1500"});
             //import_manager.run_function_all("server_functions", "get_player", new string[2] {"match_manager", "receive_test_data"});
             import_manager.run_function_all("add_character", "add", new string[] {"ground_1_0_1, ninja"});
         }
