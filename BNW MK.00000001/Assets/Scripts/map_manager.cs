@@ -13,9 +13,10 @@ public class map_manager : MonoBehaviour
     public GameObject vikingLand;
     public GameObject greeceLand;
     public GameObject asianLand;
+    public string currentSelected; // stores what tile is currently selected
 
     // Private Global Variables //
-    private string currentSelected; // stores what tile is currently selected
+    //private string currentSelected; // stores what tile is currently selected
 
     // Start is called before the first frame update
     void Start()

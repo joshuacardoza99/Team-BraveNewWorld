@@ -59,7 +59,6 @@
     <Compile Include="Assets\Scripts\menu_scene.cs" />
     <Compile Include="Assets\Scripts\CameraControl.cs" />
     <Compile Include="Assets\Scripts\add_character.cs" />
-    <Compile Include="Assets\Scripts\MapGenerator.cs" />
     <Compile Include="Assets\Scripts\character_selection.cs" />
     <Compile Include="Assets\Scripts\import_manager.cs" />
     <Compile Include="Assets\Scripts\change_scene.cs" />
