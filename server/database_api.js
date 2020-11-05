@@ -1,4 +1,3 @@
-
 /*
    How to connect to the database:
    serverName = "unitybackend";
@@ -57,18 +56,18 @@ exports.database_api = function(serverName = "", username = "", password = "", d
          });
    }
    
-   // Add the match with the following parameters
-   this.add_match = function(parameters)
+   // Add the matchs with the following parameters
+   this.add_matchs = function(parameters)
    {
       let matchID = parameters[0]
       let map     = parameters[1]
-      insert_data("match",  [matchID, map]);
+      insert_data("matchs",  [matchID, map]);
    }
 
-   // Receive the match and select the match
-   this.get_match = function(receiver)
+   // Receive the matchs and select the match
+   this.get_matchs = function(receiver)
    {
-      select_data("match", receiver);
+      select_data("matchs", receiver);
    }
 
    // Add the players with the following parameters
@@ -89,19 +88,19 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    }
 
    // Add the characters with the following parameters
-   this.add_character = function(parameters)
+   this.add_characters = function(parameters)
    {
       let characterID   =       parameters[0]
-      let champion      = "'" + parameters[1] + "'"
+      let champion      =       parameters[1] 
       let characterType = "'" + parameters[2] + "'"
       let tileName      = "'" + parameters[3] + "'"
       let playerID      =       parameters[4]
-      insert_data("character",  [characterID, champion, characterType, tileName, playerID]);
+      insert_data("characters",  [characterID, champion, characterType, tileName, playerID]);
    }
 
    // Receive the character and select the character
-   this.get_character = function(receiver)
+   this.get_characters = function(receiver)
    {
-      select_data("character", receiver);
+      select_data("characters", receiver);
    }
 }

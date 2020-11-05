@@ -2,8 +2,8 @@
 exports.match = function(id = 0)
 {
 	// External Class.
-	/*let database_api = require("../server/database_api").database_api; // Database_Api Class that enables communication to the database.
-	    database_api = new database_api();*/
+	let database_api = require("../server/database_api").database_api; // Database_Api Class that enables communication to the database.
+	    database_api = new database_api();
 	    
 	// Global Variables.
 	let players = [];   // All players in this match.
