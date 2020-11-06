@@ -64,7 +64,7 @@
      <Compile Include="Assets\Scripts\match_manager.cs" />
      <Compile Include="Assets\Scripts\click_handlers.cs" />
      <Compile Include="Assets\Scripts\character_selection.cs" />
-     <Compile Include="Assets\Scripts\PanZoom (disjoin).cs" />
+     <Compile Include="Assets\Scripts\PanZoom.cs" />
      <Compile Include="Assets\Scripts\TileMove.cs" />
      <Compile Include="Assets\Scripts\server_manager.cs" />
      <Compile Include="Assets\Scripts\change_button.cs" />
