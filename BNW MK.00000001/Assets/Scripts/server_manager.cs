@@ -7,7 +7,7 @@ using NativeWebSocket;
 public class server_manager : MonoBehaviour
 {
     // Public Global Variables //
-    private string url = "ws://ec2-3-138-134-244.us-east-2.compute.amazonaws.com:5678"; // Public global variables that can be changed in the Unity UI.
+    private string url = "ws://localhost:5678/";//"ws://ec2-3-138-134-244.us-east-2.compute.amazonaws.com:5678"; // Public global variables that can be changed in the Unity UI.
 
     // Private Global Variables //
     private WebSocket webSocket;  // WebSocket Class that allows to start connections with the players.
@@ -93,5 +93,13 @@ public class server_manager : MonoBehaviour
     public void send(string gameObject, string function, string[] parameters)
     {
         webSocket.SendText(JsonUtility.ToJson(new update_message(gameObject, function, parameters)));
+    }
+
+    // Resets the servers connection
+    // Parameters = []
+    public void reset(string[] parameters)
+    {
+        webSocket.Close();
+        Start();
     }
 }

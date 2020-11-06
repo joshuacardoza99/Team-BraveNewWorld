@@ -99,6 +99,7 @@ server.on("connection", (playerSocket) =>
 		{
 			try
 			{
+				console.log("received message");
 				message_handler(JSON.parse(message), currentPlayer);
 			}
 			catch (error)
@@ -114,7 +115,14 @@ server.on("connection", (playerSocket) =>
 
 		playerSocket.on("close", () =>
 		{
+			let playerMatch = find_player_match(currentPlayer);
+
 			players = players.filter(player => player != currentPlayer);
+
+			if (playerMatch != null)
+			{
+				playerMatch.remove_player(currentPlayer);
+			}
 		})
 	}
 	catch (error)

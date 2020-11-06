@@ -92,8 +92,8 @@ public void Reset()
     // Set current to this tile when it gets clicked
     public void OnMouseDown()
     {
-        import_manager.run_function("Map", "unselect_tile", new string[0] { });
-        import_manager.run_function("Map", "set_current", new string[1] { this.name });
+        import_manager.run_function("map", "unselect_tile", new string[0] { });
+        import_manager.run_function("map", "set_current", new string[1] { this.name });
         current = true;
     }
 
