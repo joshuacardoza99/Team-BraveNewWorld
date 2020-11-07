@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\TileMove.cs" />
      <Compile Include="Assets\Scripts\server_manager.cs" />
      <Compile Include="Assets\Scripts\change_button.cs" />
+     <Compile Include="Assets\Scripts\Preload.cs" />
      <Compile Include="Assets\Scripts\change_scene.cs" />
      <Compile Include="Assets\Scripts\map_manager.cs" />
      <Compile Include="Assets\Scripts\PlayerMove.cs" />
@@ -75,7 +76,6 @@
      <Compile Include="Assets\Scripts\menu_scene.cs" />
      <Compile Include="Assets\Scripts\civ_description.cs" />
      <Compile Include="Assets\Packages\WebSocket\WebSocket.cs" />
-     <Compile Include="Assets\Scripts\Preload.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/elija/OneDrive/Documents/College/CS 451/Project/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
