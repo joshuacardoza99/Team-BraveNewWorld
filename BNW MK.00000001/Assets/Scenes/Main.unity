@@ -1051,11 +1051,23 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618882892}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dedcd09fd73bab40b4f25b327abc05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PanSpeed: 45
+  ZoomSpeedTouch: 1
+  ZoomSpeedMouse: 5
+  BoundsX:
+  - -1000
+  - 1000
+  BoundsZ:
+  - -1000
+  - 1000
+  ZoomBounds:
+  - 60
+  - 100
 --- !u!1 &1653309901 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2352706935188495442, guid: 6876bbc8477f5c24aa2f0caf33290cdd, type: 3}
@@ -1143,7 +1155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25c6e3c3085cde4c9cfcf886ed03d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 30
+  mapWidth: 20
   water: {fileID: 3313963180499537379, guid: c923e0107c6fb184bbe3081289560780, type: 3}
   vikingLand: {fileID: 2998451163597735178, guid: f92086fee053a8f45aff25213fef8ceb, type: 3}
   greeceLand: {fileID: 513165736817720220, guid: 2f7e87437d0440745ac5314672cc48e5, type: 3}
