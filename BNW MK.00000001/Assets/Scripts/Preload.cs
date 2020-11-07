@@ -30,16 +30,16 @@ public class Preload : MonoBehaviour
     private void Update()
     {
         // Fade in
-        if(Time.time < minimumTextTime)
+        if (Time.time < minimumTextTime)
         {
             fadeGroup.alpha = 1 - Time.time;
         }
 
         // Fade out
-        if(Time.time > minimumTextTime && loadTime !=0)
+        if (Time.time > minimumTextTime && loadTime != 0)
         {
             fadeGroup.alpha = Time.time - minimumTextTime;
-            if(fadeGroup.alpha >= 1)
+            if (fadeGroup.alpha >= 1)
             {
                 SceneManager.LoadScene("Start");
             }

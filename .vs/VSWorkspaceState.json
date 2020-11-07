@@ -3,13 +3,8 @@
     "",
     "\\BNW MK.00000001",
     "\\BNW MK.00000001\\Assets",
-    "\\BNW MK.00000001\\Assets\\Scripts",
-    "\\server"
+    "\\BNW MK.00000001\\Assets\\Scripts"
   ],
-<<<<<<< HEAD
-  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\Tile.cs",
-=======
-  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\import_manager.cs",
->>>>>>> Tests
+  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\Preload.cs",
   "PreviewInSolutionExplorer": false
 }
