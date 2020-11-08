@@ -76,6 +76,7 @@
      <Compile Include="Assets\Scripts\menu_scene.cs" />
      <Compile Include="Assets\Scripts\civ_description.cs" />
      <Compile Include="Assets\Packages\WebSocket\WebSocket.cs" />
+     <Compile Include="Assets\Scripts\ChampionGenerator.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>D:/Team-BraveNewWorld/BNW MK.00000001/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
