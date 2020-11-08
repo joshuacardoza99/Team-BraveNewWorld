@@ -129,6 +129,23 @@ public class match_manager : MonoBehaviour
         {
             this.map     = int.Parse(parameters[2]);
         }
+        Vector3 lightPosition = GameObject.Find("Directional Light").transform.position;
+        lightPosition.y = 500;
+        var lightDirection = GameObject.Find("Directional Light").transform.rotation.eulerAngles;
+        lightDirection.x = 70;
+
+        GameObject.Find("Directional Light").transform.position = lightPosition;
+        GameObject.Find("Directional Light").transform.rotation = Quaternion.Euler(lightDirection);
+
+
+        Vector3 cameraPosition = GameObject.Find("Directional Light").transform.position;
+        cameraPosition.y = 3;
+        var cameraDirection = GameObject.Find("Directional Light").transform.rotation.eulerAngles;
+        cameraDirection.x = 80;
+
+
+        GameObject.Find("Main Camera").transform.position = cameraPosition;
+        GameObject.Find("Main Camera").transform.rotation = Quaternion.Euler(cameraDirection);
         import_manager.run_function("map", "load_map", new string[1] {this.map.ToString()});
         import_manager.run_function_all("network_manager", "vote_ready", new string[0] {});
     }
@@ -162,5 +179,24 @@ public class match_manager : MonoBehaviour
     public void leave_match ()
     {
         import_manager.run_function("network_manager", "reset", new string[0] {});
+    }
+
+     // Gets a list of all land of a certain type
+    // Parameter = [string landType, string gameObject, string function];
+    public void get_land(string[] parameters)
+    {
+        string type = parameters[0];
+        List<string> landOfType = new List<string>();
+
+        foreach (GameObject land in GameObject.FindObjectsOfType<GameObject>())
+        {
+            if (Regex.IsMatch(land.name, type + "_*_*_*", RegexOptions.IgnoreCase))
+            {
+                landOfType.Add(land.name);
+                Debug.Log(land.name);
+            }
+        }
+
+        import_manager.run_function(parameters[1], parameters[2], landOfType.ToArray());
     }
 }

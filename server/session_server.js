@@ -73,7 +73,7 @@ let message_handler = function(message, playerSocket)
 			                       match.get_id(), playerSocket);
 
 		players.push(newPlayer)
-		match.add_player(playerSocket);
+		match.add_player(newPlayer);
 	}
 	else
 	{
@@ -116,7 +116,7 @@ server.on("connection", (playerSocket) =>
 		playerSocket.on("close", () =>
 		{
 			let playerMatch = find_player_match(currentPlayer);
-
+			let currentPlayerObject = 
 			players = players.filter(player => player != currentPlayer);
 
 			if (playerMatch != null)
