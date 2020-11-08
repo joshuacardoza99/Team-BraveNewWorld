@@ -6,8 +6,9 @@ exports.match = function(id = 0)
 	    database_api = new database_api();
 	    
 	// Global Variables.
-	let players = [];   // All players in this match.
-	let matchId = id;   // Id of the match.
+	let players = [];           // All players in this match.
+	let matchId = id;           // Id of the match.
+	let maxNumberOfPlayers = 3; // The number of players for a match.
 
 	// Add a new player to the match.
 	this.add_player = function(player = null)
@@ -18,13 +19,31 @@ exports.match = function(id = 0)
 			  function: "setup_match",
 			parameters: [matchId.toString(), players.length > 1 ? "false" : "true", "network"]
 		}));
+
+		if (players.length > 1)
+		{
+			player.host = true;
+		}
+
 		players.push(player);
 	}
 
 	// Removes a player from the match.
 	this.remove_player = function(currentPlayer = null)
 	{
-		players = players.filter(player => player != currentPlayer);
+		players = players.filter(player => (player.name != currentPlayer.name && player.ip == currentPlayer.ip));
+
+		if (currentPlayer.host)
+		{
+			players[0].host = true;
+
+			players[0].send(JSON.stringify(
+			{
+				gameObject: "network_manager",
+				  function: "set_host",
+				parameters: []
+			}));
+		}
 	}
 
 	// Determins if the match is full or if it can take another player.
@@ -69,13 +88,13 @@ exports.match = function(id = 0)
 	}
 
 	// Sends the message to all other players in this match.
-	let broadcast = function (message, playerSocket)
+	let broadcast = function (message, player)
 	{
-		this.players.forEach((nextPlayerSocket) =>
+		this.players.forEach((nextPlayer) =>
 		{
-			if (nextPlayerSocket !== playerSocket)
+			if (nextPlayer.socket !== player.socket)
 			{
-				nextPlayerSocket.send(JSON.stringify(message));
+				nextPlayer.socket.send(JSON.stringify(message));
 			}
 		})
 	}
