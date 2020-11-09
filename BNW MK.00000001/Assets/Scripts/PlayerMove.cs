@@ -5,44 +5,43 @@ using UnityEngine;
 public class PlayerMove : TileMove
 {
     Vector3 targetPosition;
+    private Ray ray;
+    private RaycastHit hit;
+    private Camera cam;
 
     // Use this for initialization
     void Start()
     {
         Init();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(transform.position, transform.forward);
+        /* FindSelectableTiles();
 
-
-        if (!moving)
+        if (Input.GetMouseButtonUp(0))
         {
-            FindSelectableTiles();
-            // Registers clicks  
-            if (Input.GetMouseButtonUp(0))
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
+                if (hit.collider.tag == "Tile")
                 {
-                    if (hit.collider.tag == "Tile")
+                    Tile t = hit.collider.GetComponent<Tile>();
+                    // if tile clicked 
+                    if (t.selectable)
                     {
-                        Tile t = hit.collider.GetComponent<Tile>();
-                        // if tile clicked 
-                        if (t.selectable)
-                        {
-                            moving = true;
-                            targetPosition = t.transform.position;
-                            Move(targetPosition);
-                        }
+                        moving = true;
+                        targetPosition = t.transform.position;
+                        Move(targetPosition);
                     }
                 }
             }
-        }
+        } */
+        
+
     }
 
     void Move(Vector3 location)
@@ -59,4 +58,18 @@ public class PlayerMove : TileMove
        
 
     }
-}
+   /* void OnMouseDown()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Tile t = this.GetComponent<Tile>();
+            // if tile clicked 
+            if (t.selectable)
+            {
+                moving = true;
+                targetPosition = t.transform.position;
+                Move(targetPosition);
+            }
+        }
+    }*/
+    }

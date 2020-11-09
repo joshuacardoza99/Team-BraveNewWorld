@@ -34,6 +34,8 @@ public class TileMove : MonoBehaviour
 
         halfHeight = GetComponent<Collider>().bounds.extents.y;
 
+        
+
     }
 
     public void GetCurrentTile()
@@ -47,7 +49,7 @@ public class TileMove : MonoBehaviour
         RaycastHit hit;
         Tile tile = null;
         
-        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 3))
+        if (Physics.Raycast(target.transform.position, -Vector3.up, out hit, 1))
         {
             tile = hit.collider.GetComponent<Tile>();
         }

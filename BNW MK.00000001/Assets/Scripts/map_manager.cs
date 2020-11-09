@@ -249,8 +249,8 @@ public class map_manager : MonoBehaviour
     public void load_map(string[] parameters)
     {
         string[,] map = generate_map2(mapWidth, mapWidth, new string[4]{ "water", "viking", "greece", "asian" }, 80, int.Parse(parameters[0]));
-        int xCoordinate = 0 - (mapWidth / 2);
-        int yCoordinate = 0 - (mapWidth / 2);
+        int xCoordinate = 0 - mapWidth;
+        int yCoordinate = 0 - mapWidth;
         int sparatedDistance = (int)water.GetComponent<Renderer>().bounds.size.x;
         int currentWidthLength = 0;
 
@@ -264,7 +264,7 @@ public class map_manager : MonoBehaviour
             if (currentWidthLength >= mapWidth)
             {
                 yCoordinate        += sparatedDistance;
-                xCoordinate         = 0 - (mapWidth / 2);
+                xCoordinate         = 0 - (mapWidth);
                 currentWidthLength  = 0;
             }
         }
