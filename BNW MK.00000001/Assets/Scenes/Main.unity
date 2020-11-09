@@ -908,12 +908,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1618882892}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dedcd09fd73bab40b4f25b327abc05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PanSpeed: 45
+  PanSpeed: 10
   ZoomSpeedTouch: 1
   ZoomSpeedMouse: 5
   BoundsX:
@@ -924,7 +924,7 @@ MonoBehaviour:
   - 1000
   ZoomBounds:
   - 60
-  - 100
+  - 130
 --- !u!1 &1653309901 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2352706935188495442, guid: 6876bbc8477f5c24aa2f0caf33290cdd, type: 3}
@@ -1972,7 +1972,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843111468843251025, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -28.800049
+      value: -28.80008
       objectReference: {fileID: 0}
     - target: {fileID: 2966516777861501630, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_IsActive

@@ -10,7 +10,7 @@ public class PanZoom : MonoBehaviour
 
     public float[] BoundsX    = new float[] { -1000f,  1000f };
     public float[] BoundsZ    = new float[] { -1000f,  1000f };
-    public float[] ZoomBounds = new float[] { -10000f, 10000f};
+    public float[] ZoomBounds = new float[] { -1000f, 1000f};
 
     private Camera cam;
 
