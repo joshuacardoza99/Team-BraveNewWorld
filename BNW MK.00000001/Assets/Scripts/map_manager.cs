@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 public class map_manager : MonoBehaviour
 {
@@ -289,5 +290,24 @@ public class map_manager : MonoBehaviour
     public void unselect_tile(string[] parameters)
     {
         import_manager.run_function(get_current(new string[0] {}), "unselect", new string[0] {});
+    }
+
+    // Gets a list of all land of a certain type
+    // Parameter = [string landType, string gameObject, string function];
+    public void get_land(string[] parameters)
+    {
+        string type = parameters[0];
+        List<string> landOfType = new List<string>();
+
+        foreach (GameObject land in GameObject.FindObjectsOfType<GameObject>())
+        {
+            if (Regex.IsMatch(land.name, type + "_*_*_*", RegexOptions.IgnoreCase))
+            {
+                landOfType.Add(land.name);
+                Debug.Log(land.name);
+            }
+        }
+
+        import_manager.run_function(parameters[1], parameters[2], landOfType.ToArray());
     }
 }
