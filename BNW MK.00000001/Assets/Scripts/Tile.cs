@@ -55,8 +55,8 @@ public class Tile : MonoBehaviour
         }
         else if (occupied)
         {
-            //this.GetComponent<Renderer>().material.color = Color.red;
-             this.GetComponent<Renderer>().material.color = realColor;
+            this.GetComponent<Renderer>().material.color = Color.red;
+             //this.GetComponent<Renderer>().material.color = realColor;
         }
         else if (target)
         {
@@ -64,8 +64,8 @@ public class Tile : MonoBehaviour
         }
         else if (selectable)
         {
-            //this.GetComponent<Renderer>().material.color = Color.blue;
-             this.GetComponent<Renderer>().material.color = realColor;
+            this.GetComponent<Renderer>().material.color = Color.blue;
+            // this.GetComponent<Renderer>().material.color = realColor;
         }
         else
         {

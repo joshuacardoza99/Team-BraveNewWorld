@@ -19,8 +19,28 @@ public class PlayerMove : TileMove
     // Update is called once per frame
     void Update()
     {
-        FindSelectableTiles();
+        /* FindSelectableTiles();
 
+        if (Input.GetMouseButtonUp(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.tag == "Tile")
+                {
+                    Tile t = hit.collider.GetComponent<Tile>();
+                    // if tile clicked 
+                    if (t.selectable)
+                    {
+                        moving = true;
+                        targetPosition = t.transform.position;
+                        Move(targetPosition);
+                    }
+                }
+            }
+        } */
+        
 
     }
 
@@ -38,7 +58,7 @@ public class PlayerMove : TileMove
        
 
     }
-    void OnMouseDown()
+   /* void OnMouseDown()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -51,5 +71,5 @@ public class PlayerMove : TileMove
                 Move(targetPosition);
             }
         }
+    }*/
     }
-}
