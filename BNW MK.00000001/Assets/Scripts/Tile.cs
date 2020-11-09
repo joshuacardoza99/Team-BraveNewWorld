@@ -65,7 +65,7 @@ public class Tile : MonoBehaviour
         else if (selectable)
         {
             this.GetComponent<Renderer>().material.color = Color.blue;
-            // this.GetComponent<Renderer>().material.color = realColor;
+             //this.GetComponent<Renderer>().material.color = realColor;
         }
         else
         {
@@ -95,6 +95,10 @@ public void Reset()
         import_manager.run_function("map", "unselect_tile", new string[0] { });
         import_manager.run_function("map", "set_current", new string[1] { this.name });
         current = true;
+        if (occupied == true)
+        {
+
+        }
     }
 
     // Unselect this tile
@@ -127,7 +131,7 @@ public void Reset()
             {
                 RaycastHit hit;
 
-                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target))
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 30) || (tile == target))
                 {
                     adjacencyList.Add(tile);
                 }

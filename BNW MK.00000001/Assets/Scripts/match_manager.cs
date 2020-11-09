@@ -188,14 +188,14 @@ public class match_manager : MonoBehaviour
         string type = parameters[0];
         List<string> landOfType = new List<string>();
 
-        foreach (GameObject land in GameObject.FindObjectsOfType<GameObject>())
+        /*foreach (GameObject land in GameObject.FindObjectsOfType<GameObject>())
         {
             if (Regex.IsMatch(land.name, type + "_*_*_*", RegexOptions.IgnoreCase))
             {
                 landOfType.Add(land.name);
                 Debug.Log(land.name);
             }
-        }
+        }*/
 
         import_manager.run_function(parameters[1], parameters[2], landOfType.ToArray());
     }
