@@ -55,8 +55,8 @@ public class Tile : MonoBehaviour
         }
         else if (occupied)
         {
-            //this.GetComponent<Renderer>().material.color = Color.red;
-             this.GetComponent<Renderer>().material.color = realColor;
+            this.GetComponent<Renderer>().material.color = Color.red;
+             //this.GetComponent<Renderer>().material.color = realColor;
         }
         else if (target)
         {
@@ -64,8 +64,8 @@ public class Tile : MonoBehaviour
         }
         else if (selectable)
         {
-            //this.GetComponent<Renderer>().material.color = Color.blue;
-             this.GetComponent<Renderer>().material.color = realColor;
+            this.GetComponent<Renderer>().material.color = Color.blue;
+             //this.GetComponent<Renderer>().material.color = realColor;
         }
         else
         {
@@ -95,6 +95,10 @@ public void Reset()
         import_manager.run_function("map", "unselect_tile", new string[0] { });
         import_manager.run_function("map", "set_current", new string[1] { this.name });
         current = true;
+        if (occupied == true)
+        {
+
+        }
     }
 
     // Unselect this tile
