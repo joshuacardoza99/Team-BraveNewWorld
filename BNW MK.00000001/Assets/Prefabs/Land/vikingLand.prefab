@@ -113,6 +113,8 @@ MonoBehaviour:
   occupied: 0
   target: 0
   selectable: 0
+  map: {fileID: 0}
+  currentchar: {fileID: 0}
   adjacencyList: []
   visited: 0
   parent: {fileID: 0}
