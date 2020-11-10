@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Transactions;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
@@ -18,7 +20,9 @@ public class Tile : MonoBehaviour
     public bool target = false;
     public bool selectable = false;
 
-
+    
+    public GameObject map; // this should be set to the map gameobject
+    public GameObject currentchar = null; // the character currently on this tile. Or about to be moved to this tile.
     public List<Tile> adjacencyList = new List<Tile>();
 
     //Needed BFS (breadth first search)
@@ -40,11 +44,26 @@ public class Tile : MonoBehaviour
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
     
         realColor = this.GetComponent<Renderer>().material.color;
+
+        map = GameObject.Find("map");
+
+        FindNeighbors();
+
     }
 	
 	// Update is called once per frame
 	void Update () 
 	{
+        // determine if there is a character currently on the tile.
+        if (currentchar != null)
+        {
+            occupied = true;
+        }
+        else
+        {
+            occupied = false;
+        }
+
         if (current && occupied)
         {
             this.GetComponent<Renderer>().material.color = Color.magenta;
@@ -73,45 +92,29 @@ public class Tile : MonoBehaviour
         }
     }
 
-
-public void Reset()
-    {
-        adjacencyList.Clear();
-
-        current = false;
-        target = false;
-        selectable = false;
-
-        visited = false;
-        parent = null;
-        distance = 0;
-
-        f = g = h = 0;
-    }
-
     // Set current to this tile when it gets clicked
     public void OnMouseDown()
     {
+        // If the tile is selectable, then move the current character to this tile
+        if (selectable)
+        {
+            import_manager.run_function("map", "get_current_char", new string[1] { this.name });
+            
+            Debug.Log("move to "+ this.name);
+            Debug.Log("current Character = " + currentchar.name);
+            import_manager.run_function_all(currentchar.name, "move", new string[1] { this.name });
+        }
+           
         import_manager.run_function("map", "unselect_tile", new string[0] { });
         import_manager.run_function("map", "set_current", new string[1] { this.name });
         current = true;
-        if (occupied == true)
-        {
-
-        }
-    }
-
-    // Unselect this tile
-    // parameter = empty array (not used)
-    public void unselect(string [] parameter) 
-    {
-        current = false;
+        
     }
     
 
     public void FindNeighbors()
     {
-        Reset();
+        //Reset();
 
         CheckTile(Vector3.forward);
         CheckTile(-Vector3.forward);
@@ -121,21 +124,68 @@ public void Reset()
 
     public void CheckTile(Vector3 direction)
     {
+
         Vector3 halfExtents = new Vector3(0.25f, 0.25f, 0.25f);
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
 
         foreach (Collider item in colliders)
         {
             Tile tile = item.GetComponent<Tile>();
-            if (tile != null && tile.walkable)
+            if (tile != null && tile.walkable && !tile.occupied)
             {
                 RaycastHit hit;
 
-                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 30) || (tile == target))
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target))
                 {
                     adjacencyList.Add(tile);
                 }
             }
         }
+    }
+
+
+    // Set and get functions
+
+    // Unselect this tile
+    // parameter = empty array (not used)
+    public void unselect(string[] parameter)
+    {
+        current = false;
+
+        // if the tile being unselected is occupied, also unselect all nearby tiles
+        if (occupied)
+        {
+            foreach (Tile tile in adjacencyList)
+            {
+                tile.selectable = false;
+            }
+        }
+    }
+    public void set_occupied()
+    {
+        occupied = true;
+    }
+    public void set_selectable()
+    {
+        selectable = true;
+    }
+
+    public void set_current_char(string[] newcurrentChar)
+    {
+        currentchar = GameObject.Find(newcurrentChar[0]);
+    }
+    public void Reset()
+    {
+        adjacencyList.Clear();
+
+        current = false;
+        target = false;
+        selectable = false;
+
+        //visited = false;
+        parent = null;
+        distance = 0;
+
+        f = g = h = 0;
     }
 }

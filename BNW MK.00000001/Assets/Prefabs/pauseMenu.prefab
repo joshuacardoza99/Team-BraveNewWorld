@@ -317,7 +317,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6610886599738569923}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: panel_toggle, Assembly-CSharp
         m_MethodName: toggle_panel
         m_Mode: 1
@@ -913,7 +913,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6610886599738569923}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: panel_toggle, Assembly-CSharp
         m_MethodName: toggle_panel
         m_Mode: 1
@@ -1013,7 +1013,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1049007676081401178}
-  - component: {fileID: 6610886599738569923}
   m_Layer: 0
   m_Name: PanelToggle
   m_TagString: Untagged
@@ -1035,19 +1034,6 @@ Transform:
   m_Father: {fileID: 8646506865767399954}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6610886599738569923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7837397265252818363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae5dc2ee1204fab4288da4e3946b72a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 2630003875511897124}
 --- !u!1 &8646506865767399955
 GameObject:
   m_ObjectHideFlags: 0

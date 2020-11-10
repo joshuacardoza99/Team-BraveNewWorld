@@ -1,75 +1,147 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class PlayerMove : TileMove
+public class PlayerMove : MonoBehaviour
 {
+    // External Classes//
+    import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
+
+    List<Tile> selectableTiles = new List<Tile>();
+    GameObject[] tiles;
+
+    Stack<Tile> path = new Stack<Tile>();
+    Tile currentTile = null;
+
+    //public bool moving = false;
+    public int moves = 3;
+    //public float jumpHeight = 2;
+    public float moveSpeed = 2;
+    public Tile actualTargetTile;
+
+    //Vector3 velocity = new Vector3();
+    //Vector3 heading = new Vector3();
+
+    float halfHeight = 0;
     Vector3 targetPosition;
     private Ray ray;
     private RaycastHit hit;
     private Camera cam;
 
+
     // Use this for initialization
     void Start()
     {
-        Init();
-        
+        tiles = GameObject.FindGameObjectsWithTag("Tile");
+
+        halfHeight = GetComponent<Collider>().bounds.extents.y;
+        //FindSelectableTiles();
+
+        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        /* FindSelectableTiles();
-
-        if (Input.GetMouseButtonUp(0))
+        if (currentTile == null)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+            Debug.Log("Updating current tile");
+            GetCurrentTile();
+            
+        }
+
+        if (currentTile.current && currentTile.occupied)
+        {
+            import_manager.run_function("map", "set_current_char", new string[1] { this.name });
+
+            foreach (Tile tile in currentTile.adjacencyList)
             {
-                if (hit.collider.tag == "Tile")
+                if (tile.occupied == false)
                 {
-                    Tile t = hit.collider.GetComponent<Tile>();
-                    // if tile clicked 
-                    if (t.selectable)
-                    {
-                        moving = true;
-                        targetPosition = t.transform.position;
-                        Move(targetPosition);
-                    }
+                    tile.selectable = true;
                 }
             }
-        } */
-        
-
+        }
+     
     }
 
-    void Move(Vector3 location)
+    public void move(string[] location)
     {
+        Debug.Log("starting move to " + location[0]);
+        
+        GameObject nextTile = GameObject.Find(location[0]);
+        targetPosition = nextTile.transform.position;
+
+        currentTile.currentchar = null;
+        currentTile.occupied = false;
+        foreach (Tile tile in currentTile.adjacencyList)
+        {
+            tile.selectable = false;
+        }
+
         this.transform.LookAt(targetPosition);
 
         this.transform.position = new Vector3(targetPosition.x, this.transform.position.y, targetPosition.z);
 
         this.transform.rotation = Quaternion.identity;
 
-     
-        moving = false;
-        //TurnManager.EndTurn();
-       
+        currentTile = nextTile.GetComponent<Tile>();
 
+        Debug.Log("Ending move to " + location[0]);
+
+        //moving = false;
     }
-   /* void OnMouseDown()
+
+
+
+    public void GetCurrentTile()
     {
-        if (Input.GetMouseButtonDown(0))
+        RaycastHit hit;
+
+        if (Physics.Raycast(this.transform.position, Vector3.down, out hit, 30))
         {
-            Tile t = this.GetComponent<Tile>();
-            // if tile clicked 
-            if (t.selectable)
-            {
-                moving = true;
-                targetPosition = t.transform.position;
-                Move(targetPosition);
-            }
+            currentTile = hit.collider.GetComponent<Tile>();
         }
-    }*/
+        currentTile.occupied = true;
+        currentTile.currentchar = this.gameObject;
     }
+
+
+
+    // Find tiles that are within the characters range
+    public void FindSelectableTiles()
+    {
+
+
+        /*Queue<Tile> process = new Queue<Tile>();
+
+        process.Enqueue(currentTile);
+        currentTile.visited = true;
+
+        while (process.Count > 0)
+        {
+            Tile t = process.Dequeue();
+
+            selectableTiles.Add(t);
+            t.set_selected();
+
+            if (t.distance < move)
+            {
+                foreach (Tile tile in t.adjacencyList)
+                {
+                    if (tile != currentTile)
+                    {
+                        //tile.parent = t;
+                        tile.visited = true;
+                        tile.distance = 1 + t.distance;
+                        process.Enqueue(tile);
+                    }
+                }
+            }
+        }*/
+    }
+}
