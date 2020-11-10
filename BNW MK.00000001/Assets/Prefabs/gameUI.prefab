@@ -165,7 +165,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3039997976459953810}
-  - component: {fileID: 677695784799670878}
   - component: {fileID: 4656188103035621094}
   m_Layer: 5
   m_Name: map
@@ -193,25 +192,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &677695784799670878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8221028248778495921}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 742b42d3a18c8f849a1aaed47e31306c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ground: {fileID: 1344572429207624, guid: 3bbd851bf0e48c2468e8f3a7c050eb05, type: 3}
-  width: 10
-  baseName: ground
-  xScale: 30
-  yScale: 1
-  zScale: 30
-  currentSelected: 
 --- !u!114 &4656188103035621094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +205,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapWidth: 30
-  water: {fileID: 1590608983609173639, guid: c923e0107c6fb184bbe3081289560780, type: 3}
-  vikingLand: {fileID: 6639488620538686953, guid: f92086fee053a8f45aff25213fef8ceb, type: 3}
-  greeceLand: {fileID: 4317716896113133201, guid: 2f7e87437d0440745ac5314672cc48e5, type: 3}
-  asianLand: {fileID: 7003437812670713215, guid: b5bbf7d6d0a88724ab6f66cfb6db6f0a, type: 3}
+  water: {fileID: 3313963180499537379, guid: c923e0107c6fb184bbe3081289560780, type: 3}
+  vikingLand: {fileID: 2998451163597735178, guid: f92086fee053a8f45aff25213fef8ceb, type: 3}
+  greeceLand: {fileID: 513165736817720220, guid: 2f7e87437d0440745ac5314672cc48e5, type: 3}
+  asianLand: {fileID: 8651404251344937564, guid: b5bbf7d6d0a88724ab6f66cfb6db6f0a, type: 3}
+  currentSelected: 

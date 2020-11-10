@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tile
   - Cam
+  - map
   layers:
   - Default
   - TransparentFX

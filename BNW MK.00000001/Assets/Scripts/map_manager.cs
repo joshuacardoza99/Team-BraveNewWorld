@@ -15,6 +15,7 @@ public class map_manager : MonoBehaviour
     public GameObject greeceLand;
     public GameObject asianLand;
     public string currentSelected; // stores what tile is currently selected
+    public string CurrentChar = null; // Character on current selected tile
 
     // Private Global Variables //
     //private string currentSelected; // stores what tile is currently selected
@@ -301,13 +302,28 @@ public class map_manager : MonoBehaviour
 
         foreach (GameObject land in GameObject.FindObjectsOfType<GameObject>())
         {
-            if (Regex.IsMatch(land.name, type + "_*_*_*", RegexOptions.IgnoreCase))
+            /*if (Regex.IsMatch(land.name, type + "_*_*_*", RegexOptions.IgnoreCase))
             {
                 landOfType.Add(land.name);
                 Debug.Log(land.name);
-            }
+            }*/
         }
 
         import_manager.run_function(parameters[1], parameters[2], landOfType.ToArray());
+    }
+
+    // Set the current character to a given character object
+    public void set_current_char(string[] character)
+    {
+        CurrentChar = character[0];
+    }
+
+    // sends the string currentChar to the calling script
+    public void get_current_char(string[] reciever)
+    {
+        string[] temp = new string[1] { CurrentChar };
+        Debug.Log("receiver = " + reciever[0]);
+
+        import_manager.run_function(reciever[0], "set_current_char",  temp );
     }
 }
