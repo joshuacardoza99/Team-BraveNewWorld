@@ -90,7 +90,6 @@
      <Compile Include="Assets\Automation\Engine\Custodian\QHelpers\RunHash.cs" />
      <Compile Include="Assets\Automation\Engine\Xtra\ThirdParty\Scripts\Pubnub\Utility.cs" />
      <Compile Include="Assets\Scripts\unit_maker.cs" />
-     <Compile Include="Assets\Scripts\add_character.cs" />
      <Compile Include="Assets\Automation\Engine\Attributes\Validate.cs" />
      <Compile Include="Assets\Scripts\Preload(dlskf).cs" />
      <Compile Include="Assets\Automation\Engine\Enums\TestStatus.cs" />

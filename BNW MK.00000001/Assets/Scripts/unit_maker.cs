@@ -64,12 +64,8 @@ public class unit_maker : MonoBehaviour
         }
         else if (tile.name.Split('_')[0] == "greek")
         {
-<<<<<<< HEAD
-            Instantiate(greeceChampion, tilePosition, Quaternion.identity);
-=======
             greekChampion.name = championName;
             Instantiate(greekChampion, tilePosition, Quaternion.identity);
->>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
         }
 
         Vector3 cameraPosition = GameObject.Find("Directional Light").transform.position;

@@ -70,47 +70,47 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11782}
     - Class: 114
-      Script: {instanceID: 11814}
+      Script: {instanceID: 11820}
     - Class: 114
-      Script: {instanceID: 12052}
+      Script: {instanceID: 12058}
     - Class: 114
-      Script: {instanceID: 12070}
+      Script: {instanceID: 12076}
     - Class: 114
-      Script: {instanceID: 12390}
+      Script: {instanceID: 12396}
     - Class: 114
-      Script: {instanceID: 12570}
+      Script: {instanceID: 12572}
     - Class: 114
-      Script: {instanceID: 12662}
-    - Class: 114
-      Script: {instanceID: 12992}
+      Script: {instanceID: 12664}
     - Class: 114
       Script: {instanceID: 12994}
     - Class: 114
-      Script: {instanceID: 13092}
+      Script: {instanceID: 12996}
     - Class: 114
-      Script: {instanceID: 13182}
+      Script: {instanceID: 13094}
     - Class: 114
-      Script: {instanceID: 13224}
+      Script: {instanceID: 13184}
     - Class: 114
-      Script: {instanceID: 13382}
+      Script: {instanceID: 13226}
     - Class: 114
-      Script: {instanceID: 13594}
+      Script: {instanceID: 13384}
     - Class: 114
-      Script: {instanceID: 13634}
+      Script: {instanceID: 13596}
     - Class: 114
-      Script: {instanceID: 13682}
+      Script: {instanceID: 13636}
     - Class: 114
-      Script: {instanceID: 13698}
+      Script: {instanceID: 13684}
     - Class: 114
-      Script: {instanceID: 13710}
+      Script: {instanceID: 13700}
     - Class: 114
-      Script: {instanceID: 13734}
+      Script: {instanceID: 13712}
     - Class: 114
-      Script: {instanceID: 13834}
+      Script: {instanceID: 13736}
     - Class: 114
-      Script: {instanceID: 13958}
+      Script: {instanceID: 13836}
     - Class: 114
-      Script: {instanceID: 14156}
+      Script: {instanceID: 13960}
+    - Class: 114
+      Script: {instanceID: 14158}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -167,25 +167,25 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11784}
     - Class: 114
-      Script: {instanceID: 11814}
+      Script: {instanceID: 11820}
     - Class: 114
-      Script: {instanceID: 12070}
+      Script: {instanceID: 12076}
     - Class: 114
-      Script: {instanceID: 12200}
+      Script: {instanceID: 12206}
     - Class: 114
-      Script: {instanceID: 12452}
+      Script: {instanceID: 12454}
     - Class: 114
-      Script: {instanceID: 12570}
+      Script: {instanceID: 12572}
     - Class: 114
-      Script: {instanceID: 13350}
+      Script: {instanceID: 13352}
     - Class: 114
-      Script: {instanceID: 13658}
+      Script: {instanceID: 13660}
     - Class: 114
-      Script: {instanceID: 13710}
+      Script: {instanceID: 13712}
     - Class: 114
-      Script: {instanceID: 14156}
+      Script: {instanceID: 14158}
     - Class: 114
-      Script: {instanceID: 20150}
+      Script: {instanceID: 19682}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -228,19 +228,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11782}
     - Class: 114
-      Script: {instanceID: 11814}
+      Script: {instanceID: 11820}
     - Class: 114
-      Script: {instanceID: 12070}
+      Script: {instanceID: 12076}
     - Class: 114
-      Script: {instanceID: 12570}
+      Script: {instanceID: 12572}
     - Class: 114
-      Script: {instanceID: 13682}
+      Script: {instanceID: 13684}
     - Class: 114
-      Script: {instanceID: 13710}
+      Script: {instanceID: 13712}
     - Class: 114
-      Script: {instanceID: 13948}
+      Script: {instanceID: 13950}
     - Class: 114
-      Script: {instanceID: 14156}
+      Script: {instanceID: 14158}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -478,7 +478,7 @@ ScriptsOnlyBuild:
     className: TMP_SubMeshUI
   - hash:
       serializedVersion: 2
-      Hash: 6b8656c6a756e483c037254543881191
+      Hash: eec4ed6629e135e6b5e20eb051df5674
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: unit_maker
@@ -488,12 +488,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: AnimationPlayableAsset
-  - hash:
-      serializedVersion: 2
-      Hash: eba0986521fc02136fb9ac95765cc14d
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: add_character
   - hash:
       serializedVersion: 2
       Hash: aba7b2852ef61d175dd9602e7723d5e5
