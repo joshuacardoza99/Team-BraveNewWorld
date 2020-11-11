@@ -16,12 +16,19 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 42
+<<<<<<< HEAD
     width: 1368
     height: 830
   m_ShowMode: 4
   m_Title: Game
+=======
+    width: 1536
+    height: 791.60004
+  m_ShowMode: 4
+  m_Title: Inspector
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_RootView: {fileID: 6}
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -43,12 +50,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
+<<<<<<< HEAD
     width: 1368
     height: 780
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
   controlID: 58
+=======
+    width: 1536
+    height: 742
+  m_MinSize: {x: 679, y: 492}
+  m_MaxSize: {x: 14002, y: 14042}
+  vertical: 0
+  controlID: 87
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -64,10 +80,17 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 953
     y: 0
     width: 415
     height: 780
+=======
+    x: 1201
+    y: 0
+    width: 335
+    height: 742
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
@@ -92,10 +115,17 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 318
     height: 420
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
+=======
+    width: 402
+    height: 399
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -117,9 +147,15 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 420
     width: 953
     height: 360
+=======
+    y: 399
+    width: 1201
+    height: 343
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_MinSize: {x: 231, y: 271}
   m_MaxSize: {x: 10001, y: 10021}
   m_ActualView: {fileID: 12}
@@ -148,9 +184,15 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1368
     height: 830
   m_MinSize: {x: 875, y: 300}
+=======
+    width: 1536
+    height: 792
+  m_MinSize: {x: 875, y: 542}
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -173,7 +215,11 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 1368
+=======
+    width: 1536
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -197,8 +243,13 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 810
     width: 1368
+=======
+    y: 772
+    width: 1536
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -221,12 +272,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 953
     height: 780
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
   controlID: 37
+=======
+    width: 1201
+    height: 742
+  m_MinSize: {x: 403, y: 492}
+  m_MaxSize: {x: 10001, y: 14042}
+  vertical: 1
+  controlID: 88
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -246,12 +306,21 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
+<<<<<<< HEAD
     width: 953
     height: 420
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
   controlID: 38
+=======
+    width: 1201
+    height: 399
+  m_MinSize: {x: 403, y: 221}
+  m_MaxSize: {x: 8003, y: 4021}
+  vertical: 0
+  controlID: 89
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -267,12 +336,21 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 318
     y: 0
     width: 635
     height: 420
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
+=======
+    x: 402
+    y: 0
+    width: 799
+    height: 399
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 15}
@@ -300,9 +378,15 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 492
     width: 952
     height: 339
+=======
+    y: 471.2
+    width: 1200
+    height: 322
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
     m_NameFilter: 
@@ -317,21 +401,37 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
+<<<<<<< HEAD
     - Assets/Scripts
+=======
+    - Assets/Prefabs/Buildings
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
     m_Globs: []
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
+<<<<<<< HEAD
   - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\josea\Documents\GitHub\Team-BraveNewWorld\BNW MK.00000001
+=======
+  - Assets/Prefabs/Buildings
+  m_LastFoldersGridSize: -1
+  m_LastProjectPath: D:\Team-BraveNewWorld\BNW MK.00000001
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
     m_SelectedIDs: 363f0000
     m_LastClickedID: 16182
     m_ExpandedIDs: 00000000223f000000ca9a3b
+=======
+    m_SelectedIDs: b83f0000
+    m_LastClickedID: 16312
+    m_ExpandedIDs: 00000000a23f0000ae3f000000ca9a3b
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -359,7 +459,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000223f0000
+=======
+    m_ExpandedIDs: 00000000a23f0000
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -435,10 +539,17 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 953
     y: 72
     width: 414
     height: 759
+=======
+    x: 1201.2001
+    y: 72
+    width: 334
+    height: 721
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_ViewDataDictionary: {fileID: 0}
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
@@ -475,15 +586,26 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 72
+<<<<<<< HEAD
     width: 317
     height: 399
+=======
+    width: 401
+    height: 378
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< HEAD
       m_SelectedIDs: 
       m_LastClickedID: 0
       m_ExpandedIDs: bebfffff88f4ffff24f8ffff60fbffff
+=======
+      m_SelectedIDs: 9a3b0000
+      m_LastClickedID: 15258
+      m_ExpandedIDs: 9aecffff7cf6ffff
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -643,10 +765,17 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 318
     y: 72
     width: 633
     height: 399
+=======
+    x: 402
+    y: 72
+    width: 797
+    height: 378
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_ViewDataDictionary: {fileID: 0}
   m_SerializedViewNames: []
   m_SerializedViewValues: []
@@ -654,7 +783,11 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
+<<<<<<< HEAD
   m_TargetSize: {x: 633, y: 378}
+=======
+  m_TargetSize: {x: 797, y: 357}
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -669,10 +802,17 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
+<<<<<<< HEAD
     m_HBaseRangeMin: -158.25
     m_HBaseRangeMax: 158.25
     m_VBaseRangeMin: -94.5
     m_VBaseRangeMax: 94.5
+=======
+    m_HBaseRangeMin: -159.40001
+    m_HBaseRangeMax: 159.40001
+    m_VBaseRangeMin: -71.4
+    m_VBaseRangeMax: 71.4
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -690,16 +830,24 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
+<<<<<<< HEAD
       width: 633
       height: 378
     m_Scale: {x: 2, y: 2}
     m_Translation: {x: 316.5, y: 189}
+=======
+      width: 797
+      height: 357
+    m_Scale: {x: 2, y: 2}
+    m_Translation: {x: 398.5, y: 178.5}
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
       x: -158.25
       y: -94.5
       width: 316.5
@@ -707,6 +855,15 @@ MonoBehaviour:
     m_MinimalGUI: 1
   m_defaultScale: 2
   m_LastWindowPixelSize: {x: 1266, y: 798}
+=======
+      x: -199.25
+      y: -89.25
+      width: 398.5
+      height: 178.5
+    m_MinimalGUI: 1
+  m_defaultScale: 2
+  m_LastWindowPixelSize: {x: 1992.5, y: 945}
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -733,9 +890,15 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
+<<<<<<< HEAD
     y: 492
     width: 952
     height: 339
+=======
+    y: 471.2
+    width: 1200
+    height: 322
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
   m_ViewDataDictionary: {fileID: 0}
 --- !u!114 &18
 MonoBehaviour:

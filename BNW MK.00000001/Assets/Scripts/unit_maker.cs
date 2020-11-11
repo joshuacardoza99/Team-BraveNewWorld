@@ -8,9 +8,29 @@ public class unit_maker : MonoBehaviour
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
 
     // Public Global Variables //
+    public GameObject asianBarracks;
     public GameObject asianChampion;
-    public GameObject greeceChampion;
+    public GameObject asianCommandPost;
+    public GameObject asianDefenseTower;
+    public GameObject asianMelee;
+    public GameObject asianRanged;
+    public GameObject asianTank;
+    public GameObject farm;
+    public GameObject greekBarracks;
+    public GameObject greekChampion;
+    public GameObject greekCommandPost;
+    public GameObject greekDefenseTower;
+    public GameObject greekMelee;
+    public GameObject greekRanged;
+    public GameObject greekTank;
+    public GameObject mine;
+    public GameObject vikingBarracks;
     public GameObject vikingChampion;
+    public GameObject vikingCommandPost;
+    public GameObject vikingDefenseTower;
+    public GameObject vikingMelee;
+    public GameObject vikingRanged;
+    public GameObject vikingTank;
 
     // Private Global Variables //
     private string championName = "champion";
@@ -32,17 +52,24 @@ public class unit_maker : MonoBehaviour
 
         if (tile.name.Split('_')[0] == "asian")
         {
+            asianChampion.name = championName;
             Instantiate(asianChampion, tilePosition, Quaternion.identity);
             //import_manager.run_function("asianChampion", "set_current_tile", new string[1] { tile.name });
 
         }
         else if (tile.name.Split('_')[0] == "viking")
         {
+            vikingChampion.name = championName;
             Instantiate(vikingChampion, tilePosition, Quaternion.identity);
         }
-        else if (tile.name.Split('_')[0] == "greece")
+        else if (tile.name.Split('_')[0] == "greek")
         {
+<<<<<<< HEAD
             Instantiate(greeceChampion, tilePosition, Quaternion.identity);
+=======
+            greekChampion.name = championName;
+            Instantiate(greekChampion, tilePosition, Quaternion.identity);
+>>>>>>> parent of 11af5d84... Revert "Prefabs created and unit_manager script"
         }
 
         Vector3 cameraPosition = GameObject.Find("Directional Light").transform.position;
@@ -62,9 +89,142 @@ public class unit_maker : MonoBehaviour
     // Parameters = [string civilization, string championName]
     public void add_champion(string[] parameters)
     {
-        championName = parameters[1] + "_" + parameters[0];
+        championName = parameters[0] + "_" + parameters[1];
         import_manager.run_function("map", "get_land", new string[3] { parameters[0], "unit_manager", "finalize_champion" });
     }
 
+    // Parameters = [string civilization, string unitType, string unitNumber]
+    public void add_unit(string[] parameters)
+    {
+        GameObject tile = GameObject.Find(parameters[0]);
+        Vector3 tilePosition = tile.transform.position;
+        tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y;
 
+        if (parameters[0] == "asian")
+        {
+            if (parameters[1] == "Melee")
+            {
+                asianMelee.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(asianMelee, tilePosition, Quaternion.identity);
+            }
+            else if (parameters[1] == "Ranged")
+            {
+                asianRanged.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(asianRanged, tilePosition, Quaternion.identity);
+            }
+            else if (parameters[1] == "Tank")
+            {
+                asianTank.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(asianTank, tilePosition, Quaternion.identity);
+            }
+        }
+        else if (parameters[0] == "greek")
+        {
+            if (parameters[1] == "Melee")
+            {
+                greekMelee.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(greekMelee, tilePosition, Quaternion.identity);
+            }
+            else if (parameters[1] == "Ranged")
+            {
+                greekRanged.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(greekRanged, tilePosition, Quaternion.identity);
+            }
+            else if (parameters[1] == "Tank")
+            {
+                greekTank.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(greekTank, tilePosition, Quaternion.identity);
+            }
+        }
+        else if (parameters[0] == "viking")
+        {
+            if (parameters[1] == "Melee")
+            {
+                vikingMelee.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(vikingMelee, tilePosition, Quaternion.identity);
+            }
+            else if (parameters[1] == "Ranged")
+            {
+                vikingRanged.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(vikingRanged, tilePosition, Quaternion.identity);
+            }
+            else if (parameters[1] == "Tank")
+            {
+                vikingTank.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(vikingTank, tilePosition, Quaternion.identity);
+            }
+        }
+    }
+
+    public void add_building(string[] parameters)
+    {
+        GameObject tile = GameObject.Find(parameters[0]);
+        Vector3 tilePosition = tile.transform.position;
+        tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y;
+
+        if (parameters[0] == "asian")
+        {
+            if (parameters[1] == "Barracks")
+            {
+                asianBarracks.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(asianBarracks, tilePosition, Quaternion.identity);
+            }
+            else if (parameters[1] == "CommandPost")
+            {
+                asianCommandPost.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(asianCommandPost, tilePosition, Quaternion.identity);
+            }
+            else if (parameters[1] == "DefenseTower")
+            {
+                asianDefenseTower.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(asianDefenseTower, tilePosition, Quaternion.identity);
+            }
+        }
+        else if (parameters[0] == "greek")
+        {
+            if (parameters[1] == "Barracks")
+            {
+                greekBarracks.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(greekBarracks, tilePosition, Quaternion.identity);
+            }
+            else if (parameters[1] == "CommandPost")
+            {
+                greekCommandPost.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(greekCommandPost, tilePosition, Quaternion.identity);
+            }
+            else if (parameters[1] == "DefenseTower")
+            {
+                greekDefenseTower.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(greekDefenseTower, tilePosition, Quaternion.identity);
+            }
+        }
+        else if (parameters[0] == "viking")
+        {
+            if (parameters[1] == "Barracks")
+            {
+                vikingBarracks.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(vikingBarracks, tilePosition, Quaternion.identity);
+            }
+            else if (parameters[1] == "CommandPost")
+            {
+                vikingCommandPost.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(vikingCommandPost, tilePosition, Quaternion.identity);
+            }
+            else if (parameters[1] == "DefenseTower")
+            {
+                vikingDefenseTower.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+                Instantiate(vikingDefenseTower, tilePosition, Quaternion.identity);
+            }
+        }
+        else if (parameters[0] == "farm")
+        {
+            farm.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+            Instantiate(farm, tilePosition, Quaternion.identity);
+        }
+        else if (parameters[0] == "mine")
+        {
+            mine.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
+            Instantiate(mine, tilePosition, Quaternion.identity);
+        }
+    }
 }
