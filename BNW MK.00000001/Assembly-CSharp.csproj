@@ -89,6 +89,7 @@
      <Compile Include="Assets\Automation\Engine\Xtra\ThirdParty\Scripts\Pubnub\PubnubCrypto.cs" />
      <Compile Include="Assets\Automation\Engine\Custodian\QHelpers\RunHash.cs" />
      <Compile Include="Assets\Automation\Engine\Xtra\ThirdParty\Scripts\Pubnub\Utility.cs" />
+     <Compile Include="Assets\Scripts\unit_maker.cs" />
      <Compile Include="Assets\Scripts\add_character.cs" />
      <Compile Include="Assets\Automation\Engine\Attributes\Validate.cs" />
      <Compile Include="Assets\Scripts\Preload(dlskf).cs" />
@@ -197,7 +198,6 @@
      <Compile Include="Assets\Automation\Engine\Attributes\TestRunnerFlags.cs" />
      <Compile Include="Assets\Automation\Engine\Enums\Buddy.cs" />
      <Compile Include="Assets\Automation\Engine\Objects\RecordedGameObjectData.cs" />
-     <Compile Include="Assets\Scripts\unit_maker.cs" />
      <None Include="Assets\Automation\Engine\Xtra\Resources\TrilleonDefaultAutomationReportDatatable.txt" />
      <None Include="Assets\Automation\Engine\Xtra\Resources\TrilleonConfig.txt" />
      <None Include="Assets\Automation\Engine\Xtra\Resources\TrilleonDefaultAutomationReportCss.txt" />
