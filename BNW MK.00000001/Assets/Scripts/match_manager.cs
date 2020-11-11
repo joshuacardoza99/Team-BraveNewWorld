@@ -103,6 +103,7 @@ public class match_manager : MonoBehaviour
     // Parameter = [int numberOfPlayers]
     public void set_numberOfPlayers (string[] parameters)
     {
+        Debug.Log("Setting the number of players");
         this.numberOfPlayers = int.Parse(parameters[0]);
     }
 
@@ -157,7 +158,7 @@ public class match_manager : MonoBehaviour
         {
             isReady.Add(true);
 
-            Debug.Log("IS Ready");
+            Debug.Log("IS Ready: " + isReady.Count + " out of" + numberOfPlayers);
 
             if ((isReady.Count == numberOfPlayers) || this.type != "network")
             {

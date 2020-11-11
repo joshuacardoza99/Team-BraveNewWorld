@@ -22,12 +22,12 @@ exports.match = function(id = 0)
 			player.host = true;
 			console.log("Setting a Host");
 
-			/*player.socket.send(JSON.stringify(
+			player.socket.send(JSON.stringify(
 			{
 				gameObject: "network_manager",
-				  function: "set_host",
-				parameters: []
-			}));*/
+				  function: "set_numberOfPlayers",
+				parameters: [maxNumberOfPlayers]
+			}));
 		}
 		
 		player.socket.send(JSON.stringify(
