@@ -114,8 +114,6 @@ public class match_manager : MonoBehaviour
     // parameters = [int id, bool host, int map]
     public void setup_match (string[] parameters)
     {
-        Debug.Log("Setup_match is started");
-        Debug.Log(parameters[0]);
         this.matchId = int.Parse(parameters[0]);
         this.isHost  = bool.Parse(parameters[1]);
 
@@ -176,6 +174,10 @@ public class match_manager : MonoBehaviour
         if (this.type == "network")
         {
             import_manager.run_function_all("server_functions", "add_player", new string[2]{this.championName, this.playerCivilization});
+        }
+        else if (this.type == "local")
+        {
+            setup_match(new string[3]{"0", "true", "1000"});
         }
         
     }

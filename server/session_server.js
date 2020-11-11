@@ -101,8 +101,7 @@ App.listen(80);
 server.on("connection", (playerSocket) =>
 {
 	let currentPlayer = playerSocket; // Socket connected to the current player.
-	console.log("connected");
-
+	
 	try
 	{
 	    players.push(currentPlayer);
@@ -111,7 +110,6 @@ server.on("connection", (playerSocket) =>
 		{
 			try
 			{
-				console.log("received message");
 				message_handler(JSON.parse(message), currentPlayer);
 			}
 			catch (error)

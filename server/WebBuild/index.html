@@ -5,10 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | BNW MK.00000001</title>
   </head>
-  <body style="text-align: center; margin: 0; padding: 0;">
-    <canvas id="unity-canvas" style="width: 100%; height: 100vh; margin: 0; padding: 0; background: #FFFFFF"></canvas>
+  <body style="text-align: center; display: block;">
+    <button onclick="goFullScreen()">Full Screen</button>
+    <canvas id="unity-canvas" style="width: 960px; height: 600px; background: #FFFFFF"></canvas>
     <script src="Build/WebBuild.loader.js"></script>
     <script>
+
+      function goFullScreen ()
+      {
+          document.getElementById("unity-canvas").requestFullscreen();
+      }
+
       createUnityInstance(document.querySelector("#unity-canvas"), {
         dataUrl: "Build/WebBuild.data.unityweb",
         frameworkUrl: "Build/WebBuild.framework.js.unityweb",

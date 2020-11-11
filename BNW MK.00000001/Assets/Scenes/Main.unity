@@ -1176,7 +1176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25c6e3c3085cde4c9cfcf886ed03d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapWidth: 20
+  mapWidth: 30
   water: {fileID: 3313963180499537379, guid: c923e0107c6fb184bbe3081289560780, type: 3}
   vikingLand: {fileID: 2998451163597735178, guid: f92086fee053a8f45aff25213fef8ceb, type: 3}
   greeceLand: {fileID: 513165736817720220, guid: 2f7e87437d0440745ac5314672cc48e5, type: 3}

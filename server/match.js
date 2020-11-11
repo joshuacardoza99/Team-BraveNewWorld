@@ -20,12 +20,19 @@ exports.match = function(id = 0)
 		{
 			gameObject: "network_manager",
 			  function: "setup_match",
-			parameters: [matchId.toString(), players.length > 1 ? "false" : "true", mapSeed]
+			parameters: [matchId.toString(), players.length == 0 ? "false" : "true", mapSeed]
 		}));
 
-		if (players.length > 1)
+		if (players.length == 0)
 		{
 			player.host = true;
+
+			player.socket.send(JSON.stringify(
+			{
+				gameObject: "network_manager",
+				  function: "set_host",
+				parameters: []
+			}));
 		}
 
 		// push player data to the database here
@@ -42,7 +49,7 @@ exports.match = function(id = 0)
 		{
 			players[0].host = true;
 
-			players[0].send(JSON.stringify(
+			players[0].socket.send(JSON.stringify(
 			{
 				gameObject: "network_manager",
 				  function: "set_host",
