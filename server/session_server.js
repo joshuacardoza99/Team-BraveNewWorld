@@ -34,8 +34,16 @@ let find_player_match = function(playerSocket)
 	return matches.filter((match) => match.get_id() == playerMatch)[0];
 }
 
+// Determins if the ip and champion name of the player was in the match.
+let was_in = function(ip = "", championNmae = "")
+{
+	let matchId = null; //calls the database here and have a players object instead of null
+
+	return matchId;
+}
+
 // Finds a match for the player to join.
-let find_match  = function ()
+let find_match  = function (player)
 {
 	let matchFound = null; // Match Object for the next player to join.
 
@@ -44,6 +52,10 @@ let find_match  = function ()
 		matches.forEach((match) =>
 		{
 			if (!match.is_full())
+			{
+				matchFound = match;
+			}
+			else if (was_in(player.ip, player.name))
 			{
 				matchFound = match;
 			}
