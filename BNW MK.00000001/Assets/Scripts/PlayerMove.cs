@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -9,21 +10,19 @@ public class PlayerMove : MonoBehaviour
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
 
+    public string civ = " ";
+
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
 
     Stack<Tile> path = new Stack<Tile>();
     Tile currentTile = null;
 
-    //public bool moving = false;
+    
     public int moves = 3;
-    //public float jumpHeight = 2;
     public float moveSpeed = 2;
+
     public Tile actualTargetTile;
-
-    //Vector3 velocity = new Vector3();
-    //Vector3 heading = new Vector3();
-
     float halfHeight = 0;
     Vector3 targetPosition;
     private Ray ray;
@@ -57,17 +56,33 @@ public class PlayerMove : MonoBehaviour
             
         }*/
 
+        // if the tile is current and occupied
         if (currentTile.current && currentTile.occupied)
         {
+            // prepare to move this character
             import_manager.run_function("map", "set_current_char", new string[1] { this.name });
 
-            foreach (Tile tile in currentTile.adjacencyList)
+            // set all tiles in range to selectable
+            if (moves >= 1) // if the character can move at least once
             {
-                if (tile.occupied == false)
+                foreach (Tile tile in currentTile.adjacencyList) // get the adjacent tiles
                 {
-                    tile.selectable = true;
+                    if (tile.occupied == false)
+                    {
+                        tile.selectable = true;
+
+                        if (moves >= 2)
+                            foreach (Tile tile2 in tile.adjacencyList)
+                            {
+                                if ((tile2.occupied == false) && (tile2.current == false))
+                                {
+                                    tile2.selectable = true;
+                                }
+                            }
+                    }
                 }
             }
+            
         }
      
     }
@@ -82,6 +97,11 @@ public class PlayerMove : MonoBehaviour
         foreach (Tile tile in currentTile.adjacencyList)
         {
             tile.selectable = false;
+            if (moves >= 2)
+                foreach (Tile tile2 in tile.adjacencyList)
+                {
+                    tile2.selectable = false;
+                }
         }
 
         this.transform.LookAt(targetPosition);

@@ -5,6 +5,10 @@
     "\\BNW MK.00000001\\Assets",
     "\\BNW MK.00000001\\Assets\\Scripts"
   ],
+<<<<<<< Updated upstream
   "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\server_manager.cs",
+=======
+  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\map_manager.cs",
+>>>>>>> Stashed changes
   "PreviewInSolutionExplorer": false
 }
