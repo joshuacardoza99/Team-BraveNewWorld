@@ -14,7 +14,7 @@ public class match_manager : MonoBehaviour
     private string    type;            // Type of game the match consist of.
     private int        map;            // Holds the seed for the map design for the game's map.
     private string playerCivilization; // The civilization the local player is playing as in this match.
-    private string championName = "start_name";       // The name of the players champion.
+    private string championName = "startName";       // The name of the players champion.
         
     // Private Global Variables //
     int        numberOfPlayers = 1000; // The number of current players in the game.
