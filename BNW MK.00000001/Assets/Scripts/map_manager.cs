@@ -299,13 +299,12 @@ public class map_manager : MonoBehaviour
     {
         string type = parameters[0].ToLower();
         List<string> landOfType = new List<string>();
-        Debug.Log("Getting " + type + " Type of land");
+
         foreach (GameObject land in GameObject.FindObjectsOfType<GameObject>())
         {
             if (Regex.IsMatch(land.name, type + "_*_*_*", RegexOptions.IgnoreCase))
             {
                 landOfType.Add(land.name);
-                Debug.Log(land.name);
             }
         }
 
@@ -322,7 +321,6 @@ public class map_manager : MonoBehaviour
     public void get_current_char(string[] reciever)
     {
         string[] temp = new string[1] { CurrentChar };
-        Debug.Log("receiver = " + reciever[0]);
 
         import_manager.run_function(reciever[0], "set_current_char",  temp );
     }

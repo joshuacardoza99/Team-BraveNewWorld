@@ -100,8 +100,6 @@ public class Tile : MonoBehaviour
         {
             import_manager.run_function("map", "get_current_char", new string[1] { this.name });
             
-            Debug.Log("move to "+ this.name);
-            Debug.Log("current Character = " + currentchar.name);
             import_manager.run_function_all(currentchar.name, "move", new string[1] { this.name });
         }
            

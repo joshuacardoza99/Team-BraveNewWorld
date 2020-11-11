@@ -25,11 +25,6 @@ public class match_manager : MonoBehaviour
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
     }
-  
-    public void receive_test_data(string[] parameters)
-    {
-        Debug.Log(parameters[0]);
-    }
 
     // Public Functions //
 
@@ -43,6 +38,7 @@ public class match_manager : MonoBehaviour
     // Parameters = []
     public void set_host (string[] parameters)
     {
+        Debug.Log("Host is being set");
         this.isHost = true;
     }
 
@@ -119,6 +115,7 @@ public class match_manager : MonoBehaviour
 
         if (this.isHost)
         {
+            Debug.Log("Is Host");
             isReady = new List<bool>();
             this.map = Random.Range(1000, 2000);
 
@@ -141,9 +138,9 @@ public class match_manager : MonoBehaviour
 
 
         Vector3 cameraPosition = GameObject.Find("Directional Light").transform.position;
-        cameraPosition.y = 3;
+        cameraPosition.y = 15;
         var cameraDirection = GameObject.Find("Directional Light").transform.rotation.eulerAngles;
-        cameraDirection.x = 80;
+        cameraDirection.x = 90;
 
 
         GameObject.Find("Main Camera").transform.position = cameraPosition;
@@ -159,6 +156,8 @@ public class match_manager : MonoBehaviour
         if (isHost)
         {
             isReady.Add(true);
+
+            Debug.Log("IS Ready");
 
             if ((isReady.Count == numberOfPlayers) || this.type != "network")
             {

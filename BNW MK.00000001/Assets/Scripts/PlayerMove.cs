@@ -49,7 +49,6 @@ public class PlayerMove : MonoBehaviour
     {
         if (currentTile == null)
         {
-            Debug.Log("Updating current tile");
             GetCurrentTile();
             
         }
@@ -70,9 +69,7 @@ public class PlayerMove : MonoBehaviour
     }
 
     public void move(string[] location)
-    {
-        Debug.Log("starting move to " + location[0]);
-        
+    {   
         GameObject nextTile = GameObject.Find(location[0]);
         targetPosition = nextTile.transform.position;
 
@@ -90,8 +87,6 @@ public class PlayerMove : MonoBehaviour
         this.transform.rotation = Quaternion.identity;
 
         currentTile = nextTile.GetComponent<Tile>();
-
-        Debug.Log("Ending move to " + location[0]);
 
         //moving = false;
     }

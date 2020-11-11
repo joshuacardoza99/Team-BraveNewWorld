@@ -16,23 +16,25 @@ exports.match = function(id = 0)
 	// Add a new player to the match.
 	this.add_player = function(player = null)
 	{
+		console.log("Adding a Player");
 		if (players.length == 0)
 		{
 			player.host = true;
+			console.log("Setting a Host");
 
-			player.socket.send(JSON.stringify(
+			/*player.socket.send(JSON.stringify(
 			{
 				gameObject: "network_manager",
 				  function: "set_host",
 				parameters: []
-			}));
+			}));*/
 		}
 		
 		player.socket.send(JSON.stringify(
 		{
 			gameObject: "network_manager",
 			  function: "setup_match",
-			parameters: [matchId.toString(), players.length == 0 ? "false" : "true", mapSeed]
+			parameters: [matchId.toString(), players.length == 0 ? "true" : "false", mapSeed]
 		}));
 
 		// push player data to the database here
@@ -93,6 +95,7 @@ exports.match = function(id = 0)
 			// Sets the map seed for the match.
 			else if (message.function == "set_match_map")
 			{
+				console.log("Setting the map to " + message.parameters[0]);
 				this.mapSeed = parseInt(message.parameters[0]);
 			}
 			else
@@ -107,12 +110,14 @@ exports.match = function(id = 0)
 	}
 
 	// Sends the message to all other players in this match.
-	let broadcast = function (message, player)
+	let broadcast = function (message, playerSocket)
 	{
+		console.log(players.length);
 		players.forEach((nextPlayer) =>
 		{
-			if (nextPlayer.socket !== player.socket)
+			if (nextPlayer.socket != playerSocket)
 			{
+				console.log("Is broadcasting");
 				nextPlayer.socket.send(JSON.stringify(message));
 			}
 		})
