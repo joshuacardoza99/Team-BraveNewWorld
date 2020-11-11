@@ -28,11 +28,13 @@ public class unit_maker : MonoBehaviour
     {
         GameObject tile = GameObject.Find(tiles[Random.Range(0, tiles.Length - 1)]);
         Vector3 tilePosition = tile.transform.position;
-        tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y;
+        tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y /1.5f;
 
         if (tile.name.Split('_')[0] == "asian")
         {
             Instantiate(asianChampion, tilePosition, Quaternion.identity);
+            //import_manager.run_function("asianChampion", "set_current_tile", new string[1] { tile.name });
+
         }
         else if (tile.name.Split('_')[0] == "viking")
         {
