@@ -16,13 +16,6 @@ exports.match = function(id = 0)
 	// Add a new player to the match.
 	this.add_player = function(player = null)
 	{
-		player.socket.send(JSON.stringify(
-		{
-			gameObject: "network_manager",
-			  function: "setup_match",
-			parameters: [matchId.toString(), players.length == 0 ? "false" : "true", mapSeed]
-		}));
-
 		if (players.length == 0)
 		{
 			player.host = true;
@@ -34,6 +27,13 @@ exports.match = function(id = 0)
 				parameters: []
 			}));
 		}
+		
+		player.socket.send(JSON.stringify(
+		{
+			gameObject: "network_manager",
+			  function: "setup_match",
+			parameters: [matchId.toString(), players.length == 0 ? "false" : "true", mapSeed]
+		}));
 
 		// push player data to the database here
 
@@ -97,7 +97,7 @@ exports.match = function(id = 0)
 			}
 			else
 			{
-				console.log("Not Implemented yet?"); //database_api[message.function](message.parameters);
+				database_api[message.function](message.parameters);
 			}
 		}
 		else
