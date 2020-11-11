@@ -40,10 +40,19 @@ public class unit_maker : MonoBehaviour
         }
         else if (tile.name.Split('_')[0] == "greece")
         {
-            Debug.Log("Trying to add a greece champion");
-            Debug.Log(tilePosition);
             Instantiate(greeceChampion, tilePosition, Quaternion.identity);
         }
+
+        Vector3 cameraPosition = GameObject.Find("Directional Light").transform.position;
+        cameraPosition.y = 10;
+        cameraPosition.x = tilePosition.x;
+        cameraPosition.z = tilePosition.z;
+        var cameraDirection = GameObject.Find("Directional Light").transform.rotation.eulerAngles;
+        cameraDirection.x = 60;
+
+
+        GameObject.Find("Main Camera").transform.position = cameraPosition;
+        GameObject.Find("Main Camera").transform.rotation = Quaternion.Euler(cameraDirection);
     }
 
     // Public Functions //
