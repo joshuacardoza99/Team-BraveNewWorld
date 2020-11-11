@@ -176,6 +176,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 38d1d77c45e719c498f97e4f68455572, type: 3}
   m_PrefabInstance: {fileID: 689991567}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &214851973
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 214851975}
+  - component: {fileID: 214851974}
+  m_Layer: 0
+  m_Name: unit_manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &214851974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214851973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 533f1bb318c495b40abb9a44af910acd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asianChampion: {fileID: 4336801283161977617, guid: e4a76b3cc176d0d4aab0f873784f316f, type: 3}
+  greeceChampion: {fileID: 8992906632270343454, guid: a05187b3305140f49a7fdb9bc47e5a5e, type: 3}
+  vikingChampion: {fileID: 1925037191333295197, guid: c972bdb2b434e654fb1c42109a14f6b7, type: 3}
+--- !u!4 &214851975
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214851973}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &246282816
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +731,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -913,18 +959,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dedcd09fd73bab40b4f25b327abc05b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PanSpeed: 10
-  ZoomSpeedTouch: 1
-  ZoomSpeedMouse: 5
+  PanSpeed: 60
+  ZoomSpeedTouch: 5
+  ZoomSpeedMouse: 100
   BoundsX:
-  - -1000
-  - 1000
+  - -15
+  - -6
   BoundsZ:
-  - -1000
-  - 1000
+  - -18
+  - -3
   ZoomBounds:
-  - 60
-  - 130
+  - 10
+  - 20
 --- !u!1 &1653309901 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2352706935188495442, guid: 6876bbc8477f5c24aa2f0caf33290cdd, type: 3}
@@ -1420,7 +1466,7 @@ PrefabInstance:
       objectReference: {fileID: 825951448}
     - target: {fileID: 2352706935113980162, guid: 6876bbc8477f5c24aa2f0caf33290cdd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: set_network_game
+      value: set_host_game
       objectReference: {fileID: 0}
     - target: {fileID: 2352706935113980162, guid: 6876bbc8477f5c24aa2f0caf33290cdd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1724,7 +1770,7 @@ PrefabInstance:
       objectReference: {fileID: 825951448}
     - target: {fileID: 2352706936359208559, guid: 6876bbc8477f5c24aa2f0caf33290cdd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: set_host_game
+      value: set_network_game
       objectReference: {fileID: 0}
     - target: {fileID: 2352706936359208559, guid: 6876bbc8477f5c24aa2f0caf33290cdd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName

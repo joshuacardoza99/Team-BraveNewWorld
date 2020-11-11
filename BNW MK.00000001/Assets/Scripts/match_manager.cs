@@ -123,12 +123,16 @@ public class match_manager : MonoBehaviour
         {
             isReady = new List<bool>();
             this.map = Random.Range(1000, 2000);
+
+            // Add the map seed to the database.
+
             import_manager.run_function_all("server_functions", "set_match_map", new string[1] {this.map.ToString()});
         }
         else
         {
             this.map     = int.Parse(parameters[2]);
         }
+
         Vector3 lightPosition = GameObject.Find("Directional Light").transform.position;
         lightPosition.y = 500;
         var lightDirection = GameObject.Find("Directional Light").transform.rotation.eulerAngles;
@@ -147,6 +151,7 @@ public class match_manager : MonoBehaviour
         GameObject.Find("Main Camera").transform.position = cameraPosition;
         GameObject.Find("Main Camera").transform.rotation = Quaternion.Euler(cameraDirection);
         import_manager.run_function("map", "load_map", new string[1] {this.map.ToString()});
+        import_manager.run_function("unit_manager", "add_champion", new string[2]{this.playerCivilization, this.championName});
         import_manager.run_function_all("network_manager", "vote_ready", new string[0] {});
     }
     
@@ -157,7 +162,7 @@ public class match_manager : MonoBehaviour
         {
             isReady.Add(true);
 
-            if ((isReady.Count == numberOfPlayers) || true)
+            if ((isReady.Count == numberOfPlayers) || this.type != "network")
             {
                 GameObject.Find("Main Camera").GetComponent<PanZoom>().enabled = true;
                 import_manager.run_function_all("MenuManager", "removeWaitPanel", new string[0] {});

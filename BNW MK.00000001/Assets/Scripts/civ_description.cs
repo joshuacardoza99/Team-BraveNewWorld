@@ -16,7 +16,7 @@ public class civ_description : MonoBehaviour
                 descriptionText.text = "Viking";
                 break;
             case 2:
-                descriptionText.text = "Greek";
+                descriptionText.text = "Greece";
                 break;
             default:
                 descriptionText.text = "Asian";

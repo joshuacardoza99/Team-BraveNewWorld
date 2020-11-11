@@ -9,21 +9,26 @@ exports.match = function(id = 0)
 	let players = [];           // All players in this match.
 	let matchId = id;           // Id of the match.
 	let maxNumberOfPlayers = 3; // The number of players for a match.
+	let mapSeed = 1000;         // The seed for the match's map.
+
+	// Add the match to the database.
 
 	// Add a new player to the match.
 	this.add_player = function(player = null)
 	{
-		player.send(JSON.stringify(
+		player.socket.send(JSON.stringify(
 		{
 			gameObject: "network_manager",
 			  function: "setup_match",
-			parameters: [matchId.toString(), players.length > 1 ? "false" : "true", "network"]
+			parameters: [matchId.toString(), players.length > 1 ? "false" : "true", mapSeed]
 		}));
 
 		if (players.length > 1)
 		{
 			player.host = true;
 		}
+
+		// push player data to the database here
 
 		players.push(player);
 	}
@@ -44,12 +49,14 @@ exports.match = function(id = 0)
 				parameters: []
 			}));
 		}
+
+		// Update the database to mark the player as absent.
 	}
 
 	// Determins if the match is full or if it can take another player.
 	this.is_full = function()
 	{
-		return players.length >= 10;
+		return players.length >= maxNumberOfPlayers;
 	}
 
 	// Returns the match's id.
@@ -76,6 +83,11 @@ exports.match = function(id = 0)
 					playerSocket.send(JSON.stringify(response));
 				})*/
 			}
+			// Sets the map seed for the match.
+			else if (message.function == "set_match_map")
+			{
+				this.mapSeed = parseInt(message.parameters[0]);
+			}
 			else
 			{
 				console.log("Not Implemented yet?"); //database_api[message.function](message.parameters);
@@ -90,7 +102,7 @@ exports.match = function(id = 0)
 	// Sends the message to all other players in this match.
 	let broadcast = function (message, player)
 	{
-		this.players.forEach((nextPlayer) =>
+		players.forEach((nextPlayer) =>
 		{
 			if (nextPlayer.socket !== player.socket)
 			{

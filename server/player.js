@@ -1,5 +1,5 @@
 // This class holds connection and game information for a player.
-exports.player = function(name = "", civilization = "", ip = "", match = 0, socket = null. host = false)
+exports.player = function(name = "", civilization = "", ip = "", match = 0, socket = null, host = false)
 {
 	this.name         = name;          // Player's champion's name.
 	this.ip           = ip;            // Player's computer's ip address.

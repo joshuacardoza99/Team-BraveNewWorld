@@ -57,7 +57,7 @@ let find_match  = function (player)
 			}
 			else if (was_in(player.ip, player.name))
 			{
-				matchFound = match;
+				matchFound = matches.filter(match => match.id == was_in(player.ip, player.name))[0];
 			}
 		})
 	}
