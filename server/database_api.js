@@ -6,6 +6,7 @@
    dbname     = "team-bravenewworld";
 */
 // Export the database api
+
 exports.database_api = function(serverName = "", username = "", password = "", databaseName = "")
 {  
    // External Classes
@@ -78,7 +79,8 @@ exports.database_api = function(serverName = "", username = "", password = "", d
       let championName = "'" + parameters[2] + "'"
       let civilization = "'" + parameters[3] + "'"
       let matchID      =       parameters[4]
-      insert_data("player",  [playerID, ipAddress, championName, civilization, matchID]);
+      let inGameFlag   =       parameters[5]
+      insert_data("player",  [playerID, ipAddress, championName, civilization, matchID, inGameFlag]);
    }
 
    // Receive the player and select the player game object and receiver function
