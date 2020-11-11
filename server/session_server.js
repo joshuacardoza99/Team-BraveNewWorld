@@ -101,7 +101,7 @@ App.listen(80);
 server.on("connection", (playerSocket) =>
 {
 	let currentPlayer = playerSocket; // Socket connected to the current player.
-	
+	//console.log("WHERE");
 	try
 	{
 	    players.push(currentPlayer);
@@ -114,20 +114,19 @@ server.on("connection", (playerSocket) =>
 			}
 			catch (error)
 			{
-				console.log(error);
+				//console.log(error);
 			}
 		})
 
 		playerSocket.on("error", (error) =>
 		{
-			console.log(error);
+			//console.log(error);
 		})
 
 		playerSocket.on("close", () =>
 		{
 			let playerMatch = find_player_match(currentPlayer);
-			let currentPlayerObject = 
-			players = players.filter(player => player != currentPlayer);
+			let currentPlayerObject = players = players.filter(player => player != currentPlayer);
 
 			if (playerMatch != null)
 			{
@@ -137,6 +136,6 @@ server.on("connection", (playerSocket) =>
 	}
 	catch (error)
 	{
-		console.log(error);
+		//console.log(error);
 	}
 })

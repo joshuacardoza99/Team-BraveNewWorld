@@ -28,11 +28,13 @@ public class unit_maker : MonoBehaviour
     {
         GameObject tile = GameObject.Find(tiles[Random.Range(0, tiles.Length - 1)]);
         Vector3 tilePosition = tile.transform.position;
-        tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y;
+        tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y /1.5f;
 
         if (tile.name.Split('_')[0] == "asian")
         {
             Instantiate(asianChampion, tilePosition, Quaternion.identity);
+            //import_manager.run_function("asianChampion", "set_current_tile", new string[1] { tile.name });
+
         }
         else if (tile.name.Split('_')[0] == "viking")
         {
@@ -40,10 +42,19 @@ public class unit_maker : MonoBehaviour
         }
         else if (tile.name.Split('_')[0] == "greece")
         {
-            Debug.Log("Trying to add a greece champion");
-            Debug.Log(tilePosition);
             Instantiate(greeceChampion, tilePosition, Quaternion.identity);
         }
+
+        Vector3 cameraPosition = GameObject.Find("Directional Light").transform.position;
+        cameraPosition.y = 10;
+        cameraPosition.x = tilePosition.x;
+        cameraPosition.z = tilePosition.z;
+        var cameraDirection = GameObject.Find("Directional Light").transform.rotation.eulerAngles;
+        cameraDirection.x = 60;
+
+
+        GameObject.Find("Main Camera").transform.position = cameraPosition;
+        GameObject.Find("Main Camera").transform.rotation = Quaternion.Euler(cameraDirection);
     }
 
     // Public Functions //

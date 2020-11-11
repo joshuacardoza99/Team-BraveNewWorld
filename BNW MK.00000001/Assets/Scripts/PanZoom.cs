@@ -8,9 +8,9 @@ public class PanZoom : MonoBehaviour
     public float ZoomSpeedTouch = 5f;
     public float ZoomSpeedMouse = 100f;
 
-    public float[] BoundsX    = new float[] { -15f,  -6f };
-    public float[] BoundsZ    = new float[] { -18f,  -3f };
-    public float[] ZoomBounds = new float[] { 10f, 20f};
+    public float[] BoundsX    = new float[] { -27f,  -6f };
+    public float[] BoundsZ    = new float[] { -35f,  -6f };
+    public float[] ZoomBounds = new float[] { 10f, 15f};
 
     private Camera cam;
 
@@ -27,11 +27,11 @@ public class PanZoom : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchSupported && SystemInfo.deviceType == DeviceType.Handheld)
+        if ( Input.touchSupported && SystemInfo.deviceType != DeviceType.Desktop)
         {
             HandleTouch();
         }
-        else
+        else if(SystemInfo.deviceType == DeviceType.Desktop)
         {
             HandleMouse();
         }
@@ -72,7 +72,7 @@ public class PanZoom : MonoBehaviour
                     // distance between the previous positions.
                     float newDistance = Vector2.Distance(newPositions[0], newPositions[1]);
                     float oldDistance = Vector2.Distance(lastZoomPositions[0], lastZoomPositions[1]);
-                    float offset = newDistance - oldDistance;
+                    float offset =  oldDistance - newDistance;
 
                     ZoomCamera(offset, ZoomSpeedTouch);
 

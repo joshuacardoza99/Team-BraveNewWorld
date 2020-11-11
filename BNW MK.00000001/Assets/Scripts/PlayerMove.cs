@@ -41,18 +41,22 @@ public class PlayerMove : MonoBehaviour
 
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
 
-
+        while (currentTile == null)
+        {
+            Debug.Log("looking for current tile");
+            GetCurrentTile();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentTile == null)
+        /*if (currentTile == null)
         {
             Debug.Log("Updating current tile");
             GetCurrentTile();
             
-        }
+        }*/
 
         if (currentTile.current && currentTile.occupied)
         {
@@ -102,7 +106,7 @@ public class PlayerMove : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(this.transform.position, Vector3.down, out hit, 30))
+        if (Physics.Raycast(this.transform.position, Vector3.down, out hit, 2))
         {
             currentTile = hit.collider.GetComponent<Tile>();
         }
@@ -111,37 +115,13 @@ public class PlayerMove : MonoBehaviour
     }
 
 
-
-    // Find tiles that are within the characters range
-    public void FindSelectableTiles()
+    // set the current tile of this character
+    // parameters = tile.name
+    public void set_current_tile(string[] parameters)
     {
-
-
-        /*Queue<Tile> process = new Queue<Tile>();
-
-        process.Enqueue(currentTile);
-        currentTile.visited = true;
-
-        while (process.Count > 0)
-        {
-            Tile t = process.Dequeue();
-
-            selectableTiles.Add(t);
-            t.set_selected();
-
-            if (t.distance < move)
-            {
-                foreach (Tile tile in t.adjacencyList)
-                {
-                    if (tile != currentTile)
-                    {
-                        //tile.parent = t;
-                        tile.visited = true;
-                        tile.distance = 1 + t.distance;
-                        process.Enqueue(tile);
-                    }
-                }
-            }
-        }*/
+        Debug.Log("setting current tile for" + this.name);
+        GameObject temp = GameObject.Find(parameters[0]);
+        Tile tile = temp.GetComponent<Tile>();
+        currentTile = tile;
     }
 }
