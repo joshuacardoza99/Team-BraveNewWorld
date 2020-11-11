@@ -95,12 +95,25 @@ public class Tile : MonoBehaviour
     // Set current to this tile when it gets clicked
     public void OnMouseDown()
     {
+        
+
+
         // If the tile is selectable, then move the current character to this tile
         if (selectable)
         {
             import_manager.run_function("map", "get_current_char", new string[1] { this.name });
+<<<<<<< Updated upstream
             
+=======
+            Debug.Log("move to "+ this.name);
+            Debug.Log("current Character = " + currentchar.name);
+>>>>>>> Stashed changes
             import_manager.run_function_all(currentchar.name, "move", new string[1] { this.name });
+        }
+        else if(occupied) // and in range
+        {
+            // check if this characters civ is the same as the character clicking on it
+            
         }
            
         import_manager.run_function("map", "unselect_tile", new string[0] { });
@@ -114,10 +127,15 @@ public class Tile : MonoBehaviour
     {
         //Reset();
 
-        CheckTile(Vector3.forward);
+        CheckTile( Vector3.forward);
         CheckTile(-Vector3.forward);
-        CheckTile(Vector3.right);
+        CheckTile( Vector3.right);
         CheckTile(-Vector3.right);
+
+        CheckTile( Vector3.forward +  Vector3.right);
+        CheckTile(-Vector3.forward +  Vector3.right);
+        CheckTile( Vector3.forward + -Vector3.right);
+        CheckTile(-Vector3.forward + -Vector3.right);
     }
 
     public void CheckTile(Vector3 direction)
@@ -156,6 +174,11 @@ public class Tile : MonoBehaviour
             foreach (Tile tile in adjacencyList)
             {
                 tile.selectable = false;
+                
+                    foreach (Tile tile2 in tile.adjacencyList)
+                    {
+                        tile2.selectable = false;
+                    }
             }
         }
     }
