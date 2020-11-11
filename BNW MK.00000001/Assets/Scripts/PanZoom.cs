@@ -6,11 +6,11 @@ public class PanZoom : MonoBehaviour
 {
     public float PanSpeed = 60f;
     public float ZoomSpeedTouch = 5f;
-    public float ZoomSpeedMouse = 5f;
+    public float ZoomSpeedMouse = 100f;
 
-    public float[] BoundsX    = new float[] { -1000f,  1000f };
-    public float[] BoundsZ    = new float[] { -1000f,  1000f };
-    public float[] ZoomBounds = new float[] { -1000f, 1000f};
+    public float[] BoundsX    = new float[] { -15f,  -6f };
+    public float[] BoundsZ    = new float[] { -18f,  -3f };
+    public float[] ZoomBounds = new float[] { 10f, 20f};
 
     private Camera cam;
 
@@ -27,7 +27,7 @@ public class PanZoom : MonoBehaviour
 
     void Update()
     {
-        if (Input.touchSupported)
+        if (Input.touchSupported && SystemInfo.deviceType == DeviceType.Handheld)
         {
             HandleTouch();
         }
@@ -130,6 +130,9 @@ public class PanZoom : MonoBehaviour
             return;
         }
 
-        cam.fieldOfView = Mathf.Clamp(cam.fieldOfView - (offset * speed), ZoomBounds[0], ZoomBounds[1]);
+        transform.position += new Vector3(0f, offset * speed * Time.deltaTime, 0f);
+        this.transform.position = new Vector3(this.transform.position.x, Mathf.Clamp(transform.position.y, ZoomBounds[0], ZoomBounds[1]),this.transform.position.z);
+        //Vector3 camPos = Camera.main.transform.position;
+        //camPos.y = Mathf.Clamp(camPos.y , ZoomBounds[0], ZoomBounds[1]);
     }
 }

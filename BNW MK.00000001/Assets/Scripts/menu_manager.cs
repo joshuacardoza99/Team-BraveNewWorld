@@ -10,6 +10,7 @@ public class menu_manager : MonoBehaviour
 
     void Awake()
     {
+        TrilleonAutomation.AutomationMaster.Initialize();
         ChangeGroup(currentGroup);
     }
 

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7856931340750279136}
   m_Layer: 0
   m_Name: greeceLand
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,6 +113,8 @@ MonoBehaviour:
   occupied: 0
   target: 0
   selectable: 0
+  map: {fileID: 0}
+  currentchar: {fileID: 0}
   adjacencyList: []
   visited: 0
   parent: {fileID: 0}

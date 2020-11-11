@@ -1099,7 +1099,7 @@ GameObject:
   - component: {fileID: 2021973902}
   m_Layer: 0
   m_Name: map
-  m_TagString: Untagged
+  m_TagString: map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1136,6 +1136,7 @@ MonoBehaviour:
   greeceLand: {fileID: 513165736817720220, guid: 2f7e87437d0440745ac5314672cc48e5, type: 3}
   asianLand: {fileID: 8651404251344937564, guid: b5bbf7d6d0a88724ab6f66cfb6db6f0a, type: 3}
   currentSelected: 
+  CurrentChar: 
 --- !u!1001 &1554879584487037386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1972,7 +1973,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843111468843251025, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -28.80008
+      value: -28.80011
       objectReference: {fileID: 0}
     - target: {fileID: 2966516777861501630, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_IsActive
