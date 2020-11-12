@@ -83,6 +83,7 @@ exports.match = function(id = 0)
 			is_available = player.civilization != civilization;
 		})
 
+		console.log("Is Available: " + is_available);
 		return is_available;
 	}
 
