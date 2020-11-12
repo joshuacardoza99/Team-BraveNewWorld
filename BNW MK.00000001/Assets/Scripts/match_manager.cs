@@ -17,7 +17,7 @@ public class match_manager : MonoBehaviour
     private string championName = "startName";       // The name of the players champion.
         
     // Private Global Variables //
-    int        numberOfPlayers = 1000; // The number of current players in the game.
+    private int    numberOfPlayers = 1000; // The number of current players in the game.
     List<bool> isReady;                // List of players ready to play.
 
     // Start is called before the first frame update
@@ -158,9 +158,9 @@ public class match_manager : MonoBehaviour
         {
             isReady.Add(true);
 
-            Debug.Log("IS Ready: " + isReady.Count + " out of" + numberOfPlayers);
+            Debug.Log("IS Ready: " + isReady.Count + " out of" + this.numberOfPlayers);
 
-            if ((isReady.Count == numberOfPlayers) || this.type != "network")
+            if ((isReady.Count == this.numberOfPlayers) || this.type != "network")
             {
                 GameObject.Find("Main Camera").GetComponent<PanZoom>().enabled = true;
                 import_manager.run_function_all("MenuManager", "removeWaitPanel", new string[0] {});

@@ -102,12 +102,6 @@ public class Tile : MonoBehaviour
         if (selectable)
         {
             import_manager.run_function("map", "get_current_char", new string[1] { this.name });
-<<<<<<< Updated upstream
-            
-=======
-            Debug.Log("move to "+ this.name);
-            Debug.Log("current Character = " + currentchar.name);
->>>>>>> Stashed changes
             import_manager.run_function_all(currentchar.name, "move", new string[1] { this.name });
         }
         else if(occupied) // and in range

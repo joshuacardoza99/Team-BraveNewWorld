@@ -74,6 +74,18 @@ exports.match = function(id = 0)
 		return matchId;
 	}
 
+	this.is_available = function(civilization)
+	{
+		let is_available = true;
+
+		players.foreach((player) =>
+		{
+			is_available = player.civilization != civilization;
+		})
+
+		return is_available;
+	}
+
 	// Handles new incomming messages for this match.
 	this.message_handler = function(message, playerSocket)
 	{
