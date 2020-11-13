@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4397289274099502656}
   - component: {fileID: 7856931340750279136}
   m_Layer: 0
-  m_Name: greeceLand
+  m_Name: greekland
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4762161454206277504}
   - component: {fileID: 1304278890736125984}
   m_Layer: 0
-  m_Name: asianLand
+  m_Name: asianland
   m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
