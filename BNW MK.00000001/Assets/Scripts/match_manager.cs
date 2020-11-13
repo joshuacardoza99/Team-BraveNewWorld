@@ -38,7 +38,6 @@ public class match_manager : MonoBehaviour
     // Parameters = []
     public void set_host (string[] parameters)
     {
-        Debug.Log("Host is being set");
         this.isHost = true;
     }
 
@@ -60,22 +59,18 @@ public class match_manager : MonoBehaviour
     public void set_network_game()
     {
         this.type = "network";
-        //import_manager.run_function_all("server_functions", "add_player", new string[0]{});
     }
 
     // Starts a single player game locally.
     public void set_local_game()
     {
         this.type = "local";
-        //currentMatch = new match(0, true, "local");
-       // import_manager.run_function("Map", "load_map", parameters);
     }
 
     // Starts a multiplayer game over a private host.
     public void set_host_game()
     {
         this.type = "host";
-        isReady = new List<bool>();
     }
 
     // Gets the civilization of the local player.
@@ -103,7 +98,6 @@ public class match_manager : MonoBehaviour
     // Parameter = [int numberOfPlayers]
     public void set_numberOfPlayers (string[] parameters)
     {
-        Debug.Log("Setting the number of players");
         this.numberOfPlayers = int.Parse(parameters[0]);
     }
 
@@ -113,11 +107,14 @@ public class match_manager : MonoBehaviour
     {
         this.matchId = int.Parse(parameters[0]);
         this.isHost  = bool.Parse(parameters[1]);
+
         Debug.Log("I joined match " + this.matchId + " : my civ is " + this.playerCivilization + " : host status is " + this.isHost);
+        
         if (this.isHost)
         {
             Debug.Log("Is Host");
-            isReady = new List<bool>();
+
+            isReady  = new List<bool>();
             this.map = Random.Range(1000, 2000);
 
             // Add the map seed to the database.
@@ -126,7 +123,7 @@ public class match_manager : MonoBehaviour
         }
         else
         {
-            this.map     = int.Parse(parameters[2]);
+            this.map = int.Parse(parameters[2]);
         }
 
         Vector3 lightPosition = GameObject.Find("Directional Light").transform.position;
@@ -154,7 +151,6 @@ public class match_manager : MonoBehaviour
     // Registers a player as being ready to play.
     public void vote_ready(string[] parameters)
     {
-        Debug.Log("I voted");
         if (this.isHost)
         {
             isReady.Add(true);
@@ -173,7 +169,6 @@ public class match_manager : MonoBehaviour
     {
         if (this.type == "network")
         {
-            Debug.Log("Starting Match");
             import_manager.run_function_all("server_functions", "add_player", new string[2]{this.championName, this.playerCivilization});
         }
         else if (this.type == "local")
@@ -187,7 +182,6 @@ public class match_manager : MonoBehaviour
     // Parameters = []
     public void start_playing (string[] parameters)
     {
-        Debug.Log("Start playing");
         import_manager.run_function_all("unit_manager", "add_champion", new string[2]{this.playerCivilization, this.championName});
         import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] {});
     }
@@ -195,6 +189,15 @@ public class match_manager : MonoBehaviour
     // Leave the match
     public void leave_match ()
     {
+        this.matchId            = 0;
+        this.isHost             = false;
+        this.type               = null;
+        this.map                = 0;
+        this.playerCivilization = null;
+        this.championName       = "startName";
+        this.numberOfPlayers    = 1000;
+        this.isReady            = null;
+
         import_manager.run_function("network_manager", "reset", new string[0] {});
     }
 }

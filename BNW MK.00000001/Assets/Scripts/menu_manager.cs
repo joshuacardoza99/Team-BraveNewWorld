@@ -18,7 +18,7 @@ public class menu_manager : MonoBehaviour
     {
 
         GameObject newGroup = groupToActivate;
-        Debug.Log(newGroup.name);
+
         foreach (GameObject group in groups)
         {
             if (group.name == newGroup.name)

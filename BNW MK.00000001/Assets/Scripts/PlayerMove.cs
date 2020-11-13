@@ -40,11 +40,12 @@ public class PlayerMove : MonoBehaviour
 
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
 
-        while (currentTile == null)
+        import_manager.run_function("network_manager", "get_player_civilization", new string[2]{this.gameObject.name, "GetCurrentTile"});
+      /*  while (currentTile == null)
         {
             Debug.Log("looking for current tile");
             GetCurrentTile();
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -115,18 +116,20 @@ public class PlayerMove : MonoBehaviour
         //moving = false;
     }
 
-
-
-    public void GetCurrentTile()
+    // parameter = [string civilization]
+    public void GetCurrentTile(string[] parameter)
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(this.transform.position, Vector3.down, out hit, 2))
+        if (this.gameObject.name.Split('_')[0] == parameter[0])
         {
-            currentTile = hit.collider.GetComponent<Tile>();
+            RaycastHit hit;
+
+            if (Physics.Raycast(this.transform.position, Vector3.down, out hit, 2))
+            {
+                currentTile = hit.collider.GetComponent<Tile>();
+            }
+            currentTile.occupied = true;
+            currentTile.currentchar = this.gameObject;
         }
-        currentTile.occupied = true;
-        currentTile.currentchar = this.gameObject;
     }
 
 
@@ -134,7 +137,6 @@ public class PlayerMove : MonoBehaviour
     // parameters = tile.name
     public void set_current_tile(string[] parameters)
     {
-        Debug.Log("setting current tile for" + this.name);
         GameObject temp = GameObject.Find(parameters[0]);
         Tile tile = temp.GetComponent<Tile>();
         currentTile = tile;
