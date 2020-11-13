@@ -51,6 +51,7 @@ let find_match  = function (player)
 	{
 		matches.forEach((match) =>
 		{
+			console.log(match.is_available(player.civilization))
 			if ((!match.is_full()) && (match.is_available(player.civilization)))
 			{
 				matchFound = match;
@@ -86,6 +87,7 @@ let message_handler = function(message, playerSocket)
 
 		let match     = find_match(newPlayer);                          // Match object that the new player will join.
 		newPlayer.match = match.id;
+
 		players.push(newPlayer)
 		match.add_player(newPlayer);
 	}
