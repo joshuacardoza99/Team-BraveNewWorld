@@ -76,14 +76,13 @@ exports.match = function(id = 0)
 
 	this.is_available = function(civilization)
 	{
-		let is_available = true;
+		var is_available = true;
 
 		players.foreach((player) =>
 		{
-			is_available = player.civilization != civilization;
+			is_available = (player.civilization != civilization);
 		})
 
-		console.log("Is Available: " + is_available);
 		return is_available;
 	}
 

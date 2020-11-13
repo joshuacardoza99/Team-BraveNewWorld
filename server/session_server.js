@@ -51,8 +51,7 @@ let find_match  = function (player)
 	{
 		matches.forEach((match) =>
 		{
-			//console.log("This match is is_available: " + match.is_available(player.civilization));
-			if (!match.is_full())
+			if ((!match.is_full()) && (match.is_available(player.civilization)))
 			{
 				matchFound = match;
 			}
@@ -80,12 +79,13 @@ let message_handler = function(message, playerSocket)
 	if (message.gameObject == "server_functions" && message.function == "add_player")
 	{
 		console.log("Adding a new player");
-		let match     = find_match();                                   // Match object that the new player will join.
 		let newPlayer = new player(message.parameters[0],               // Player object for the new player.
 			                       message.parameters[1],
 			                       playerSocket._socket.remoteAddress,
 			                       match.get_id(), playerSocket);
 
+		let match     = find_match(newPlayer);                          // Match object that the new player will join.
+		
 		players.push(newPlayer)
 		match.add_player(newPlayer);
 	}
