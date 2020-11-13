@@ -41,22 +41,11 @@ public class PlayerMove : MonoBehaviour
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
 
         import_manager.run_function("network_manager", "get_player_civilization", new string[2]{this.gameObject.name, "GetCurrentTile"});
-      /*  while (currentTile == null)
-        {
-            Debug.Log("looking for current tile");
-            GetCurrentTile();
-        }*/
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (currentTile == null)
-        {
-            GetCurrentTile();
-            
-        }*/
-
         // if the tile is current and occupied
         if (currentTile.current && currentTile.occupied)
         {

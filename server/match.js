@@ -17,11 +17,9 @@ exports.match = function(id = 0)
 	// Add a new player to the match.
 	this.add_player = function(player = null)
 	{
-		console.log("Adding a Player");
 		if (players.length == 0)
 		{
 			player.host = true;
-			console.log("Setting a Host");
 
 			player.socket.send(JSON.stringify(
 			{
@@ -84,14 +82,11 @@ exports.match = function(id = 0)
 	{
 		var is_available = true;
 
-		console.log("Trying to get the availability");
-
 		if (players.length > 0)
 		{
-			console.log("In if statement");
 			players.forEach((player) =>
 			{
-				is_available = (player.civilization.toLowerCase() != civilization.toLowerCase());
+				is_available = ((player.civilization.toLowerCase() != civilization.toLowerCase()) && is_available);
 			})
 		}
 		
@@ -125,7 +120,6 @@ exports.match = function(id = 0)
 			// Sets the map seed for the match.
 			else if (message.function == "set_match_map")
 			{
-				console.log("Setting the map to " + message.parameters[0]);
 				mapSeed = parseInt(message.parameters[0]);
 			}
 			else
@@ -142,12 +136,10 @@ exports.match = function(id = 0)
 	// Sends the message to all other players in this match.
 	let broadcast = function (message, playerSocket)
 	{
-		console.log(players.length);
 		players.forEach((nextPlayer) =>
 		{
 			if (nextPlayer.socket != playerSocket)
 			{
-				console.log("Is broadcasting");
 				nextPlayer.socket.send(JSON.stringify(message));
 			}
 		})

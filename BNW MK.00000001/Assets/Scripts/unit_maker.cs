@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 public class unit_maker : MonoBehaviour
 {
@@ -221,6 +222,23 @@ public class unit_maker : MonoBehaviour
         {
             mine.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
             Instantiate(mine, tilePosition, Quaternion.identity);
+        }
+    }
+
+    // Removes the all units on the map.
+    // Parameters = []
+    public void remove_all_units (string[] parameters)
+    {
+        object[] sceneGameObjects = GameObject.FindSceneObjectsOfType(typeof (GameObject));
+        Debug.Log("Removing the units");
+        foreach (GameObject sceneObject in sceneGameObjects)
+        {
+            if (Regex.IsMatch(sceneObject.name.ToLower(), "asian_*", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(sceneObject.name.ToLower(), "greek_*", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(sceneObject.name.ToLower(), "viking_*", RegexOptions.IgnoreCase))
+            {
+                Destroy(sceneObject);
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    var connection = mySQL.createConnection(connectionOptions);
    connection.connect((error) => 
    {
-      console.log("Connected");
+      //console.log("Connected");
    })
 
    // Insert data into the database
@@ -30,7 +30,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    {
       var sql = "INSERT INTO " + tableName +  " VALUES (" + tableData.toString() + ");";
      
-         console.log(sql)
+        // console.log(sql)
          connection.query(sql, (error) =>
          {
             if (error)

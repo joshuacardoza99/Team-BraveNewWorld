@@ -85,13 +85,12 @@ let message_handler = function(message, playerSocket)
 	// Parameter = [string name, string civilization]
 	if (message.gameObject == "server_functions" && message.function == "add_player")
 	{
-		console.log("Adding a new player");
 		let newPlayer = new player(message.parameters[0],               // Player object for the new player.
 			                       message.parameters[1],
 			                       playerSocket._socket.remoteAddress,
 			                       0, playerSocket);
 
-		let match     = find_match(newPlayer);                          // Match object that the new player will join.
+		let match       = find_match(newPlayer);                        // Match object that the new player will join.
 		newPlayer.match = match.get_id();
 
 		players.push(newPlayer)
@@ -111,7 +110,7 @@ App.listen(80);
 server.on("connection", (playerSocket) =>
 {
 	let currentPlayer = playerSocket; // Socket connected to the current player.
-	//console.log("WHERE");
+
 	try
 	{
 	    players.push(currentPlayer);
@@ -124,13 +123,13 @@ server.on("connection", (playerSocket) =>
 			}
 			catch (error)
 			{
-				//console.log(error);
+				console.log(error);
 			}
 		})
 
 		playerSocket.on("error", (error) =>
 		{
-			//console.log(error);
+			console.log(error);
 		})
 
 		playerSocket.on("close", () =>
@@ -146,6 +145,6 @@ server.on("connection", (playerSocket) =>
 	}
 	catch (error)
 	{
-		//console.log(error);
+		console.log(error);
 	}
 })

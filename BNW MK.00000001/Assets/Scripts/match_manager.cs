@@ -198,6 +198,8 @@ public class match_manager : MonoBehaviour
         this.numberOfPlayers    = 1000;
         this.isReady            = null;
 
+        import_manager.run_function("map", "remove_map", new string[0]{});
+        import_manager.run_function("unit_manager", "remove_all_units", new string[0]{});
         import_manager.run_function("network_manager", "reset", new string[0] {});
     }
 }

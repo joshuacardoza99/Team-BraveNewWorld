@@ -272,6 +272,24 @@ public class map_manager : MonoBehaviour
         }
     }
 
+    // Removes the map.
+    // Parameters = []
+    public void remove_map (string[] parameters)
+    {
+        object[] sceneGameObjects = GameObject.FindSceneObjectsOfType(typeof (GameObject));
+
+        foreach (GameObject sceneObject in sceneGameObjects)
+        {
+            if (Regex.IsMatch(sceneObject.name.ToLower(), "water_*_*_*", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(sceneObject.name.ToLower(), "asian_*_*_*", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(sceneObject.name.ToLower(), "greek_*_*_*", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(sceneObject.name.ToLower(), "viking_*_*_*", RegexOptions.IgnoreCase))
+            {
+                Destroy(sceneObject);
+            }
+        }
+    }
+
     // Get the name of the current selected tile
     // Parameters = []
     public string get_current(string[] parameters)
