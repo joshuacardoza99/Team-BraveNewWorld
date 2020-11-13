@@ -10,6 +10,7 @@ exports.match = function(id = 0)
 	let matchId = id;           // Id of the match.
 	let maxNumberOfPlayers = 3; // The number of players for a match.
 	let mapSeed = 1000;         // The seed for the match's map.
+	let isDone  = false;        // Tells if the match is finished or if all the players have left.
 
 	// Add the match to the database.
 
@@ -45,7 +46,7 @@ exports.match = function(id = 0)
 	// Removes a player from the match.
 	this.remove_player = function(currentPlayer = null)
 	{
-		players = players.filter(player => (player.name != currentPlayer.name && player.ip == currentPlayer.ip));
+		players = players.filter(player => ((player.name != currentPlayer.name) && (player.ip == currentPlayer.ip)));
 
 		if (currentPlayer.host)
 		{
@@ -59,6 +60,10 @@ exports.match = function(id = 0)
 			}));
 		}
 
+		if (players.length == 0)
+		{
+			isDone = true;
+		}
 		// Update the database to mark the player as absent.
 	}
 
@@ -74,6 +79,7 @@ exports.match = function(id = 0)
 		return matchId;
 	}
 
+	// Tells if the civilization is available to be played in this match.
 	this.is_available = function(civilization)
 	{
 		var is_available = true;
@@ -90,6 +96,12 @@ exports.match = function(id = 0)
 		}
 		
 		return is_available;
+	}
+
+	// Tells if the match is finished or if all the players have left.
+	this.is_done = function ()
+	{
+		return isDone;
 	}
 
 	// Handles new incomming messages for this match.

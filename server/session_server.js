@@ -51,15 +51,20 @@ let find_match  = function (player)
 	{
 		matches.forEach((match) =>
 		{
-			//console.log("match " + match.get_id() + " " + match.is_available(player.civilization))
-			if ((!match.is_full()) && match.is_available(player.civilization))
+			if (!match.is_done())
 			{
-				console.log("Math Found");
-				matchFound = match;
+				if ((!match.is_full()) && match.is_available(player.civilization))
+				{
+					matchFound = match;
+				}
+				else if (was_in(player.ip, player.name))
+				{
+					//matchFound = matches.filter(match => match.get_id() == was_in(player.ip, player.name))[0];
+				}
 			}
-			else if (was_in(player.ip, player.name))
+			else
 			{
-				matchFound = matches.filter(match => match.get_id() == was_in(player.ip, player.name))[0];
+				matches = matches.filter(nextMatch => nextMatch.get_id() != match.get_id());
 			}
 		})
 	}
