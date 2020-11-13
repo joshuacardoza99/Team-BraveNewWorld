@@ -148,7 +148,6 @@ public class match_manager : MonoBehaviour
         GameObject.Find("Main Camera").transform.rotation = Quaternion.Euler(cameraDirection);
         GameObject.Find("Main Camera").GetComponent<PanZoom>().enabled = true;
         import_manager.run_function("map", "load_map", new string[1] {this.map.ToString()});
-        import_manager.run_function_all("unit_manager", "add_champion", new string[2]{this.playerCivilization, this.championName});
         import_manager.run_function_all("network_manager", "vote_ready", new string[0] {});
     }
     
@@ -164,7 +163,7 @@ public class match_manager : MonoBehaviour
 
             if ((isReady.Count == this.numberOfPlayers) || this.type != "network")
             {
-                import_manager.run_function_all("MenuManager", "removeWaitPanel", new string[0] {});
+                import_manager.run_function_all("network_manager", "start_playing", new string[0] {});
             }
         }
     }
@@ -182,6 +181,14 @@ public class match_manager : MonoBehaviour
             setup_match(new string[3]{"0", "true", "1000"});
         }
         
+    }
+
+    // Lets everyone begin playing the game
+    // Parameters = []
+    public void start_playing (string[] parameters)
+    {
+        import_manager.run_function_all("unit_manager", "add_champion", new string[2]{this.playerCivilization, this.championName});
+        import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] {});
     }
 
     // Leave the match

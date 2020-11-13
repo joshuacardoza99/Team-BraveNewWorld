@@ -12,7 +12,7 @@ public class map_manager : MonoBehaviour
     public int mapWidth = 10;
     public GameObject water;
     public GameObject vikingLand;
-    public GameObject greeceLand;
+    public GameObject greekLand;
     public GameObject asianLand;
     public string currentSelected; // stores what tile is currently selected
     public string CurrentChar = null; // Character on current selected tile
@@ -43,9 +43,9 @@ public class map_manager : MonoBehaviour
         {
             ground = vikingLand;
         }
-        else if (prefabName == "greece")
+        else if (prefabName == "greek")
         {
-            ground = greeceLand;
+            ground = greekLand;
         }
         else if (prefabName == "asian")
         {
@@ -250,7 +250,7 @@ public class map_manager : MonoBehaviour
     // Parameter = [int seed]
     public void load_map(string[] parameters)
     {
-        string[,] map = generate_map2(mapWidth, mapWidth, new string[4]{ "water", "viking", "greece", "asian" }, 80, int.Parse(parameters[0]));
+        string[,] map = generate_map2(mapWidth, mapWidth, new string[4]{ "water", "viking", "greek", "asian" }, 80, int.Parse(parameters[0]));
         int xCoordinate = 0 - mapWidth;
         int yCoordinate = 0 - mapWidth;
         int sparatedDistance = (int)water.GetComponent<Renderer>().bounds.size.x;
