@@ -84,6 +84,7 @@ exports.match = function(id = 0)
 		{
 			players.foreach((player) =>
 			{
+				console.log(player);
 				is_available = (player.civilization != civilization);
 			})
 		}
