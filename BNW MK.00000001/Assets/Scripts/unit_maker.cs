@@ -35,6 +35,7 @@ public class unit_maker : MonoBehaviour
 
     // Private Global Variables //
     private string championName = "champion";
+    private int    randomTile   = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +48,7 @@ public class unit_maker : MonoBehaviour
     // tiles = and array of tile names.
     private void finalize_champion(string[] tiles)
     {
-        GameObject tile = GameObject.Find(tiles[Random.Range(0, tiles.Length - 1)]);
+        GameObject tile = GameObject.Find(tiles[(int)(this.randomTile / tiles.Length)]);
         Vector3 tilePosition = tile.transform.position;
         tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y /1.5f;
 
@@ -83,9 +84,10 @@ public class unit_maker : MonoBehaviour
 
     // Public Functions //
 
-    // Parameters = [string civilization, string championName]
+    // Parameters = [string civilization, string championName, int randomTile]
     public void add_champion(string[] parameters)
     {
+        this.randomTile = int.Parse(parameters[2]);
         championName = parameters[0] + "_" + parameters[1];
         import_manager.run_function("map", "get_land", new string[3] { parameters[0], "unit_manager", "finalize_champion" });
     }

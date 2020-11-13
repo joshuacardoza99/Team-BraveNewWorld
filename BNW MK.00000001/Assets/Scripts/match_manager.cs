@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System.Text.RegularExpressions;
 
 // This class facilitates connected to and interacting with a match.
 public class match_manager : MonoBehaviour
@@ -182,7 +183,7 @@ public class match_manager : MonoBehaviour
     // Parameters = []
     public void start_playing (string[] parameters)
     {
-        import_manager.run_function_all("unit_manager", "add_champion", new string[2]{this.playerCivilization, this.championName});
+        import_manager.run_function_all("unit_manager", "add_champion", new string[3]{this.playerCivilization, this.championName, Random.Range(1000, 2000).ToString()});
         import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] {});
     }
 
