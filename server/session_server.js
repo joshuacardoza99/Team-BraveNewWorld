@@ -52,8 +52,9 @@ let find_match  = function (player)
 		matches.forEach((match) =>
 		{
 			//console.log("match " + match.get_id() + " " + match.is_available(player.civilization))
-			if ((!match.is_full()))
+			if ((!match.is_full()) && match.is_available(player.civilization))
 			{
+				console.log("Math Found");
 				matchFound = match;
 			}
 			else if (was_in(player.ip, player.name))
