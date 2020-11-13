@@ -205,29 +205,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533f1bb318c495b40abb9a44af910acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asianBarracks: {fileID: 7278557504324950904, guid: edfd167feb90b854a8bf4c576a84c31b, type: 3}
+  asianBarracks: {fileID: 0}
   asianChampion: {fileID: 4336801283161977617, guid: e4a76b3cc176d0d4aab0f873784f316f, type: 3}
-  asianCommandPost: {fileID: 5115697619238189621, guid: 5d8518a68ba523f40a8ce181d85e2a0a, type: 3}
-  asianDefenseTower: {fileID: 5223565672878160245, guid: 0a35f458afb8de64681d94b949ca95f0, type: 3}
-  asianMelee: {fileID: 2321938364658750749, guid: 751f881917f883d499c5ac00a1117d39, type: 3}
-  asianRanged: {fileID: 1329556787522775455, guid: b69bcda86eea3bf4b8108b2a36009580, type: 3}
-  asianTank: {fileID: 1747921082604144475, guid: c6b91d83ba547bb4482fc1bcae6bb33b, type: 3}
-  farm: {fileID: 4285380549379301957, guid: 849e980d7745d0e48a3a24046edba4cd, type: 3}
-  greekBarracks: {fileID: 5530108580011645875, guid: 11a32ebacd1c9ad44bc8d2753fd64148, type: 3}
+  asianCommandPost: {fileID: 0}
+  asianDefenseTower: {fileID: 0}
+  asianMelee: {fileID: 0}
+  asianRanged: {fileID: 0}
+  asianTank: {fileID: 0}
+  farm: {fileID: 0}
+  greekBarracks: {fileID: 0}
   greekChampion: {fileID: 8992906632270343454, guid: a05187b3305140f49a7fdb9bc47e5a5e, type: 3}
-  greekCommandPost: {fileID: 3349474123833341495, guid: e942a2a660fa046419634fefc70eee18, type: 3}
-  greekDefenseTower: {fileID: 6477161442057101128, guid: 6f1c65fd6b3e200419cebdf1f41a4989, type: 3}
-  greekMelee: {fileID: 5029391578913264415, guid: 3587df9d8622c524eaeaf107ebada7df, type: 3}
-  greekRanged: {fileID: 205546677920593609, guid: 3fb838361eecf0a47923c1b2327cfb18, type: 3}
-  greekTank: {fileID: 4057296160118638936, guid: d6330227bed779a4b98077b86c8c808e, type: 3}
-  mine: {fileID: 3893895701050224703, guid: a3a711119a0a1174898731c3b91b22e3, type: 3}
-  vikingBarracks: {fileID: 5838351705324196768, guid: 6958a3035aeebf94ab4cd3c633a5d64c, type: 3}
+  greekCommandPost: {fileID: 0}
+  greekDefenseTower: {fileID: 0}
+  greekMelee: {fileID: 0}
+  greekRanged: {fileID: 0}
+  greekTank: {fileID: 0}
+  mine: {fileID: 0}
+  vikingBarracks: {fileID: 0}
   vikingChampion: {fileID: 1925037191333295197, guid: c972bdb2b434e654fb1c42109a14f6b7, type: 3}
-  vikingCommandPost: {fileID: 6314122212467016357, guid: c99ba051d19e6b045bd49fe352801a2e, type: 3}
-  vikingDefenseTower: {fileID: 8324413524997505279, guid: 96f421c1d16a1824cbe54ff28dcedd35, type: 3}
-  vikingMelee: {fileID: 641409159721196302, guid: 7e81c53724641ae46992b0923c80272b, type: 3}
-  vikingRanged: {fileID: 5235617767263526320, guid: 948e55ac5461d5e41bbefd596b35cd78, type: 3}
-  vikingTank: {fileID: 4398548747908970332, guid: d3fbed7240ecd344d80127031e04f59e, type: 3}
+  vikingCommandPost: {fileID: 0}
+  vikingDefenseTower: {fileID: 0}
+  vikingMelee: {fileID: 0}
+  vikingRanged: {fileID: 0}
+  vikingTank: {fileID: 0}
 --- !u!4 &214851975
 Transform:
   m_ObjectHideFlags: 0
@@ -1202,9 +1202,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapWidth: 30
-  water: {fileID: 3909690650225517432, guid: c923e0107c6fb184bbe3081289560780, type: 3}
+  water: {fileID: 3313963180499537379, guid: c923e0107c6fb184bbe3081289560780, type: 3}
   vikingLand: {fileID: 2998451163597735178, guid: f92086fee053a8f45aff25213fef8ceb, type: 3}
-  greekLand: {fileID: 513165736817720220, guid: 2f7e87437d0440745ac5314672cc48e5, type: 3}
+  greekLand: {fileID: 0}
   asianLand: {fileID: 8651404251344937564, guid: b5bbf7d6d0a88724ab6f66cfb6db6f0a, type: 3}
   currentSelected: 
   CurrentChar: 
@@ -2044,7 +2044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2843111468843251025, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -28.80011
+      value: -28.80008
       objectReference: {fileID: 0}
     - target: {fileID: 2966516777861501630, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_IsActive
