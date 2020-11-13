@@ -113,7 +113,7 @@ public class match_manager : MonoBehaviour
     {
         this.matchId = int.Parse(parameters[0]);
         this.isHost  = bool.Parse(parameters[1]);
-
+        Debug.Log("I joined match " + this.matchId + " : my civ is " + this.playerCivilization + " : host status is " + this.isHost);
         if (this.isHost)
         {
             Debug.Log("Is Host");
@@ -154,11 +154,12 @@ public class match_manager : MonoBehaviour
     // Registers a player as being ready to play.
     public void vote_ready(string[] parameters)
     {
+        Debug.Log("I voted");
         if (isHost)
         {
             isReady.Add(true);
 
-            Debug.Log("IS Ready: " + isReady.Count + " out of" + this.numberOfPlayers);
+            Debug.Log("IS Ready: " + isReady.Count + " out of " + this.numberOfPlayers);
 
             if ((isReady.Count == this.numberOfPlayers) || this.type != "network")
             {

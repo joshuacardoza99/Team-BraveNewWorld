@@ -51,7 +51,7 @@ let find_match  = function (player)
 	{
 		matches.forEach((match) =>
 		{
-			console.log( match.is_available(player.civilization));
+			console.log("This match is is_available: " + match.is_available(player.civilization));
 			if (!match.is_full())
 			{
 				matchFound = match;
