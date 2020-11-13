@@ -82,10 +82,10 @@ let message_handler = function(message, playerSocket)
 		let newPlayer = new player(message.parameters[0],               // Player object for the new player.
 			                       message.parameters[1],
 			                       playerSocket._socket.remoteAddress,
-			                       match.get_id(), playerSocket);
+			                       0, playerSocket);
 
 		let match     = find_match(newPlayer);                          // Match object that the new player will join.
-		
+		newPlayer.match = match.id;
 		players.push(newPlayer)
 		match.add_player(newPlayer);
 	}
