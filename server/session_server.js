@@ -51,14 +51,14 @@ let find_match  = function (player)
 	{
 		matches.forEach((match) =>
 		{
-			console.log(match.is_available(player.civilization))
-			if ((!match.is_full()) && (match.is_available(player.civilization)))
+			console.log("match " + match.get_id() + " " + match.is_available(player.civilization))
+			if ((!match.is_full()))
 			{
 				matchFound = match;
 			}
 			else if (was_in(player.ip, player.name))
 			{
-				matchFound = matches.filter(match => match.id == was_in(player.ip, player.name))[0];
+				matchFound = matches.filter(match => match.get_id() == was_in(player.ip, player.name))[0];
 			}
 		})
 	}
@@ -86,7 +86,7 @@ let message_handler = function(message, playerSocket)
 			                       0, playerSocket);
 
 		let match     = find_match(newPlayer);                          // Match object that the new player will join.
-		newPlayer.match = match.id;
+		newPlayer.match = match.get_id();
 
 		players.push(newPlayer)
 		match.add_player(newPlayer);
