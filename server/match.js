@@ -109,7 +109,7 @@ exports.match = function(id = 0)
 			else if (message.function == "set_match_map")
 			{
 				console.log("Setting the map to " + message.parameters[0]);
-				this.mapSeed = parseInt(message.parameters[0]);
+				mapSeed = parseInt(message.parameters[0]);
 			}
 			else
 			{
