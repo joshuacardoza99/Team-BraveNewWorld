@@ -34,7 +34,7 @@ exports.match = function(id = 0)
 		{
 			gameObject: "network_manager",
 			  function: "setup_match",
-			parameters: [matchId.toString(), players.length == 0 ? "true" : "false", mapSeed]
+			parameters: [matchId.toString(), players.length == 0 ? "true" : "false", mapSeed.toString()]
 		}));
 
 		// push player data to the database here

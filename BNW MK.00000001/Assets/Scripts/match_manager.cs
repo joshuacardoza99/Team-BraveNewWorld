@@ -155,7 +155,7 @@ public class match_manager : MonoBehaviour
     public void vote_ready(string[] parameters)
     {
         Debug.Log("I voted");
-        if (isHost)
+        if (this.isHost)
         {
             isReady.Add(true);
 
@@ -174,6 +174,7 @@ public class match_manager : MonoBehaviour
     {
         if (this.type == "network")
         {
+            Debug.Log("Starting Match");
             import_manager.run_function_all("server_functions", "add_player", new string[2]{this.championName, this.playerCivilization});
         }
         else if (this.type == "local")
