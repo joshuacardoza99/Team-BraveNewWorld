@@ -98,13 +98,13 @@ public class Tile : MonoBehaviour
         
 
 
-        // If the tile is selectable, then move the current character to this tile
-        if (selectable)
+        // If the tile is selectable and open, then move the current character to this tile
+        if (selectable && (occupied == false))
         {
             import_manager.run_function("map", "get_current_char", new string[1] { this.name });
             import_manager.run_function_all(currentchar.name, "move", new string[1] { this.name });
         }
-        else if(occupied) // and in range
+        else if(occupied) // and in range, and not a friendly civ
         {
             // check if this characters civ is the same as the character clicking on it
             
@@ -176,9 +176,13 @@ public class Tile : MonoBehaviour
             }
         }
     }
-    public void set_occupied()
+    public void set_occupied(string[] parameter)
     {
         occupied = true;
+    }
+    public void set_unoccupied(string[] parameter)
+    {
+        occupied = false;
     }
     public void set_selectable()
     {

@@ -83,7 +83,7 @@ public class PlayerMove : MonoBehaviour
         targetPosition = nextTile.transform.position;
 
         currentTile.currentchar = null;
-        currentTile.occupied = false;
+        import_manager.run_function_all(currentTile.name, "set_unoccupied", new string[1] { "parameters" });
         foreach (Tile tile in currentTile.adjacencyList)
         {
             tile.selectable = false;
@@ -116,8 +116,8 @@ public class PlayerMove : MonoBehaviour
             {
                 currentTile = hit.collider.GetComponent<Tile>();
             }
-            currentTile.occupied = true;
-            currentTile.currentchar = this.gameObject;
+            import_manager.run_function_all(currentTile.name, "set_occupied", new string[1] { "parameters" });
+            import_manager.run_function(currentTile.name, "set_current_char", new string[1] { this.name });
         }
     }
 
