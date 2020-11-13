@@ -82,11 +82,12 @@ exports.match = function(id = 0)
 
 		if (players.length > 0)
 		{
-			players.foreach((player) =>
+			console.log("In if statement");
+			/*players.foreach((player) =>
 			{
 				console.log(player);
 				is_available = (player.civilization != civilization);
-			})
+			})*/
 		}
 		
 		return is_available;
