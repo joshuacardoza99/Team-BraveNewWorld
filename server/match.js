@@ -91,7 +91,7 @@ exports.match = function(id = 0)
 			console.log("In if statement");
 			players.forEach((player) =>
 			{
-				is_available = (player.civilization != civilization);
+				is_available = (player.civilization.toLowerCase() != civilization.toLowerCase());
 			})
 		}
 		
