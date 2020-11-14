@@ -26,11 +26,7 @@ public class map_manager : MonoBehaviour
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     // Private Functions //
 
