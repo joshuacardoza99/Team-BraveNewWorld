@@ -51,8 +51,8 @@ public class Tile : MonoBehaviour
 
     }
 	
-	// Update is called once per frame
-	void Update () 
+	// Update is whenever needed
+	public void Updateme () 
 	{
         // determine if there is a character currently on the tile.
         if (currentchar != null)
@@ -113,7 +113,10 @@ public class Tile : MonoBehaviour
         import_manager.run_function("map", "unselect_tile", new string[0] { });
         import_manager.run_function("map", "set_current", new string[1] { this.name });
         current = true;
-        
+
+        Updateme();
+        PlayerMove temp = currentchar.GetComponent<PlayerMove>();
+        temp.set_selectable();
     }
     
 
@@ -161,6 +164,7 @@ public class Tile : MonoBehaviour
     public void unselect(string[] parameter)
     {
         current = false;
+        Updateme();
 
         // if the tile being unselected is occupied, also unselect all nearby tiles
         if (occupied)
@@ -168,10 +172,12 @@ public class Tile : MonoBehaviour
             foreach (Tile tile in adjacencyList)
             {
                 tile.selectable = false;
+                tile.Updateme();
                 
                     foreach (Tile tile2 in tile.adjacencyList)
                     {
                         tile2.selectable = false;
+                        tile2.Updateme();
                     }
             }
         }
@@ -179,19 +185,23 @@ public class Tile : MonoBehaviour
     public void set_occupied(string[] parameter)
     {
         occupied = true;
+        Updateme();
     }
     public void set_unoccupied(string[] parameter)
     {
         occupied = false;
+        Updateme();
     }
     public void set_selectable()
     {
         selectable = true;
+        Updateme();
     }
 
     public void set_current_char(string[] newcurrentChar)
     {
         currentchar = GameObject.Find(newcurrentChar[0]);
+        Updateme();
     }
     public void Reset()
     {
@@ -206,5 +216,6 @@ public class Tile : MonoBehaviour
         distance = 0;
 
         f = g = h = 0;
+        Updateme();
     }
 }
