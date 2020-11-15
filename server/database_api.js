@@ -22,7 +22,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    var connection = mySQL.createConnection(connectionOptions);
    connection.connect((error) => 
    {
-      //console.log("Connected");
+      console.log("Connected");
    })
 
    // Insert data into the database
@@ -30,7 +30,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    {
       var sql = "INSERT INTO " + tableName +  " VALUES (" + tableData.toString() + ");";
      
-        // console.log(sql)
+         console.log(sql)
          connection.query(sql, (error) =>
          {
             if (error)
@@ -56,6 +56,25 @@ exports.database_api = function(serverName = "", username = "", password = "", d
             }
          });
    }
+
+   // Mark the player as absent
+   // Parameters = [ipAddress, championName]
+   this.markPlayerAbsent = function(parameters)
+   {
+      let ipAddress    = "'" + parameters[0] + "'"
+      let championName = "'" + parameters[1] + "'"
+
+      var sql = "UPDATE  player  SET inGameFlag = false WHERE ipAddress = " + ipAddress + " AND championName = " + championName + ";";
+
+         console.log(sql)
+         connection.query(sql, (error) =>
+         {
+            if (error)
+            {
+               console.log("Update Failed with the following error:" + error);
+            }
+         });
+   }
    
    // Add the matchs with the following parameters
    this.add_matchs = function(parameters)
@@ -71,16 +90,33 @@ exports.database_api = function(serverName = "", username = "", password = "", d
       select_data("matchs", receiver);
    }
 
+   // Update the map seed
+   // Parameters = [matchID, map]
+   this.update_map = function(parameters)
+   {
+      let matchID       =       parameters[0]
+      let map           =       parameters[1]
+
+      var sql = "UPDATE match SET map = " + map + " WHERE matchID = " + matchID + ";";
+      
+         connection.query(sql, (error) =>
+         {
+            if (error)
+            {
+               console.log("Update Failed with the following error:" + error);
+            }
+         });
+   }
+
    // Add the players with the following parameters
    this.add_player = function(parameters)
    {
-      let playerID     =       parameters[0]
-      let ipAddress    =       parameters[1]
-      let championName = "'" + parameters[2] + "'"
-      let civilization = "'" + parameters[3] + "'"
-      let matchID      =       parameters[4]
-      let inGameFlag   =       parameters[5]
-      insert_data("player",  [playerID, ipAddress, championName, civilization, matchID, inGameFlag]);
+      let ipAddress    =       parameters[0]
+      let championName = "'" + parameters[1] + "'"
+      let civilization = "'" + parameters[2] + "'"
+      let matchID      =       parameters[3]
+      let inGameFlag   =       parameters[4]
+      insert_data("player",  [ipAddress, championName, civilization, matchID, inGameFlag]);
    }
 
    // Receive the player and select the player game object and receiver function
@@ -104,5 +140,28 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    this.get_characters = function(receiver)
    {
       select_data("characters", receiver);
+   }
+
+   // Update the character position
+   // Parameters = [ipAddress, championName, characterName, newTilName]
+   this.update_character_position = function(parameters)
+   {
+      let ipAddress     = "'" + parameters[0] + "'"
+      let championName  = "'" + parameters[1] + "'"
+      let characterName = "'" + parameters[2] + "'"
+      let newTileName   = "'" + parameters[3] + "'"
+
+      var sql = "UPDATE characters SET tileName = " + newTileName + " WHERE characterName = " 
+         + characterName + " AND playerID = (SELECT playerID FROM player WHERE ipAddress = " 
+         + ipAddress + " AND championName = " + championName + ");";
+      
+         console.log(sql)
+         connection.query(sql, (error) =>
+         {
+            if (error)
+            {
+               console.log("Update Failed with the following error:" + error);
+            }
+         });
    }
 }

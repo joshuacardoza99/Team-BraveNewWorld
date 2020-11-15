@@ -59,7 +59,7 @@ let find_match  = function (player)
 				}
 				else if (was_in(player.ip, player.name))
 				{
-					//matchFound = matches.filter(match => match.get_id() == was_in(player.ip, player.name))[0];
+					matchFound = matches.filter(match => match.get_id() == was_in(player.ip, player.name))[0];
 				}
 			}
 			else
