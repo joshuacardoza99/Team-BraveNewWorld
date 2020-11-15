@@ -1194,6 +1194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   civ: ' '
+  currentTile: {fileID: 0}
   moves: 3
   moveSpeed: 10
   actualTargetTile: {fileID: 0}

@@ -16,7 +16,7 @@ public class PlayerMove : MonoBehaviour
     GameObject[] tiles;
 
     Stack<Tile> path = new Stack<Tile>();
-    Tile currentTile = null;
+    public Tile currentTile = null;
 
     
     public int moves = 3;
@@ -43,8 +43,8 @@ public class PlayerMove : MonoBehaviour
         import_manager.run_function("network_manager", "get_player_civilization", new string[2]{this.gameObject.name, "GetCurrentTile"});
     }
 
-    // Update is called once per frame
-    void Update()
+    // if the current tile is occupied, highlight all surrounding tiles
+    public void set_selectable()
     {
         // if the tile is current and occupied
         if (currentTile.current && currentTile.occupied)
@@ -60,6 +60,7 @@ public class PlayerMove : MonoBehaviour
                     if (tile.occupied == false)
                     {
                         tile.selectable = true;
+                        tile.Updateme();
 
                         if (moves >= 2)
                             foreach (Tile tile2 in tile.adjacencyList)
@@ -67,6 +68,7 @@ public class PlayerMove : MonoBehaviour
                                 if ((tile2.occupied == false) && (tile2.current == false))
                                 {
                                     tile2.selectable = true;
+                                    tile2.Updateme();
                                 }
                             }
                     }
@@ -87,10 +89,12 @@ public class PlayerMove : MonoBehaviour
         foreach (Tile tile in currentTile.adjacencyList)
         {
             tile.selectable = false;
+            tile.Updateme();
             if (moves >= 2)
                 foreach (Tile tile2 in tile.adjacencyList)
                 {
                     tile2.selectable = false;
+                    tile2.Updateme();
                 }
         }
 
