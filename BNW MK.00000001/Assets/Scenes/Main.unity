@@ -1202,10 +1202,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapWidth: 30
-  water: {fileID: 3909690650225517432, guid: c923e0107c6fb184bbe3081289560780, type: 3}
-  vikingLand: {fileID: 2998451163597735178, guid: f92086fee053a8f45aff25213fef8ceb, type: 3}
-  greekLand: {fileID: 513165736817720220, guid: 2f7e87437d0440745ac5314672cc48e5, type: 3}
-  asianLand: {fileID: 8651404251344937564, guid: b5bbf7d6d0a88724ab6f66cfb6db6f0a, type: 3}
+  water: {fileID: 4563262902638668817, guid: 566fef9167dada142a8d29034a411095, type: 3}
+  vikingLand: {fileID: 1481374795766051786, guid: 172aac78f7fa9864788c0726b6ff8110, type: 3}
+  greekLand: {fileID: 5460428617536025655, guid: 04b1819dc458a0c4d9e71bb66fd519d1, type: 3}
+  asianLand: {fileID: 5179006773973348921, guid: df2c09fa61e93194daff75ed734ff6e4, type: 3}
   currentSelected: 
   CurrentChar: 
 --- !u!1001 &1554879584487037386

@@ -57,6 +57,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
+    - Class: 64
+      Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
     - Class: 81
@@ -185,7 +187,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14148}
     - Class: 114
-      Script: {instanceID: 29712}
+      Script: {instanceID: 16492}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -832,7 +834,7 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 78354fc4d647634ccd5958e32aaea67e
+      Hash: 8feead385c485c183423d155177fcb05
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMove
