@@ -79,6 +79,11 @@ public class PlayerMove : MonoBehaviour
      
     }
 
+    private void OnMouseDown()
+    {
+        currentTile.OnMouseDown();
+    }
+
     public void move(string[] location)
     {   
         GameObject nextTile = GameObject.Find(location[0]);
