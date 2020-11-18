@@ -40,7 +40,7 @@ public class PlayerMove : MonoBehaviour
 
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
 
-        import_manager.run_function("network_manager", "get_player_civilization", new string[2]{this.gameObject.name, "GetCurrentTile"});
+        import_manager.run_function_all("network_manager", "get_player_civilization", new string[2]{this.gameObject.name, "GetCurrentTile"});
     }
 
     // if the current tile is occupied, highlight all surrounding tiles

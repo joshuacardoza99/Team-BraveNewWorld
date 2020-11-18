@@ -102,7 +102,7 @@ public class Tile : MonoBehaviour
         if (selectable && (occupied == false))
         {
             import_manager.run_function("map", "get_current_char", new string[1] { this.name });
-            import_manager.run_function(currentchar.name, "switch_selectable_tile", new string[1] {""});
+            import_manager.run_function_all(currentchar.name, "switch_selectable_tile", new string[1] {""});
             import_manager.run_function_all(currentchar.name, "move", new string[1] { this.name });
         }
         else if(occupied) // and in range, and not a friendly civ
