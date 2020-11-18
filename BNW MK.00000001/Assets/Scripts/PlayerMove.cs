@@ -42,7 +42,7 @@ public class PlayerMove : MonoBehaviour
 
         import_manager.run_function_all("network_manager", "get_player_civilization", new string[2]{this.gameObject.name, "GetCurrentTile"});
     }
-
+    
     // if the current tile is occupied, highlight all surrounding tiles
     public void set_selectable()
     {
@@ -50,7 +50,7 @@ public class PlayerMove : MonoBehaviour
         if (currentTile.current && currentTile.occupied)
         {
             // prepare to move this character
-            import_manager.run_function("map", "set_current_char", new string[1] { this.name });
+            import_manager.run_function_all("map", "set_current_char", new string[1] { this.name });
 
             // set all tiles in range to selectable
             if (moves >= 1) // if the character can move at least once
@@ -89,6 +89,8 @@ public class PlayerMove : MonoBehaviour
         GameObject nextTile = GameObject.Find(location[0]);
         targetPosition = nextTile.transform.position;
         
+        switch_selectable_tile(new string[0] {});
+
         this.transform.LookAt(targetPosition);
 
         this.transform.position = new Vector3(targetPosition.x, this.transform.position.y, targetPosition.z);
@@ -135,7 +137,7 @@ public class PlayerMove : MonoBehaviour
                 currentTile = hit.collider.GetComponent<Tile>();
             }
             import_manager.run_function_all(currentTile.name, "set_occupied", new string[1] { "parameters" });
-            import_manager.run_function(currentTile.name, "set_current_char", new string[1] { this.name });
+            import_manager.run_function_all(currentTile.name, "set_current_char", new string[1] { this.name });
         }
     }
 
