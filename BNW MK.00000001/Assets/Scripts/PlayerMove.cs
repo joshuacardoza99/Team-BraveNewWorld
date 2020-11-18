@@ -96,6 +96,8 @@ public class PlayerMove : MonoBehaviour
         this.transform.rotation = Quaternion.identity;
 
         currentTile = nextTile.GetComponent<Tile>();
+
+        import_manager.run_function_all(currentTile.name, "set_occupied", new string[1] { "parameters" });
         
        // import_manager.run_function_all("server_function", "update_character_position", new string[2] {this.gameObject.name, location[0]});
 
