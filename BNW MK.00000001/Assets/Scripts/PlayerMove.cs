@@ -89,7 +89,7 @@ public class PlayerMove : MonoBehaviour
         GameObject nextTile = GameObject.Find(location[0]);
         targetPosition = nextTile.transform.position;
         
-        switch_selectable_tile(new string[0] {});
+       // switch_selectable_tile(new string[0] {});
 
         this.transform.LookAt(targetPosition);
 
