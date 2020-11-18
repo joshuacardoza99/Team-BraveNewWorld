@@ -205,8 +205,10 @@ exports.match = function(id = 0)
 	{
 		players.forEach((nextPlayer) =>
 		{
+			console.log(nextPlayer);
 			if (nextPlayer.socket != playerSocket)
 			{
+				console.log("sent");
 				nextPlayer.socket.send(JSON.stringify(message));
 			}
 		})
