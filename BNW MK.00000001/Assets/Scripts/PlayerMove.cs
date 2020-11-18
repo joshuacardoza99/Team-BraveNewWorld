@@ -111,7 +111,7 @@ public class PlayerMove : MonoBehaviour
 
         currentTile = nextTile.GetComponent<Tile>();
         
-        import_manager.run_function_all("server_function", "update_character_position", new string[2] {this.gameObject.name, location[0]});
+       // import_manager.run_function_all("server_function", "update_character_position", new string[2] {this.gameObject.name, location[0]});
 
         //moving = false;
     }
