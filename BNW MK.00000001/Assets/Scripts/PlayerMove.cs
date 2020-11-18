@@ -88,21 +88,7 @@ public class PlayerMove : MonoBehaviour
     {   
         GameObject nextTile = GameObject.Find(location[0]);
         targetPosition = nextTile.transform.position;
-
-        currentTile.currentchar = null;
-        import_manager.run_function_all(currentTile.name, "set_unoccupied", new string[1] { "parameters" });
-        foreach (Tile tile in currentTile.adjacencyList)
-        {
-            tile.selectable = false;
-            tile.Updateme();
-            if (moves >= 2)
-                foreach (Tile tile2 in tile.adjacencyList)
-                {
-                    tile2.selectable = false;
-                    tile2.Updateme();
-                }
-        }
-
+        
         this.transform.LookAt(targetPosition);
 
         this.transform.position = new Vector3(targetPosition.x, this.transform.position.y, targetPosition.z);
@@ -114,6 +100,25 @@ public class PlayerMove : MonoBehaviour
        // import_manager.run_function_all("server_function", "update_character_position", new string[2] {this.gameObject.name, location[0]});
 
         //moving = false;
+    }
+
+    // Handles the Tile status change for movement.
+    // parameter = []
+    public void switch_selectable_tile (string[] parameter)
+    {
+        currentTile.currentchar = null;
+        import_manager.run_function_all(currentTile.name, "set_unoccupied", new string[1] { "" });
+        foreach (Tile tile in currentTile.adjacencyList)
+        {
+            tile.selectable = false;
+            tile.Updateme();
+            if (moves >= 2)
+                foreach (Tile tile2 in tile.adjacencyList)
+                {
+                    tile2.selectable = false;
+                    tile2.Updateme();
+                }
+        }
     }
 
     // parameter = [string civilization]

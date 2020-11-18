@@ -27,11 +27,12 @@ public class PanZoom : MonoBehaviour
 
     void Update()
     {
-        if ( Input.touchSupported )
+        if ( Input.touchSupported)
         {
             HandleTouch();
         }
-        else if(SystemInfo.deviceType == DeviceType.Desktop)
+        
+        if(SystemInfo.deviceType == DeviceType.Desktop)
         {
             HandleMouse();
         }
