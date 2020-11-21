@@ -577,6 +577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   civ: ' '
+  isChampion: 1
   currentTile: {fileID: 0}
   moves: 3
   moveSpeed: 10

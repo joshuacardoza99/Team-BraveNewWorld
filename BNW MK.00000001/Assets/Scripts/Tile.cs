@@ -30,11 +30,6 @@ public class Tile : MonoBehaviour
     public Tile parent = null;
     public int distance = 0;
 
-    //For A*
-    public float f = 0;
-    public float g = 0;
-    public float h = 0;
-
     // Private Variables //
     private Color realColor; // The color the tile should be without any highlights.
 
@@ -63,7 +58,8 @@ public class Tile : MonoBehaviour
         {
             occupied = false;
         }
-
+        
+        // set the current color of the tile
         if (current && occupied)
         {
             this.GetComponent<Renderer>().material.color = Color.magenta;
@@ -95,9 +91,6 @@ public class Tile : MonoBehaviour
     // Set current to this tile when it gets clicked
     public void OnMouseDown()
     {
-        
-
-
         // If the tile is selectable and open, then move the current character to this tile
         if (selectable && (occupied == false))
         {
@@ -105,10 +98,10 @@ public class Tile : MonoBehaviour
             import_manager.run_function_all(currentchar.name, "switch_selectable_tile", new string[0] { });
             import_manager.run_function_all(currentchar.name, "move", new string[1] { this.name });
         }
+        // check to see if you can attack a character on this tile
         else if(occupied) // and in range, and not a friendly civ
         {
-            // check if this characters civ is the same as the character clicking on it
-            
+            // run the attack script ///////////////  
         }
            
         import_manager.run_function("map", "unselect_tile", new string[0] { });
@@ -118,6 +111,12 @@ public class Tile : MonoBehaviour
         Updateme();
         PlayerMove temp = currentchar.GetComponent<PlayerMove>();
         temp.set_selectable();
+        // check if this is a champion
+        if (temp.isChampion == true)
+        {
+            Debug.Log("championclicked");
+            // show the add command post button ////////////////
+        }
     }
     
 
@@ -212,11 +211,8 @@ public class Tile : MonoBehaviour
         target = false;
         selectable = false;
 
-        //visited = false;
         parent = null;
         distance = 0;
-
-        f = g = h = 0;
         Updateme();
     }
 }
