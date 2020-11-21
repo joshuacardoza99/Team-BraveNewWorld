@@ -3,7 +3,7 @@ exports.player = function(name = "", civilization = "", ip = "", match = 0, sock
 {
 	this.name         = name;          // Player's champion's name.
 	this.ip           = ip;            // Player's computer's ip address.
-	this.host         = host;          // Tells wether the player is the host for the match or not.
+	this.host         = host;          // Tells whether the player is the host for the match or not.
 	this.match        = match;         // Match id of the match the player is playing in.
 	this.civilization = civilization;  // Name of the player's civilization.
 	this.isAbsent     = isAbsent;      // Tells whether the player is absent or not.
