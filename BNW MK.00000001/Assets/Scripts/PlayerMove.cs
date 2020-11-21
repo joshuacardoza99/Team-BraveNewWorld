@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
 
     public string civ = " ";
+    public bool isChampion = false;
 
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
