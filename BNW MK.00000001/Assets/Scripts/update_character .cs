@@ -1,4 +1,4 @@
-/*using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,4 +28,3 @@ public class update_character : MonoBehaviour
        var message = JsonUtility.FromJson<update_message>
        GameObject.Find(message.gameObject).SendMessage(message.function, message.parameters);
     }
-}*/

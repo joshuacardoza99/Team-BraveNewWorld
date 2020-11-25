@@ -1,4 +1,4 @@
-/*using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,4 +33,4 @@ public class database_message : MonoBehaviour
     {
        var message = JsonUtility.FromJson<update_message>(System.Text.Encoding.UTF8.GetString(bytes));
        GameObject.Find(message.gameObject).SendMessage(message.function, message.parameters);
-    }*/
+    }
