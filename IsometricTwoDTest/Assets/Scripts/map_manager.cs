@@ -52,7 +52,7 @@ public class map_manager : MonoBehaviour
         
         ground.name = prefabName + "_" + xPosition.ToString() + "_" + yPosition.ToString() + "_" + zPosition.ToString();
         Debug.Log(ground.name);
-        Instantiate(ground,new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(new Vector3(30, 0, 0)));
+        Instantiate(ground,new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(new Vector3(30, 0, -45)));
     }
 
     // Tells if the ground borders land.
@@ -183,27 +183,37 @@ public class map_manager : MonoBehaviour
     // Parameter = [int seed]
     public void load_map(string[] parameters)
     {
-        string[,] map = generate_map(mapWidth, mapWidth, new string[4]{ "water", "viking", "greek", "asian" }, 80, int.Parse(parameters[0]));
-        float xCoordinate = mapWidth;
-        float yCoordinate = mapWidth;
-        float zCoordinate = mapWidth;
-        float ySparatedDistance = water.GetComponent<Renderer>().bounds.size.y - 0.13f;
-        float xSparatedDistance = water.GetComponent<Renderer>().bounds.size.x - 0.13f;
+        string[,] map = generate_map(mapWidth, mapWidth, new string[4] { "water", "viking", "greek", "asian" }, 80, int.Parse(parameters[0]));
+        int diagonalLength = (int)Mathf.Sqrt((mapWidth * mapWidth) + (mapWidth * mapWidth));
+        float ySparatedDistance = (water.GetComponent<Renderer>().bounds.size.y / 1.65f);
+        float xSparatedDistance = ySparatedDistance * 2.3f;
+        int currectRowLength = 1;
+        float xCoordinate = (diagonalLength / 2) + (xSparatedDistance * (currectRowLength * 0.5f));
+        float yCoordinate = diagonalLength / 2;
+        float zCoordinate = diagonalLength / 2;
+        float rowWidthIncreaser  = 1f;
         int currentWidthLength = 0;
 
         foreach (string ground in map)
         {
             create_ground(xCoordinate, yCoordinate, zCoordinate, ground);
 
-            xCoordinate        -= xSparatedDistance;
+            xCoordinate -= xSparatedDistance;
+
             currentWidthLength += 1;
 
-            if (currentWidthLength >= mapWidth)
+            if (currentWidthLength >= currectRowLength)
             {
-                yCoordinate        -= ySparatedDistance;
-                xCoordinate         = (mapWidth);
-                zCoordinate        -= 1;
-                currentWidthLength  = 0;
+                if (currectRowLength >= mapWidth)
+                {
+                    rowWidthIncreaser = -1f;
+                }
+
+                currectRowLength = (int)(currectRowLength + rowWidthIncreaser);
+                yCoordinate -= ySparatedDistance;
+                xCoordinate = (diagonalLength / 2) + (xSparatedDistance * (currectRowLength * 0.5f));
+                zCoordinate -= 1;
+                currentWidthLength = 0;
             }
         }
     }

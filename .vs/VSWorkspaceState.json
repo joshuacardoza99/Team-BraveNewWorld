@@ -1,10 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\BNW MK.00000001",
     "\\BNW MK.00000001\\Assets",
-    "\\BNW MK.00000001\\Assets\\Scripts"
+    "\\BNW MK.00000001\\Assets\\Scripts",
+    "\\IsometricTwoDTest",
+    "\\IsometricTwoDTest\\Assets",
+    "\\IsometricTwoDTest\\Assets\\Scripts"
   ],
-  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\Building.cs",
+  "SelectedNode": "\\IsometricTwoDTest\\Assets\\Scripts\\map_manager.cs",
   "PreviewInSolutionExplorer": false
 }
