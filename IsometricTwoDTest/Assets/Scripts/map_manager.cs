@@ -16,9 +16,9 @@ public class map_manager : MonoBehaviour
     public GameObject asianLand;
     public string currentSelected; // stores what tile is currently selected
     public string CurrentChar = null; // Character on current selected tile
+    public GameObject gridGameObject;
 
     // Private Global Variables //
-    //private string currentSelected; // stores what tile is currently selected
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +51,7 @@ public class map_manager : MonoBehaviour
         }
         
         ground.name = prefabName + "_" + xPosition.ToString() + "_" + yPosition.ToString() + "_" + zPosition.ToString();
+        ground.transform.SetParent(gridGameObject.transform, false);
         Debug.Log(ground.name);
         Instantiate(ground,new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(new Vector3(30, 0, -45)));
     }
@@ -183,38 +184,40 @@ public class map_manager : MonoBehaviour
     // Parameter = [int seed]
     public void load_map(string[] parameters)
     {
-        string[,] map = generate_map(mapWidth, mapWidth, new string[4] { "water", "viking", "greek", "asian" }, 80, int.Parse(parameters[0]));
-        int diagonalLength = (int)Mathf.Sqrt((mapWidth * mapWidth) + (mapWidth * mapWidth));
-        float ySparatedDistance = (water.GetComponent<Renderer>().bounds.size.y / 1.65f);
-        float xSparatedDistance = ySparatedDistance * 2.3f;
-        int currectRowLength = 1;
-        float xCoordinate = (diagonalLength / 2) + (xSparatedDistance * (currectRowLength * 0.5f));
-        float yCoordinate = diagonalLength / 2;
-        float zCoordinate = diagonalLength / 2;
-        float rowWidthIncreaser  = 1f;
-        int currentWidthLength = 0;
+        string[,] map = generate_map(mapWidth, mapWidth, new string[4] { "water", "viking", "greek", "asian" },  // Stores the square paderian for the map.
+                                     80, int.Parse(parameters[0])); 
+        int   referencePossition = 0;                                                                            // Reference point for the map placement.                    
+        float ySparatedDistance  = (water.GetComponent<Renderer>().bounds.size.y / 1.65f);                       // Separation distance on the y-axis.
+        float xSparatedDistance  = ySparatedDistance * 2.3f;                                                     // Separation distance on the x-axis.
+        float xCoordinate        = referencePossition;                                                           // X-Coordinate for the next square.
+        float yCoordinate        = referencePossition;                                                           // Y-Coordinate for the next square.      
+        float zCoordinate        = referencePossition;                                                           // Z-Coordinate for the next square.
+        float rowWidthIncreaser  = 1f;                                                                           // A factor for controling the placement of the next square.
 
-        foreach (string ground in map)
+        for (int level = 0; level < 60; level++)
         {
-            create_ground(xCoordinate, yCoordinate, zCoordinate, ground);
-
-            xCoordinate -= xSparatedDistance;
-
-            currentWidthLength += 1;
-
-            if (currentWidthLength >= currectRowLength)
+            for (int row = 0; row <= level; row++)
             {
-                if (currectRowLength >= mapWidth)
+                if (map.GetLength(0) > (level - row))
                 {
-                    rowWidthIncreaser = -1f;
-                }
+                    try
+                    {
+                        create_ground(xCoordinate, yCoordinate, zCoordinate, map[row, (level - row)]);
 
-                currectRowLength = (int)(currectRowLength + rowWidthIncreaser);
-                yCoordinate -= ySparatedDistance;
-                xCoordinate = (diagonalLength / 2) + (xSparatedDistance * (currectRowLength * 0.5f));
-                zCoordinate -= 1;
-                currentWidthLength = 0;
+                        xCoordinate -= xSparatedDistance;
+                    }
+                    catch { }
+                }
             }
+
+            if (level >= (mapWidth - 1))
+            {
+                rowWidthIncreaser = (mapWidth - (level + 1.5f)) * 2;
+            }
+
+            yCoordinate -= ySparatedDistance;
+            xCoordinate = referencePossition + (xSparatedDistance * ((level + rowWidthIncreaser) * 0.5f));
+            zCoordinate -= 1;
         }
     }
 
