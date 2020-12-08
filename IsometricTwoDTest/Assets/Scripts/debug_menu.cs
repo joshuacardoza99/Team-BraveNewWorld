@@ -5,51 +5,27 @@ using UnityEngine.Events;
 
 public class debug_menu : MonoBehaviour
 {
+    public GameObject buildingMenu;
+
     UnityEvent debugMenu = new UnityEvent();
 
     void Start()
     {
+        buildingMenu.SetActive(false);
         debugMenu.AddListener(Menu);
     }
 
     void Update()
     {
+        // When 'p' is pressed, this calls the menu function
         if (Input.GetKeyDown("p") && debugMenu != null)
-        {
             debugMenu.Invoke();
-        }
     }
 
     void Menu()
     {
+        // Code for actually making the menu appear and be usable goes here
         Debug.Log("Menu");
+        buildingMenu.SetActive(true);
     }
-
-    // Start is called before the first frame update
-    /*void Start()
-    {
-        //Add a listener to the new Event. Calls MyAction method when invoked
-        debugMenu.AddListener(generateMenu);
-        Debug.Log("Menu started");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    publipc void KeyDownEvent()
-    {
-        if (Input.GetKeyDown("p"))
-        {
-            Debug.Log("Menu");
-            debugMenu.RemoveListener(generateMenu);
-        }
-    }
-
-    public void generateMenu()
-    {
-        Debug.Log("Menu generated!");
-    }*/
 }

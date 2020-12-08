@@ -155,6 +155,7 @@ public class unit_maker : MonoBehaviour
         }
     }
 
+    // Parameters = [string civilization, string buildingType, string unitNumber]
     public void add_building(string[] parameters)
     {
         GameObject tile = GameObject.Find(parameters[0]);
