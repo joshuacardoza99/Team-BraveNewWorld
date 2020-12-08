@@ -1500,6 +1500,99 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9d44fdbae1d80045891901a42ecd772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &370689066871090643
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1852004887197534708, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 67.50261
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852004887197534708, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 26.384735
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852004887197534708, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -84.27173
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852004887197534708, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852004887197534708, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852004887197534708, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852004887197534708, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852004887197534708, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852004887197534708, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852004887197534708, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852004887197534708, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: asianMelee
+      value: 
+      objectReference: {fileID: 6538327491079307972, guid: 3aa818b752418c248b04eb77f4e5cec5, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: asianRanged
+      value: 
+      objectReference: {fileID: 4252896283761650798, guid: a112f9a7f775e184a8ab17fe3b1e7e75, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: asianTank
+      value: 
+      objectReference: {fileID: 5433882904834823725, guid: 70d53fb988231f146b26db2080952cba, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: greekMelee
+      value: 
+      objectReference: {fileID: 5133069982945647373, guid: 17686f180f851e84cb9f81bf717098d7, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: greekRanged
+      value: 
+      objectReference: {fileID: 6607924441072032639, guid: cdddc313cc9c2ec4d9c71541b393510e, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: greekTank
+      value: 
+      objectReference: {fileID: 1179204933227736705, guid: 4df1eb7fcbb56f44ba7dec38fb06d9fb, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: vikingMelee
+      value: 
+      objectReference: {fileID: 7553942430005813915, guid: f1d462006eb18ef46800727dcefe952c, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: vikingRanged
+      value: 
+      objectReference: {fileID: 2663706081370168036, guid: c09edde1a994af343bc32a3450dcf3e2, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: vikingTank
+      value: 
+      objectReference: {fileID: 7336288608846533854, guid: cf88e477ada742243a49a89513d5960d, type: 3}
+    - target: {fileID: 8328366925452020881, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: m_Name
+      value: Unit Creator
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
 --- !u!1001 &3753470237240160785
 PrefabInstance:
   m_ObjectHideFlags: 0

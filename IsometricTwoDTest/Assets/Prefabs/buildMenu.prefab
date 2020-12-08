@@ -1048,7 +1048,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7790510323473636298}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8328366925452020881, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7666785525725918575
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,7 +25,9 @@ public class debug_menu : MonoBehaviour
     void Menu()
     {
         // Code for actually making the menu appear and be usable goes here
-        Debug.Log("Menu");
-        buildingMenu.SetActive(true);
+        if(buildingMenu.activeSelf == false)
+           buildingMenu.SetActive(true);
+        else
+           buildingMenu.SetActive(false);
     }
 }
