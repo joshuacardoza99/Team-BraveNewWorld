@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+///  THIS FILE IS OBSALETE ////
+/// </summary>
+/// 
+
+
 // To set the angle do it in the unity visual game object pannel
 public class CameraControl : MonoBehaviour
 {

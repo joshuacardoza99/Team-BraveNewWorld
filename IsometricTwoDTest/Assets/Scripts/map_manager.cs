@@ -35,7 +35,7 @@ public class map_manager : MonoBehaviour
     // Creates one ground object
     private void create_ground(float xPosition, float yPosition, float zPosition, string prefabName)
     {
-        GameObject ground = water;
+        GameObject ground = water; // The GameObject for the ground prefab of the type of ground being created.
 
         if (prefabName == "viking")
         {
@@ -52,14 +52,13 @@ public class map_manager : MonoBehaviour
         
         ground.name = prefabName + "_" + xPosition.ToString() + "_" + yPosition.ToString() + "_" + zPosition.ToString();
         ground.transform.SetParent(gridGameObject.transform, false);
-        Debug.Log(ground.name);
         Instantiate(ground,new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(new Vector3(30, 0, -45)));
     }
 
-    // Tells if the ground borders land.
+    // Checks the surrounding grounds for being the same type as the given one.
     private int near_ground_type(string[,] map, string type, int xCoordinate, int yCoordinate)
     {
-        int nearGroundType = 0;
+        int nearGroundType = 0; // Counts the number of surrounding grounds are of the same type.
 
         try
         {
@@ -100,10 +99,10 @@ public class map_manager : MonoBehaviour
         return nearGroundType;
     }
 
-    // Not near.
+    // Checks the surrounding grounds for not being the same type as the given one.
     private int not_near_ground_type(string[,] map, string[] set, string type, int xCoordinate, int yCoordinate)
     {
-        int notNearGroundType = 0;
+        int notNearGroundType = 0; // // Counts the number of surrounding grounds are not of the same type.
 
         foreach (string item in set)
         {
@@ -120,16 +119,15 @@ public class map_manager : MonoBehaviour
     // where the first prefab in grounditems is the water prefab and the string is the name of the prefab in the prefab folder
     private string[,] generate_map(int width, int height, string[] groundItems, int landPercentage, int seed)
     {
-        string water = groundItems[0];
-        List<string> preLand = new List<string>(groundItems);
+        string       water               = groundItems[0];                           // Holds the water water "civ" name.
+        List<string> preLand             = new List<string>(groundItems);            // This is a placeholder for the land until the first item gets removed.
         preLand.RemoveAt(0);
-        string[] land = preLand.ToArray();
-        int numberOfGroundItems = width * height;
-        int numberOfLandItems = (int)(((float) numberOfGroundItems) * ((float)landPercentage / 100f));
-        int numberOfWaterItems = numberOfGroundItems - numberOfLandItems;
-        string[,] map = new string[width, height];
-        int centerXCoordinate = (int)(width / 2);
-        int centerYCoordinate = (int)(height / 2);
+        string[]     land                = preLand.ToArray();                        // Holds all the ground items given.
+        int          numberOfGroundItems = width * height;                           // Total number of ground items for all civs and for water.
+        int          numberOfLandItems   = (int)(((float) numberOfGroundItems) *     // Total number of ground items for all civs.
+                                           ((float)landPercentage / 100f));
+        int          numberOfWaterItems  = numberOfGroundItems - numberOfLandItems;  // Total number of ground items for the water.
+        string[,]    map                 = new string[width, height];                // Holds the finished map.
 
         Random.InitState(seed);
 
@@ -225,7 +223,7 @@ public class map_manager : MonoBehaviour
     // Parameters = []
     public void remove_map (string[] parameters)
     {
-        object[] sceneGameObjects = GameObject.FindSceneObjectsOfType(typeof (GameObject));
+        object[] sceneGameObjects = GameObject.FindSceneObjectsOfType(typeof (GameObject)); // The current scene's GameObject.
 
         foreach (GameObject sceneObject in sceneGameObjects)
         {

@@ -13,11 +13,7 @@ exports.match = function(id = 0)
 	let isDone  = false;        // Tells if the match is finished or if all the players have left.
 
 	// Add the match to the database.
-<<<<<<< Updated upstream
 	//database_api.add_matchs ([matchId, mapSeed]);
-=======
-	database_api.add_matchs ([matchId, mapSeed]);
->>>>>>> Stashed changes
 
 	// Add a new player to the match.
 	this.add_player = function(player = null)
@@ -56,17 +52,11 @@ exports.match = function(id = 0)
 				parameters: [matchId.toString(), players.length == 0 ? "true" : "false", mapSeed.toString()]
 			}));
 
-<<<<<<< Updated upstream
 			// Push player data to the database here
 			//database_api.add_player([player.ip, player.name, player.civilization, player.match, "true"]);
 
 			players.push(player);
 		}
-=======
-		// Push player data to the database here
-		database_api.add_player([player.ip, player.name, player.civilization, player.match, "true"]);
-		players.push(player);
->>>>>>> Stashed changes
 	}
 
 	// Removes a player from the match.
@@ -91,11 +81,7 @@ exports.match = function(id = 0)
 		}
 		
 		// Update the database to mark the player as absent.
-<<<<<<< Updated upstream
 		//database_api.markPlayerAbsent([currentPlayer.ip, currentPlayer.name]);
-=======
-		database_api.markPlayerAbsent([currentPlayer.ip, currentPlayer.name]);
->>>>>>> Stashed changes
 	}
 
 	// Determins if the match is full or if it can take another player.
@@ -156,13 +142,8 @@ exports.match = function(id = 0)
 			// Did not work in the past
 			if (message.function == "get_player")
 			{
-<<<<<<< Updated upstream
 			/*	database_api.get_player((data) =>
 				{
-=======
-				database_api.get_player((data) =>
-				{					
->>>>>>> Stashed changes
 					let response = {   // JSON message to send to a player.
 										gameObject: message.parameters[0],
 										  function: message.parameters[1],
@@ -210,11 +191,7 @@ exports.match = function(id = 0)
 			}
 			else
 			{
-<<<<<<< Updated upstream
 				//database_api[message.function](message.parameters);
-=======
-				database_api[message.function](message.parameters);
->>>>>>> Stashed changes
 			}
 		}
 		else
