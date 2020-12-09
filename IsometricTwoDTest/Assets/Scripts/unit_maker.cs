@@ -84,6 +84,14 @@ public class unit_maker : MonoBehaviour
 
     // Public Functions //
 
+    // On click functions to call the instantiate functions
+    public void mine_button()
+    {
+        Debug.Log("Mine Button pushed");
+        string[] buildingType = new string[] { "mine", "", "" };
+        add_building(buildingType);
+    }
+
     // Parameters = [string civilization, string championName, int randomTile]
     public void add_champion(string[] parameters)
     {
@@ -162,6 +170,7 @@ public class unit_maker : MonoBehaviour
         GameObject tile = GameObject.Find(parameters[0]);
         Vector3 tilePosition = tile.transform.position;
         tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y;
+
 
         if (parameters[0] == "asian")
         {
