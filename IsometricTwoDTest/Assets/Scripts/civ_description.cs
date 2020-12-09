@@ -5,22 +5,35 @@ using UnityEngine.UI;
 
 public class civ_description : MonoBehaviour
 {
-    public Text descriptionText = null;
+    public Text descriptionText;
+    public Text getText;
+    public InputField inputText;
     public int selectedCiv;
+
+    void Start()
+    {
+        getText = GetComponent<Text>();
+        getText.text = inputText.text;
+    }
+    
+    public void show_text()
+    {   
+        getText.text = inputText.text;
+    }
 
     void Update()
     {
-        switch (selectedCiv)
+        if (selectedCiv == 0)
         {
-            case 1:
-                descriptionText.text = "Viking";
-                break;
-            case 2:
-                descriptionText.text = "Greek";
-                break;
-            default:
-                descriptionText.text = "Asian";
-                break;
+            descriptionText.text = "Selected Civilization: Asian";
+        }
+        else if (selectedCiv == 1)
+        {
+            descriptionText.text = "Selected Civilization: Greek";
+        }
+        else
+        {
+            descriptionText.text = "Selected Civilization: Viking";
         }
     }
 }

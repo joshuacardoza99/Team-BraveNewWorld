@@ -87,8 +87,8 @@ public class unit_maker : MonoBehaviour
     // On click functions to call the instantiate functions
     public void mine_button()
     {
-        Debug.Log("Mine Button pushed");
-        string[] buildingType = new string[] { "mine", "", "" };
+        //Debug.Log("Mine Button pushed");
+        string[] buildingType = new string[] { "asian", "Melee", "1" };
         add_building(buildingType);
     }
 
