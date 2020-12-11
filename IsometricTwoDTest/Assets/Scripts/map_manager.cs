@@ -16,7 +16,6 @@ public class map_manager : MonoBehaviour
     public GameObject asianLand;
     public string currentSelected; // stores what tile is currently selected
     public string CurrentChar = null; // Character on current selected tile
-    public GameObject gridGameObject;
 
     // Private Global Variables //
 
@@ -25,7 +24,7 @@ public class map_manager : MonoBehaviour
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
 
-        load_map(new string[1] { "1997" });
+        //load_map(new string[1] { "1997" });
     }
 
     
@@ -51,7 +50,6 @@ public class map_manager : MonoBehaviour
         }
         
         ground.name = prefabName + "_" + xPosition.ToString() + "_" + yPosition.ToString() + "_" + zPosition.ToString();
-        ground.transform.SetParent(gridGameObject.transform, false);
         Instantiate(ground,new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(new Vector3(30, 0, -45)));
     }
 
@@ -264,7 +262,6 @@ public class map_manager : MonoBehaviour
     {
         string type = parameters[0].ToLower();
         List<string> landOfType = new List<string>();
-
         foreach (GameObject land in GameObject.FindObjectsOfType<GameObject>())
         {
             if (Regex.IsMatch(land.name, type + "_*_*_*", RegexOptions.IgnoreCase))

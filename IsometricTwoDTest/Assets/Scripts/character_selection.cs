@@ -44,6 +44,7 @@ public class character_selection : MonoBehaviour
     // Gives the Civilization
     public void get_civilization ()
     {
-        import_manager.run_function("network_manager", "set_player_civilization", new string[1] {description.descriptionText.text});
+        import_manager.run_function("network_manager", "set_player_civilization", new string[1] { description.selectedCivString });
+        import_manager.run_function("network_manager", "set_champion_name",       new string[1] { description.inputText.text });
     }
 }

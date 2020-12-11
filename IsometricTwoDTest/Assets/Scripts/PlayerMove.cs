@@ -93,7 +93,7 @@ public class PlayerMove : MonoBehaviour
 
         this.transform.LookAt(targetPosition);
 
-        this.transform.position = new Vector3(targetPosition.x, this.transform.position.y, targetPosition.z);
+        this.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - nextTile.GetComponent<Renderer>().bounds.size.z);
 
         this.transform.rotation = Quaternion.identity;
 
@@ -130,12 +130,11 @@ public class PlayerMove : MonoBehaviour
     {
         if (this.gameObject.name.Split('_')[0] == parameter[0])
         {
-            RaycastHit hit;
+            GameObject referenceTile = GameObject.Find("water_0_0_0(Clone)");
+            GameObject tileGameObject = GameObject.Find(parameter[0] + "_" + this.transform.position.x + "_" + this.transform.position.y + "_" + (this.transform.position.z + referenceTile.GetComponent<Renderer>().bounds.size.z) + "(Clone)");
+        
+            currentTile = tileGameObject.GetComponent<Tile>();
 
-            if (Physics.Raycast(this.transform.position, Vector3.down, out hit, 2))
-            {
-                currentTile = hit.collider.GetComponent<Tile>();
-            }
             import_manager.run_function_all(currentTile.name, "set_occupied", new string[1] { "parameters" });
             import_manager.run_function_all(currentTile.name, "set_current_char", new string[1] { this.name });
         }

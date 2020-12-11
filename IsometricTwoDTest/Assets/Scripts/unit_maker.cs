@@ -48,9 +48,10 @@ public class unit_maker : MonoBehaviour
     // tiles = and array of tile names.
     private void finalize_champion(string[] tiles)
     {
+        Debug.Log("Tile Index: " + this.randomTile + " / " + tiles.Length);
         GameObject tile = GameObject.Find(tiles[(int)(this.randomTile / tiles.Length)]);
         Vector3 tilePosition = tile.transform.position;
-        tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y /1.5f;
+        tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
 
         if (tile.name.Split('_')[0] == "asian")
         {
@@ -70,16 +71,11 @@ public class unit_maker : MonoBehaviour
             Instantiate(greekChampion, tilePosition, Quaternion.identity);
         }
 
-        Vector3 cameraPosition = GameObject.Find("Directional Light").transform.position;
-        cameraPosition.y = 10;
+        Vector3 cameraPosition = GameObject.Find("Main Camera").transform.position;
+        cameraPosition.y = tilePosition.y;
         cameraPosition.x = tilePosition.x;
-        cameraPosition.z = tilePosition.z;
-        var cameraDirection = GameObject.Find("Directional Light").transform.rotation.eulerAngles;
-        cameraDirection.x = 60;
-
 
         GameObject.Find("Main Camera").transform.position = cameraPosition;
-        GameObject.Find("Main Camera").transform.rotation = Quaternion.Euler(cameraDirection);
     }
 
     // Public Functions //
@@ -97,7 +93,7 @@ public class unit_maker : MonoBehaviour
     {
         this.randomTile = int.Parse(parameters[2]);
         championName = parameters[0] + "_" + parameters[1];
-        import_manager.run_function("map", "get_land", new string[3] { parameters[0], "unit_manager", "finalize_champion" });
+        import_manager.run_function("Map", "get_land", new string[3] { parameters[0], "unit_manager", "finalize_champion" });
     }
 
     // Parameters = [string civilization, string unitType, string unitNumber]
