@@ -2727,6 +2727,10 @@ PrefabInstance:
       propertyPath: vikingTank
       value: 
       objectReference: {fileID: 7336288608846533854, guid: cf88e477ada742243a49a89513d5960d, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: mine
+      value: 
+      objectReference: {fileID: 6342099949864958783, guid: 5f40469189e4afa479d795f878314c1b, type: 3}
     - target: {fileID: 8328366925452020881, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
       propertyPath: m_Name
       value: unit_manager

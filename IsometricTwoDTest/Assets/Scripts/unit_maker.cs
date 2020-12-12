@@ -83,9 +83,14 @@ public class unit_maker : MonoBehaviour
     // On click functions to call the instantiate functions
     public void mine_button()
     {
-        //Debug.Log("Mine Button pushed");
-        string[] buildingType = new string[] { "asian", "Melee", "1" };
-        add_building(buildingType);
+        int mine_number = 0;
+        Vector3 tilePosition;
+        tilePosition = new Vector3(0.0f, 1.0f, 0.0f);
+        Debug.Log("Mine Button pushed");
+        /*string[] buildingType = new string[] { "mine", " ", mine_number.ToString() };
+        mine_number++;
+        add_building(buildingType);*/
+        Instantiate(mine, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
     }
 
     // Parameters = [string civilization, string championName, int randomTile]
@@ -229,9 +234,13 @@ public class unit_maker : MonoBehaviour
         }
         else if (parameters[0] == "mine")
         {
+            Debug.Log("Else if!");
             mine.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-            Instantiate(mine, tilePosition, Quaternion.identity);
+            Instantiate(mine, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+            Debug.Log("Mine instantiated!");
         }
+        else
+           Debug.Log("Else");
     }
 
     // Removes the all units on the map.
