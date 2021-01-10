@@ -104,6 +104,8 @@ public class unit_maker : MonoBehaviour
     // Parameters = [string civilization, string unitType, string unitNumber]
     public void add_unit(string[] parameters)
     {
+        //    public string get_current(string[] parameters)
+        // for tile coordinates, also figure out scaling for buildings
         GameObject tile = GameObject.Find(parameters[0]);
         Vector3 tilePosition = tile.transform.position;
         tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y;
@@ -168,6 +170,8 @@ public class unit_maker : MonoBehaviour
     // Adds buildings to the map
     public void add_building(string[] parameters)
     {
+        //    public string get_current(string[] parameters)
+        // for tile coordinates, also figure out scaling for buildings
         GameObject tile = GameObject.Find(parameters[0]);
         Vector3 tilePosition = tile.transform.position;
         tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y;
@@ -234,13 +238,9 @@ public class unit_maker : MonoBehaviour
         }
         else if (parameters[0] == "mine")
         {
-            Debug.Log("Else if!");
             mine.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
             Instantiate(mine, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-            Debug.Log("Mine instantiated!");
         }
-        else
-           Debug.Log("Else");
     }
 
     // Removes the all units on the map.
