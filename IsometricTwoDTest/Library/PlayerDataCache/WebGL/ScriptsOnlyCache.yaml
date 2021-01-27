@@ -20,8 +20,6 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
-    - UnityEditor.Tilemaps.GridPaletteBrushes
-    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.Rider.Editor.dll:
@@ -84,59 +82,59 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11798}
     - Class: 114
-      Script: {instanceID: 11832}
+      Script: {instanceID: 11830}
     - Class: 114
-      Script: {instanceID: 12180}
+      Script: {instanceID: 12178}
     - Class: 114
-      Script: {instanceID: 12210}
+      Script: {instanceID: 12208}
     - Class: 114
-      Script: {instanceID: 12232}
+      Script: {instanceID: 12230}
     - Class: 114
-      Script: {instanceID: 12352}
+      Script: {instanceID: 12350}
     - Class: 114
-      Script: {instanceID: 12436}
+      Script: {instanceID: 12434}
     - Class: 114
-      Script: {instanceID: 12704}
+      Script: {instanceID: 12702}
     - Class: 114
-      Script: {instanceID: 12800}
+      Script: {instanceID: 12798}
     - Class: 114
-      Script: {instanceID: 13000}
+      Script: {instanceID: 12998}
     - Class: 114
-      Script: {instanceID: 13136}
+      Script: {instanceID: 13134}
     - Class: 114
-      Script: {instanceID: 13684}
+      Script: {instanceID: 13682}
     - Class: 114
-      Script: {instanceID: 13688}
+      Script: {instanceID: 13686}
     - Class: 114
-      Script: {instanceID: 13832}
+      Script: {instanceID: 13830}
     - Class: 114
-      Script: {instanceID: 13958}
+      Script: {instanceID: 13956}
     - Class: 114
-      Script: {instanceID: 14024}
+      Script: {instanceID: 14022}
     - Class: 114
-      Script: {instanceID: 14200}
+      Script: {instanceID: 14198}
     - Class: 114
-      Script: {instanceID: 14256}
+      Script: {instanceID: 14254}
     - Class: 114
-      Script: {instanceID: 14570}
+      Script: {instanceID: 14568}
     - Class: 114
-      Script: {instanceID: 14626}
+      Script: {instanceID: 14624}
     - Class: 114
-      Script: {instanceID: 14696}
+      Script: {instanceID: 14694}
     - Class: 114
-      Script: {instanceID: 14724}
+      Script: {instanceID: 14722}
     - Class: 114
-      Script: {instanceID: 14740}
+      Script: {instanceID: 14738}
     - Class: 114
-      Script: {instanceID: 14776}
+      Script: {instanceID: 14774}
     - Class: 114
-      Script: {instanceID: 14940}
+      Script: {instanceID: 14938}
     - Class: 114
-      Script: {instanceID: 15124}
+      Script: {instanceID: 15122}
     - Class: 114
-      Script: {instanceID: 15438}
+      Script: {instanceID: 15436}
     - Class: 114
-      Script: {instanceID: 30274}
+      Script: {instanceID: 26458}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
