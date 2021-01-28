@@ -13,6 +13,9 @@ public class character_selection : MonoBehaviour
     [SerializeField]
     private civ_description description;
 
+    [SerializeField]
+    private unit_maker civ_number;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,7 @@ public class character_selection : MonoBehaviour
         selectedCharacter = (selectedCharacter + 1) % characters.Length;
         characters[selectedCharacter].SetActive(true);
         description.selectedCiv = selectedCharacter;
+        civ_number.civNumber = selectedCharacter;
     }
 
     public void PreviousCharacter()
@@ -38,6 +42,7 @@ public class character_selection : MonoBehaviour
         }
         characters[selectedCharacter].SetActive(true);
         description.selectedCiv = selectedCharacter;
+        civ_number.civNumber = selectedCharacter;
     }
 
 

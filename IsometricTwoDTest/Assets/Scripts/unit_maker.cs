@@ -32,10 +32,13 @@ public class unit_maker : MonoBehaviour
     public GameObject vikingMelee;
     public GameObject vikingRanged;
     public GameObject vikingTank;
+    public int civNumber;
 
     // Private Global Variables //
     private string championName = "champion";
     private int    randomTile   = 0;
+
+    private 
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +94,54 @@ public class unit_maker : MonoBehaviour
         mine_number++;
         add_building(buildingType);*/
         Instantiate(mine, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+    }
+
+    public void command_post_button()
+    {
+        int command_post_number = 0;
+        Vector3 tilePosition;
+        tilePosition = new Vector3(0.0f, 1.0f, 0.0f);
+        Debug.Log("Command Post Button pushed");
+        /*string[] buildingType = new string[] { "mine", " ", mine_number.ToString() };
+        mine_number++;
+        add_building(buildingType);*/
+
+        if (civNumber == 1)
+            Instantiate(greekCommandPost, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+        else if (civNumber == 2)
+            Instantiate(vikingCommandPost, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+        else
+            Instantiate(asianCommandPost, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+    }
+
+    public void farm_button()
+    {
+        int farm_number = 0;
+        Vector3 tilePosition;
+        tilePosition = new Vector3(0.0f, 1.0f, 0.0f);
+        Debug.Log("Farm Button pushed");
+        /*string[] buildingType = new string[] { "mine", " ", mine_number.ToString() };
+        mine_number++;
+        add_building(buildingType);*/
+        Instantiate(farm, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+    }
+
+    public void barracks_button()
+    {
+        int barracks_number = 0;
+        Vector3 tilePosition;
+        tilePosition = new Vector3(0.0f, 1.0f, 0.0f);
+        Debug.Log("Barracks Button pushed");
+        /*string[] buildingType = new string[] { "mine", " ", mine_number.ToString() };
+        mine_number++;
+        add_building(buildingType);*/
+        if (civNumber == 1)
+            Instantiate(greekBarracks, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+        else if (civNumber == 2)
+            Instantiate(vikingBarracks, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+        else
+            Instantiate(asianBarracks, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+
     }
 
     // Parameters = [string civilization, string championName, int randomTile]
