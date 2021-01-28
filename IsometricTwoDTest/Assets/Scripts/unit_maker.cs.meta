@@ -3,7 +3,30 @@ guid: 533f1bb318c495b40abb9a44af910acd
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - asianBarracks: {instanceID: 0}
+  - asianChampion: {instanceID: 0}
+  - asianCommandPost: {instanceID: 0}
+  - asianDefenseTower: {instanceID: 0}
+  - asianMelee: {instanceID: 0}
+  - asianRanged: {instanceID: 0}
+  - asianTank: {instanceID: 0}
+  - farm: {instanceID: 0}
+  - greekBarracks: {instanceID: 0}
+  - greekChampion: {instanceID: 0}
+  - greekCommandPost: {instanceID: 0}
+  - greekDefenseTower: {instanceID: 0}
+  - greekMelee: {instanceID: 0}
+  - greekRanged: {instanceID: 0}
+  - greekTank: {instanceID: 0}
+  - mine: {fileID: 6342099949864958783, guid: 5f40469189e4afa479d795f878314c1b, type: 3}
+  - vikingBarracks: {instanceID: 0}
+  - vikingChampion: {instanceID: 0}
+  - vikingCommandPost: {instanceID: 0}
+  - vikingDefenseTower: {instanceID: 0}
+  - vikingMelee: {instanceID: 0}
+  - vikingRanged: {instanceID: 0}
+  - vikingTank: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

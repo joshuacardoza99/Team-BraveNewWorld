@@ -240,6 +240,7 @@ public class unit_maker : MonoBehaviour
         {
             mine.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
             Instantiate(mine, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+            Debug.Log("Mine");
         }
     }
 
