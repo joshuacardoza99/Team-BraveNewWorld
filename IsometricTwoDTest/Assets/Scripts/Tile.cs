@@ -91,9 +91,6 @@ public class Tile : MonoBehaviour
     // Set current to this tile when it gets clicked
     public void OnMouseDown()
     {
-        
-
-
         // If the tile is selectable and open, then move the current character to this tile
         if (selectable && (occupied == false))
         {
@@ -112,8 +109,8 @@ public class Tile : MonoBehaviour
         current = true;
 
         Updateme();
-        PlayerMove temp = currentchar.GetComponent<PlayerMove>();
-        temp.set_selectable();
+        PlayerMove temp = currentchar.GetComponent<PlayerMove>(); 
+        temp.set_selectable(); // this allows you to move right after youve moved, this will be disabled when we set cooldowns.
     }
     
 

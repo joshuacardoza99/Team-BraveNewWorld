@@ -79,6 +79,7 @@ public class PlayerMove : MonoBehaviour
      
     }
 
+    // Send clicks to the current tile
     private void OnMouseDown()
     {
         currentTile.OnMouseDown();
