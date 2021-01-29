@@ -50,7 +50,7 @@ public class PlayerMove : MonoBehaviour
         if (currentTile.current && currentTile.occupied)
         {
             // prepare to move this character
-            import_manager.run_function_all("map", "set_current_char", new string[1] { this.name });
+            import_manager.run_function_all("Map", "set_current_char", new string[1] { this.name });
 
             // set all tiles in range to selectable
             if (moves >= 1) // if the character can move at least once

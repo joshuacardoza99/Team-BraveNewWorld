@@ -20,8 +20,6 @@ public class Tile : MonoBehaviour
     public bool target = false;
     public bool selectable = false;
 
-    
-    public GameObject map; // this should be set to the map gameobject
     public GameObject currentchar = null; // the character currently on this tile. Or about to be moved to this tile.
     public List<Tile> adjacencyList = new List<Tile>();
 
@@ -44,8 +42,6 @@ public class Tile : MonoBehaviour
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
     
         realColor = this.GetComponent<Renderer>().material.color;
-
-        map = GameObject.Find("map");
 
         FindNeighbors();
 
@@ -101,7 +97,7 @@ public class Tile : MonoBehaviour
         // If the tile is selectable and open, then move the current character to this tile
         if (selectable && (occupied == false))
         {
-            import_manager.run_function("map", "get_current_char", new string[1] { this.name });
+            import_manager.run_function("Map", "get_current_char", new string[1] { this.name });
             import_manager.run_function_all(currentchar.name, "switch_selectable_tile", new string[0] { });
             import_manager.run_function_all(currentchar.name, "move", new string[1] { this.name });
         }
@@ -111,8 +107,8 @@ public class Tile : MonoBehaviour
             
         }
            
-        import_manager.run_function("map", "unselect_tile", new string[0] { });
-        import_manager.run_function("map", "set_current", new string[1] { this.name });
+        import_manager.run_function("Map", "unselect_tile", new string[0] { });
+        import_manager.run_function("Map", "set_current", new string[1] { this.name });
         current = true;
 
         Updateme();
