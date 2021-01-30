@@ -13,9 +13,7 @@ public class PlayerMove : MonoBehaviour
 
 
     List<Tile> selectableTiles = new List<Tile>();
-    GameObject[] tiles;
 
-    public Tile currentTile = null;
     // Unit attribiutes //
     public int health = 10;
     public int attackRange = 4;
@@ -101,7 +99,7 @@ public class PlayerMove : MonoBehaviour
         {
             tile.selectable = false;
             tile.Updateme();
-            if (moves >= 2)
+            if (moveRange >= 2)
                 foreach (Tile tile2 in tile.adjacencyList)
                 {
                     tile2.selectable = false;
