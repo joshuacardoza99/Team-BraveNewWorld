@@ -116,17 +116,7 @@ public class Tile : MonoBehaviour
 
     public void CheckTile()
     {
-        Updateme();
-        int range;
-
-        if (currentchar != null)
-        {
-            range = currentchar.GetComponent<PlayerMove>().moveRange;
-        }
-        else
-        {
-            range = 0;
-        }
+        int range = currentchar.GetComponent<PlayerMove>().moveRange;
         List<map_manager.map_item> inrange = new List<map_manager.map_item>();
 
         for(distance = 1; distance > range; distance++)
@@ -145,8 +135,6 @@ public class Tile : MonoBehaviour
         foreach(map_manager.map_item item in inrange)
         {
             adjacencyList.Add(item.ground.GetComponent<Tile>());
-            item.ground.GetComponent<Tile>().selectable = false;
-            item.ground.GetComponent<Tile>().Updateme();
         }
     }
 
