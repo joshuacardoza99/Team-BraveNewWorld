@@ -13,7 +13,6 @@ public class Tile : MonoBehaviour
 
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
-    map_manager map_manager;
 
     public bool walkable = true;
     public bool current = false; // if the player is currently using this tile
@@ -29,7 +28,10 @@ public class Tile : MonoBehaviour
     public Tile parent = null;
     public int distance = 0;
 
-
+    //For A*
+    public float f = 0;
+    public float g = 0;
+    public float h = 0;
 
     // Private Variables //
     private Color  realColor;    // The color the tile should be without any highlights.
@@ -40,10 +42,10 @@ public class Tile : MonoBehaviour
     void Start () 
 	{
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
-
-        map_manager = GameObject.Find("Map").GetComponent<map_manager>();
-
+    
         realColor = this.GetComponent<Renderer>().material.color;
+
+        FindNeighbors();
 
     }
 
@@ -113,28 +115,41 @@ public class Tile : MonoBehaviour
         PlayerMove temp = currentchar.GetComponent<PlayerMove>(); 
         temp.set_selectable(); // this allows you to move right after youve moved, this will be disabled when we set cooldowns.
     }
+    
 
-    public void CheckTile()
+    public void FindNeighbors()
     {
-        int range = currentchar.GetComponent<PlayerMove>().moveRange;
-        List<map_manager.map_item> inrange = new List<map_manager.map_item>();
+        //Reset();
 
-        for(distance = 1; distance > range; distance++)
+        CheckTile( Vector3.forward);
+        CheckTile(-Vector3.forward);
+        CheckTile( Vector3.right);
+        CheckTile(-Vector3.right);
+
+        CheckTile( Vector3.forward +  Vector3.right);
+        CheckTile(-Vector3.forward +  Vector3.right);
+        CheckTile( Vector3.forward + -Vector3.right);
+        CheckTile(-Vector3.forward + -Vector3.right);
+    }
+
+    public void CheckTile(Vector3 direction)
+    {
+
+        Vector3 halfExtents = new Vector3(0.25f, 0.25f, 0.25f);
+        Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
+
+        foreach (Collider item in colliders)
         {
-            inrange.Add(map_manager.map[grid[0]           , grid[1] + distance]);
-            inrange.Add(map_manager.map[grid[0] + distance, grid[1]           ]);
-            inrange.Add(map_manager.map[grid[0]           , grid[1] - distance]);
-            inrange.Add(map_manager.map[grid[0] - distance, grid[1]           ]);
+            Tile tile = item.GetComponent<Tile>();
+            if (tile != null && tile.walkable && !tile.occupied)
+            {
+                RaycastHit hit;
 
-            inrange.Add(map_manager.map[grid[0] + distance, grid[1] + distance]);
-            inrange.Add(map_manager.map[grid[0] + distance, grid[1] - distance]);
-            inrange.Add(map_manager.map[grid[0] - distance, grid[1] + distance]);
-            inrange.Add(map_manager.map[grid[0] - distance, grid[1] - distance]);
-        }
-
-        foreach(map_manager.map_item item in inrange)
-        {
-            adjacencyList.Add(item.ground.GetComponent<Tile>());
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target))
+                {
+                    adjacencyList.Add(tile);
+                }
+            }
         }
     }
 
@@ -232,6 +247,7 @@ public class Tile : MonoBehaviour
         parent = null;
         distance = 0;
 
+        f = g = h = 0;
         Updateme();
     }
 }
