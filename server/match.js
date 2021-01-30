@@ -2,8 +2,8 @@
 exports.match = function(id = 0)
 {
 	// External Class.
-	let database_api = require("../server/database_api").database_api; // Database_Api Class that enables communication to the database.
-	    database_api = new database_api();
+	//let database_api = require("../server/database_api").database_api; // Database_Api Class that enables communication to the database.
+	//    database_api = new database_api();
 	    
 	// Global Variables.
 	let players = [];           // All players in this match.
@@ -13,14 +13,14 @@ exports.match = function(id = 0)
 	let isDone  = false;        // Tells if the match is finished or if all the players have left.
 
 	// Add the match to the database.
-	database_api.add_matchs ([matchId, mapSeed]);
+	//database_api.add_matchs ([matchId, mapSeed]);
 
 	// Add a new player to the match.
 	this.add_player = function(player = null)
 	{
 		if (player.isAbsent)
 		{
-			database_api.change_player_absent([player.ip, player.name, "false"]);
+			//database_api.change_player_absent([player.ip, player.name, "false"]);
 
 			player.socket.send(JSON.stringify(
 			{
@@ -53,7 +53,7 @@ exports.match = function(id = 0)
 			}));
 
 			// Push player data to the database here
-			database_api.add_player([player.ip, player.name, player.civilization, player.match, "true"]);
+			//database_api.add_player([player.ip, player.name, player.civilization, player.match, "true"]);
 
 			players.push(player);
 		}
@@ -67,7 +67,6 @@ exports.match = function(id = 0)
 		if (currentPlayer.host)
 		{
 			players[0].host = true;
-
 			players[0].socket.send(JSON.stringify(
 			{
 				gameObject: "network_manager",
@@ -82,7 +81,7 @@ exports.match = function(id = 0)
 		}
 		
 		// Update the database to mark the player as absent.
-		database_api.markPlayerAbsent([currentPlayer.ip, currentPlayer.name]);
+		//database_api.markPlayerAbsent([currentPlayer.ip, currentPlayer.name]);
 	}
 
 	// Determins if the match is full or if it can take another player.
@@ -140,9 +139,10 @@ exports.match = function(id = 0)
 	{
 		if (message.gameObject == "server_functions")
 		{
+			// Did not work in the past
 			if (message.function == "get_player")
 			{
-				database_api.get_player((data) =>
+			/*	database_api.get_player((data) =>
 				{
 					let response = {   // JSON message to send to a player.
 										gameObject: message.parameters[0],
@@ -159,14 +159,14 @@ exports.match = function(id = 0)
 				mapSeed = parseInt(message.parameters[0]);
 
 				//Updates the maps seed value in the database;
-				database_api.update_map([this.matchId.toString(), message.parameters[0]]);
+				//database_api.update_map([this.matchId.toString(), message.parameters[0]]);
 			}
 			// Updates the characters position on the map.
 			else if (message.function == "update_character_position")
 			{
 				let player = get_player(playerSocket);
 
-				database_api.update_map([player.ip, player.name, message.parameters[0], message.parameters[1]]);
+				//database_api.update_map([player.ip, player.name, message.parameters[0], message.parameters[1]]);
 			}
 			// Get a list of all of the characters.
 			else if (message.function == "get_characters")
@@ -191,7 +191,7 @@ exports.match = function(id = 0)
 			}
 			else
 			{
-				database_api[message.function](message.parameters);
+				//database_api[message.function](message.parameters);
 			}
 		}
 		else

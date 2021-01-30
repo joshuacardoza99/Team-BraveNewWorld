@@ -1,10 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\BNW MK.00000001",
-    "\\BNW MK.00000001\\Assets",
-    "\\BNW MK.00000001\\Assets\\Scripts"
+    "\\IsometricTwoDTest",
+    "\\IsometricTwoDTest\\Assets",
+    "\\IsometricTwoDTest\\Assets\\Scripts"
   ],
-  "SelectedNode": "\\BNW MK.00000001\\Assets\\Scripts\\PlayerMove.cs",
+  "SelectedNode": "\\IsometricTwoDTest\\Assets\\Scripts\\PlayerMove.cs",
   "PreviewInSolutionExplorer": false
 }

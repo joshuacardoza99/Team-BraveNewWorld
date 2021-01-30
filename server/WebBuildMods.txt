@@ -1,6 +1,2 @@
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-
-
 <body style="text-align: center; padding: 0; margin: 0;">
-    <canvas id="unity-canvas" style="width: 100%; height: 100vh; padding: 0; margin: 0; background: #FFFFFF"></canvas>
+    <canvas id="unity-canvas" style="width: 100%; height: 90vh; padding: 0; margin: 0; background: #bfbfbf"></canvas>

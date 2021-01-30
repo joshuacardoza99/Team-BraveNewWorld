@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
 
     public string civ = " ";
+    public bool isChampion = false;
 
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
@@ -40,9 +41,9 @@ public class PlayerMove : MonoBehaviour
 
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
 
-        import_manager.run_function("network_manager", "get_player_civilization", new string[2]{this.gameObject.name, "GetCurrentTile"});
+        import_manager.run_function_all("network_manager", "get_player_civilization", new string[2]{this.gameObject.name, "GetCurrentTile"});
     }
-
+    
     // if the current tile is occupied, highlight all surrounding tiles
     public void set_selectable()
     {
@@ -50,7 +51,7 @@ public class PlayerMove : MonoBehaviour
         if (currentTile.current && currentTile.occupied)
         {
             // prepare to move this character
-            import_manager.run_function("map", "set_current_char", new string[1] { this.name });
+            import_manager.run_function_all("map", "set_current_char", new string[1] { this.name });
 
             // set all tiles in range to selectable
             if (moves >= 1) // if the character can move at least once
@@ -88,9 +89,30 @@ public class PlayerMove : MonoBehaviour
     {   
         GameObject nextTile = GameObject.Find(location[0]);
         targetPosition = nextTile.transform.position;
+        
+       // switch_selectable_tile(new string[0] {});
 
+        this.transform.LookAt(targetPosition);
+
+        this.transform.position = new Vector3(targetPosition.x, this.transform.position.y, targetPosition.z);
+
+        this.transform.rotation = Quaternion.identity;
+
+        currentTile = nextTile.GetComponent<Tile>();
+
+        import_manager.run_function_all(currentTile.name, "set_occupied", new string[1] { "parameters" });
+        
+       // import_manager.run_function_all("server_function", "update_character_position", new string[2] {this.gameObject.name, location[0]});
+
+        //moving = false;
+    }
+
+    // Handles the Tile status change for movement.
+    // parameter = []
+    public void switch_selectable_tile (string[] parameter)
+    {
         currentTile.currentchar = null;
-        import_manager.run_function_all(currentTile.name, "set_unoccupied", new string[1] { "parameters" });
+        import_manager.run_function_all(currentTile.name, "set_unoccupied", new string[1] { "" });
         foreach (Tile tile in currentTile.adjacencyList)
         {
             tile.selectable = false;
@@ -102,18 +124,6 @@ public class PlayerMove : MonoBehaviour
                     tile2.Updateme();
                 }
         }
-
-        this.transform.LookAt(targetPosition);
-
-        this.transform.position = new Vector3(targetPosition.x, this.transform.position.y, targetPosition.z);
-
-        this.transform.rotation = Quaternion.identity;
-
-        currentTile = nextTile.GetComponent<Tile>();
-        
-        import_manager.run_function_all("server_function", "update_character_position", new string[2] {this.gameObject.name, location[0]});
-
-        //moving = false;
     }
 
     // parameter = [string civilization]
@@ -128,7 +138,7 @@ public class PlayerMove : MonoBehaviour
                 currentTile = hit.collider.GetComponent<Tile>();
             }
             import_manager.run_function_all(currentTile.name, "set_occupied", new string[1] { "parameters" });
-            import_manager.run_function(currentTile.name, "set_current_char", new string[1] { this.name });
+            import_manager.run_function_all(currentTile.name, "set_current_char", new string[1] { this.name });
         }
     }
 
