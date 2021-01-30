@@ -11,12 +11,10 @@ public class PlayerMove : MonoBehaviour
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
     map_manager    map_manager;
 
-    public string civ = " ";
 
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
 
-    Stack<Tile> path = new Stack<Tile>();
     public Tile currentTile = null;
 
     
@@ -51,8 +49,8 @@ public class PlayerMove : MonoBehaviour
     // if the current tile is occupied, highlight all surrounding tiles
     public void set_selectable()
     {
-        // if the tile is current and occupied
-        if (currentTile.current && currentTile.occupied)
+        // if this unit is on the current tile
+        if (currentTile.current)
         {
             // prepare to move this character
             Debug.Log("In Set_selectable() name = " + this.name);
@@ -64,7 +62,7 @@ public class PlayerMove : MonoBehaviour
             {
                 foreach (Tile tile in currentTile.adjacencyList) // get the adjacent tiles
                 {
-                    if (tile.occupied == false)
+                    if (tile.occupied == false) // if the tile is open
                     {
                         tile.selectable = true;
                         tile.Updateme();
@@ -81,15 +79,27 @@ public class PlayerMove : MonoBehaviour
                     }
                 }
             }
-            
-        }
-     
+ 
+        } 
     }
 
-    // Send clicks to the current tile
-    private void OnMouseDown()
+    // Handles the Tile status change for movement.
+    // parameter = []
+    public void switch_selectable_tile(string[] parameter)
     {
-        currentTile.OnMouseDown();
+        currentTile.currentchar = null;
+        import_manager.run_function_all(currentTile.name, "set_unoccupied", new string[1] { "" });
+        foreach (Tile tile in currentTile.adjacencyList)
+        {
+            tile.selectable = false;
+            tile.Updateme();
+            if (moves >= 2)
+                foreach (Tile tile2 in tile.adjacencyList)
+                {
+                    tile2.selectable = false;
+                    tile2.Updateme();
+                }
+        }
     }
 
     public void move(string[] location)
@@ -115,24 +125,6 @@ public class PlayerMove : MonoBehaviour
         //moving = false;
     }
 
-    // Handles the Tile status change for movement.
-    // parameter = []
-    public void switch_selectable_tile (string[] parameter)
-    {
-        currentTile.currentchar = null;
-        import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
-        foreach (Tile tile in currentTile.adjacencyList)
-        {
-            tile.selectable = false;
-            tile.Updateme();
-            if (moves >= 2)
-                foreach (Tile tile2 in tile.adjacencyList)
-                {
-                    tile2.selectable = false;
-                    tile2.Updateme();
-                }
-        }
-    }
 
     // parameter = [string civilization]
     public void GetCurrentTile(string[] parameter)
@@ -162,5 +154,20 @@ public class PlayerMove : MonoBehaviour
     public int[] get_grid()
     {
         return grid;
+    }
+    // set the current tile of this character
+    // parameters = tile.name
+    /*public void set_current_tile(string[] parameters)
+    {
+        GameObject temp = GameObject.Find(parameters[0]);
+        Tile tile = temp.GetComponent<Tile>();
+        currentTile = tile;
+    }*/
+
+    // Send clicks to the current tile
+    private void OnMouseDown()
+    {
+        currentTile.OnMouseDown();
+        
     }
 }
