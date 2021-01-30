@@ -34,10 +34,12 @@ public class Tile : MonoBehaviour
     public float h = 0;
 
     // Private Variables //
-    private Color realColor; // The color the tile should be without any highlights.
+    private Color  realColor;    // The color the tile should be without any highlights.
+    private string civilization; // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
+    private int[]  grid;         // Stores the position of the Tile in the virtual grid. [x position, y position]
 
-	// Use this for initialization
-	void Start () 
+    // Use this for initialization
+    void Start () 
 	{
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
     
@@ -46,11 +48,12 @@ public class Tile : MonoBehaviour
         FindNeighbors();
 
     }
-	
-	// Update is whenever needed
-	public void Updateme () 
-	{
+
+    // Update is whenever needed
+    public void Updateme()
+    {
         // determine if there is a character currently on the tile.
+        Debug.Log("This is currentchar = " + currentchar + " occupied = " + occupied + " current = " + current);
         if (currentchar != null)
         {
             occupied = true;
@@ -94,18 +97,18 @@ public class Tile : MonoBehaviour
         // If the tile is selectable and open, then move the current character to this tile
         if (selectable && (occupied == false))
         {
-            import_manager.run_function("Map", "get_current_char", new string[1] { this.name });
+            import_manager.run_function("Map", "get_current_char", new string[2] { grid[0].ToString(), grid[1].ToString() });
             import_manager.run_function_all(currentchar.name, "switch_selectable_tile", new string[0] { });
-            import_manager.run_function_all(currentchar.name, "move", new string[1] { this.name });
+            import_manager.run_function_all(currentchar.name, "move", new string[2] {grid[0].ToString(), grid[1].ToString()});
         }
         else if(occupied) // and in range, and not a friendly civ
         {
             // check if this characters civ is the same as the character clicking on it
             
         }
-           
+         
         import_manager.run_function("Map", "unselect_tile", new string[0] { });
-        import_manager.run_function("Map", "set_current", new string[1] { this.name });
+        import_manager.run_function("Map", "set_current", new string[2] { grid[0].ToString(), grid[1].ToString()});
         current = true;
 
         Updateme();
@@ -176,9 +179,38 @@ public class Tile : MonoBehaviour
             }
         }
     }
+
+    // Get and Set Functions //
+
+    public void set_civilization(string civ)
+    {
+        civilization = civ;
+    }
+
+    public string get_civilization()
+    {
+        return civilization;
+    }
+
+    public void set_grid(int xPosition, int yPosition)
+    {
+        grid = new int[2] { xPosition, yPosition };
+    }
+
+    public int[] get_grid()
+    {
+        return grid;
+    }
+
+    public bool is_current()
+    {
+        return current;
+    }
+
     public void set_occupied(string[] parameter)
     {
         occupied = true;
+        Debug.Log("Setting Occupied");
         Updateme();
     }
     public void set_unoccupied(string[] parameter)
@@ -194,7 +226,13 @@ public class Tile : MonoBehaviour
 
     public void set_current_char(string[] newcurrentChar)
     {
-        currentchar = GameObject.Find(newcurrentChar[0]);
+        Debug.Log("set_current_char = " + newcurrentChar[0]);
+
+        if (newcurrentChar[0] != "")
+        {
+            currentchar = GameObject.Find(newcurrentChar[0]);
+        }
+        
         Updateme();
     }
     public void Reset()

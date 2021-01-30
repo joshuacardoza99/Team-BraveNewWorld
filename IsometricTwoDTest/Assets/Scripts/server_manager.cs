@@ -84,8 +84,6 @@ public class server_manager : MonoBehaviour
     private void deliver_message(byte[] bytes)
     {
         var message = JsonUtility.FromJson<update_message>(System.Text.Encoding.UTF8.GetString(bytes));
-        Debug.Log(message.gameObject);
-        Debug.Log(message.function);
         GameObject.Find(message.gameObject).SendMessage(message.function, message.parameters);
     }
 
