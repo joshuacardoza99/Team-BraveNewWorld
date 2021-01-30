@@ -59,7 +59,6 @@ public class PlayerMove : MonoBehaviour
         if (currentTile.current)
         {
             // prepare to move this character
-            Debug.Log("In Set_selectable() name = " + this.name);
             map_manager.set_current_char(new string[1] { this.name });
             import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_char", this.name});
 
@@ -72,16 +71,6 @@ public class PlayerMove : MonoBehaviour
                     {
                         tile.selectable = true;
                         tile.Updateme();
-
-                        if (moveRange >= 2)
-                            foreach (Tile tile2 in tile.adjacencyList)
-                            {
-                                if ((tile2.occupied == false) && (tile2.current == false))
-                                {
-                                    tile2.selectable = true;
-                                    tile2.Updateme();
-                                }
-                            }
                     }
                 }
             }
@@ -124,6 +113,7 @@ public class PlayerMove : MonoBehaviour
 
         this.transform.rotation = Quaternion.identity;
 
+        currentTile.CheckTile(moveRange);
         import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied" });
 
         // import_manager.run_function_all("server_function", "update_character_position", new string[2] {this.gameObject.name, location[0]});

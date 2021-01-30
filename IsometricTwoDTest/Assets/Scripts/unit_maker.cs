@@ -151,6 +151,8 @@ public class unit_maker : MonoBehaviour
         cameraPosition.x = tilePosition.x;
 
         GameObject.Find("Main Camera").transform.position = cameraPosition;
+
+        tile.GetComponent<Tile>().CheckTile(champion.GetComponent<PlayerMove>().moveRange);
     }
 
     // Parameters = [string civilization, string unitType, string unitNumber]

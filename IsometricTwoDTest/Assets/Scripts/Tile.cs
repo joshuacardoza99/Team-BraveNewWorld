@@ -13,6 +13,7 @@ public class Tile : MonoBehaviour
 
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
+    map_manager map_manager;
 
     public bool walkable = true;
     public bool current = false; // if the player is currently using this tile
@@ -42,10 +43,11 @@ public class Tile : MonoBehaviour
     void Start () 
 	{
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
-    
+        map_manager = GameObject.Find("Map").GetComponent<map_manager>();
+
         realColor = this.GetComponent<Renderer>().material.color;
 
-        FindNeighbors();
+        //FindNeighbors();
 
     }
 
@@ -107,17 +109,17 @@ public class Tile : MonoBehaviour
             
         }
          
-        import_manager.run_function("Map", "unselect_tile", new string[0] { });
         import_manager.run_function("Map", "set_current", new string[2] { grid[0].ToString(), grid[1].ToString()});
+        import_manager.run_function("Map", "unselect_tile", new string[0] { });
         current = true;
 
         Updateme();
         PlayerMove temp = currentchar.GetComponent<PlayerMove>(); 
         temp.set_selectable(); // this allows you to move right after youve moved, this will be disabled when we set cooldowns.
     }
-    
 
-    public void FindNeighbors()
+
+    /*public void FindNeighbors()
     {
         //Reset();
 
@@ -151,6 +153,37 @@ public class Tile : MonoBehaviour
                 }
             }
         }
+    }*/
+
+    public void CheckTile(int range)
+    {
+        List<map_manager.map_item> inrange = new List<map_manager.map_item>();
+
+        for (distance = 1; distance > range; distance++)
+        {
+            inrange.Add(map_manager.map[grid[0], grid[1] + distance]);
+            inrange.Add(map_manager.map[grid[0] + distance, grid[1]]);
+            inrange.Add(map_manager.map[grid[0], grid[1] - distance]);
+            inrange.Add(map_manager.map[grid[0] - distance, grid[1]]);
+
+            inrange.Add(map_manager.map[grid[0] + distance, grid[1] + distance]);
+            inrange.Add(map_manager.map[grid[0] + distance, grid[1] - distance]);
+            inrange.Add(map_manager.map[grid[0] - distance, grid[1] + distance]);
+            inrange.Add(map_manager.map[grid[0] - distance, grid[1] - distance]);
+        }
+
+        foreach (map_manager.map_item item in inrange)
+        {
+            if (item.groundType != "water")
+            {
+                adjacencyList.Add(item.ground.GetComponent<Tile>());
+                item.ground.GetComponent<Tile>().selectable = true;
+                item.ground.GetComponent<Tile>().Updateme();
+
+            }
+        }
+
+
     }
 
 
@@ -210,7 +243,6 @@ public class Tile : MonoBehaviour
     public void set_occupied(string[] parameter)
     {
         occupied = true;
-        Debug.Log("Setting Occupied");
         Updateme();
     }
     public void set_unoccupied(string[] parameter)
@@ -235,7 +267,8 @@ public class Tile : MonoBehaviour
         
         Updateme();
     }
-    public void Reset()
+
+   public void Reset()
     {
         adjacencyList.Clear();
 
