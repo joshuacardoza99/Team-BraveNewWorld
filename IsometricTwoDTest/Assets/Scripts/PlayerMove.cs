@@ -16,17 +16,25 @@ public class PlayerMove : MonoBehaviour
     GameObject[] tiles;
 
     public Tile currentTile = null;
+    // Unit attribiutes //
+    public int health = 10;
+    public int attackRange = 4;
+    public int moveRange = 3;
+    public float cooldown = 3;
+    public float nextAttack = 0;
+    bool isAttacking = false;
 
     
-    public int moves = 3;
-    public float moveSpeed = 2;
 
+    // Varibles for movement 
     public Tile actualTargetTile;
     float halfHeight = 0;
     Vector3 targetPosition;
     private Ray ray;
     private RaycastHit hit;
-    private Camera cam;
+    public Tile currentTile = null;
+    GameObject[] tiles;
+
 
     private string civilization; // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     private int[] grid;         // Stores the position of the Tile in the virtual grid. [x position, y position]
@@ -58,7 +66,7 @@ public class PlayerMove : MonoBehaviour
             import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_char", this.name});
 
             // set all tiles in range to selectable
-            if (moves >= 1) // if the character can move at least once
+            if (moveRange >= 1) // if the character can move at least once
             {
                 foreach (Tile tile in currentTile.adjacencyList) // get the adjacent tiles
                 {
@@ -67,7 +75,7 @@ public class PlayerMove : MonoBehaviour
                         tile.selectable = true;
                         tile.Updateme();
 
-                        if (moves >= 2)
+                        if (moveRange >= 2)
                             foreach (Tile tile2 in tile.adjacencyList)
                             {
                                 if ((tile2.occupied == false) && (tile2.current == false))
@@ -155,19 +163,21 @@ public class PlayerMove : MonoBehaviour
     {
         return grid;
     }
-    // set the current tile of this character
-    // parameters = tile.name
-    /*public void set_current_tile(string[] parameters)
-    {
-        GameObject temp = GameObject.Find(parameters[0]);
-        Tile tile = temp.GetComponent<Tile>();
-        currentTile = tile;
-    }*/
 
     // Send clicks to the current tile
     private void OnMouseDown()
     {
         currentTile.OnMouseDown();
-        
+    } 
+    public void update_cooldown()
+    {
+        if (Time.time > nextAttack)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                print("You attacked, cooldown intiated");
+                nextAttack = Time.time + cooldown;
+            }
+        }
     }
 }

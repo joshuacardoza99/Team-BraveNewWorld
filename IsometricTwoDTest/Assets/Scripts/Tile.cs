@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
 
-public class Tile : MonoBehaviour 
+public class Tile : MonoBehaviour
 {
 
     // External Classes//
