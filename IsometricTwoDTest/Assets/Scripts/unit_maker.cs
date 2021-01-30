@@ -7,6 +7,9 @@ public class unit_maker : MonoBehaviour
 {
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
+    Tile           Tile;
+    PlayerMove     PlayerMove;
+    map_manager    map_manager;
 
     // Public Global Variables //
     public GameObject asianBarracks;
@@ -44,42 +47,11 @@ public class unit_maker : MonoBehaviour
     void Start()
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
+        map_manager    = GameObject.Find("Map").GetComponent<map_manager>();
     }
 
     // Private Functions //
 
-    // tiles = and array of tile names.
-    private void finalize_champion(string[] tiles)
-    {
-        Debug.Log("Tile Index: " + this.randomTile + " / " + tiles.Length);
-        GameObject tile = GameObject.Find(tiles[(int)(this.randomTile / tiles.Length)]);
-        Vector3 tilePosition = tile.transform.position;
-        tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
-
-        if (tile.name.Split('_')[0] == "asian")
-        {
-            asianChampion.name = championName;
-            Instantiate(asianChampion, tilePosition, Quaternion.identity);
-            //import_manager.run_function("asianChampion", "set_current_tile", new string[1] { tile.name });
-
-        }
-        else if (tile.name.Split('_')[0] == "viking")
-        {
-            vikingChampion.name = championName;
-            Instantiate(vikingChampion, tilePosition, Quaternion.identity);
-        }
-        else if (tile.name.Split('_')[0] == "greek")
-        {
-            greekChampion.name = championName;
-            Instantiate(greekChampion, tilePosition, Quaternion.identity);
-        }
-
-        Vector3 cameraPosition = GameObject.Find("Main Camera").transform.position;
-        cameraPosition.y = tilePosition.y;
-        cameraPosition.x = tilePosition.x;
-
-        GameObject.Find("Main Camera").transform.position = cameraPosition;
-    }
 
     // Public Functions //
 
@@ -147,9 +119,38 @@ public class unit_maker : MonoBehaviour
     // Parameters = [string civilization, string championName, int randomTile]
     public void add_champion(string[] parameters)
     {
+        GameObject champion = null;
+
         this.randomTile = int.Parse(parameters[2]);
         championName = parameters[0] + "_" + parameters[1];
-        import_manager.run_function("Map", "get_land", new string[3] { parameters[0], "unit_manager", "finalize_champion" });
+        List<GameObject> tiles = map_manager.get_land(parameters[0]);
+
+        GameObject tile = tiles[(int)(this.randomTile / tiles.Count)];
+        Vector3 tilePosition = tile.transform.position;
+        tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
+
+        if (tile.GetComponent<Tile>().get_civilization() == "asian")
+        {
+            champion = Instantiate(asianChampion, tilePosition, Quaternion.identity);
+        }
+        else if (tile.GetComponent<Tile>().get_civilization() == "viking")
+        {
+            champion = Instantiate(vikingChampion, tilePosition, Quaternion.identity);
+        }
+        else if (tile.GetComponent<Tile>().get_civilization() == "greek")
+        {
+            champion = Instantiate(greekChampion, tilePosition, Quaternion.identity);
+        }
+
+        champion.name = championName;
+        champion.GetComponent<PlayerMove>().set_civilization(tile.GetComponent<Tile>().get_civilization());
+        champion.GetComponent<PlayerMove>().set_grid(tile.GetComponent<Tile>().get_grid()[0], tile.GetComponent<Tile>().get_grid()[1]);
+
+        Vector3 cameraPosition = GameObject.Find("Main Camera").transform.position;
+        cameraPosition.y = tilePosition.y;
+        cameraPosition.x = tilePosition.x;
+
+        GameObject.Find("Main Camera").transform.position = cameraPosition;
     }
 
     // Parameters = [string civilization, string unitType, string unitNumber]
