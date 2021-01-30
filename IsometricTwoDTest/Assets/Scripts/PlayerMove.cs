@@ -30,6 +30,7 @@ public class PlayerMove : MonoBehaviour
     Vector3 targetPosition;
     private Ray ray;
     private RaycastHit hit;
+
     public Tile currentTile = null;
     GameObject[] tiles;
 
@@ -45,6 +46,8 @@ public class PlayerMove : MonoBehaviour
 
         halfHeight = GetComponent<Collider>().bounds.extents.y;
         //FindSelectableTiles();
+
+        currentTile.CheckTile();
 
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
@@ -64,28 +67,14 @@ public class PlayerMove : MonoBehaviour
             import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_char", this.name});
 
             // set all tiles in range to selectable
-            if (moveRange >= 1) // if the character can move at least once
+            foreach (Tile tile in currentTile.adjacencyList) // get the adjacent tiles
             {
-                foreach (Tile tile in currentTile.adjacencyList) // get the adjacent tiles
+                if (tile.occupied == false) // if the tile is open
                 {
-                    if (tile.occupied == false) // if the tile is open
-                    {
-                        tile.selectable = true;
-                        tile.Updateme();
-
-                        if (moveRange >= 2)
-                            foreach (Tile tile2 in tile.adjacencyList)
-                            {
-                                if ((tile2.occupied == false) && (tile2.current == false))
-                                {
-                                    tile2.selectable = true;
-                                    tile2.Updateme();
-                                }
-                            }
-                    }
+                   tile.selectable = true;
+                   tile.Updateme();
                 }
             }
- 
         } 
     }
 
@@ -126,6 +115,7 @@ public class PlayerMove : MonoBehaviour
 
         import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied" });
 
+        currentTile.CheckTile();
         // import_manager.run_function_all("server_function", "update_character_position", new string[2] {this.gameObject.name, location[0]});
 
         //moving = false;
