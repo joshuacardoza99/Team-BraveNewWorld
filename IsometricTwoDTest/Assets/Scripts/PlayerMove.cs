@@ -88,12 +88,6 @@ public class PlayerMove : MonoBehaviour
         {
             tile.selectable = false;
             tile.Updateme();
-            if (moveRange >= 2)
-                foreach (Tile tile2 in tile.adjacencyList)
-                {
-                    tile2.selectable = false;
-                    tile2.Updateme();
-                }
         }
     }
 
@@ -116,9 +110,7 @@ public class PlayerMove : MonoBehaviour
         import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied" });
 
         currentTile.CheckTile();
-        // import_manager.run_function_all("server_function", "update_character_position", new string[2] {this.gameObject.name, location[0]});
-
-        //moving = false;
+        currentTile.Updateme();
     }
 
 
@@ -151,9 +143,6 @@ public class PlayerMove : MonoBehaviour
     {
         return grid;
     }
-<<<<<<< HEAD
-    public void Update()
-=======
 
     // Send clicks to the current tile
     private void OnMouseDown()
@@ -161,7 +150,6 @@ public class PlayerMove : MonoBehaviour
         currentTile.OnMouseDown();
     } 
     public void update_cooldown()
->>>>>>> 988da9f6b8abd4a94de34d05592bcbd781100afb
     {
         if (Time.time > nextAttack)
         {
