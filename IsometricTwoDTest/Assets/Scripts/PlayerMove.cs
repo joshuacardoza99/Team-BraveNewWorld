@@ -10,24 +10,25 @@ public class PlayerMove : MonoBehaviour
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
 
-    public string civ = " ";
-
-    List<Tile> selectableTiles = new List<Tile>();
-    GameObject[] tiles;
-
-    Stack<Tile> path = new Stack<Tile>();
-    public Tile currentTile = null;
+    // Unit attribiutes //
+    public int health = 10;
+    public int attackRange = 4;
+    public int moveRange = 3;
+    public float cooldown = 3;
+    public float nextAttack = 0;
+    bool isAttacking = false;
 
     
-    public int moves = 3;
-    public float moveSpeed = 2;
 
+    // Varibles for movement 
     public Tile actualTargetTile;
     float halfHeight = 0;
     Vector3 targetPosition;
     private Ray ray;
     private RaycastHit hit;
-    private Camera cam;
+    public Tile currentTile = null;
+    GameObject[] tiles;
+
 
 
     // Use this for initialization
@@ -53,7 +54,7 @@ public class PlayerMove : MonoBehaviour
             import_manager.run_function_all("Map", "set_current_char", new string[1] { this.name });
 
             // set all tiles in range to selectable
-            if (moves >= 1) // if the character can move at least once
+            if (moveRange >= 1) // if the character can move at least once
             {
                 foreach (Tile tile in currentTile.adjacencyList) // get the adjacent tiles
                 {
@@ -62,7 +63,7 @@ public class PlayerMove : MonoBehaviour
                         tile.selectable = true;
                         tile.Updateme();
 
-                        if (moves >= 2)
+                        if (moveRange >= 2)
                             foreach (Tile tile2 in tile.adjacencyList)
                             {
                                 if ((tile2.occupied == false) && (tile2.current == false))
@@ -117,7 +118,7 @@ public class PlayerMove : MonoBehaviour
         {
             tile.selectable = false;
             tile.Updateme();
-            if (moves >= 2)
+            if (moveRange >= 2)
                 foreach (Tile tile2 in tile.adjacencyList)
                 {
                     tile2.selectable = false;
@@ -149,5 +150,16 @@ public class PlayerMove : MonoBehaviour
         GameObject temp = GameObject.Find(parameters[0]);
         Tile tile = temp.GetComponent<Tile>();
         currentTile = tile;
+    }
+    public void update_cooldown()
+    {
+        if (Time.time > nextAttack)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                print("You attacked, cooldown intiated");
+                nextAttack = Time.time + cooldown;
+            }
+        }
     }
 }
