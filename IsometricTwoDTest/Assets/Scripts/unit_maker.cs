@@ -12,29 +12,21 @@ public class unit_maker : MonoBehaviour
     map_manager    map_manager;
 
     // Public Global Variables //
-    public GameObject asianBarracks;
     public GameObject asianChampion;
-    public GameObject asianCommandPost;
-    public GameObject asianDefenseTower;
     public GameObject asianMelee;
     public GameObject asianRanged;
     public GameObject asianTank;
-    public GameObject farm;
-    public GameObject greekBarracks;
+   
     public GameObject greekChampion;
-    public GameObject greekCommandPost;
-    public GameObject greekDefenseTower;
     public GameObject greekMelee;
     public GameObject greekRanged;
     public GameObject greekTank;
-    public GameObject mine;
-    public GameObject vikingBarracks;
+
     public GameObject vikingChampion;
-    public GameObject vikingCommandPost;
-    public GameObject vikingDefenseTower;
     public GameObject vikingMelee;
     public GameObject vikingRanged;
     public GameObject vikingTank;
+
     public int civNumber;
 
     // Private Global Variables //
@@ -54,67 +46,6 @@ public class unit_maker : MonoBehaviour
 
 
     // Public Functions //
-
-    // On click functions to call the instantiate functions
-    public void mine_button()
-    {
-        int mine_number = 0;
-        Vector3 tilePosition;
-        tilePosition = new Vector3(0.0f, 1.0f, 0.0f);
-        Debug.Log("Mine Button pushed");
-        /*string[] buildingType = new string[] { "mine", " ", mine_number.ToString() };
-        mine_number++;
-        add_building(buildingType);*/
-        Instantiate(mine, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-    }
-
-    public void command_post_button()
-    {
-        int command_post_number = 0;
-        Vector3 tilePosition;
-        tilePosition = new Vector3(0.0f, 1.0f, 0.0f);
-        Debug.Log("Command Post Button pushed");
-        /*string[] buildingType = new string[] { "mine", " ", mine_number.ToString() };
-        mine_number++;
-        add_building(buildingType);*/
-
-        if (civNumber == 1)
-            Instantiate(greekCommandPost, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-        else if (civNumber == 2)
-            Instantiate(vikingCommandPost, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-        else
-            Instantiate(asianCommandPost, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-    }
-
-    public void farm_button()
-    {
-        int farm_number = 0;
-        Vector3 tilePosition;
-        tilePosition = new Vector3(0.0f, 1.0f, 0.0f);
-        Debug.Log("Farm Button pushed");
-        /*string[] buildingType = new string[] { "mine", " ", mine_number.ToString() };
-        mine_number++;
-        add_building(buildingType);*/
-        Instantiate(farm, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-    }
-
-    public void barracks_button()
-    {
-        int barracks_number = 0;
-        Vector3 tilePosition;
-        tilePosition = new Vector3(0.0f, 1.0f, 0.0f);
-        Debug.Log("Barracks Button pushed");
-        /*string[] buildingType = new string[] { "mine", " ", mine_number.ToString() };
-        mine_number++;
-        add_building(buildingType);*/
-        if (civNumber == 1)
-            Instantiate(greekBarracks, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-        else if (civNumber == 2)
-            Instantiate(vikingBarracks, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-        else
-            Instantiate(asianBarracks, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-
-    }
 
     // Parameters = [string civilization, string championName, int randomTile]
     public void add_champion(string[] parameters)
@@ -217,84 +148,6 @@ public class unit_maker : MonoBehaviour
                 vikingTank.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
                 Instantiate(vikingTank, tilePosition, Quaternion.identity);
             }
-        }
-    }
-
-    // Parameters = [string civilization, string buildingType, string unitNumber]
-    // Adds buildings to the map
-    public void add_building(string[] parameters)
-    {
-        //    public string get_current(string[] parameters)
-        // for tile coordinates, also figure out scaling for buildings
-        GameObject tile = GameObject.Find(parameters[0]);
-        Vector3 tilePosition = tile.transform.position;
-        tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y;
-
-
-        if (parameters[0] == "asian")
-        {
-            if (parameters[1] == "Barracks")
-            {
-                asianBarracks.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(asianBarracks, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "CommandPost")
-            {
-                asianCommandPost.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(asianCommandPost, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "DefenseTower")
-            {
-                asianDefenseTower.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(asianDefenseTower, tilePosition, Quaternion.identity);
-            }
-        }
-        else if (parameters[0] == "greek")
-        {
-            if (parameters[1] == "Barracks")
-            {
-                greekBarracks.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(greekBarracks, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "CommandPost")
-            {
-                greekCommandPost.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(greekCommandPost, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "DefenseTower")
-            {
-                greekDefenseTower.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(greekDefenseTower, tilePosition, Quaternion.identity);
-            }
-        }
-        else if (parameters[0] == "viking")
-        {
-            if (parameters[1] == "Barracks")
-            {
-                vikingBarracks.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(vikingBarracks, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "CommandPost")
-            {
-                vikingCommandPost.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(vikingCommandPost, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "DefenseTower")
-            {
-                vikingDefenseTower.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(vikingDefenseTower, tilePosition, Quaternion.identity);
-            }
-        }
-        else if (parameters[0] == "farm")
-        {
-            farm.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-            Instantiate(farm, tilePosition, Quaternion.identity);
-        }
-        else if (parameters[0] == "mine")
-        {
-            mine.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-            Instantiate(mine, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-            Debug.Log("Mine");
         }
     }
 

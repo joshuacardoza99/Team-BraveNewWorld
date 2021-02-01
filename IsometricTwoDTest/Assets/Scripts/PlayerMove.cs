@@ -151,9 +151,6 @@ public class PlayerMove : MonoBehaviour
     {
         return grid;
     }
-<<<<<<< HEAD
-    public void Update()
-=======
 
     // Send clicks to the current tile
     private void OnMouseDown()
@@ -161,7 +158,6 @@ public class PlayerMove : MonoBehaviour
         currentTile.OnMouseDown();
     } 
     public void update_cooldown()
->>>>>>> 988da9f6b8abd4a94de34d05592bcbd781100afb
     {
         if (Time.time > nextAttack)
         {
