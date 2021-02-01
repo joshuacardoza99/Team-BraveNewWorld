@@ -19,6 +19,10 @@ public class Tile : MonoBehaviour
     public bool occupied = false; // if there is a character currently on this tile
     public bool target = false;
     public bool selectable = false;
+    public bool isAttacking = false;
+    public int health = 5;
+    public float cooldown = 3;
+    public float nextAttack = 0;
 
     public GameObject currentchar = null; // the character currently on this tile. Or about to be moved to this tile.
     public List<Tile> adjacencyList = new List<Tile>();
@@ -104,15 +108,16 @@ public class Tile : MonoBehaviour
         else if(occupied) // and in range, and not a friendly civ
         {
             // check if this characters civ is the same as the character clicking on it
-            
+
+
         }
+
          
         import_manager.run_function("Map", "unselect_tile", new string[0] { });
         import_manager.run_function("Map", "set_current", new string[2] { grid[0].ToString(), grid[1].ToString()});
         current = true;
-
         Updateme();
-        PlayerMove temp = currentchar.GetComponent<PlayerMove>(); 
+        PlayerMove temp = currentchar.GetComponent<PlayerMove>();
         temp.set_selectable(); // this allows you to move right after youve moved, this will be disabled when we set cooldowns.
     }
     

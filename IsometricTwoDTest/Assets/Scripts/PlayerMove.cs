@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour
     public int moveRange = 3;
     public float cooldown = 3;
     public float nextAttack = 0;
-    bool isAttacking = false;
+    public bool isAttacking = false;
 
     
 
@@ -161,17 +161,13 @@ public class PlayerMove : MonoBehaviour
     {
         return grid;
     }
-<<<<<<< HEAD
-    public void Update()
-=======
 
     // Send clicks to the current tile
     private void OnMouseDown()
     {
         currentTile.OnMouseDown();
-    } 
-    public void update_cooldown()
->>>>>>> 988da9f6b8abd4a94de34d05592bcbd781100afb
+    }
+    public void Update()
     {
         if (Time.time > nextAttack)
         {
