@@ -65,12 +65,11 @@ public class PlayerMove : MonoBehaviour
             // set all tiles in range to selectable
             if (moveRange >= 1) // if the character can move at least once
             {
-                foreach (Tile tile in currentTile.adjacencyList) // get the adjacent tiles
+                foreach (Tile tile in currentTile.GetAdjacenctTiles(moveRange)) // get the adjacent tiles
                 {
                     if (tile.occupied == false) // if the tile is open
                     {
-                        tile.selectable = true;
-                        tile.Updateme();
+                        tile.set_selectable(new string[0] { });
                     }
                 }
             }
@@ -83,17 +82,11 @@ public class PlayerMove : MonoBehaviour
     public void switch_selectable_tile(string[] parameter)
     {
         currentTile.currentchar = null;
-        import_manager.run_function_all(currentTile.name, "set_unoccupied", new string[1] { "" });
-        foreach (Tile tile in currentTile.adjacencyList)
+        import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
+   
+        foreach (Tile tile in currentTile.GetAdjacenctTiles(moveRange))
         {
-            tile.selectable = false;
-            tile.Updateme();
-            if (moveRange >= 2)
-                foreach (Tile tile2 in tile.adjacencyList)
-                {
-                    tile2.selectable = false;
-                    tile2.Updateme();
-                }
+            tile.set_unselectable(new string[0] { });
         }
     }
 
@@ -113,12 +106,7 @@ public class PlayerMove : MonoBehaviour
 
         this.transform.rotation = Quaternion.identity;
 
-        currentTile.CheckTile(moveRange);
         import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied" });
-
-        // import_manager.run_function_all("server_function", "update_character_position", new string[2] {this.gameObject.name, location[0]});
-
-        //moving = false;
     }
 
 
@@ -157,13 +145,13 @@ public class PlayerMove : MonoBehaviour
     {
         currentTile.OnMouseDown();
     } 
+
     public void update_cooldown()
     {
         if (Time.time > nextAttack)
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                Debug.Log("You attacked, cooldown intiated");
                 nextAttack = Time.time + cooldown;
             }
         }
