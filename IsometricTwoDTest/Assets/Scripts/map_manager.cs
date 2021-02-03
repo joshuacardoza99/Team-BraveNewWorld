@@ -264,6 +264,13 @@ public class map_manager : MonoBehaviour
         this.currentSelected = map[int.Parse(input[0]), int.Parse(input[1])];
     }
 
+    //Unselect previously selected tile
+    // string parameter = empty (not used)
+    public void unselect_tile(string[] parameters)
+    {
+        run_on_map_item(new string[4] { get_current().xVirtualPosition.ToString(), get_current().yVirtualPosition.ToString(), "unselect", GameObject.Find(CurrentChar).GetComponent<PlayerMove>().moveRange.ToString() });
+    }
+
     // Gets a list of all land of a certain type
     public List<GameObject> get_land(string landType)
     {

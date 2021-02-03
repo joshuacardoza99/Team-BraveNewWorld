@@ -98,17 +98,17 @@ public class Tile : MonoBehaviour
         if (selectable && (occupied == false))
         {
             map_manager.get_current_char(new string[2] {grid[0].ToString(), grid[1].ToString()});
-            map_manager.set_current(new string[2] { grid[0].ToString(), grid[1].ToString() });
+            import_manager.run_function_all(currentchar.name, "switch_selectable_tile", new string[0] { });
             import_manager.run_function_all(currentchar.name, "move", new string[2] {grid[0].ToString(), grid[1].ToString()});
         }
         else if(occupied) // and in range, and not a friendly civ
         {
-            select(new string[1] { currentchar.GetComponent<PlayerMove>().moveRange.ToString()});
             // check if this characters civ is the same as the character clicking on it
             
         }
          
         map_manager.set_current(new string[2] { grid[0].ToString(), grid[1].ToString() });
+        map_manager.unselect_tile(new string[0] { });
         current = true;
 
         Updateme();
@@ -177,7 +177,7 @@ public class Tile : MonoBehaviour
                 if (item.walkable)
                 {
                     adjacentTiles.Add(item);
-                   // item.set_selectable(new string[0] { }); // this is curently doing what line 72 in player move should be doing.
+                    item.set_selectable(new string[0] { }); // this is curently doing what line 72 in player move should be doing.
                         // this line shouldnt be here because it is messing with the unselect function.
                 }
             }
@@ -191,40 +191,24 @@ public class Tile : MonoBehaviour
 
     // Set and get functions
 
-    // Unselect this tile and the surounding tiles based on the player move.
+    // Unselect this tile
     // parameter = [int range]
     public void unselect(string[] parameter)
     {
+        Debug.Log("Unselecting: range = " + parameter[0]);
         int range = int.Parse(parameter[0]);
         current = false;
         Updateme();
 
+        // if the tile being unselected is occupied, also unselect all nearby tiles
         if (occupied)
         {
             this.set_unselectable(new string[0] { });
 
             foreach (Tile tile in GetAdjacenctTiles(range))
             {
+                //Debug.Log("Unselecting a tile");
                 tile.set_unselectable(new string[0] { });
-            }
-        }
-    }
-
-    // Select this tile and the surounding tiles based on the player move.
-    // parameter = [int range]
-    public void select(string[] parameter)
-    {
-        int range = int.Parse(parameter[0]);
-        current = true;
-        Updateme();
-
-        if (occupied)
-        {
-            this.set_selectable(new string[0] { });
-
-            foreach (Tile tile in GetAdjacenctTiles(range))
-            {
-                tile.set_selectable(new string[0] { });
             }
         }
     }
