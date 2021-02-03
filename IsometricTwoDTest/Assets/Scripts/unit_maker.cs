@@ -77,8 +77,6 @@ public class unit_maker : MonoBehaviour
         champion.GetComponent<PlayerMove>().set_civilization(tile.GetComponent<Tile>().get_civilization());
         champion.GetComponent<PlayerMove>().set_grid(tile.GetComponent<Tile>().get_grid()[0], tile.GetComponent<Tile>().get_grid()[1]);
 
-        tile.GetComponent<Tile>().set_current_char(new string[1] { championName });
-
         Vector3 cameraPosition = GameObject.Find("Main Camera").transform.position;
         cameraPosition.y = tilePosition.y;
         cameraPosition.x = tilePosition.x;
