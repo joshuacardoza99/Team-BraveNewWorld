@@ -177,7 +177,8 @@ public class Tile : MonoBehaviour
                 if (item.walkable)
                 {
                     adjacentTiles.Add(item);
-                    item.set_selectable(new string[0] { });
+                    item.set_selectable(new string[0] { }); // this is curently doing what line 72 in player move should be doing.
+                        // this line shouldnt be here because it is messing with the unselect function.
                 }
             }
 
@@ -206,7 +207,7 @@ public class Tile : MonoBehaviour
 
             foreach (Tile tile in GetAdjacenctTiles(range))
             {
-                Debug.Log("Unselecting a tile");
+                //Debug.Log("Unselecting a tile");
                 tile.set_unselectable(new string[0] { });
             }
         }

@@ -41,11 +41,11 @@ public class building_manager : MonoBehaviour
 
     public void Update()
       {
-          Vector3 tilePosition = map_manager.get_current().ground.transform.position;
+          //Vector3 tilePosition = map_manager.get_current().ground.transform.position;
 
           if (Input.GetMouseButtonDown(0))
           {
-              Instantiate(activeBuildingType.prefab, tilePosition, Quaternion.Euler(new Vector3(60, 6, 7)));      
+             // Instantiate(activeBuildingType.prefab, tilePosition, Quaternion.Euler(new Vector3(60, 6, 7)));      
           }
       }
 

@@ -69,7 +69,7 @@ public class PlayerMove : MonoBehaviour
                 {
                     if (tile.occupied == false) // if the tile is open
                     {
-                        tile.set_selectable(new string[0] { });
+                        tile.set_selectable(new string[0] { }); // this is currently not doing anything
                     }
                 }
             }
