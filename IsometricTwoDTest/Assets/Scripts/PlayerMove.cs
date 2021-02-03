@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour
     public int moveRange = 3;
     public float cooldown = 3;
     public float nextAttack = 0;
-    bool isAttacking = false;
+    public bool isAttacking = false;
 
     
 
@@ -59,17 +59,29 @@ public class PlayerMove : MonoBehaviour
         if (currentTile.current)
         {
             // prepare to move this character
+            Debug.Log("In Set_selectable() name = " + this.name);
             map_manager.set_current_char(new string[1] { this.name });
             import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_char", this.name});
 
             // set all tiles in range to selectable
             if (moveRange >= 1) // if the character can move at least once
             {
-                foreach (Tile tile in currentTile.GetAdjacenctTiles(moveRange)) // get the adjacent tiles
+                foreach (Tile tile in currentTile.adjacencyList) // get the adjacent tiles
                 {
                     if (tile.occupied == false) // if the tile is open
                     {
-                        tile.set_selectable(new string[0] { }); // this is currently not doing anything
+                        tile.selectable = true;
+                        tile.Updateme();
+
+                        if (moveRange >= 2)
+                            foreach (Tile tile2 in tile.adjacencyList)
+                            {
+                                if ((tile2.occupied == false) && (tile2.current == false))
+                                {
+                                    tile2.selectable = true;
+                                    tile2.Updateme();
+                                }
+                            }
                     }
                 }
             }
@@ -82,11 +94,17 @@ public class PlayerMove : MonoBehaviour
     public void switch_selectable_tile(string[] parameter)
     {
         currentTile.currentchar = null;
-        import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
-   
-        foreach (Tile tile in currentTile.GetAdjacenctTiles(moveRange))
+        import_manager.run_function_all(currentTile.name, "set_unoccupied", new string[1] { "" });
+        foreach (Tile tile in currentTile.adjacencyList)
         {
-            tile.set_unselectable(new string[0] { });
+            tile.selectable = false;
+            tile.Updateme();
+            if (moveRange >= 2)
+                foreach (Tile tile2 in tile.adjacencyList)
+                {
+                    tile2.selectable = false;
+                    tile2.Updateme();
+                }
         }
     }
 
@@ -107,6 +125,10 @@ public class PlayerMove : MonoBehaviour
         this.transform.rotation = Quaternion.identity;
 
         import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied" });
+
+        // import_manager.run_function_all("server_function", "update_character_position", new string[2] {this.gameObject.name, location[0]});
+
+        //moving = false;
     }
 
 
@@ -144,14 +166,14 @@ public class PlayerMove : MonoBehaviour
     private void OnMouseDown()
     {
         currentTile.OnMouseDown();
-    } 
-
-    public void update_cooldown()
+    }
+    public void Update()
     {
         if (Time.time > nextAttack)
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
+                Debug.Log("You attacked, cooldown intiated");
                 nextAttack = Time.time + cooldown;
             }
         }

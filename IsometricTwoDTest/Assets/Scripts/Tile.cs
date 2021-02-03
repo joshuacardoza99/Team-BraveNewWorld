@@ -13,15 +13,19 @@ public class Tile : MonoBehaviour
 
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
-    map_manager map_manager;
 
     public bool walkable = true;
     public bool current = false; // if the player is currently using this tile
     public bool occupied = false; // if there is a character currently on this tile
     public bool target = false;
-    private bool selectable = false;
-    public List<Tile> adjacencyList = new List<Tile>();
+    public bool selectable = false;
+    public bool isAttacking = false;
+    public int health = 5;
+    public float cooldown = 3;
+    public float nextAttack = 0;
+
     public GameObject currentchar = null; // the character currently on this tile. Or about to be moved to this tile.
+    public List<Tile> adjacencyList = new List<Tile>();
 
     //Needed BFS (breadth first search)
     public bool visited = false;
@@ -42,11 +46,10 @@ public class Tile : MonoBehaviour
     void Start () 
 	{
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
-        map_manager = GameObject.Find("Map").GetComponent<map_manager>();
-
+    
         realColor = this.GetComponent<Renderer>().material.color;
 
-        //FindNeighbors();
+        FindNeighbors();
 
     }
 
@@ -54,6 +57,7 @@ public class Tile : MonoBehaviour
     public void Updateme()
     {
         // determine if there is a character currently on the tile.
+        Debug.Log("This is currentchar = " + currentchar + " occupied = " + occupied + " current = " + current);
         if (currentchar != null)
         {
             occupied = true;
@@ -97,118 +101,86 @@ public class Tile : MonoBehaviour
         // If the tile is selectable and open, then move the current character to this tile
         if (selectable && (occupied == false))
         {
-            map_manager.get_current_char(new string[2] {grid[0].ToString(), grid[1].ToString()});
+            import_manager.run_function("Map", "get_current_char", new string[2] { grid[0].ToString(), grid[1].ToString() });
             import_manager.run_function_all(currentchar.name, "switch_selectable_tile", new string[0] { });
             import_manager.run_function_all(currentchar.name, "move", new string[2] {grid[0].ToString(), grid[1].ToString()});
         }
         else if(occupied) // and in range, and not a friendly civ
         {
             // check if this characters civ is the same as the character clicking on it
-            
-        }
-         
-        map_manager.set_current(new string[2] { grid[0].ToString(), grid[1].ToString() });
-        map_manager.unselect_tile(new string[0] { });
-        current = true;
 
+
+        }
+
+         
+        import_manager.run_function("Map", "unselect_tile", new string[0] { });
+        import_manager.run_function("Map", "set_current", new string[2] { grid[0].ToString(), grid[1].ToString()});
+        current = true;
         Updateme();
-       // PlayerMove temp = currentchar.GetComponent<PlayerMove>(); 
-       // temp.set_selectable(); // this allows you to move right after youve moved, this will be disabled when we set cooldowns.
+        PlayerMove temp = currentchar.GetComponent<PlayerMove>();
+        temp.set_selectable(); // this allows you to move right after youve moved, this will be disabled when we set cooldowns.
+    }
+    
+
+    public void FindNeighbors()
+    {
+        //Reset();
+
+        CheckTile( Vector3.forward);
+        CheckTile(-Vector3.forward);
+        CheckTile( Vector3.right);
+        CheckTile(-Vector3.right);
+
+        CheckTile( Vector3.forward +  Vector3.right);
+        CheckTile(-Vector3.forward +  Vector3.right);
+        CheckTile( Vector3.forward + -Vector3.right);
+        CheckTile(-Vector3.forward + -Vector3.right);
     }
 
-    public List<Tile> GetAdjacenctTiles(int range)
+    public void CheckTile(Vector3 direction)
     {
-        List<Tile> inrange       = new List<Tile>();
-        List<Tile> adjacentTiles = new List<Tile>();
 
-        if (range > 0)
+        Vector3 halfExtents = new Vector3(0.25f, 0.25f, 0.25f);
+        Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
+
+        foreach (Collider item in colliders)
         {
-            try
+            Tile tile = item.GetComponent<Tile>();
+            if (tile != null && tile.walkable && !tile.occupied)
             {
-                inrange.Add(map_manager.map[grid[0], grid[1] + 1].ground.GetComponent<Tile>());
-            } catch { }
-            try
-            {
-                inrange.Add(map_manager.map[grid[0] + 1, grid[1]].ground.GetComponent<Tile>());
-            }
-            catch { }
-            try
-            {
-                inrange.Add(map_manager.map[grid[0], grid[1] - 1].ground.GetComponent<Tile>());
-            }
-            catch { }
-            try
-            {
-                inrange.Add(map_manager.map[grid[0] - 1, grid[1]].ground.GetComponent<Tile>());
-            }
-            catch { }
+                RaycastHit hit;
 
-
-            try
-            {
-                inrange.Add(map_manager.map[grid[0] + 1, grid[1] + 1].ground.GetComponent<Tile>());
-            }
-            catch { }
-            try
-            {
-                inrange.Add(map_manager.map[grid[0] + 1, grid[1] - 1].ground.GetComponent<Tile>());
-            } catch { }
-            try
-            {
-                inrange.Add(map_manager.map[grid[0] - 1, grid[1] + 1].ground.GetComponent<Tile>());
-            }
-            catch { }
-            try
-            {
-                inrange.Add(map_manager.map[grid[0] - 1, grid[1] - 1].ground.GetComponent<Tile>());
-            }
-            catch { }
-
-            if (range > 1)
-            {
-                foreach (Tile item in inrange)
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1) || (tile == target))
                 {
-                    adjacencyList.AddRange(item.GetAdjacenctTiles(range - 1));
+                    adjacencyList.Add(tile);
                 }
             }
-
-            foreach (Tile item in inrange)
-            {
-                if (item.walkable)
-                {
-                    adjacentTiles.Add(item);
-                    item.set_selectable(new string[0] { }); // this is curently doing what line 72 in player move should be doing.
-                        // this line shouldnt be here because it is messing with the unselect function.
-                }
-            }
-
-            adjacencyList.AddRange(inrange);
         }
-
-        return adjacentTiles;
     }
 
 
     // Set and get functions
 
     // Unselect this tile
-    // parameter = [int range]
+    // parameter = empty array (not used)
     public void unselect(string[] parameter)
     {
-        Debug.Log("Unselecting: range = " + parameter[0]);
-        int range = int.Parse(parameter[0]);
         current = false;
         Updateme();
 
         // if the tile being unselected is occupied, also unselect all nearby tiles
         if (occupied)
         {
-            this.set_unselectable(new string[0] { });
-
-            foreach (Tile tile in GetAdjacenctTiles(range))
+            foreach (Tile tile in adjacencyList)
             {
-                //Debug.Log("Unselecting a tile");
-                tile.set_unselectable(new string[0] { });
+                tile.selectable = false;
+                tile.Updateme();
+                
+                    foreach (Tile tile2 in tile.adjacencyList)
+                    {
+                        tile2.selectable = false;
+                        tile2.Updateme();
+                    }
             }
         }
     }
@@ -243,6 +215,7 @@ public class Tile : MonoBehaviour
     public void set_occupied(string[] parameter)
     {
         occupied = true;
+        Debug.Log("Setting Occupied");
         Updateme();
     }
     public void set_unoccupied(string[] parameter)
@@ -250,20 +223,16 @@ public class Tile : MonoBehaviour
         occupied = false;
         Updateme();
     }
-    public void set_selectable(string[] parameter)
+    public void set_selectable()
     {
         selectable = true;
         Updateme();
     }
 
-    public void set_unselectable(string[] parameter)
-    {
-        selectable = false;
-        Updateme();
-    }
-
     public void set_current_char(string[] newcurrentChar)
     {
+        Debug.Log("set_current_char = " + newcurrentChar[0]);
+
         if (newcurrentChar[0] != "")
         {
             currentchar = GameObject.Find(newcurrentChar[0]);
@@ -271,9 +240,10 @@ public class Tile : MonoBehaviour
         
         Updateme();
     }
-
-   public void Reset()
+    public void Reset()
     {
+        adjacencyList.Clear();
+
         current = false;
         target = false;
         selectable = false;
