@@ -53,7 +53,7 @@ public class PlayerMove : MonoBehaviour
     }
     
     // if the current tile is occupied, highlight all surrounding tiles
-    public void set_selectable()
+    public void set_selectable(string[] parameter)
     {
         // if this unit is on the current tile
         if (currentTile.current)
@@ -67,6 +67,7 @@ public class PlayerMove : MonoBehaviour
             {
                 foreach (Tile tile in currentTile.GetAdjacenctTiles(moveRange)) // get the adjacent tiles
                 {
+                    Debug.Log("IN SET SELECTABLE");
                     if (tile.occupied == false) // if the tile is open
                     {
                         tile.set_selectable(new string[0] { }); // this is currently not doing anything
@@ -95,16 +96,18 @@ public class PlayerMove : MonoBehaviour
         grid[0] = int.Parse(location[0]);
         grid[1] = int.Parse(location[1]);
 
+        currentTile.unselect(new string[1] { moveRange.ToString()});
+        import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
+
         targetPosition = map_manager.map[grid[0], grid[1]].ground.transform.position;
         currentTile    = map_manager.map[grid[0], grid[1]].ground.GetComponent<Tile>();
-        
-       // switch_selectable_tile(new string[0] {});
 
         this.transform.LookAt(targetPosition);
 
         this.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - currentTile.GetComponent<Renderer>().bounds.size.z);
 
         this.transform.rotation = Quaternion.identity;
+        currentTile.select(new string[1] { moveRange.ToString() });
 
         import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied" });
     }
