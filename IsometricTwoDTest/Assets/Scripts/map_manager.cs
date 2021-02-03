@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 public class map_manager : MonoBehaviour
 {
@@ -267,7 +268,7 @@ public class map_manager : MonoBehaviour
     // string parameter = empty (not used)
     public void unselect_tile(string[] parameters)
     {
-        run_on_map_item(new string[3] { get_current().xVirtualPosition.ToString(), get_current().yVirtualPosition.ToString(), "unselect" });
+        run_on_map_item(new string[4] { get_current().xVirtualPosition.ToString(), get_current().yVirtualPosition.ToString(), "unselect", GameObject.Find(CurrentChar).GetComponent<PlayerMove>().moveRange.ToString() });
     }
 
     // Gets a list of all land of a certain type
@@ -305,15 +306,13 @@ public class map_manager : MonoBehaviour
         int    xVirtualPosition = int.Parse(parameter[0]);
         int    yVirtualPosition = int.Parse(parameter[1]);
         string fucntionName     = parameter[2];
-        
-        if (parameter.Length >= 4)
-        {
-            map[xVirtualPosition, yVirtualPosition].ground.SendMessage(fucntionName, new string[1] { parameter[3] });
-        }
-        else
-        {
-            map[xVirtualPosition, yVirtualPosition].ground.SendMessage(fucntionName, new string[1] { "" });
-        }
+
+        List<string> parameterList = new List<string>(parameter);
+        parameterList.RemoveAt(0);
+        parameterList.RemoveAt(0);
+        parameterList.RemoveAt(0);
+
+        map[xVirtualPosition, yVirtualPosition].ground.SendMessage(fucntionName, parameterList.ToArray());
         
        
     }
