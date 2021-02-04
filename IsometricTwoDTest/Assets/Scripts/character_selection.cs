@@ -14,7 +14,7 @@ public class character_selection : MonoBehaviour
     private civ_description description;
 
     [SerializeField]
-    private unit_maker civ_number;
+    private building_type civ_number;
 
     // Start is called before the first frame update
     void Start()

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 4189977001460276037, guid: fa8062b996cef8c4dbb624d57182006b, type: 3}
   sprite: {fileID: 21300000, guid: ed06a23196980ae45b19738a61700f49, type: 3}
+  civNumber: 0

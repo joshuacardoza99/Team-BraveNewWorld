@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class building_manager : MonoBehaviour
 {
@@ -11,21 +12,8 @@ public class building_manager : MonoBehaviour
     map_manager map_manager;
 
     // Public Global Variables //
-   /* public GameObject asianBarracks;
-    public GameObject asianCommandPost;
-    public GameObject asianDefenseTower;
-    public GameObject farm;
-    public GameObject greekBarracks;
-    public GameObject greekCommandPost;
-    public GameObject greekDefenseTower;
-    public GameObject mine;
-    public GameObject vikingBarracks;
-    public GameObject vikingCommandPost;
-    public GameObject vikingDefenseTower;*/
     public int civNumber;
 
-    
-    
     // Private Global Variables //
     private int randomTile = 0;
 
@@ -40,14 +28,18 @@ public class building_manager : MonoBehaviour
     }
 
     public void Update()
-      {
-          //Vector3 tilePosition = map_manager.get_current().ground.transform.position;
+    {
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        {
+            Vector3 tilePosition = map_manager.get_current().ground.transform.position;
+            Instantiate(activeBuildingType.prefab, tilePosition, Quaternion.identity);
+        }    
+    }
 
-          if (Input.GetMouseButtonDown(0))
-          {
-             // Instantiate(activeBuildingType.prefab, tilePosition, Quaternion.Euler(new Vector3(60, 6, 7)));      
-          }
-      }
+    public void set_active_building_type(building_type building_Type)
+    {
+        activeBuildingType = building_Type;
+    }
 
     
 

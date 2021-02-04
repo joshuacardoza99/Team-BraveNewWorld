@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class building_select : MonoBehaviour
 {
     [SerializeField]
-    private List<building_type> buildingTypeSOList;
+    private List<building_type> buildingTypeList;
+
+    [SerializeField]
+    private building_manager building_manager;
 
     private void Awake()
     {
@@ -14,14 +17,18 @@ public class building_select : MonoBehaviour
         buildingTemplate.gameObject.SetActive(false);
 
         int index = 0;
-        foreach (building_type building_type in buildingTypeSOList)
+        foreach (building_type building_type in buildingTypeList)
         {
             Transform buildingTransform = Instantiate(buildingTemplate, transform);
-            buildingTemplate.gameObject.SetActive(true);
+            buildingTransform.gameObject.SetActive(true);
 
-            buildingTemplate.GetComponent<RectTransform>().anchoredPosition += new Vector2(index * 60, 0);
-            buildingTemplate.Find("image").GetComponent<Image>().sprite = building_type.sprite;
+            buildingTransform.GetComponent<RectTransform>().anchoredPosition += new Vector2(index * 150, 0);
+            buildingTransform.Find("Image").GetComponent<Image>().sprite = building_type.sprite;
 
+            buildingTransform.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                building_manager.set_active_building_type(building_type);
+            });
             index++;
         }
     }
