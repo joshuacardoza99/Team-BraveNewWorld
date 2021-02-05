@@ -34,6 +34,8 @@ public class PlayerMove : MonoBehaviour
     public Tile currentTile = null;
     GameObject[] tiles;
 
+    // Animation Controller
+    public Animator anim;
 
     private string civilization; // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     private int[] grid;         // Stores the position of the Tile in the virtual grid. [x position, y position]
@@ -51,6 +53,8 @@ public class PlayerMove : MonoBehaviour
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
 
         import_manager.run_function_all("network_manager", "get_player_civilization", new string[2]{this.gameObject.name, "GetCurrentTile"});
+
+        anim = this.GetComponent<Animator>();
     }
     
     // if the current tile is occupied, highlight all surrounding tiles
