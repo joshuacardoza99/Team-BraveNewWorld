@@ -110,6 +110,8 @@ public class Tile : MonoBehaviour
             // check if this characters civ is the same as the character clicking on it
 
 
+
+
         }
 
          
