@@ -23,16 +23,6 @@ public class Tile : MonoBehaviour
     public List<Tile> adjacencyList = new List<Tile>();
     public GameObject currentchar = null; // the character currently on this tile. Or about to be moved to this tile.
 
-    //Needed BFS (breadth first search)
-    public bool visited = false;
-    public Tile parent = null;
-    public int distance = 0;
-
-    //For A*
-    public float f = 0;
-    public float g = 0;
-    public float h = 0;
-
     // Private Variables //
     private Color  realColor;    // The color the tile should be without any highlights.
     private string civilization; // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
@@ -105,7 +95,11 @@ public class Tile : MonoBehaviour
         {
             select(new string[1] { currentchar.GetComponent<PlayerMove>().moveRange.ToString()});
             // check if this characters civ is the same as the character clicking on it
-
+            if(Input.GetMouseButtonDown(0))
+            {
+                currentchar.GetComponent<PlayerMove>().health -= currentchar.GetComponent<PlayerMove>().damage;
+                Debug.Log("Health equals " + currentchar.GetComponent<PlayerMove>().health); 
+            }
 
 
 
@@ -298,10 +292,6 @@ public class Tile : MonoBehaviour
         selectable = false;
 
         //visited = false;
-        parent = null;
-        distance = 0;
-
-        f = g = h = 0;
         Updateme();
     }
 }

@@ -16,6 +16,7 @@ public class PlayerMove : MonoBehaviour
 
     // Unit attribiutes //
     public int health = 10;
+    public int damage = 2;
     public int attackRange = 4;
     public int moveRange = 3;
     public float cooldown = 3;
