@@ -1193,8 +1193,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdfb57c639781a438bc2f6fd21e1554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  civ: ' '
-  currentTile: {fileID: 0}
-  moves: 3
-  moveSpeed: 10
+  health: 10
+  damage: 4
+  attackRange: 4
+  moveRange: 3
+  cooldown: 3
+  nextAttack: 0
   actualTargetTile: {fileID: 0}
+  currentTile: {fileID: 0}
+  anim: {fileID: 0}

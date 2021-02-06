@@ -23,6 +23,10 @@ public class Tile : MonoBehaviour
     public List<Tile> adjacencyList = new List<Tile>();
     public GameObject currentchar = null; // the character currently on this tile. Or about to be moved to this tile.
 
+    public float nextAttack = 0;
+    bool isAttacking = false;
+    public float cooldown = 3;
+
     // Private Variables //
     private Color  realColor;    // The color the tile should be without any highlights.
     private string civilization; // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
@@ -91,14 +95,20 @@ public class Tile : MonoBehaviour
             map_manager.set_current(new string[2] { grid[0].ToString(), grid[1].ToString() });
             import_manager.run_function_all(currentchar.name, "move", new string[2] {grid[0].ToString(), grid[1].ToString()});
         }
-        else if(occupied) // and in range, and not a friendly civ
+        else if(occupied && Time.time > nextAttack) // and in range, and not a friendly civ
         {
             select(new string[1] { currentchar.GetComponent<PlayerMove>().moveRange.ToString()});
             // check if this characters civ is the same as the character clicking on it
             if(Input.GetMouseButtonDown(0))
             {
                 currentchar.GetComponent<PlayerMove>().health -= currentchar.GetComponent<PlayerMove>().damage;
-                Debug.Log("Health equals " + currentchar.GetComponent<PlayerMove>().health); 
+                Debug.Log("Health equals " + currentchar.GetComponent<PlayerMove>().health);
+                if (currentchar.GetComponent<PlayerMove>().health <= 0)
+                {
+                    Debug.Log("YOUR SOLDIER HAS FALLEN !!");
+                }
+                Debug.Log("IN COOLDOWN WAIT");
+                nextAttack = Time.time + cooldown;
             }
 
 
