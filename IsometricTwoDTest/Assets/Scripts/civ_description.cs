@@ -9,7 +9,6 @@ public class civ_description : MonoBehaviour
     public Text getText;
     public InputField inputText;
     public int selectedCiv;
-    public string selectedCivString;
 
     void Start()
     {
@@ -26,17 +25,14 @@ public class civ_description : MonoBehaviour
         if (selectedCiv == 0)
         {
             descriptionText.text = "Selected Civilization: Asian";
-            selectedCivString    = "Asian";
         }
         else if (selectedCiv == 1)
         {
             descriptionText.text = "Selected Civilization: Greek";
-            selectedCivString    = "Greek";
         }
         else
         {
             descriptionText.text = "Selected Civilization: Viking";
-            selectedCivString    = "Viking";
         }
     }
 }
