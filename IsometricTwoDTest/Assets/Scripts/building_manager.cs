@@ -5,17 +5,15 @@ using UnityEngine.EventSystems;
 
 public class building_manager : MonoBehaviour
 {
-    // External Classes//
+    // External Classes
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
-    Tile Tile;
+   // Tile Tile;
     PlayerMove PlayerMove;
     map_manager map_manager;
 
-    // Public Global Variables //
+    // Public Global Variables 
     public int civNumber;
-
-    // Private Global Variables //
-    private int randomTile = 0;
+    public bool place = true;
 
     [SerializeField]
     private building_type activeBuildingType;
@@ -24,8 +22,9 @@ public class building_manager : MonoBehaviour
     void Start()
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
-        map_manager = GameObject.Find("Map").GetComponent<map_manager>(); // Connects to the import_manager.
-    }
+        map_manager = GameObject.Find("Map").GetComponent<map_manager>();                   // Connects to the map_manager.
+       // Tile = GameObject.Find("map").GetComponent<Tile>();                                 // Connects to the tile.
+    } 
 
     public void Update()
     {

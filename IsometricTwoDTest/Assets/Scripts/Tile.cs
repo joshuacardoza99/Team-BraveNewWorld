@@ -11,13 +11,16 @@ using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
 {
-
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
     map_manager map_manager;
 
     public bool walkable = true;
-    private bool occupied = false; // if there is a character currently on this tile
+
+
+    public bool current = false;  // if the player is currently using this tile
+    public bool occupied = false; // if there is a character currently on this tile
+
     public bool target = false;
     private bool selectable = false;
     public List<Tile> adjacencyList = new List<Tile>();

@@ -11,12 +11,13 @@ public class building_select : MonoBehaviour
     [SerializeField]
     private building_manager building_manager;
 
+    public int index = 0;
+
     private void Awake()
     {
         Transform buildingTemplate = transform.Find("buildingTemplate");
         buildingTemplate.gameObject.SetActive(false);
-
-        int index = 0;
+        
         foreach (building_type building_type in buildingTypeList)
         {
             Transform buildingTransform = Instantiate(buildingTemplate, transform);
