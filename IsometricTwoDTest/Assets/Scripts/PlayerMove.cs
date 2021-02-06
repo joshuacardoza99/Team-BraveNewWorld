@@ -84,17 +84,25 @@ public class PlayerMove : MonoBehaviour
         targetPosition = map_manager.map[grid[0], grid[1]].ground.transform.position;
         currentTile    = map_manager.map[grid[0], grid[1]].ground.GetComponent<Tile>();
 
+        // Condition if character moved
+        //if (currentTile.Position != targetPosition)
+            try
+            {
+                anim.SetBool("isWalking", true);
+            }
+            catch { }
+
         this.transform.LookAt(targetPosition);
 
-        if (currentTile != actualTargetTile)
-           anim.SetBool("isWalking", true);
 
         this.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - currentTile.GetComponent<Renderer>().bounds.size.z);
 
         this.transform.rotation = Quaternion.identity;
         currentTile.select(new string[1] { moveRange.ToString() });
         Debug.Log("Move game object name = " + this.name);
-        anim.SetBool("isWalking", false);
+
+        if (anim.GetBool("isWalking"))
+            anim.SetBool("isWalking", false);
         import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied", this.name });
     }
 
