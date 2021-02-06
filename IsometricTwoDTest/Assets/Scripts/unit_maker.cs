@@ -57,28 +57,26 @@ public class unit_maker : MonoBehaviour
         List<GameObject> tiles = map_manager.get_land(parameters[0]);
 
         GameObject tile = tiles[(int)(this.randomTile / tiles.Count)];
-        Vector3 tilePosition = tile.transform.position;
-        tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
+         int[] tileGrid   = tile.GetComponent<Tile>().get_grid();
+         Vector3 tilePosition = tile.transform.position;
+         tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
 
-        if (tile.GetComponent<Tile>().get_civilization() == "asian")
-        {
-            champion = Instantiate(asianChampion, tilePosition, Quaternion.identity);
-        }
-        else if (tile.GetComponent<Tile>().get_civilization() == "viking")
-        {
-            champion = Instantiate(vikingChampion, tilePosition, Quaternion.identity);
-        }
-        else if (tile.GetComponent<Tile>().get_civilization() == "greek")
-        {
-            champion = Instantiate(greekChampion, tilePosition, Quaternion.identity);
-        }
-
+         if (tile.GetComponent<Tile>().get_civilization() == "asian")
+         {
+             champion = Instantiate(asianChampion, tilePosition, Quaternion.identity);
+         }
+         else if (tile.GetComponent<Tile>().get_civilization() == "viking")
+         {
+             champion = Instantiate(vikingChampion, tilePosition, Quaternion.identity);
+         }
+         else if (tile.GetComponent<Tile>().get_civilization() == "greek")
+         {
+             champion = Instantiate(greekChampion, tilePosition, Quaternion.identity);
+         }
+        
         champion.name = championName;
         champion.GetComponent<PlayerMove>().set_civilization(tile.GetComponent<Tile>().get_civilization());
-        champion.GetComponent<PlayerMove>().set_grid(tile.GetComponent<Tile>().get_grid()[0], tile.GetComponent<Tile>().get_grid()[1]);
-
-        tile.GetComponent<Tile>().set_current_char(new string[1] { championName });
-
+        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tileGrid[0].ToString(), tileGrid[1].ToString(), "set_occupied", championName });
         Vector3 cameraPosition = GameObject.Find("Main Camera").transform.position;
         cameraPosition.y = tilePosition.y;
         cameraPosition.x = tilePosition.x;

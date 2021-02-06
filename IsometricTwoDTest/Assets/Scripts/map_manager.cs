@@ -287,9 +287,9 @@ public class map_manager : MonoBehaviour
     }
 
     // sends the string currentChar to the calling script
-    public void get_current_char(string[] reciever)
+    public string get_current_char()
     {
-        run_on_map_item(new string[4] { reciever[0], reciever[1], "set_current_char", CurrentChar });
+        return CurrentChar;
     }
 
     // Finds the wanted map item and runs the given function on it.
@@ -298,14 +298,13 @@ public class map_manager : MonoBehaviour
     {
         int    xVirtualPosition = int.Parse(parameter[0]);
         int    yVirtualPosition = int.Parse(parameter[1]);
-        string fucntionName     = parameter[2];
+        string functionName     = parameter[2];
 
         List<string> parameterList = new List<string>(parameter);
         parameterList.RemoveAt(0);
         parameterList.RemoveAt(0);
         parameterList.RemoveAt(0);
-
-        map[xVirtualPosition, yVirtualPosition].ground.SendMessage(fucntionName, parameterList.ToArray());
+        map[xVirtualPosition, yVirtualPosition].ground.SendMessage(functionName, parameterList.ToArray());
         
        
     }
