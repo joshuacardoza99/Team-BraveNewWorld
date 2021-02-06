@@ -27,13 +27,13 @@ public class map_manager : MonoBehaviour
     // This class contains all of the details the map needs for each ground item.
     public class map_item
     {
-        public string groundType;       // Type of ground like water, asian, etc.
+        public int    groundType;       // Type of ground like water, asian, etc.
         public int    xVirtualPosition; // The x position on the virtual grid.
         public int    yVirtualPosition; // The y posiiton on the virtual grid.
         public GameObject ground;       // The GameObject for the gorund.
 
         // Contructor for map_item class.
-        public map_item(string groundType, int xVirtualPosition, int yVirtualPosition)
+        public map_item(int groundType, int xVirtualPosition, int yVirtualPosition)
         {
             this.groundType       = groundType;
             this.xVirtualPosition = xVirtualPosition;
@@ -58,19 +58,22 @@ public class map_manager : MonoBehaviour
     {
         GameObject ground = water; // The GameObject for the ground prefab of the type of ground being created.
 
-        if (groundItem.groundType == "viking")
-        {
-            ground = vikingLand;
-        }
-        else if (groundItem.groundType == "greek")
-        {
-            ground = greekLand;
-        }
-        else if (groundItem.groundType == "asian")
+        // GroundType 0 is Asian groundType.
+        if (groundItem.groundType == 0)
         {
             ground = asianLand;
         }
-        
+        // GroundType 1 is Greek groundType.
+        else if (groundItem.groundType == 1)
+        {
+            ground = greekLand;
+        }
+        // GroundType 2 is Viking groundType.
+        else if (groundItem.groundType == 2)
+        {
+            ground = vikingLand;
+        }
+
         groundItem.ground = Instantiate(ground,new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(new Vector3(30, 0, -45)));
         groundItem.ground.name = "map";
         groundItem.ground.GetComponent<Tile>().set_civilization(groundItem.groundType);
@@ -78,7 +81,7 @@ public class map_manager : MonoBehaviour
     }
 
     // Checks the surrounding grounds for being the same type as the given one.
-    private int near_ground_type(string type, int xCoordinate, int yCoordinate)
+    private int near_ground_type(int type, int xCoordinate, int yCoordinate)
     {
         int nearGroundType = 0; // Counts the number of surrounding grounds are of the same type.
 
@@ -122,11 +125,11 @@ public class map_manager : MonoBehaviour
     }
 
     // Checks the surrounding grounds for not being the same type as the given one.
-    private int not_near_ground_type(string[] set, string type, int xCoordinate, int yCoordinate)
+    private int not_near_ground_type(int[] set, int type, int xCoordinate, int yCoordinate)
     {
         int notNearGroundType = 0; // // Counts the number of surrounding grounds are not of the same type.
 
-        foreach (string item in set)
+        foreach (int item in set)
         {
             if (item != type)
             {
@@ -139,12 +142,12 @@ public class map_manager : MonoBehaviour
 
     // Generate a map topography plan.
     // where the first prefab in grounditems is the water prefab and the string is the name of the prefab in the prefab folder
-    private void generate_map(int width, int height, string[] groundItems, int landPercentage, int seed)
+    private void generate_map(int width, int height, int[] groundItems, int landPercentage, int seed)
     {
-        string       water               = groundItems[0];                           // Holds the water water "civ" name.
-        List<string> preLand             = new List<string>(groundItems);            // This is a placeholder for the land until the first item gets removed.
+        int          water               = groundItems[0];                           // Holds the water water "civ" name.
+        List<int>    preLand             = new List<int>(groundItems);            // This is a placeholder for the land until the first item gets removed.
         preLand.RemoveAt(0);
-        string[]     land                = preLand.ToArray();                        // Holds all the ground items given.
+        int[]        land                = preLand.ToArray();                        // Holds all the ground items given.
         int          numberOfGroundItems = width * height;                           // Total number of ground items for all civs and for water.
         int          numberOfLandItems   = (int)(((float) numberOfGroundItems) *     // Total number of ground items for all civs.
                                            ((float)landPercentage / 100f));
@@ -162,7 +165,7 @@ public class map_manager : MonoBehaviour
             }
         }
 
-        foreach (string type in land)
+        foreach (int type in land)
         {
              int localWidth  = Random.Range(1, (width - 2));
              int localHeight = Random.Range(1, (width - 2));
@@ -203,7 +206,7 @@ public class map_manager : MonoBehaviour
     // Parameter = [int seed]
     public void load_map(string[] parameters)
     {
-        generate_map(mapWidth, mapWidth, new string[4] { "water", "viking", "greek", "asian" },  // Stores the square paderian for the map.
+        generate_map(mapWidth, mapWidth, new int[4] { -1, 0, 1, 2},  // Stores the square paderian for the map.
                                      80, int.Parse(parameters[0])); 
         int   referencePossition = 0;                                                                            // Reference point for the map placement.                    
         float ySparatedDistance  = (water.GetComponent<Renderer>().bounds.size.y / 1.65f);                       // Separation distance on the y-axis.
@@ -250,28 +253,13 @@ public class map_manager : MonoBehaviour
         }
     }
 
-    // Get the name of the current selected tile
-    // Parameters = []
-    public map_item get_current()
-    {
-        return currentSelected;
-    }
-
-    // Set current selected tile
-    // parameters = setcurrent(this.name)
-    public void set_current(string[] input)
-    {
-        this.currentSelected = map[int.Parse(input[0]), int.Parse(input[1])];
-    }
-
     // Gets a list of all land of a certain type
-    public List<GameObject> get_land(string landType)
+    public List<GameObject> get_land(int landType)
     {
-        string type = landType.ToLower();
         List<GameObject> landOfType = new List<GameObject>();
         foreach (map_item land in map)
         {
-            if (land.groundType == type)
+            if (land.groundType == landType)
             {
                 landOfType.Add(land.ground);
             }

@@ -17,7 +17,6 @@ public class Tile : MonoBehaviour
     map_manager map_manager;
 
     public bool walkable = true;
-    private bool current = false; // if the player is currently using this tile
     private bool occupied = false; // if there is a character currently on this tile
     public bool target = false;
     private bool selectable = false;
@@ -30,7 +29,7 @@ public class Tile : MonoBehaviour
 
     // Private Variables //
     private Color  realColor;    // The color the tile should be without any highlights.
-    private string civilization; // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
+    private int civilization; // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     private int[]  grid;         // Stores the position of the Tile in the virtual grid. [x position, y position]
 
     // Use this for initialization
@@ -55,13 +54,9 @@ public class Tile : MonoBehaviour
             occupied = false;
         }
 
-        if (current && occupied)
+        if (occupied)
         {
             this.GetComponent<Renderer>().material.color = Color.magenta;
-        }
-        else if (current)
-        {
-            this.GetComponent<Renderer>().material.color = Color.cyan;
         }
         else if (occupied)
         {
@@ -89,8 +84,11 @@ public class Tile : MonoBehaviour
         if (selectable && !occupied)
         {
             set_current_char(new string[1] { map_manager.get_current_char()});
-            map_manager.set_current(new string[2] { grid[0].ToString(), grid[1].ToString() });
             import_manager.run_function_all(currentchar.name, "move", new string[2] {grid[0].ToString(), grid[1].ToString()});
+        }
+        else if (selectable)
+        {
+            set_unselectable(new string[0] { });
         }
         else if(occupied && Time.time > nextAttack) // and in range, and not a friendly civ
         {
@@ -113,9 +111,6 @@ public class Tile : MonoBehaviour
 
 
         }
-         
-        map_manager.set_current(new string[2] { grid[0].ToString(), grid[1].ToString() });
-        current = true;
 
         Updateme();
     }
@@ -205,7 +200,6 @@ public class Tile : MonoBehaviour
     public void unselect(string[] parameter)
     {
         int range = int.Parse(parameter[0]);
-        current = false;
         Updateme();
 
         if (occupied)
@@ -224,7 +218,6 @@ public class Tile : MonoBehaviour
     public void select(string[] parameter)
     {
         int range = int.Parse(parameter[0]);
-        current = true;
         Updateme();
 
         if (occupied)
@@ -240,12 +233,12 @@ public class Tile : MonoBehaviour
 
     // Get and Set Functions //
 
-    public void set_civilization(string civ)
+    public void set_civilization(int civ)
     {
         civilization = civ;
     }
 
-    public string get_civilization()
+    public int get_civilization()
     {
         return civilization;
     }
@@ -260,16 +253,10 @@ public class Tile : MonoBehaviour
         return grid;
     }
 
-    public bool is_current()
-    {
-        return current;
-    }
-
     // parameter = [string characterName]
     public void set_occupied(string[] parameter)
     {
         occupied = true;
-        current = true;
         selectable = true;
         currentchar = GameObject.Find(parameter[0]);
         currentchar.GetComponent<PlayerMove>().currentTile = this;
@@ -279,7 +266,6 @@ public class Tile : MonoBehaviour
     public void set_unoccupied(string[] parameter)
     {
         occupied    = false;
-        current = false;
         selectable = false;
         currentchar.GetComponent<PlayerMove>().currentTile = null;
         currentchar = null;
@@ -315,11 +301,8 @@ public class Tile : MonoBehaviour
 
    public void Reset()
     {
-        current = false;
         target = false;
         selectable = false;
-
-        //visited = false;
         Updateme();
     }
 }

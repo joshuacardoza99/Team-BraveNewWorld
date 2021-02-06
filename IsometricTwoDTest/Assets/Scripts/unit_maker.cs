@@ -50,28 +50,32 @@ public class unit_maker : MonoBehaviour
     // Parameters = [string civilization, string championName, int randomTile]
     public void add_champion(string[] parameters)
     {
+        int civilization = int.Parse(parameters[0]);
         GameObject champion = null;
 
         this.randomTile = int.Parse(parameters[2]);
         championName = parameters[0] + "_" + parameters[1];
-        List<GameObject> tiles = map_manager.get_land(parameters[0]);
+        List<GameObject> tiles = map_manager.get_land(civilization);
 
         GameObject tile = tiles[(int)(this.randomTile / tiles.Count)];
          int[] tileGrid   = tile.GetComponent<Tile>().get_grid();
          Vector3 tilePosition = tile.transform.position;
          tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
-
-         if (tile.GetComponent<Tile>().get_civilization() == "asian")
+            
+        // Civilization 0 is Asian civilization.
+        if (tile.GetComponent<Tile>().get_civilization() == 0)
+        {
+            champion = Instantiate(asianChampion, tilePosition, Quaternion.identity);
+        }
+        // Civilization 1 is Greek civilization.
+        else if (tile.GetComponent<Tile>().get_civilization() == 1)
+        {
+            champion = Instantiate(greekChampion, tilePosition, Quaternion.identity);
+        }
+        // Civilization 2 is Viking civilization.
+        else if (tile.GetComponent<Tile>().get_civilization() == 2)
          {
-             champion = Instantiate(asianChampion, tilePosition, Quaternion.identity);
-         }
-         else if (tile.GetComponent<Tile>().get_civilization() == "viking")
-         {
-             champion = Instantiate(vikingChampion, tilePosition, Quaternion.identity);
-         }
-         else if (tile.GetComponent<Tile>().get_civilization() == "greek")
-         {
-             champion = Instantiate(greekChampion, tilePosition, Quaternion.identity);
+            champion = Instantiate(vikingChampion, tilePosition, Quaternion.identity);
          }
         
         champion.name = championName;
@@ -87,7 +91,6 @@ public class unit_maker : MonoBehaviour
     // Parameters = [string civilization, string unitType, string unitNumber]
     public void add_unit(string[] parameters)
     {
-        //    public string get_current(string[] parameters)
         // for tile coordinates, also figure out scaling for buildings
         GameObject tile = GameObject.Find(parameters[0]);
         Vector3 tilePosition = tile.transform.position;
