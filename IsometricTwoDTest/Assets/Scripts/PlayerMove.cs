@@ -38,7 +38,7 @@ public class PlayerMove : MonoBehaviour
     public Animator anim;
 
     private string civilization; // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
-    private int[] grid;         // Stores the position of the Tile in the virtual grid. [x position, y position]
+    private int[] grid = new int[2] { 0, 0 };         // Stores the position of the Tile in the virtual grid. [x position, y position]
 
 
     // Use this for initialization
@@ -47,12 +47,9 @@ public class PlayerMove : MonoBehaviour
         tiles = GameObject.FindGameObjectsWithTag("Tile");
 
         halfHeight = GetComponent<Collider>().bounds.extents.y;
-        //FindSelectableTiles();
 
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
-
-        import_manager.run_function_all("network_manager", "get_player_civilization", new string[2]{this.gameObject.name, "GetCurrentTile"});
 
         anim = this.GetComponent<Animator>();
     }
@@ -61,10 +58,9 @@ public class PlayerMove : MonoBehaviour
     public void set_selectable(string[] parameter)
     {
         // if this unit is on the current tile
-        if (currentTile.current)
+        if (currentTile.is_current())
         {
             // prepare to move this character
-            map_manager.set_current_char(new string[1] { this.name });
             import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_char", this.name});
 
             // set all tiles in range to selectable
@@ -72,8 +68,7 @@ public class PlayerMove : MonoBehaviour
             {
                 foreach (Tile tile in currentTile.GetAdjacenctTiles(moveRange)) // get the adjacent tiles
                 {
-                    Debug.Log("IN SET SELECTABLE");
-                    if (tile.occupied == false) // if the tile is open
+                    if (!tile.get_occupied())
                     {
                         tile.set_selectable(new string[0] { }); // this is currently not doing anything
                     }
@@ -83,24 +78,11 @@ public class PlayerMove : MonoBehaviour
         } 
     }
 
-    // Handles the Tile status change for movement.
-    // parameter = []
-    public void switch_selectable_tile(string[] parameter)
-    {
-        currentTile.currentchar = null;
-        import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
-   
-        foreach (Tile tile in currentTile.GetAdjacenctTiles(moveRange))
-        {
-            tile.set_unselectable(new string[0] { });
-        }
-    }
-
     public void move(string[] location)
     {
         grid[0] = int.Parse(location[0]);
         grid[1] = int.Parse(location[1]);
-
+        Debug.Log("Moving");
         currentTile.unselect(new string[1] { moveRange.ToString()});
         import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
 
@@ -109,23 +91,16 @@ public class PlayerMove : MonoBehaviour
 
         this.transform.LookAt(targetPosition);
 
+        if (currentTile != actualTargetTile)
+           anim.SetBool("isWalking", true);
+
         this.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - currentTile.GetComponent<Renderer>().bounds.size.z);
 
         this.transform.rotation = Quaternion.identity;
         currentTile.select(new string[1] { moveRange.ToString() });
-
-        import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied" });
-    }
-
-
-    // parameter = [string civilization]
-    public void GetCurrentTile(string[] parameter)
-    {
-        currentTile = map_manager.map[grid[0], grid[1]].ground.GetComponent<Tile>();
-
-        import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied" });
-        map_manager.set_current_char(new string[1] { this.name });
-        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_char", this.name});
+        Debug.Log("Move game object name = " + this.name);
+        anim.SetBool("isWalking", false);
+        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied", this.name });
     }
 
     public void set_civilization(string civ)

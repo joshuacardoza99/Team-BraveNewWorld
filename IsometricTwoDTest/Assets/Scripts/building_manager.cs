@@ -29,11 +29,11 @@ public class building_manager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+       /* if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             Vector3 tilePosition = map_manager.get_current().ground.transform.position;
             Instantiate(activeBuildingType.prefab, tilePosition, Quaternion.identity);
-        }    
+        }    */
     }
 
     public void set_active_building_type(building_type building_Type)
