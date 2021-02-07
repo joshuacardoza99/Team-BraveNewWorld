@@ -4,6 +4,9 @@ ScriptsOnlyBuild:
     - PanZoom
     - PlayerMove
     - Tile
+    - building_manager
+    - building_select
+    - building_type
     - change_button
     - change_scene
     - character_selection
@@ -20,10 +23,18 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
+    - UnityEditor.Tilemaps.GridPaletteBrushes
+    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -40,7 +51,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.InputField
     - UnityEngine.UI.Mask
     - UnityEngine.UI.ScrollRect
-    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Text
     - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
@@ -69,7 +79,13 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -82,59 +98,63 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11798}
     - Class: 114
-      Script: {instanceID: 11830}
+      Script: {instanceID: 11842}
     - Class: 114
-      Script: {instanceID: 12178}
+      Script: {instanceID: 12220}
     - Class: 114
-      Script: {instanceID: 12208}
+      Script: {instanceID: 12242}
     - Class: 114
-      Script: {instanceID: 12230}
+      Script: {instanceID: 12362}
     - Class: 114
-      Script: {instanceID: 12350}
+      Script: {instanceID: 12446}
     - Class: 114
-      Script: {instanceID: 12434}
+      Script: {instanceID: 12716}
     - Class: 114
-      Script: {instanceID: 12702}
+      Script: {instanceID: 12812}
     - Class: 114
-      Script: {instanceID: 12798}
+      Script: {instanceID: 13012}
     - Class: 114
-      Script: {instanceID: 12998}
+      Script: {instanceID: 13148}
     - Class: 114
-      Script: {instanceID: 13134}
+      Script: {instanceID: 13424}
     - Class: 114
-      Script: {instanceID: 13682}
+      Script: {instanceID: 13698}
     - Class: 114
-      Script: {instanceID: 13686}
+      Script: {instanceID: 13702}
     - Class: 114
-      Script: {instanceID: 13830}
+      Script: {instanceID: 13844}
     - Class: 114
-      Script: {instanceID: 13956}
+      Script: {instanceID: 13876}
     - Class: 114
-      Script: {instanceID: 14022}
+      Script: {instanceID: 13974}
     - Class: 114
-      Script: {instanceID: 14198}
+      Script: {instanceID: 14040}
     - Class: 114
-      Script: {instanceID: 14254}
+      Script: {instanceID: 14216}
     - Class: 114
-      Script: {instanceID: 14568}
+      Script: {instanceID: 14272}
     - Class: 114
-      Script: {instanceID: 14624}
+      Script: {instanceID: 14586}
     - Class: 114
-      Script: {instanceID: 14694}
+      Script: {instanceID: 14642}
     - Class: 114
-      Script: {instanceID: 14722}
+      Script: {instanceID: 14712}
     - Class: 114
-      Script: {instanceID: 14738}
+      Script: {instanceID: 14740}
     - Class: 114
-      Script: {instanceID: 14774}
+      Script: {instanceID: 14756}
     - Class: 114
-      Script: {instanceID: 14938}
+      Script: {instanceID: 14792}
     - Class: 114
-      Script: {instanceID: 15122}
+      Script: {instanceID: 14956}
     - Class: 114
-      Script: {instanceID: 15436}
+      Script: {instanceID: 15140}
     - Class: 114
-      Script: {instanceID: 26458}
+      Script: {instanceID: 15456}
+    - Class: 114
+      Script: {instanceID: 15524}
+    - Class: 114
+      Script: {instanceID: 32806}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -266,7 +286,7 @@ ScriptsOnlyBuild:
     className: Scrollbar
   - hash:
       serializedVersion: 2
-      Hash: 0b2d2e6a932cd4ae2d6ca0511a04ee56
+      Hash: 2b4d348e4fe47f2726fa99b2273217f5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tile
@@ -386,6 +406,12 @@ ScriptsOnlyBuild:
     className: AspectRatioFitter
   - hash:
       serializedVersion: 2
+      Hash: 6786dc84a8262f2aea403d0e72e8afe0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: unit_manager
+  - hash:
+      serializedVersion: 2
       Hash: 87cef3c82381dc586f6772c3e27561b6
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.Experimental.U2D.Animation
@@ -416,7 +442,7 @@ ScriptsOnlyBuild:
     className: PixelPerfectCamera
   - hash:
       serializedVersion: 2
-      Hash: eec4ed6629e135e6b5e20eb051df5674
+      Hash: 3b89d83f5f42d733818e81a25a977896
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: unit_maker
@@ -524,6 +550,12 @@ ScriptsOnlyBuild:
     className: AutoHud
   - hash:
       serializedVersion: 2
+      Hash: a9068eea350290838740069cdd82a942
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: building_manager
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -590,22 +622,28 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: d1db11b98348f48c27d24ab13dddda01
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: click_handlers
-  - hash:
-      serializedVersion: 2
-      Hash: 077363076d711bf78954df2ff24b8754
+      Hash: 52893a989ee134ce670e5f29c200d661
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: character_selection
+  - hash:
+      serializedVersion: 2
+      Hash: 97f1ad62e28a956e13ff867bb8ebe936
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: building_type
   - hash:
       serializedVersion: 2
       Hash: c1d728126ff1918728036c59106d32b2
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: RawImage
+  - hash:
+      serializedVersion: 2
+      Hash: 48b7c69db93718385298016223e3babf
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: building_civ
   - hash:
       serializedVersion: 2
       Hash: c5b286ca3cff0f60f5a226dbe9f6f941
@@ -788,7 +826,7 @@ ScriptsOnlyBuild:
     className: AudioTrack
   - hash:
       serializedVersion: 2
-      Hash: 92eb99482781f63dbd8a06197b0961d1
+      Hash: cefcfeec7e8e623a1eec16bf8268be70
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: map_manager
@@ -800,7 +838,7 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 8feead385c485c183423d155177fcb05
+      Hash: 627bab22db5e6db36c1753539133c262
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMove
@@ -848,7 +886,7 @@ ScriptsOnlyBuild:
     className: menu_scene
   - hash:
       serializedVersion: 2
-      Hash: 0280f5a339bc545ddfa38377a427af67
+      Hash: 4b054f17d1eba738f205eb8b8cfffcd7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: civ_description
@@ -912,6 +950,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Outline
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: attack
   - hash:
       serializedVersion: 2
       Hash: 134322c9293c1896357cce271b819ce4
@@ -984,6 +1028,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Slider
+  - hash:
+      serializedVersion: 2
+      Hash: c26ce128aa3843a6f15816ae022d8e5a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: building_select
   - hash:
       serializedVersion: 2
       Hash: 0fd6822f6177297bd0eb4d83cc7a9030
