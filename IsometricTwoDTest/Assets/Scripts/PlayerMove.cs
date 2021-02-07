@@ -58,14 +58,14 @@ public class PlayerMove : MonoBehaviour
     public void set_selectable(string[] parameter)
     {
         // prepare to move this character
-        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_char", this.name});
+        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_character", this.name});
 
         // set all tiles in range to selectable
         if (moveRange >= 1) // if the character can move at least once
         {
-            foreach (Tile tile in currentTile.GetAdjacenctTiles(moveRange)) // get the adjacent tiles
+            foreach (Tile tile in currentTile.get_walkable_tiles(moveRange)) // get the adjacent tiles
             {
-                if (!tile.get_occupied())
+                if (!tile.is_occupied())
                 {
                     tile.set_selectable(new string[0] { }); // this is currently not doing anything
                 }

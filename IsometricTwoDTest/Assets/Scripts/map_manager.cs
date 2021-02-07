@@ -17,7 +17,7 @@ public class map_manager : MonoBehaviour
     public GameObject greekLand;
     public GameObject asianLand;
     public map_item currentSelected; // stores what tile is currently selected
-    public string CurrentChar = null; // Character on current selected tile
+    public string currentCharacter = null; // Character on current selected tile
     public map_item[,] map;
 
     // Private Global Variables //
@@ -269,15 +269,15 @@ public class map_manager : MonoBehaviour
     }
 
     // Set the current character to a given character object
-    public void set_current_char(string[] character)
+    public void set_current_character(string[] character)
     {
-        CurrentChar = character[0];
+        currentCharacter = character[0];
     }
 
     // sends the string currentChar to the calling script
-    public string get_current_char()
+    public string get_current_character()
     {
-        return CurrentChar;
+        return currentCharacter;
     }
 
     // Finds the wanted map item and runs the given function on it.
