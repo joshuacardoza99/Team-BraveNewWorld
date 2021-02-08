@@ -93,7 +93,7 @@ public class Tile : MonoBehaviour
         {
             set_unselectable(new string[0] { });
         }
-        else if(occupied && Time.time > nextAttack) // and in range, and not a friendly civ
+        else if(occupied && Time.time > nextAttack /* and check that charcter on tile is not your own civ type */ ) // and in range, and not a friendly civ
         {
             // This will make you able to walk on top of other players in multiplayer.
             map_manager.set_current_char(new string[1] { currentchar.name });
