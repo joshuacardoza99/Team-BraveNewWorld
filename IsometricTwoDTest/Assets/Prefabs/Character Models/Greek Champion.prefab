@@ -1144,6 +1144,7 @@ GameObject:
   - component: {fileID: 8612826712256427940}
   - component: {fileID: -3313503516995483423}
   - component: {fileID: 8644886194534655741}
+  - component: {fileID: -6705420529854839220}
   m_Layer: 0
   m_Name: Greek Champion
   m_TagString: Untagged
@@ -1202,3 +1203,22 @@ MonoBehaviour:
   actualTargetTile: {fileID: 0}
   currentTile: {fileID: 0}
   anim: {fileID: 0}
+--- !u!95 &-6705420529854839220
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8992906632270343454}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bbd47d04f0987b540915f0043f2a945a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

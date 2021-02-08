@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 1296134598327430887}
   - component: {fileID: -2960142360621993120}
   - component: {fileID: 6874454136166758796}
+  - component: {fileID: 2857041312152882581}
   m_Layer: 0
   m_Name: Viking Champion
   m_TagString: Untagged
@@ -277,11 +278,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdfb57c639781a438bc2f6fd21e1554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  civ: ' '
-  currentTile: {fileID: 0}
-  moves: 3
-  moveSpeed: 2
+  health: 10
+  damage: 2
+  attackRange: 4
+  moveRange: 3
+  cooldown: 3
+  nextAttack: 0
   actualTargetTile: {fileID: 0}
+  currentTile: {fileID: 0}
+  anim: {fileID: 0}
+--- !u!95 &2857041312152882581
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925037191333295197}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: df0db9f0a5ad52a4092540a083e77413, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2208903239704800612
 GameObject:
   m_ObjectHideFlags: 0

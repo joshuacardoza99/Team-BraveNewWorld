@@ -58,14 +58,14 @@ public class PlayerMove : MonoBehaviour
     public void set_selectable(string[] parameter)
     {
         // prepare to move this character
-        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_char", this.name});
+        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_character", this.name});
 
         // set all tiles in range to selectable
         if (moveRange >= 1) // if the character can move at least once
         {
-            foreach (Tile tile in currentTile.GetAdjacenctTiles(moveRange)) // get the adjacent tiles
+            foreach (Tile tile in currentTile.get_walkable_tiles(moveRange)) // get the adjacent tiles
             {
-                if (!tile.get_occupied())
+                if (!tile.is_occupied())
                 {
                     tile.set_selectable(new string[0] { }); // this is currently not doing anything
                 }
@@ -84,17 +84,25 @@ public class PlayerMove : MonoBehaviour
         targetPosition = map_manager.map[grid[0], grid[1]].ground.transform.position;
         currentTile    = map_manager.map[grid[0], grid[1]].ground.GetComponent<Tile>();
 
+        // Condition if character moved
+        //if (currentTile.Position != targetPosition)
+            try
+            {
+                anim.SetBool("isWalking", true);
+            }
+            catch { }
+
         this.transform.LookAt(targetPosition);
 
-        if (currentTile != actualTargetTile)
-           anim.SetBool("isWalking", true);
 
         this.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - currentTile.GetComponent<Renderer>().bounds.size.z);
 
         this.transform.rotation = Quaternion.identity;
         currentTile.select(new string[1] { moveRange.ToString() });
         Debug.Log("Move game object name = " + this.name);
-        anim.SetBool("isWalking", false);
+
+        if (anim.GetBool("isWalking"))
+            anim.SetBool("isWalking", false);
         import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied", this.name });
     }
 
