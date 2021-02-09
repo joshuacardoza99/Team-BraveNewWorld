@@ -20,7 +20,7 @@ public class Tile : MonoBehaviour
 
     public bool current = false;  // if the player is currently using this tile
     public bool occupied = false; // if there is a character currently on this tile
-
+    private bool isCurrentlySelectedTile = false; // Tells when this tile is selected by the player.
     public bool target = false;
     private bool selectable = false; // Determins if the player can click on click on this tile.
     private bool attackable = false;
@@ -88,6 +88,8 @@ public class Tile : MonoBehaviour
     // Set current to this tile when it gets clicked
     public void OnMouseDown()
     {
+        map_manager.set_current_tile(map_manager.map[grid[0], grid[1]].ground); // Sets this tile as being currently selected.
+
         // If the tile is selectable and open, then move the current character to this tile
         if (selectable && !occupied)
         {
@@ -319,6 +321,27 @@ public class Tile : MonoBehaviour
     }
 
    public void get_attack_range()
+    // Puts the tile into currently selected mode.
+    public void set_as_current()
+    {
+        if (!isCurrentlySelectedTile)
+        {
+            this.isCurrentlySelectedTile = true;
+            this.GetComponent<Renderer>().material.color = Color.cyan;
+        }
+    }
+
+    // Puts the tile into normal mode.
+    public void set_as_not_current()
+    {
+        if (isCurrentlySelectedTile)
+        {
+            this.isCurrentlySelectedTile = false;
+            this.GetComponent<Renderer>().material.color = realColor;
+        }
+    }
+
+   /*public void Reset()
     {
         
 
