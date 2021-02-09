@@ -321,6 +321,15 @@ public class Tile : MonoBehaviour
     }
 
    public void get_attack_range()
+    {
+
+    foreach (Tile tile in get_walkable_tiles(currentCharacter.GetComponent<PlayerMove>().attackRange))
+        {
+            tile.set_attackable(new string[0] { });
+        }
+
+        
+    }
     // Puts the tile into currently selected mode.
     public void set_as_current()
     {
@@ -339,16 +348,5 @@ public class Tile : MonoBehaviour
             this.isCurrentlySelectedTile = false;
             this.GetComponent<Renderer>().material.color = realColor;
         }
-    }
-
-   /*public void Reset()
-    {
-        
-
-        foreach (Tile tile in get_walkable_tiles(currentCharacter.GetComponent<PlayerMove>().attackRange))
-        {
-            tile.set_attackable(new string[0] { });
-        }
-
     }
 }
