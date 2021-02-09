@@ -23,6 +23,7 @@ public class Tile : MonoBehaviour
 
     public bool target = false;
     private bool selectable = false; // Determins if the player can click on click on this tile.
+    private bool attackable = false;
     public List<Tile> adjacencyList = new List<Tile>();
     public GameObject currentCharacter = null; // the character currently occupying this tile.
 
@@ -69,6 +70,10 @@ public class Tile : MonoBehaviour
         {
             this.GetComponent<Renderer>().material.color = Color.white;
         }
+        else if (attackable)
+        {
+            this.GetComponent<Renderer>().material.color = Color.yellow;
+        }
         else if (selectable)
         {
            this.GetComponent<Renderer>().material.color = Color.blue;
@@ -93,22 +98,27 @@ public class Tile : MonoBehaviour
         {
             set_unselectable(new string[0] { });
         }
-        else if(occupied && Time.time > nextAttack /* and check that charcter on tile is not your own civ type */ ) // and in range, and not a friendly civ
+        else if(occupied && Time.time > nextAttack && attackable/* and check that charcter on tile is not your own civ type */ ) // and in range, and not a friendly civ
         {
             // This will make you able to walk on top of other players in multiplayer.
             map_manager.set_current_character(new string[1] { currentCharacter.name });
             select(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString()});
+            // create if to check if in attack range 
             // check if this characters civ is the same as the character clicking on it
             if(Input.GetMouseButtonDown(0))
             {
-                currentCharacter.GetComponent<PlayerMove>().health -= currentCharacter.GetComponent<PlayerMove>().damage;
-                Debug.Log("Health equals " + currentCharacter.GetComponent<PlayerMove>().health);
-                if (currentCharacter.GetComponent<PlayerMove>().health <= 0)
+                if(currentCharacter.GetComponent<PlayerMove>().civilization != currentCharacter.GetComponent<PlayerMove>().civilization)
                 {
-                    Debug.Log("YOUR SOLDIER HAS FALLEN !!");
+                    currentCharacter.GetComponent<PlayerMove>().health -= currentCharacter.GetComponent<PlayerMove>().damage;
+                    Debug.Log("Health equals " + currentCharacter.GetComponent<PlayerMove>().health);
+                    if (currentCharacter.GetComponent<PlayerMove>().health <= 0)
+                    {
+                        Debug.Log("YOUR SOLDIER HAS FALLEN !!");
+                    }
+                    Debug.Log("IN COOLDOWN WAIT");
+                    nextAttack = Time.time + cooldown;
                 }
-                Debug.Log("IN COOLDOWN WAIT");
-                nextAttack = Time.time + cooldown;
+
             }
 
 
@@ -184,7 +194,7 @@ public class Tile : MonoBehaviour
 
     // Returns a List of Tiles with all tiles in the given range away from this tile that are walkable.
     // Test Instructions: To test run this function with the given range. Then you can manually select with the map_manager.map to check the output with predetermined walkable tiles.
-    public List<Tile> get_walkable_tiles (int range)
+    public List<Tile> get_walkable_tiles (int range) // use this to get attack range 
     {
         List<Tile> filteredList = new List<Tile>(); // A list of all the walkable tiles in the given range of this tile.
 
@@ -202,7 +212,7 @@ public class Tile : MonoBehaviour
     // Sets the surounding tiles in the given range to be selectable.
     // Test Instruction: Manually select the tile with map_manager.map and make sure the tile color is blue and if tile.selectable is true.
     // parameter = [int range]
-    public void select(string[] parameter)
+    public void select(string[] parameter)// use this for attack range 
     {
         int range = int.Parse(parameter[0]); // The distance a needs to be away from this tile to select.
 
@@ -284,6 +294,12 @@ public class Tile : MonoBehaviour
         Updateme();
     }
 
+    public void set_attackable(string[] parameter)
+    {
+        attackable = true;
+        Updateme();
+    }
+
     // Sets this tile to be unselectable.
     public void set_unselectable(string[] parameter)
     {
@@ -302,10 +318,14 @@ public class Tile : MonoBehaviour
         Updateme();
     }
 
-   /*public void Reset()
+   public void get_attack_range()
     {
-        target = false;
-        selectable = false;
-        Updateme();
-    }*/
+        
+
+        foreach (Tile tile in get_walkable_tiles(currentCharacter.GetComponent<PlayerMove>().attackRange))
+        {
+            tile.set_attackable(new string[0] { });
+        }
+
+    }
 }

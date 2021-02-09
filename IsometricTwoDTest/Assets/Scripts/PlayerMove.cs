@@ -37,7 +37,7 @@ public class PlayerMove : MonoBehaviour
     // Animation Controller
     public Animator anim;
 
-    private int civilization; // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
+    public int civilization; // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     private int[] grid = new int[2] { 0, 0 };         // Stores the position of the Tile in the virtual grid. [x position, y position]
 
 
@@ -132,14 +132,4 @@ public class PlayerMove : MonoBehaviour
         currentTile.OnMouseDown();
     } 
 
-    public void update_cooldown()
-    {
-        if (Time.time > nextAttack)
-        {
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                nextAttack = Time.time + cooldown;
-            }
-        }
-    }
 }
