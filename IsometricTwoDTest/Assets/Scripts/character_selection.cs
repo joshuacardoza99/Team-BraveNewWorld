@@ -7,14 +7,11 @@ public class character_selection : MonoBehaviour
      // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
 
-    public GameObject[] characters;
-    public int selectedCharacter = 0;
+    public GameObject[] characters;   // Array of Gameobjects that used can select
+    public int selectedCharacter = 0; // Currently selected Civ
 
     [SerializeField]
-    private civ_description description;
-
-    [SerializeField]
-    private building_civ civ_number;
+    private civ_description description; // Make varible visible in insector and connect it to civ_description
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +19,7 @@ public class character_selection : MonoBehaviour
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
     }
 
+    // Change to next Civ in array list
     public void NextCharacter()
     {
         characters[selectedCharacter].SetActive(false);
@@ -31,6 +29,7 @@ public class character_selection : MonoBehaviour
         civ_number.civNumber = selectedCharacter;
     }
 
+    // Change to previous civ in array list
     public void PreviousCharacter()
     {
         characters[selectedCharacter].SetActive(false);
