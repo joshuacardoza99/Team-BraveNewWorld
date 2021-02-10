@@ -5,8 +5,15 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class building_type : ScriptableObject
 {
-    public Transform prefab;
-    public Sprite sprite;
+    [Header("Sprite being used for button")]  // Shows text in inspector
+    public Sprite sprite;                     // Sprites being used to attach to button
 
-    public int civNumber;
+    [Space(5)]                                // 5 pixels of spacing here.
+    [Header("Prefab used for budiling")]      // Shows text in inspector
+    public Transform asian;                   // Asian civ prefabs
+    public Transform viking;                  // Viking civ prefabs
+    public Transform greek;                   // Greek civ prefabs
+
+    [Space(5)]                                // 5 pixels of spacing here.
+    public bool canChampionSpawn = false;     // Ability for building to spawn units
 }

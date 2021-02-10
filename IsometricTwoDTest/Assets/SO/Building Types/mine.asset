@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609c0da8d4167184bad12b13e612d074, type: 3}
+  m_Name: mine
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 329975fb78391c04cbb5af74a2b9df66, type: 3}
+  asian: {fileID: 6001181614200676741, guid: 5f40469189e4afa479d795f878314c1b, type: 3}
+  viking: {fileID: 6001181614200676741, guid: 5f40469189e4afa479d795f878314c1b, type: 3}
+  greek: {fileID: 6001181614200676741, guid: 5f40469189e4afa479d795f878314c1b, type: 3}
+  canSpawnUnits: 0
+  Health: 50

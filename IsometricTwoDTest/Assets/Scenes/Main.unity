@@ -456,7 +456,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   civNumber: 0
-  place: 1
   activeBuildingType: {fileID: 0}
 --- !u!4 &640418262
 Transform:
@@ -1511,7 +1510,7 @@ MonoBehaviour:
   - {fileID: 1222782188}
   selectedCharacter: 0
   description: {fileID: 1958256377}
-  civ_number: {fileID: 0}
+  civNumber: {fileID: 640418261}
 --- !u!4 &1447093570
 Transform:
   m_ObjectHideFlags: 0
@@ -3047,7 +3046,7 @@ PrefabInstance:
       objectReference: {fileID: 640418261}
     - target: {fileID: 1445479643354041312, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: add_building
+      value: add_building_on_click
       objectReference: {fileID: 0}
     - target: {fileID: 1445479643354041312, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -3388,11 +3387,11 @@ PrefabInstance:
     - target: {fileID: 6058921390549617269, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: buildingTypeList.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 0e2efc00141420440b6ef2cc509fdeef, type: 2}
+      objectReference: {fileID: 11400000, guid: 57c33a5f3ed89df4a84d1d4039ba4c01, type: 2}
     - target: {fileID: 6058921390549617269, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: buildingTypeList.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: cf193b2ab44ba3a478106fc4d93782bf, type: 2}
+      objectReference: {fileID: 11400000, guid: 4058bf08d40abbf4cb193caf21affeef, type: 2}
     - target: {fileID: 6591165327972315548, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
