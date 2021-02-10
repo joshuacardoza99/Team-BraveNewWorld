@@ -12,6 +12,10 @@ public class character_selection : MonoBehaviour
 
     [SerializeField]
     private civ_description description; // Make varible visible in insector and connect it to civ_description
+    
+    [SerializeField]
+    private building_manager civNumber; // Make varible visible in insector and connect it to building_manager
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +30,7 @@ public class character_selection : MonoBehaviour
         selectedCharacter = (selectedCharacter + 1) % characters.Length;
         characters[selectedCharacter].SetActive(true);
         description.selectedCiv = selectedCharacter;
-        civ_number.civNumber = selectedCharacter;
+        civNumber.civNumber = selectedCharacter;
     }
 
     // Change to previous civ in array list
@@ -41,7 +45,7 @@ public class character_selection : MonoBehaviour
         }
         characters[selectedCharacter].SetActive(true);
         description.selectedCiv = selectedCharacter;
-        civ_number.civNumber = selectedCharacter;
+        civNumber.civNumber = selectedCharacter;
     }
 
 

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609c0da8d4167184bad12b13e612d074, type: 3}
+  m_Name: barracks
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: ed06a23196980ae45b19738a61700f49, type: 3}
+  asian: {fileID: 4189977001460276037, guid: fa8062b996cef8c4dbb624d57182006b, type: 3}
+  viking: {fileID: 4537105331377201163, guid: 149ec2a9724de944e9c5956f6ef4007f, type: 3}
+  greek: {fileID: 1867276486797851103, guid: 4767ef0fd5da48a4c93f3bff273636b2, type: 3}
+  canSpawnUnits: 0
+  Health: 50
