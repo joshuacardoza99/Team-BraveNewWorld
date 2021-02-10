@@ -97,14 +97,13 @@ public class Tile : MonoBehaviour
         }
         else if (selectable)
         {
-            Debug.Log("Should set unselectable"); // set_unselectable(new string[0] { });
+            Debug.Log("Should set unselectable");
         }
-        else if(occupied && Time.time > nextAttack && attackable/* and check that charcter on tile is not your own civ type */ ) // and in range, and not a friendly civ
+        else if(occupied && Time.time > nextAttack && attackable) // and in range, and not a friendly civ
         {
             // This will make you able to walk on top of other players in multiplayer.
            // set_occupied(new string[1] { currentCharacter.name });
             select(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString()});
-            // create if to check if in attack range 
             // check if this characters civ is the same as the character clicking on it
             if(Input.GetMouseButtonDown(0))
             {
@@ -293,6 +292,7 @@ public class Tile : MonoBehaviour
         Updateme();
     }
 
+    // Sets his tile to be attackable 
     public void set_attackable(string[] parameter)
     {
         attackable = true;
@@ -331,6 +331,7 @@ public class Tile : MonoBehaviour
         Updateme();
     }
 
+    // Gets the range of tiles that are attackable 
     public void get_attack_range()
     {
 
@@ -352,6 +353,7 @@ public class Tile : MonoBehaviour
             if (is_occupied())
             {
                 select(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString() });
+                get_attack_range();
             }
         }
     }
