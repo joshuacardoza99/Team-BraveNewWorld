@@ -58,6 +58,7 @@ public class PlayerMove : MonoBehaviour
     public void set_selectable(string[] parameter)
     {
         // prepare to move this character
+        Debug.Log("Trying to Set current character from set_selectable to " + this.name);
         import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_character", this.name});
 
         // set all tiles in range to selectable
@@ -78,7 +79,7 @@ public class PlayerMove : MonoBehaviour
         grid[0] = int.Parse(location[0]);
         grid[1] = int.Parse(location[1]);
         Debug.Log("Moving");
-        currentTile.unselect(new string[1] { moveRange.ToString()});
+        //currentTile.set_unoccupied(new string[1] { moveRange.ToString()});
         import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
 
         targetPosition = map_manager.map[grid[0], grid[1]].ground.transform.position;
@@ -101,8 +102,12 @@ public class PlayerMove : MonoBehaviour
         currentTile.select(new string[1] { moveRange.ToString() });
         Debug.Log("Move game object name = " + this.name);
 
-        if (anim.GetBool("isWalking"))
-            anim.SetBool("isWalking", false);
+        try
+        {
+            if (anim.GetBool("isWalking"))
+                anim.SetBool("isWalking", false);
+        }
+        catch { }
         import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied", this.name });
     }
 
