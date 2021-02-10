@@ -271,12 +271,14 @@ public class map_manager : MonoBehaviour
     // Set the current character to a given character object
     public void set_current_character(string[] character)
     {
+        Debug.Log("Setting current Character in map to " + character[0]);
         currentCharacter = character[0];
     }
 
     // sends the string currentChar to the calling script
     public string get_current_character()
     {
+        Debug.Log("Returning the current character as " + currentCharacter);
         return currentCharacter;
     }
 

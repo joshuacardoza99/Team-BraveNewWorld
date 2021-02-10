@@ -78,9 +78,8 @@ public class Tile : MonoBehaviour
         {
            this.GetComponent<Renderer>().material.color = Color.blue;
         }
-        else
+        else if (!isCurrentlySelectedTile)
         {
-                // Sometime the realColor is Black here for appearantly no reason.
                 this.GetComponent<Renderer>().material.color = realColor;
         }
     }
@@ -88,22 +87,22 @@ public class Tile : MonoBehaviour
     // Set current to this tile when it gets clicked
     public void OnMouseDown()
     {
-        map_manager.set_current_tile(map_manager.map[grid[0], grid[1]].ground); // Sets this tile as being currently selected.
-
         // If the tile is selectable and open, then move the current character to this tile
         if (selectable && !occupied)
         {
-            set_current_character(new string[1] { map_manager.get_current_character()});
+            Debug.Log("About to set current character from OnMouseDown to " + map_manager.get_current_character());
+            set_occupied(new string[1] { map_manager.get_current_character()});
+            Debug.Log("About to move " + currentCharacter.name);
             import_manager.run_function_all(currentCharacter.name, "move", new string[2] {grid[0].ToString(), grid[1].ToString()});
         }
         else if (selectable)
         {
-            set_unselectable(new string[0] { });
+            Debug.Log("Should set unselectable"); // set_unselectable(new string[0] { });
         }
         else if(occupied && Time.time > nextAttack && attackable/* and check that charcter on tile is not your own civ type */ ) // and in range, and not a friendly civ
         {
             // This will make you able to walk on top of other players in multiplayer.
-            map_manager.set_current_character(new string[1] { currentCharacter.name });
+           // set_occupied(new string[1] { currentCharacter.name });
             select(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString()});
             // create if to check if in attack range 
             // check if this characters civ is the same as the character clicking on it
@@ -127,7 +126,8 @@ public class Tile : MonoBehaviour
 
         }
 
-        Updateme();
+
+        map_manager.set_current_tile(map_manager.map[grid[0], grid[1]].ground); // Sets this tile as being currently selected.
     }
 
     // Returns a List of Tiles with all tiles in the given range away from this tile.
@@ -267,20 +267,17 @@ public class Tile : MonoBehaviour
     {
         occupied    = true;
         selectable  = true;
-        currentCharacter = GameObject.Find(parameter[0]);
-        currentCharacter.GetComponent<PlayerMove>().currentTile = this;
-        Updateme();
+        set_current_character(parameter);
     }
 
     // Sets this tile into unoccupied mode.
     // parameter = [] -- just to make it compatible with import_manager.run_function_all.
     public void set_unoccupied(string[] parameter)
     {
+        Debug.Log("Setting Unoccupied");
         occupied    = false;
         selectable = false;
-        currentCharacter.GetComponent<PlayerMove>().currentTile = null;
-        currentCharacter = null;
-        Updateme();
+        unset_current_character(parameter);
     }
 
     // Determines if this tile is occupied.
@@ -312,18 +309,32 @@ public class Tile : MonoBehaviour
     // Sets the current character who is occupying this tile.
     public void set_current_character(string[] newcurrentChar)
     {
+        if (map_manager == null)
+        {
+            map_manager = GameObject.Find("Map").GetComponent<map_manager>();
+        }
+
         if (newcurrentChar[0] != "")
         {
             currentCharacter = GameObject.Find(newcurrentChar[0]);
+            currentCharacter.GetComponent<PlayerMove>().currentTile = this;
+            map_manager.set_current_character(new string[1] { currentCharacter.name });
+            Updateme();
         }
-        
+    }
+
+    // Unsets the current character who is occupying this tile.
+    public void unset_current_character(string[] nothing)
+    {
+        currentCharacter.GetComponent<PlayerMove>().currentTile = null;
+        currentCharacter = null;
         Updateme();
     }
 
-   public void get_attack_range()
+    public void get_attack_range()
     {
 
-    foreach (Tile tile in get_walkable_tiles(currentCharacter.GetComponent<PlayerMove>().attackRange))
+        foreach (Tile tile in get_walkable_tiles(currentCharacter.GetComponent<PlayerMove>().attackRange))
         {
             tile.set_attackable(new string[0] { });
         }
@@ -337,6 +348,11 @@ public class Tile : MonoBehaviour
         {
             this.isCurrentlySelectedTile = true;
             this.GetComponent<Renderer>().material.color = Color.cyan;
+             
+            if (is_occupied())
+            {
+                select(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString() });
+            }
         }
     }
 
@@ -347,6 +363,11 @@ public class Tile : MonoBehaviour
         {
             this.isCurrentlySelectedTile = false;
             this.GetComponent<Renderer>().material.color = realColor;
+
+            if (is_occupied())
+            {
+                unselect(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString() });
+            }
         }
     }
 }
