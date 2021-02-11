@@ -8,41 +8,35 @@ using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 
-
+// This class handles the different interactions on a single tile. //
 public class Tile : MonoBehaviour
 {
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
-    map_manager map_manager;
+    map_manager    map_manager;     // This imports the map_manager class to help with interactions with othe tiles.
 
-    public bool walkable = true;
+    // Global Variables //
+    public  bool       walkable                = true;  // Determins if this tile can be walked on.
+    public  bool       current                 = false; // if the player is currently using this tile
+    public  bool       occupied                = false; // if there is a character currently on this tile
+    private bool       isCurrentlySelectedTile = false; // Tells when this tile is selected by the player.
+    public  bool       target                  = false; // Determines if this tile is being targeted by another player.
+    private bool       selectable              = false; // Determins if the player can click on click on this tile.
+    private bool       attackable              = false; // Determines if another player can attach this tile.
+    public  GameObject currentCharacter        = null;  // the character currently occupying this tile.
+    public  float      nextAttack              = 0;     // Determine if another player is attaching this tile.
+    private bool       isAttacking             = false; // Determine if the player on this tile it attaching another tile.
+    public  float      cooldown                = 3;     // The amount of seconds a character must wast before moving again.
+    private Color      realColor;                       // The color the tile should be without any highlights.
+    private int        civilization;                    // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
+    private int[]      grid;                            // Stores the position of the Tile in the virtual grid. [x position, y position]
 
-
-    public bool current = false;  // if the player is currently using this tile
-    public bool occupied = false; // if there is a character currently on this tile
-    private bool isCurrentlySelectedTile = false; // Tells when this tile is selected by the player.
-    public bool target = false;
-    public bool selectable = false; // Determins if the player can click on click on this tile.
-    private bool attackable = false;
-    public List<Tile> adjacencyList = new List<Tile>();
-    public GameObject currentCharacter = null; // the character currently occupying this tile.
-
-    public float nextAttack = 0;
-    bool isAttacking = false;
-    public float cooldown = 3;
-
-    // Private Variables //
-    private Color  realColor;    // The color the tile should be without any highlights.
-    private int civilization; // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
-    private int[]  grid;         // Stores the position of the Tile in the virtual grid. [x position, y position]
-
-    // Use this for initialization
+    // Use this for initialization.
     void Start () 
 	{
-        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
-        map_manager     = GameObject.Find("Map").GetComponent<map_manager>();
-
-        realColor = this.GetComponent<Renderer>().material.color;
+        import_manager  = GameObject.Find("network_manager").GetComponent<import_manager>();
+        map_manager = GameObject.Find("Map").GetComponent<map_manager>();
+        realColor       = this.GetComponent<Renderer>().material.color;
     }
 
     // Update is whenever needed
@@ -58,13 +52,14 @@ public class Tile : MonoBehaviour
             occupied = false;
         }
 
-        if (occupied)
+        
+        if (occupied && isCurrentlySelectedTile)
         {
-            this.GetComponent<Renderer>().material.color = Color.magenta;
+            this.GetComponent<Renderer>().material.color = Color.red;
         }
         else if (occupied)
         {
-            this.GetComponent<Renderer>().material.color = Color.red;
+            this.GetComponent<Renderer>().material.color = Color.magenta;
         }
         else if (target)
         {
@@ -97,14 +92,13 @@ public class Tile : MonoBehaviour
         }
         else if (selectable)
         {
-            Debug.Log("Should set unselectable"); // set_unselectable(new string[0] { });
+            Debug.Log("Should set unselectable");
         }
-        else if(occupied && Time.time > nextAttack && attackable/* and check that charcter on tile is not your own civ type */ ) // and in range, and not a friendly civ
+        else if(occupied && Time.time > nextAttack && attackable) // and in range, and not a friendly civ
         {
             // This will make you able to walk on top of other players in multiplayer.
            // set_occupied(new string[1] { currentCharacter.name });
             select(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString()});
-            // create if to check if in attack range 
             // check if this characters civ is the same as the character clicking on it
             if(Input.GetMouseButtonDown(0))
             {
@@ -121,11 +115,7 @@ public class Tile : MonoBehaviour
                 }
 
             }
-
-
-
         }
-
 
         map_manager.set_current_tile(map_manager.map[grid[0], grid[1]].ground); // Sets this tile as being currently selected.
     }
@@ -268,6 +258,7 @@ public class Tile : MonoBehaviour
         occupied    = true;
         selectable  = true;
         set_current_character(parameter);
+        Updateme();
     }
 
     // Sets this tile into unoccupied mode.
@@ -278,6 +269,7 @@ public class Tile : MonoBehaviour
         occupied    = false;
         selectable = false;
         unset_current_character(parameter);
+        Updateme();
     }
 
     // Determines if this tile is occupied.
@@ -293,6 +285,7 @@ public class Tile : MonoBehaviour
         Updateme();
     }
 
+    // Sets his tile to be attackable .
     public void set_attackable(string[] parameter)
     {
         attackable = true;
@@ -331,16 +324,15 @@ public class Tile : MonoBehaviour
         Updateme();
     }
 
+    // Gets the range of tiles that are attackable.
     public void get_attack_range()
     {
-
         foreach (Tile tile in get_walkable_tiles(currentCharacter.GetComponent<PlayerMove>().attackRange))
         {
             tile.set_attackable(new string[0] { });
         }
-
-        
     }
+
     // Puts the tile into currently selected mode.
     public void set_as_current()
     {
@@ -352,6 +344,7 @@ public class Tile : MonoBehaviour
             if (is_occupied())
             {
                 select(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString() });
+                get_attack_range();
             }
         }
     }
