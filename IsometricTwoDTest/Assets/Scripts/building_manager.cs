@@ -8,6 +8,8 @@ public class building_manager : MonoBehaviour
     // External Classes
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
     map_manager map_manager;
+    Tile Tile;
+    PlayerMove PlayerMove;
 
     // Public Global Variables 
     public int civNumber;          // Number of the civilization
@@ -26,7 +28,11 @@ public class building_manager : MonoBehaviour
     // Champion Spawn command post (still need to figure out how to get this to work outside update function)
     public void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && (activeBuildingType.canChampionSpawn == true))
+        // Check conditions for spawining a command post
+        if (Input.GetMouseButtonDown(0) 
+            && !EventSystem.current.IsPointerOverGameObject()
+            && activeBuildingType != null
+            && (map_manager.get_current_tile().GetComponent<Tile>().walkable))
         {
             Vector3 tilePosition = map_manager.get_current_tile().transform.position;
 
@@ -37,6 +43,8 @@ public class building_manager : MonoBehaviour
                 Instantiate(activeBuildingType.greek, tilePosition, Quaternion.identity);
             else
                 Instantiate(activeBuildingType.viking, tilePosition, Quaternion.identity);
+
+            activeBuildingType = null;
         }    
     }
 

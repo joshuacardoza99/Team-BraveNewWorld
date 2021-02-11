@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1852004887197534708}
   - component: {fileID: 4475268923984904374}
+  - component: {fileID: 4394364529303328768}
   m_Layer: 0
   m_Name: Unit Creator
   m_TagString: Untagged
@@ -43,26 +44,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533f1bb318c495b40abb9a44af910acd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  asianBarracks: {fileID: 0}
   asianChampion: {fileID: 4336801283161977617, guid: e4a76b3cc176d0d4aab0f873784f316f, type: 3}
-  asianCommandPost: {fileID: 0}
-  asianDefenseTower: {fileID: 0}
   asianMelee: {fileID: 0}
   asianRanged: {fileID: 0}
   asianTank: {fileID: 0}
-  farm: {fileID: 0}
-  greekBarracks: {fileID: 0}
   greekChampion: {fileID: 8992906632270343454, guid: a05187b3305140f49a7fdb9bc47e5a5e, type: 3}
-  greekCommandPost: {fileID: 0}
-  greekDefenseTower: {fileID: 0}
   greekMelee: {fileID: 0}
   greekRanged: {fileID: 0}
   greekTank: {fileID: 0}
-  mine: {fileID: 5437878567262687149, guid: 78f4e734bc6d7a94a81bd9d547a68d06, type: 3}
-  vikingBarracks: {fileID: 0}
   vikingChampion: {fileID: 1925037191333295197, guid: c972bdb2b434e654fb1c42109a14f6b7, type: 3}
-  vikingCommandPost: {fileID: 0}
-  vikingDefenseTower: {fileID: 0}
   vikingMelee: {fileID: 0}
   vikingRanged: {fileID: 0}
   vikingTank: {fileID: 0}
+  civNumber: 0
+--- !u!114 &4394364529303328768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8328366925452020881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82c5fc5314f0a2a4dac76d4a406ccd26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  civNumber: 0
+  activeUnitType: {fileID: 0}

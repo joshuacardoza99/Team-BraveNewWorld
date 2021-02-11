@@ -11,9 +11,6 @@ public class unit_type : ScriptableObject
     public Transform asian;  // Asian civ prefabs
     public Transform viking; // Viking civ prefabs
     public Transform greek;  // Greek civ prefabs
-    
-    [Space(5)] // 5 pixels of spacing here.
-    public int Health; // Building health
 
     [Space(5)] // 5 pixels of spacing here.
     public dropDownAttackType unitType = new dropDownAttackType(); // Adds drop down list for attack type

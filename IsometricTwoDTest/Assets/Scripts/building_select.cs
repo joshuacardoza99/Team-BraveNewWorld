@@ -15,7 +15,7 @@ public class building_select : MonoBehaviour
 
     private void Awake()
     {
-        Transform buildingTemplate = transform.Find("buildingTemplate");  // Use the template button made in unity for the button creation
+        Transform buildingTemplate = transform.Find("buildTemplate");  // Use the template button made in unity for the button creation
         buildingTemplate.gameObject.SetActive(false);
 
         int index = 0;                        // Index used to keep count of buttons
@@ -27,7 +27,7 @@ public class building_select : MonoBehaviour
             buildingTransform.gameObject.SetActive(true);
 
             // Set the position of the button adn grab the sprite from the SO and attach it to the button
-            buildingTransform.GetComponent<RectTransform>().anchoredPosition += new Vector2(index * 150, 0);
+            buildingTransform.GetComponent<RectTransform>().anchoredPosition += new Vector2(index * 180, 0);
             buildingTransform.Find("Image").GetComponent<Image>().sprite = building_type.sprite;
 
             // Set which ever button clicked on to the active building to use

@@ -22,7 +22,7 @@ public class Tile : MonoBehaviour
     public bool occupied = false; // if there is a character currently on this tile
     private bool isCurrentlySelectedTile = false; // Tells when this tile is selected by the player.
     public bool target = false;
-    private bool selectable = false; // Determins if the player can click on click on this tile.
+    public bool selectable = false; // Determins if the player can click on click on this tile.
     private bool attackable = false;
     public List<Tile> adjacencyList = new List<Tile>();
     public GameObject currentCharacter = null; // the character currently occupying this tile.

@@ -59,7 +59,7 @@ public class PlayerMove : MonoBehaviour
     {
         // prepare to move this character
         Debug.Log("Trying to Set current character from set_selectable to " + this.name);
-        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_character", this.name});
+        //import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_character", this.name});
 
         // set all tiles in range to selectable
         if (moveRange >= 1) // if the character can move at least once
@@ -109,6 +109,7 @@ public class PlayerMove : MonoBehaviour
         }
         catch { }
         import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied", this.name });
+
     }
 
     public void set_civilization(int civ)
