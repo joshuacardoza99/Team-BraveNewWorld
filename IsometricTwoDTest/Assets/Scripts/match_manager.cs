@@ -10,24 +10,22 @@ public class match_manager : MonoBehaviour
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
 
-    private int    matchId;            // Id for the current match.
-    private bool    isHost;            // Determines if the player's computer is hosting the match.
-    private string    type;            // Type of game the match consist of.
-    private int        map;            // Holds the seed for the map design for the game's map.
-    private string playerCivilization; // The civilization the local player is playing as in this match.
-    private string championName = "startName";       // The name of the players champion.
+    private int    matchId;                           // Id for the current match.
+    private bool   isHost;                            // Determines if the player's computer is hosting the match.
+    private string type;                              // Type of game the match consist of.
+    private int    map;                               // Holds the seed for the map design for the game's map.
+    private string playerCivilization;                // The civilization the local player is playing as in this match.
+    private string championName        = "startName"; // The name of the players champion.
         
     // Private Global Variables //
     private int    numberOfPlayers = 1000; // The number of current players in the game.
-    List<bool> isReady;                // List of players ready to play.
+    List<bool>    isReady;                 // List of players ready to play.
 
     // Start is called before the first frame update
     void Start()
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
     }
-
-    // Public Functions //
 
     // Parameter = [int matchId]
     public void set_id (string[] parameters)

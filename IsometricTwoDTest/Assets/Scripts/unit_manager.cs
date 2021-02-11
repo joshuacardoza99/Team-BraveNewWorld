@@ -9,22 +9,21 @@ public class unit_manager : MonoBehaviour
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
 
     // Public Global Variables //
-    public GameObject asianMelee;
-    public GameObject asianRanged;
-    public GameObject asianTank;
-    public GameObject asianChampion;
-    public GameObject greekChampion;
-    public GameObject greekMelee;
-    public GameObject greekRanged;
-    public GameObject greekTank;
-    public GameObject vikingChampion;
-    public GameObject vikingMelee;
-    public GameObject vikingRanged;
-    public GameObject vikingTank;
-    public int civNumber;
+    public GameObject asianMelee;     // The GameObject for the asian melee character.
+    public GameObject asianRanged;    // The GameObject for the asian range character.
+    public GameObject asianTank;      // The GameObject for the asian tank character.
+    public GameObject asianChampion;  // The GameObject for the asian champion character.
+    public GameObject greekChampion;  // The GameObject for the greek champion character.
+    public GameObject greekMelee;     // The GameObject for the greek melee character.
+    public GameObject greekRanged;    // The GameObject for the greek range character.
+    public GameObject greekTank;      // The GameObject for the greek tank character.
+    public GameObject vikingChampion; // The GameObject for the viking champion character.
+    public GameObject vikingMelee;    // The GameObject for the viking melee character.
+    public GameObject vikingRanged;   // The GameObject for the viking range character.
+    public GameObject vikingTank;     // The GameObject for the viking tank character.
 
     // Private Global Variables //
-    private string championName = "champion";
+    private string championName = "champion"; // The name of the champion cur
     private int randomTile = 0;
 
     // Start is called before the first frame update
@@ -33,18 +32,9 @@ public class unit_manager : MonoBehaviour
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    // Private Functions //
-
     // tiles = and array of tile names.
     private void finalize_champion(string[] tiles)
     {
-        Debug.Log("Tile Index: " + this.randomTile + " / " + tiles.Length);
         GameObject tile = GameObject.Find(tiles[(int)(this.randomTile / tiles.Length)]);
         Vector3 tilePosition = tile.transform.position;
         tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
@@ -73,8 +63,6 @@ public class unit_manager : MonoBehaviour
 
         GameObject.Find("Main Camera").transform.position = cameraPosition;
     }
-
-    // Public Functions //
 
     // Parameters = [string civilization, string championName, int randomTile]
     public void add_champion(string[] parameters)
