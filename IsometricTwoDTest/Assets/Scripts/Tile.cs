@@ -334,9 +334,10 @@ public class Tile : MonoBehaviour
     // Gets the range of tiles that are attackable 
     public void get_attack_range()
     {
-
+        
         foreach (Tile tile in get_walkable_tiles(currentCharacter.GetComponent<PlayerMove>().attackRange))
         {
+            if(tile.occupied)
             tile.set_attackable(new string[0] { });
         }
 

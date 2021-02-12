@@ -24,7 +24,7 @@ public class building_manager : MonoBehaviour
 
 
     // Champion Spawn command post (still need to figure out how to get this to work outside update function)
-    public void Update()
+   /* public void Update()
     {
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject() && (activeBuildingType.canChampionSpawn == true))
         {
@@ -39,7 +39,7 @@ public class building_manager : MonoBehaviour
                 Instantiate(activeBuildingType.viking, tilePosition, Quaternion.identity);
         }    
     }
-
+   */
     //  Set active building to which ever the user selected
     public void set_active_building_type(building_type building_Type)
     {
