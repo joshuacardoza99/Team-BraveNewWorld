@@ -51,19 +51,9 @@ public class Tile : MonoBehaviour
         {
             occupied = false;
         }
-
-        
-        if (occupied && isCurrentlySelectedTile)
-        {
-            this.GetComponent<Renderer>().material.color = Color.red;
-        }
-        else if (occupied)
+        if (occupied)
         {
             this.GetComponent<Renderer>().material.color = Color.magenta;
-        }
-        else if (target)
-        {
-            this.GetComponent<Renderer>().material.color = Color.white;
         }
         else if (attackable)
         {
@@ -90,31 +80,26 @@ public class Tile : MonoBehaviour
             Debug.Log("About to move " + currentCharacter.name);
             import_manager.run_function_all(currentCharacter.name, "move", new string[2] {grid[0].ToString(), grid[1].ToString()});
         }
-        else if (selectable)
-        {
-            Debug.Log("Should set unselectable");
-        }
-        else if(occupied && Time.time > nextAttack && attackable) // and in range, and not a friendly civ
+        else if(occupied && Time.time > nextAttack /*&& attackable*/) // and in range, and not a friendly civ
         {
             // This will make you able to walk on top of other players in multiplayer.
            // set_occupied(new string[1] { currentCharacter.name });
             select(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString()});
             // check if this characters civ is the same as the character clicking on it
-            if(Input.GetMouseButtonDown(0))
-            {
-                if(currentCharacter.GetComponent<PlayerMove>().civilization != currentCharacter.GetComponent<PlayerMove>().civilization)
-                {
-                    currentCharacter.GetComponent<PlayerMove>().health -= currentCharacter.GetComponent<PlayerMove>().damage;
-                    Debug.Log("Health equals " + currentCharacter.GetComponent<PlayerMove>().health);
-                    if (currentCharacter.GetComponent<PlayerMove>().health <= 0)
-                    {
-                        Debug.Log("YOUR SOLDIER HAS FALLEN !!");
-                    }
-                    Debug.Log("IN COOLDOWN WAIT");
-                    nextAttack = Time.time + cooldown;
-                }
+            //if(currentCharacter.GetComponent<PlayerMove>().civilization != currentCharacter.GetComponent<PlayerMove>().civilization)
+            //{
 
-            }
+            
+                currentCharacter.GetComponent<PlayerMove>().health -= currentCharacter.GetComponent<PlayerMove>().damage;
+                Debug.Log("Health equals " + currentCharacter.GetComponent<PlayerMove>().health);
+                if (currentCharacter.GetComponent<PlayerMove>().health <= 0)
+                {
+                    Debug.Log("YOUR SOLDIER HAS FALLEN !!");
+                }
+                Debug.Log("IN COOLDOWN WAIT");
+                nextAttack = Time.time + cooldown;
+            
+           // }
         }
 
         map_manager.set_current_tile(map_manager.map[grid[0], grid[1]].ground); // Sets this tile as being currently selected.

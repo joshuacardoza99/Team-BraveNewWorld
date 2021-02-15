@@ -196,7 +196,6 @@ public class match_manager : MonoBehaviour
     public void start_playing (string[] parameters)
     {
         import_manager.run_function_all("unit_manager", "add_champion", new string[3]{this.playerCivilization, this.championName, Random.Range(1000, 2000).ToString()});
-        import_manager.run_function_all("unit_manager", "add_champion", new string[3] { "1", "test", Random.Range(1000, 2000).ToString() });
         import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] {});
     }
 
