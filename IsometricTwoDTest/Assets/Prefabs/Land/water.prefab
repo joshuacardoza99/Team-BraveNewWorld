@@ -109,12 +109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkable: 0
-  current: 0
-  occupied: 0
   target: 0
-  selectable: 0
-  currentchar: {fileID: 0}
   adjacencyList: []
+  currentchar: {fileID: 0}
   visited: 0
   parent: {fileID: 0}
   distance: 0

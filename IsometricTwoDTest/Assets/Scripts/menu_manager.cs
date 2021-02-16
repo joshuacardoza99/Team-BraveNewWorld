@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class menu_manager : MonoBehaviour
 {
-    public GameObject[] groups;
+    public GameObject[] groups; // Array of Gameobjects being used for the menu scenes
 
-    public GameObject currentGroup;
+    public GameObject currentGroup; // Current menu scene being displayed
 
     void Awake()
     {
-        TrilleonAutomation.AutomationMaster.Initialize();
-        ChangeGroup(currentGroup);
+        //TrilleonAutomation.AutomationMaster.Initialize();
+        ChangeGroup(currentGroup); // Change Scene to first selected (set in inspector)
     }
 
+    // Change scene to next selected scene on button click (set in inspector)
     public void ChangeGroup(GameObject groupToActivate)
     {
-
         GameObject newGroup = groupToActivate;
 
         foreach (GameObject group in groups)
