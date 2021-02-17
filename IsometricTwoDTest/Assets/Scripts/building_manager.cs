@@ -26,7 +26,7 @@ public class building_manager : MonoBehaviour
 
 
     // Champion Spawn command post (still need to figure out how to get this to work outside update function)
-   /* public void Update()
+    public void Update()
     {
         // Check conditions for spawining a command post
         if (Input.GetMouseButtonDown(0) 
@@ -47,7 +47,7 @@ public class building_manager : MonoBehaviour
             activeBuildingType = null;
         }    
     }
-   */
+   
     //  Set active building to which ever the user selected
     public void set_active_building_type(building_type building_Type)
     {
