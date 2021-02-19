@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34f5e829aac125644afc840d4882860f, type: 3}
-  m_Name: Ranged 1
+  m_Name: Ranged
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
   asian: {fileID: 3480862566136248020, guid: a112f9a7f775e184a8ab17fe3b1e7e75, type: 3}
   viking: {fileID: 3439820194571976798, guid: c09edde1a994af343bc32a3450dcf3e2, type: 3}
   greek: {fileID: 5836595746069545413, guid: cdddc313cc9c2ec4d9c71541b393510e, type: 3}
-  Health: 50
   unitType: 0
+  health: 0
+  attackRange: 0
+  attackDamage: 0
+  attackCooldown: 0
+  movementCooldown: 0

@@ -16,5 +16,7 @@ MonoBehaviour:
   asian: {fileID: 3814490536550466924, guid: ee2c97a1b49f7d944adab5223d88d1f7, type: 3}
   viking: {fileID: 3814490536550466924, guid: ee2c97a1b49f7d944adab5223d88d1f7, type: 3}
   greek: {fileID: 3814490536550466924, guid: ee2c97a1b49f7d944adab5223d88d1f7, type: 3}
-  canSpawnUnits: 0
-  Health: 50
+  isConquered: 0
+  unitType: 2
+  resourcesAmount: 0
+  resourceCooldown: 0

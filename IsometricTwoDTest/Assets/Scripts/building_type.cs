@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class building_type : ScriptableObject
 {
+    [Space(5)]                                // 5 pixels of spacing here.
     [Header("Sprite being used for button")]  // Shows text in inspector
     public Sprite sprite;                     // Sprites being used to attach to button
 
@@ -15,5 +16,24 @@ public class building_type : ScriptableObject
     public Transform greek;                   // Greek civ prefabs
 
     [Space(5)]                                // 5 pixels of spacing here.
-    public bool canChampionSpawn = false;     // Ability for building to spawn units
+    public bool isConquered = false;          // Ability for building to spawn units
+
+
+    [Space(5)]                                // 5 pixels of spacing here.
+    public BuildingType unitType = new BuildingType(); // Adds drop down list for attack type
+
+    [Space(5)]                                // 5 pixels of spacing here.
+    [Header("Building Attributes")]           // Shows text in inspector
+    public int resourcesAmount;               // Amount of resources building generates
+    public int resourceCooldown;              // Cooldown on resource
+
+}
+
+
+public enum BuildingType
+{
+    commandPost,
+    barracks,
+    farm,
+    mine
 }
