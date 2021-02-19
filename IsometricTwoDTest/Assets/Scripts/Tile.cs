@@ -24,9 +24,7 @@ public class Tile : MonoBehaviour
     private bool       selectable              = false; // Determins if the player can click on click on this tile.
     private bool       attackable              = false; // Determines if another player can attach this tile.
     public  GameObject currentCharacter        = null;  // the character currently occupying this tile.
-    public  float      nextAttack              = 0;     // Determine if another player is attaching this tile.
     private bool       isAttacking             = false; // Determine if the player on this tile it attaching another tile.
-    public  float      cooldown                = 3;     // The amount of seconds a character must wast before moving again.
     private Color      realColor;                       // The color the tile should be without any highlights.
     private int        civilization;                    // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     private int[]      grid;                            // Stores the position of the Tile in the virtual grid. [x position, y position]
@@ -80,28 +78,28 @@ public class Tile : MonoBehaviour
             Debug.Log("About to move " + currentCharacter.name);
             import_manager.run_function_all(currentCharacter.name, "move", new string[2] {grid[0].ToString(), grid[1].ToString()});
         }
-        else if(occupied && Time.time > nextAttack /*&& attackable*/) // and in range, and not a friendly civ
+        else if(occupied /*&& attackable*/) // and in range, and not a friendly civ
         {
             // This will make you able to walk on top of other players in multiplayer.
-           // set_occupied(new string[1] { currentCharacter.name });
-            select(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString()});
-            // check if this characters civ is the same as the character clicking on it
-            //if(currentCharacter.GetComponent<PlayerMove>().civilization != currentCharacter.GetComponent<PlayerMove>().civilization)
-            //{
-
-            
-                currentCharacter.GetComponent<PlayerMove>().health -= currentCharacter.GetComponent<PlayerMove>().damage;
-                Debug.Log("Health equals " + currentCharacter.GetComponent<PlayerMove>().health);
-                if (currentCharacter.GetComponent<PlayerMove>().health <= 0)
+            // set_occupied(new string[1] { currentCharacter.name });
+            select(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString() });
+            if (Time.time > currentCharacter.GetComponent<cooldown>().nextAttack)
+            {
+                // check if this characters civ is the same as the character clicking on it
+                if (currentCharacter.GetComponent<PlayerMove>().civilization == currentCharacter.GetComponent<PlayerMove>().civilization)
                 {
-                    Debug.Log("YOUR SOLDIER HAS FALLEN !!");
+                    currentCharacter.GetComponent<PlayerMove>().health -= currentCharacter.GetComponent<PlayerMove>().damage;
+                    Debug.Log("Health equals " + currentCharacter.GetComponent<PlayerMove>().health);
+                    currentCharacter.GetComponent<cooldown>().initiate_attack_cooldown();
+                    if (currentCharacter.GetComponent<PlayerMove>().health <= 0)
+                    {
+                        Debug.Log("YOUR SOLDIER HAS FALLEN !!");
+                    }
                 }
-                Debug.Log("IN COOLDOWN WAIT");
-                nextAttack = Time.time + cooldown;
-            
-           // }
+            }
+           
         }
-
+            
         map_manager.set_current_tile(map_manager.map[grid[0], grid[1]].ground); // Sets this tile as being currently selected.
     }
 
