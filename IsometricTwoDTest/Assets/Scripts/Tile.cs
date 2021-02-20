@@ -73,8 +73,6 @@ public class Tile : MonoBehaviour
         {
             OnSelected(this, currentCharacter);
         }
-           
-        }
     }
 
     // Returns a List of Tiles with all tiles in the given range away from this tile.
@@ -317,7 +315,7 @@ public class Tile : MonoBehaviour
         {
             foreach (Tile nearByTile in get_walkable_tiles(character.moveRange))
             {
-                if (nearByTile.is_occupied() && nearByTile.get_civilization != get_civilization())
+                if (nearByTile.is_occupied() && nearByTile.get_civilization() != get_civilization())
                 {
                     nearByTile.set_attackable(new string[0] { });
                 }
