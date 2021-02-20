@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f5e829aac125644afc840d4882860f, type: 3}
   m_Name: Meele
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 9dfe021dbdf4f5941815623e95ccc50e, type: 3}
   asian: {fileID: 5906223086050760830, guid: 3aa818b752418c248b04eb77f4e5cec5, type: 3}
   viking: {fileID: 7178507125491972129, guid: f1d462006eb18ef46800727dcefe952c, type: 3}
   greek: {fileID: 5510017085608182199, guid: 17686f180f851e84cb9f81bf717098d7, type: 3}
-  Health: 75
   unitType: 1
+  health: 75
+  attackRange: 4
+  attackDamage: 40
+  attackCooldown: 3
+  movementCooldown: 3

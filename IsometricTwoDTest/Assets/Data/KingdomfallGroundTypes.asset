@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 383905e04e857b44b97afddadb83b995, type: 3}
+  m_Name: KingdomfallGroundTypes
+  m_EditorClassIdentifier: 
+  asian: {fileID: 2100000, guid: e55dc1d3b45d4ae45a1c12e85e213cb6, type: 2}
+  greek: {fileID: 2100000, guid: d83accc1b7a8092489b0fd7168622d40, type: 2}
+  viking: {fileID: 2100000, guid: f8812ebb7dbda764992397bae9196099, type: 2}
+  water: {fileID: 2100000, guid: fd8f505468700c44a90cc394fea90c29, type: 2}
+  selectable: {fileID: 2100000, guid: eac96445a0bd7ec4cb46ceb0780e5448, type: 2}
+  selected: {fileID: 2100000, guid: e6da6da3ef176104ebf7ccf808e790e7, type: 2}
+  attackable: {fileID: 2100000, guid: 132720e2851d37d4db2a520f01c34756, type: 2}
+  occupied: {fileID: 2100000, guid: 2fb7d5e53bf82ad4897263b4a5a283ff, type: 2}

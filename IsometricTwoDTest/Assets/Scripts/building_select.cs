@@ -11,14 +11,12 @@ public class building_select : MonoBehaviour
     [SerializeField]
     private building_manager building_manager;   // Makes varible visible in inspector and connect it to building_manager
 
-    
-
     private void Awake()
     {
         Transform buildingTemplate = transform.Find("buildTemplate");  // Use the template button made in unity for the button creation
         buildingTemplate.gameObject.SetActive(false);
 
-        int index = 0;                        // Index used to keep count of buttons
+        int index = 0;                            // Index used to keep count of buttons
 
         // Loop processing creating buttons for each SO in buildingTypeList
         foreach (building_type building_type in buildingTypeList)

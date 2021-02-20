@@ -583,7 +583,10 @@ MonoBehaviour:
   moveRange: 2
   cooldown: 3
   nextAttack: 0
+  isAttacking: 0
+  civilization: 0
   actualTargetTile: {fileID: 0}
+  halfHeight: 0
   currentTile: {fileID: 0}
   anim: {fileID: 0}
 --- !u!95 &3405852011452029001
