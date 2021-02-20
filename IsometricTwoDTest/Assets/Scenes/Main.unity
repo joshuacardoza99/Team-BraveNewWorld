@@ -1064,6 +1064,7 @@ MonoBehaviour:
   greekLand: {fileID: 513165736817720220, guid: 2f7e87437d0440745ac5314672cc48e5, type: 3}
   asianLand: {fileID: 8651404251344937564, guid: b5bbf7d6d0a88724ab6f66cfb6db6f0a, type: 3}
   currentCharacter: 
+  types: {fileID: 11400000, guid: 6746f9449632cf548b5a8b1a63b25b61, type: 2}
 --- !u!4 &887863131
 Transform:
   m_ObjectHideFlags: 0

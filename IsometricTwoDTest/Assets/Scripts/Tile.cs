@@ -13,70 +13,65 @@ public class Tile : MonoBehaviour
 {
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
-    map_manager    map_manager;     // This imports the map_manager class to help with interactions with othe tiles.
+    map_manager map_manager;     // This imports the map_manager class to help with interactions with othe tiles.
+
+    // Events
+    public delegate void  TileSelected   (Tile selectedTile, PlayerMove occupyingCharacter);   // Template function for the TileSelected Event.
+    public static   event TileSelected   OnSelected;                                           // The TileSelected function call stub.
+    public delegate void  TileUnselected (Tile unselectedTile, PlayerMove occupyingCharacter); // Template function for the TileUnselected Event.
+    public static   event TileUnselected OnUnselected;                                         // The TileSelected function call stub.
 
     // Global Variables //
-    public  bool       walkable                = true;  // Determins if this tile can be walked on.
-    public  bool       current                 = false; // if the player is currently using this tile
-    public  bool       occupied                = false; // if there is a character currently on this tile
-    private bool       isCurrentlySelectedTile = false; // Tells when this tile is selected by the player.
-    public  bool       target                  = false; // Determines if this tile is being targeted by another player.
-    private bool       selectable              = false; // Determins if the player can click on click on this tile.
-    private bool       attackable              = false; // Determines if another player can attach this tile.
-    public  GameObject currentCharacter        = null;  // the character currently occupying this tile.
-    private bool       isAttacking             = false; // Determine if the player on this tile it attaching another tile.
-    private Color      realColor;                       // The color the tile should be without any highlights.
-    private int        civilization;                    // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
-    private int[]      grid;                            // Stores the position of the Tile in the virtual grid. [x position, y position]
+    [SerializeField] private bool       walkable                = true;  // Determins if this tile can be walked on.
+    [SerializeField] private bool       current                 = false; // Determins if the player is currently using this tile
+    [SerializeField] private bool       occupied                = false; // Determins if there is a character currently on this tile
+    [SerializeField] private bool       isCurrentlySelectedTile = false; // Tells when this tile is selected by the player.
+    [SerializeField] private bool       target                  = false; // Determines if this tile is being targeted by another player.
+    [SerializeField] private bool       selectable              = false; // Determins if the player can click on click on this tile.
+    [SerializeField] private bool       attackable              = false; // Determines if another player can attach this tile.
+    [SerializeField] private PlayerMove currentCharacter        = null;  // the character currently occupying this tile.
+    [SerializeField] private float      nextAttack              = 0;     // Determine if another player is attaching this tile.
+    [SerializeField] private bool       isAttacking             = false; // Determine if the player on this tile it attaching another tile.
+    [SerializeField] private float      cooldown                = 3;     // The amount of seconds a character must wast before moving again.
+    [SerializeField] private int        civilization;                    // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
+    [SerializeField] private int[]      grid;                            // Stores the position of the Tile in the virtual grid. [x position, y position]
 
     // Use this for initialization.
-    void Start () 
-	{
-        import_manager  = GameObject.Find("network_manager").GetComponent<import_manager>();
-        map_manager = GameObject.Find("Map").GetComponent<map_manager>();
-        realColor       = this.GetComponent<Renderer>().material.color;
-    }
-
-    // Update is whenever needed
-    public void Updateme()
+    void Start()
     {
-        // determine if there is a character currently on the tile.
-        if (currentCharacter != null)
-        {
-            occupied = true;
-        }
-        else
-        {
-            occupied = false;
-        }
-        if (occupied)
-        {
-            this.GetComponent<Renderer>().material.color = Color.magenta;
-        }
-        else if (attackable)
-        {
-            this.GetComponent<Renderer>().material.color = Color.yellow;
-        }
-        else if (selectable)
-        {
-           this.GetComponent<Renderer>().material.color = Color.blue;
-        }
-        else if (!isCurrentlySelectedTile)
-        {
-                this.GetComponent<Renderer>().material.color = realColor;
-        }
+        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
+        map_manager    = GameObject.Find("Map").GetComponent<map_manager>();
     }
 
-    // Set current to this tile when it gets clicked
+    // This runs when the character is enabled.
+    void OnEnable()
+    {
+        Tile.OnSelected   += handle_selection;
+        Tile.OnSelected   += select;
+        Tile.OnSelected   += attack;
+        Tile.OnSelected   += select_attackable;
+        Tile.OnUnselected += unselect;
+        Tile.OnUnselected += unselect_attackable;
+    }
+
+
+    // This runs when the tile is disabled.
+    void OnDisable()
+    {
+        Tile.OnSelected   -= handle_selection;
+        Tile.OnSelected   -= select;
+        Tile.OnSelected   -= attack;
+        Tile.OnSelected   -= select_attackable;
+        Tile.OnUnselected -= unselect;
+        Tile.OnUnselected -= unselect_attackable;
+    }
+
+    // Listens for a mouse click and translates to an OnSelected event.
     public void OnMouseDown()
     {
-        // If the tile is selectable and open, then move the current character to this tile
-        if (selectable && !occupied)
+        if (OnSelected != null)
         {
-            Debug.Log("About to set current character from OnMouseDown to " + map_manager.get_current_character());
-            set_occupied(new string[1] { map_manager.get_current_character()});
-            Debug.Log("About to move " + currentCharacter.name);
-            import_manager.run_function_all(currentCharacter.name, "move", new string[2] {grid[0].ToString(), grid[1].ToString()});
+            OnSelected(this, currentCharacter);
         }
         else if(occupied /*&& attackable*/) // and in range, and not a friendly civ
         {
@@ -101,15 +96,13 @@ public class Tile : MonoBehaviour
             }
            
         }
-            
-        map_manager.set_current_tile(map_manager.map[grid[0], grid[1]].ground); // Sets this tile as being currently selected.
     }
 
     // Returns a List of Tiles with all tiles in the given range away from this tile.
     // Test Intructions: To test run this function with the given range. Then you can manually select with the map_manager.map to check the output.
     public List<Tile> get_adjacenct_tiles(int range)
     {
-        List<Tile> inrange       = new List<Tile>(); // A list of tiles that directly border this tile.
+        List<Tile> inrange = new List<Tile>(); // A list of tiles that directly border this tile.
         List<Tile> adjacentTiles = new List<Tile>(); // A list of all the tiles that border the tiles in the inrange list upto the range given.
 
         // Fills the inrange with the tiles that directly border this tile. Catches all the errors when a tile doesn't exist.
@@ -118,7 +111,8 @@ public class Tile : MonoBehaviour
             try
             {
                 inrange.Add(map_manager.map[grid[0], grid[1] + 1].ground.GetComponent<Tile>());
-            } catch { }
+            }
+            catch { }
             try
             {
                 inrange.Add(map_manager.map[grid[0] + 1, grid[1]].ground.GetComponent<Tile>());
@@ -142,7 +136,8 @@ public class Tile : MonoBehaviour
             try
             {
                 inrange.Add(map_manager.map[grid[0] + 1, grid[1] - 1].ground.GetComponent<Tile>());
-            } catch { }
+            }
+            catch { }
             try
             {
                 inrange.Add(map_manager.map[grid[0] - 1, grid[1] + 1].ground.GetComponent<Tile>());
@@ -171,13 +166,13 @@ public class Tile : MonoBehaviour
 
     // Returns a List of Tiles with all tiles in the given range away from this tile that are walkable.
     // Test Instructions: To test run this function with the given range. Then you can manually select with the map_manager.map to check the output with predetermined walkable tiles.
-    public List<Tile> get_walkable_tiles (int range) // use this to get attack range 
+    public List<Tile> get_walkable_tiles(int range) // use this to get attack range 
     {
         List<Tile> filteredList = new List<Tile>(); // A list of all the walkable tiles in the given range of this tile.
 
         foreach (Tile tile in get_adjacenct_tiles(range))
         {
-            if (tile.walkable)
+            if (tile.is_walkable())
             {
                 filteredList.Add(tile);
             }
@@ -189,26 +184,34 @@ public class Tile : MonoBehaviour
     // Sets the surounding tiles in the given range to be selectable.
     // Test Instruction: Manually select the tile with map_manager.map and make sure the tile color is blue and if tile.selectable is true.
     // parameter = [int range]
-    public void select(string[] parameter)// use this for attack range 
+    public void select(Tile tile, PlayerMove character)// use this for attack range 
     {
-        int range = int.Parse(parameter[0]); // The distance a needs to be away from this tile to select.
-
-        foreach (Tile tile in get_walkable_tiles(range))
+        if (tile == this && tile.is_occupied())
         {
+            Debug.Log("Selecting all the tiles around this one.");
             tile.set_selectable(new string[0] { });
+
+            foreach (Tile nearByTile in get_walkable_tiles(character.moveRange))
+            {
+               nearByTile.set_selectable(new string[0] { });
+            }
         }
     }
 
     // Sets the surounding tiles in the given range to be unselectable.
     // Test Instruction: Manually select the tile with map_manager.map and make sure the tile color is its normal color and if tile.selectable is false.
     // parameter = [int range]
-    public void unselect(string[] parameter)
+    public void unselect(Tile tile, PlayerMove character)
     {
-        int range = int.Parse(parameter[0]); // The distance a needs to be away from this tile to unselect.
-
-        foreach (Tile tile in get_walkable_tiles(range))
+        if (tile == this && tile.is_occupied())
         {
+            Debug.Log("Unselecting all the tiles around this one.");
             tile.set_unselectable(new string[0] { });
+
+            foreach (Tile nearByTile in get_walkable_tiles(character.moveRange))
+            {
+                nearByTile.set_unselectable(new string[0] { });
+            }
         }
     }
 
@@ -240,24 +243,27 @@ public class Tile : MonoBehaviour
     // parameter = [string characterName]
     public void set_occupied(string[] parameter)
     {
-        occupied    = true;
-        selectable  = true;
-        set_current_character(parameter);
-        Updateme();
+        if (map_manager == null)
+        {
+            map_manager = GameObject.Find("Map").GetComponent<map_manager>();
+        }
+        occupied = true;
+        currentCharacter = GameObject.Find(parameter[0]).GetComponent<PlayerMove>();
+        currentCharacter.set_current_tile(this);
+        this.GetComponent<Renderer>().material = map_manager.types.occupied;
     }
 
     // Sets this tile into unoccupied mode.
     // parameter = [] -- just to make it compatible with import_manager.run_function_all.
     public void set_unoccupied(string[] parameter)
     {
-        Debug.Log("Setting Unoccupied");
-        occupied    = false;
-        selectable = false;
-        unset_current_character(parameter);
-        Updateme();
+        occupied = false;
+        currentCharacter.set_current_tile(null);
+        this.GetComponent<Renderer>().material = map_manager.types.get_material(civilization);
+        currentCharacter = null;
     }
 
-    // Determines if this tile is occupied.
+    // Determins if this tile is currently occupied by an character.
     public bool is_occupied()
     {
         return occupied;
@@ -266,47 +272,111 @@ public class Tile : MonoBehaviour
     // Sets this tile to be selectable.
     public void set_selectable(string[] parameter)
     {
-        selectable = true;
-        Updateme();
-    }
+        if (map_manager == null)
+        {
+            map_manager = GameObject.Find("Map").GetComponent<map_manager>();
+        }
 
-    // Sets his tile to be attackable .
-    public void set_attackable(string[] parameter)
-    {
-        attackable = true;
-        Updateme();
+        selectable = true;
+        this.GetComponent<Renderer>().material = map_manager.types.selectable;
     }
 
     // Sets this tile to be unselectable.
     public void set_unselectable(string[] parameter)
-    {
-        selectable = false;
-        Updateme();
-    }
-
-    // Sets the current character who is occupying this tile.
-    public void set_current_character(string[] newcurrentChar)
     {
         if (map_manager == null)
         {
             map_manager = GameObject.Find("Map").GetComponent<map_manager>();
         }
 
-        if (newcurrentChar[0] != "")
+        if (!occupied)
         {
-            currentCharacter = GameObject.Find(newcurrentChar[0]);
-            currentCharacter.GetComponent<PlayerMove>().currentTile = this;
-            map_manager.set_current_character(new string[1] { currentCharacter.name });
-            Updateme();
+            selectable = false;
+            this.GetComponent<Renderer>().material = map_manager.types.get_material(civilization);
         }
     }
 
-    // Unsets the current character who is occupying this tile.
-    public void unset_current_character(string[] nothing)
+    // Determines if a character can walk on top of this tile.
+    public bool is_walkable()
     {
-        currentCharacter.GetComponent<PlayerMove>().currentTile = null;
-        currentCharacter = null;
-        Updateme();
+        return walkable;
+    }
+
+    // Determines if this tile can be selected to move a character onto.
+    public bool is_selectable()
+    {
+        return selectable;
+    }
+
+    // Attacks the character on selected tile.
+    public void attack(Tile tile, PlayerMove character)
+    {
+        if (tile == this && occupied && attackable) // and in range, and not a friendly civ
+        {
+            if (Time.time > currentCharacter.GetComponent<cooldown>().nextAttack)
+            {
+                // check if this characters civ is the same as the character clicking on it
+                if (currentCharacter.GetComponent<PlayerMove>().civilization == currentCharacter.GetComponent<PlayerMove>().civilization)
+                {
+                    currentCharacter.GetComponent<PlayerMove>().health -= currentCharacter.GetComponent<PlayerMove>().damage;
+                    Debug.Log("Health equals " + currentCharacter.GetComponent<PlayerMove>().health);
+                    currentCharacter.GetComponent<cooldown>().initiate_attack_cooldown();
+                    if (currentCharacter.GetComponent<PlayerMove>().health <= 0)
+                    {
+                        Debug.Log("YOUR SOLDIER HAS FALLEN !!");
+                    }
+                }
+            }
+
+        }
+    }
+
+    // Sets the nearby tiles to be attackable.
+    public void select_attackable(Tile tile, PlayerMove character)
+    {
+        if (tile == this && tile.is_occupied())
+        {
+            foreach (Tile nearByTile in get_walkable_tiles(character.moveRange))
+            {
+                if (nearByTile.is_occupied() && nearByTile.get_civilization != get_civilization())
+                {
+                    nearByTile.set_attackable(new string[0] { });
+                }
+            }
+        }
+    }
+
+    // Unsets the nearby tiles from being attackable.
+    public void unselect_attackable(Tile tile, PlayerMove character)
+    {
+        if (tile == this && tile.is_occupied())
+        {
+            foreach (Tile nearByTile in get_walkable_tiles(character.moveRange))
+            {
+                if (nearByTile.is_attackable())
+                {
+                    nearByTile.set_attackable(new string[0] { });
+                }
+            }
+        }
+    }
+
+    // Sets his tile to be attackable .
+    public void set_attackable(string[] parameter)
+    {
+        attackable = true;
+    }
+
+    // Determines if this tile is attackable.
+    public bool is_attackable()
+    {
+        return attackable;
+    }
+
+    // Gets the current character for this tile.
+    public PlayerMove get_current_character()
+    {
+        return currentCharacter;
     }
 
     // Gets the range of tiles that are attackable.
@@ -314,38 +384,56 @@ public class Tile : MonoBehaviour
     {
         foreach (Tile tile in get_walkable_tiles(currentCharacter.GetComponent<PlayerMove>().attackRange))
         {
-            if(tile.occupied)
-            tile.set_attackable(new string[0] { });
+            if (tile.occupied)
+                tile.set_attackable(new string[0] { });
         }
     }
 
-    // Puts the tile into currently selected mode.
-    public void set_as_current()
+    // Sets this tile to be selectable.
+    public void handle_selection(Tile selectedTile, PlayerMove unusedCharacter)
     {
-        if (!isCurrentlySelectedTile)
+        if (selectedTile == this)
         {
-            this.isCurrentlySelectedTile = true;
-            this.GetComponent<Renderer>().material.color = Color.cyan;
-             
-            if (is_occupied())
+            if (is_occupied() && !isCurrentlySelectedTile)
             {
-                select(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString() });
-                get_attack_range();
+                this.isCurrentlySelectedTile = true;
+            }
+            else if (is_occupied() && isCurrentlySelectedTile)
+            {
+                OnUnselected(this, currentCharacter);
+                this.isCurrentlySelectedTile = false;
+            }
+            else
+            {
+                this.isCurrentlySelectedTile = true;
+            }
+
+            if (isCurrentlySelectedTile)
+            {
+                this.GetComponent<Renderer>().material = map_manager.types.selected;
             }
         }
-    }
-
-    // Puts the tile into normal mode.
-    public void set_as_not_current()
-    {
-        if (isCurrentlySelectedTile)
+        else if (isCurrentlySelectedTile)
         {
-            this.isCurrentlySelectedTile = false;
-            this.GetComponent<Renderer>().material.color = realColor;
-
-            if (is_occupied())
+            if (is_occupied() && (!selectedTile.is_selectable() || selectedTile.is_occupied()))
             {
-                unselect(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString() });
+                unselect(this, currentCharacter);
+                
+            }
+
+            this.isCurrentlySelectedTile = false;
+
+            if (!isCurrentlySelectedTile && !is_occupied() && !is_selectable())
+            {
+                this.GetComponent<Renderer>().material = map_manager.types.get_material(civilization);
+            }
+            else if (is_occupied())
+            {
+                this.GetComponent<Renderer>().material = map_manager.types.occupied;
+            }
+            else if (is_selectable())
+            {
+                this.GetComponent<Renderer>().material = map_manager.types.selectable;
             }
         }
     }
