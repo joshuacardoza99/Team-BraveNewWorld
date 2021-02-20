@@ -9,23 +9,23 @@ public class PlayerMove : MonoBehaviour
 {
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
-    map_manager    map_manager;     // Importing the map_manager class.
+    map_manager map_manager;     // Importing the map_manager class.
 
     // Unit attribiutes //
-    public  int   health       = 10;                  // The current health of this character.
-    public  int   damage       = 2;                   // The amount of damage this character gives in an attach.
-    public  int   attackRange  = 4;                   // The range this character can attach from.
-    public  int   moveRange    = 3;                   // The range this character can move to.
-    public  float cooldown     = 3;                   // The seconds this player needs to wait between actions.
-    public  float nextAttack   = 0;                   // Does not appear to be used.
-    public  bool  isAttacking  = false;               // Determines if this player is currently attaching.
-    public  int   civilization = 0;                   // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
-    private int[] grid         = new int[2] { 0, 0 }; // Stores the position of the Tile in the virtual grid. [x position, y position]
+    public int health = 10;                  // The current health of this character.
+    public int damage = 2;                   // The amount of damage this character gives in an attach.
+    public int attackRange = 4;                   // The range this character can attach from.
+    public int moveRange = 3;                   // The range this character can move to.
+    public float cooldown = 3;                   // The seconds this player needs to wait between actions.
+    public float nextAttack = 0;                   // Does not appear to be used.
+    public bool isAttacking = false;               // Determines if this player is currently attaching.
+    public int civilization = 0;                   // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
+    private int[] grid = new int[2] { 0, 0 }; // Stores the position of the Tile in the virtual grid. [x position, y position]
 
     // Varibles for movement 
-    public Tile  actualTargetTile;        // Does not appear to be used.
-    public float halfHeight       = 0;    // Apears to only be assigned half-of the height of this character.
-    public Tile  currentTile      = null; // The tile this character is currently on.
+    public Tile actualTargetTile;        // Does not appear to be used.
+    public float halfHeight = 0;    // Apears to only be assigned half-of the height of this character.
+    public Tile currentTile = null; // The tile this character is currently on.
 
     // Animation Controller
     public Animator anim; // Some kind of controler for the animations.
@@ -40,16 +40,27 @@ public class PlayerMove : MonoBehaviour
 
         anim = this.GetComponent<Animator>();
     }
-    
+
+    // This runs when the character is enabled.
+    void OnEnable()
+    {
+        Tile.OnSelected += move;
+    }
+
+
+    // This runs when the character is disabled.
+    void OnDisable()
+    {
+        Tile.OnSelected -= move;
+    }
+
     // if the current tile is occupied, highlight all surrounding tiles.
     public void set_selectable(string[] parameter)
     {
-        // prepare to move this character
-        Debug.Log("Trying to Set current character from set_selectable to " + this.name);
         //import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_character", this.name});
 
         // set all tiles in range to selectable
-        if (moveRange >= 1) // if the character can move at least once
+        /*if (moveRange >= 1) // if the character can move at least once
         {
             foreach (Tile tile in currentTile.get_walkable_tiles(moveRange)) // get the adjacent tiles
             {
@@ -58,49 +69,47 @@ public class PlayerMove : MonoBehaviour
                     tile.set_selectable(new string[0] { }); // this is currently not doing anything
                 }
             }
-        }
+        }*/
     }
 
     // Moves the player to the selected tile.
-    public void move(string[] location)
+    public void move(Tile moveToTile, PlayerMove unusedCharacter)
     {
-        Vector3 targetPosition; // The actual position of the tile this character is about to move to.
+        if (!moveToTile.is_occupied() && moveToTile.is_selectable())
+        {
+            Vector3 targetPosition; // The actual position of the tile this character is about to move to.
+            currentTile.unselect(currentTile, this);
+            grid[0] = moveToTile.get_grid()[0];
+            grid[1] = moveToTile.get_grid()[1];
 
-        grid[0] = int.Parse(location[0]);
-        grid[1] = int.Parse(location[1]);
-        Debug.Log("Moving");
-        //currentTile.unselect(new string[1] { moveRange.ToString()});
-        //urrentTile.set_unselectable(new string[0] { });
-        import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
+            import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
 
-        targetPosition = map_manager.map[grid[0], grid[1]].ground.transform.position;
-        currentTile    = map_manager.map[grid[0], grid[1]].ground.GetComponent<Tile>();
+            targetPosition = map_manager.map[grid[0], grid[1]].ground.transform.position;
+            currentTile = map_manager.map[grid[0], grid[1]].ground.GetComponent<Tile>();
 
-        // Condition if character moved
-        //if (currentTile.Position != targetPosition)
+            // Condition if character moved
+            //if (currentTile.Position != targetPosition)
             try
             {
                 anim.SetBool("isWalking", true);
             }
             catch { }
 
-        this.transform.LookAt(targetPosition);
+            this.transform.LookAt(targetPosition);
 
 
-        this.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - currentTile.GetComponent<Renderer>().bounds.size.z);
+            this.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - currentTile.GetComponent<Renderer>().bounds.size.z);
 
-        this.transform.rotation = Quaternion.identity;
-        currentTile.select(new string[1] { moveRange.ToString() });
-        Debug.Log("Move game object name = " + this.name);
+            this.transform.rotation = Quaternion.identity;
 
-        try
-        {
-            if (anim.GetBool("isWalking"))
-                anim.SetBool("isWalking", false);
+            try
+            {
+                if (anim.GetBool("isWalking"))
+                    anim.SetBool("isWalking", false);
+            }
+            catch { }
+            import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied", this.name });
         }
-        catch { }
-        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied", this.name });
-
     }
 
     // Sets the civilization this character is apart of.
@@ -127,10 +136,17 @@ public class PlayerMove : MonoBehaviour
         return grid;
     }
 
+    // Sets the current tile this character is occupying.
+    public void set_current_tile(Tile tile)
+    {
+        currentTile = tile;
+        //grid = tile.get_grid(); This line brakes set_unoccupied on the Tile script.
+    }
+
     // Send clicks to the current tile
     private void OnMouseDown()
     {
         currentTile.OnMouseDown();
-    } 
+    }
 
 }

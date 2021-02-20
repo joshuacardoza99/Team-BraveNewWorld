@@ -8,30 +8,31 @@ public class map_manager : MonoBehaviour
 {
     // External Classes//
     import_manager import_manager;                 // Import_Manager Class that facilitates cross class, player, and server function calls.
-    Tile           Tile;                           // Importing the Tile class.
+    Tile Tile;                           // Importing the Tile class.
 
     // Public Global Variables //
-    public  int         mapWidth = 10;              // The number of tiles across the width and height of the map is.
-    public  GameObject  water;                      // The water GroundType's GameObject.
-    public  GameObject  vikingLand;                 // The viking GroundType's GameObject.
-    public  GameObject  greekLand;                  // The greek GroundType's GameObject.
-    public  GameObject  asianLand;                  // The asian GroundType's GameObject.
-    private GameObject  currentSelectedTile = null; // stores what tile is currently selected
-    public  string      currentCharacter = null;    // Character on current selected tile
-    public  map_item[,] map;                        // The games current map as a 2-dimintional array of map_items.
+    public int mapWidth = 10;              // The number of tiles across the width and height of the map is.
+    public GameObject water;                      // The water GroundType's GameObject.
+    public GameObject vikingLand;                 // The viking GroundType's GameObject.
+    public GameObject greekLand;                  // The greek GroundType's GameObject.
+    public GameObject asianLand;                  // The asian GroundType's GameObject.
+    private GameObject currentSelectedTile = null; // stores what tile is currently selected
+    public string currentCharacter = null;    // Character on current selected tile
+    public map_item[,] map;                        // The games current map as a 2-dimintional array of map_items.
+    public GroundTypes types;                       // Holds all of the materials for each ground item.
 
     // This class contains all of the details the map needs for each ground item.
     public class map_item
     {
-        public int    groundType;       // Type of ground like water, asian, etc.
-        public int    xVirtualPosition; // The x position on the virtual grid.
-        public int    yVirtualPosition; // The y posiiton on the virtual grid.
+        public int groundType;       // Type of ground like water, asian, etc.
+        public int xVirtualPosition; // The x position on the virtual grid.
+        public int yVirtualPosition; // The y posiiton on the virtual grid.
         public GameObject ground;       // The GameObject for the gorund.
 
         // Contructor for map_item class.
         public map_item(int groundType, int xVirtualPosition, int yVirtualPosition)
         {
-            this.groundType       = groundType;
+            this.groundType = groundType;
             this.xVirtualPosition = xVirtualPosition;
             this.yVirtualPosition = yVirtualPosition;
         }
@@ -64,7 +65,7 @@ public class map_manager : MonoBehaviour
             ground = vikingLand;
         }
 
-        groundItem.ground = Instantiate(ground,new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(new Vector3(30, 0, -45)));
+        groundItem.ground = Instantiate(ground, new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(new Vector3(30, 0, -45)));
         groundItem.ground.name = "map";
         groundItem.ground.GetComponent<Tile>().set_civilization(groundItem.groundType);
         groundItem.ground.GetComponent<Tile>().set_grid(groundItem.xVirtualPosition, groundItem.yVirtualPosition);
@@ -77,40 +78,48 @@ public class map_manager : MonoBehaviour
 
         try
         {
-            nearGroundType += (map[xCoordinate - 1, yCoordinate    ].groundType == type) ? 1 : 0;
-        }catch{}
+            nearGroundType += (map[xCoordinate - 1, yCoordinate].groundType == type) ? 1 : 0;
+        }
+        catch { }
         try
         {
             nearGroundType += (map[xCoordinate - 1, yCoordinate - 1].groundType == type) ? 1 : 0;
-        }catch{}
+        }
+        catch { }
         try
         {
-            nearGroundType += (map[xCoordinate    , yCoordinate - 1].groundType == type) ? 1 : 0;
-        }catch{}
+            nearGroundType += (map[xCoordinate, yCoordinate - 1].groundType == type) ? 1 : 0;
+        }
+        catch { }
         try
         {
             nearGroundType += (map[xCoordinate + 1, yCoordinate - 1].groundType == type) ? 1 : 0;
-        }catch{}
+        }
+        catch { }
         try
         {
-            nearGroundType += (map[xCoordinate + 1, yCoordinate    ].groundType == type) ? 1 : 0;
-        }catch{}
+            nearGroundType += (map[xCoordinate + 1, yCoordinate].groundType == type) ? 1 : 0;
+        }
+        catch { }
         try
         {
             nearGroundType += (map[xCoordinate + 1, yCoordinate + 1].groundType == type) ? 1 : 0;
 
-        }catch{}
+        }
+        catch { }
         try
         {
-            nearGroundType += (map[xCoordinate    , yCoordinate + 1].groundType == type) ? 1 : 0;
+            nearGroundType += (map[xCoordinate, yCoordinate + 1].groundType == type) ? 1 : 0;
 
-        }catch{}
+        }
+        catch { }
         try
         {
             nearGroundType += (map[xCoordinate - 1, yCoordinate + 1].groundType == type) ? 1 : 0;
 
-        }catch{}
-        
+        }
+        catch { }
+
         return nearGroundType;
     }
 
@@ -134,15 +143,15 @@ public class map_manager : MonoBehaviour
     // where the first prefab in grounditems is the water prefab and the string is the name of the prefab in the prefab folder
     private void generate_map(int width, int height, int[] groundItems, int landPercentage, int seed)
     {
-        int          water               = groundItems[0];                           // Holds the water water "civ" name.
-        List<int>    preLand             = new List<int>(groundItems);               // This is a placeholder for the land until the first item gets removed.
+        int water = groundItems[0];                           // Holds the water water "civ" name.
+        List<int> preLand = new List<int>(groundItems);               // This is a placeholder for the land until the first item gets removed.
         preLand.RemoveAt(0);
-        int[]        land                = preLand.ToArray();                        // Holds all the ground items given.
-        int          numberOfGroundItems = width * height;                           // Total number of ground items for all civs and for water.
-        int          numberOfLandItems   = (int)(((float) numberOfGroundItems) *     // Total number of ground items for all civs.
+        int[] land = preLand.ToArray();                        // Holds all the ground items given.
+        int numberOfGroundItems = width * height;                           // Total number of ground items for all civs and for water.
+        int numberOfLandItems = (int)(((float)numberOfGroundItems) *     // Total number of ground items for all civs.
                                            ((float)landPercentage / 100f));
-        int          numberOfWaterItems  = numberOfGroundItems - numberOfLandItems;  // Total number of ground items for the water.
-        
+        int numberOfWaterItems = numberOfGroundItems - numberOfLandItems;  // Total number of ground items for the water.
+
         map = new map_item[width, height];  // Holds the finished map.
 
         Random.InitState(seed);
@@ -157,17 +166,17 @@ public class map_manager : MonoBehaviour
 
         foreach (int type in land)
         {
-             int localWidth  = Random.Range(1, (width - 2));
-             int localHeight = Random.Range(1, (width - 2));
+            int localWidth = Random.Range(1, (width - 2));
+            int localHeight = Random.Range(1, (width - 2));
 
-            while ((map[localWidth,     localHeight].groundType != water) &&
+            while ((map[localWidth, localHeight].groundType != water) &&
                    (map[localWidth + 1, localHeight].groundType != water))
             {
-                localWidth  = Random.Range(1, (width - 2));
+                localWidth = Random.Range(1, (width - 2));
                 localHeight = Random.Range(1, (width - 2));
             }
 
-            map[localWidth,     localHeight].groundType = type;
+            map[localWidth, localHeight].groundType = type;
             map[localWidth + 1, localHeight].groundType = type;
 
             for (int numberOfLandForThisType = (numberOfLandItems / land.Length) - 2; numberOfLandForThisType > 0; numberOfLandForThisType--)
@@ -179,7 +188,7 @@ public class map_manager : MonoBehaviour
                         if ((near_ground_type(type, localXCoordinate, localYCoordinate) >= Random.Range(2, 4)) &&
                             (not_near_ground_type(land, type, localXCoordinate, localYCoordinate) >= Random.Range(0, 4)) &&
                            (map[localXCoordinate, localYCoordinate].groundType == water) &&
-                           (numberOfLandForThisType != 0) )
+                           (numberOfLandForThisType != 0))
                         {
                             map[localXCoordinate, localYCoordinate].groundType = type;
                             numberOfLandForThisType--;
@@ -194,15 +203,15 @@ public class map_manager : MonoBehaviour
     // Parameter = [int seed]
     public void load_map(string[] parameters)
     {
-        generate_map(mapWidth, mapWidth, new int[4] { -1, 0, 1, 2}, 80, int.Parse(parameters[0])); // Stores the square paderian for the map.
+        generate_map(mapWidth, mapWidth, new int[4] { -1, 0, 1, 2 }, 80, int.Parse(parameters[0])); // Stores the square paderian for the map.
 
-        int   referencePossition = 0;                                                                            // Reference point for the map placement.                    
-        float ySparatedDistance  = (water.GetComponent<Renderer>().bounds.size.y / 1.65f);                       // Separation distance on the y-axis.
-        float xSparatedDistance  = ySparatedDistance * 2.3f;                                                     // Separation distance on the x-axis.
-        float xCoordinate        = referencePossition;                                                           // X-Coordinate for the next square.
-        float yCoordinate        = referencePossition;                                                           // Y-Coordinate for the next square.      
-        float zCoordinate        = referencePossition;                                                           // Z-Coordinate for the next square.
-        float rowWidthIncreaser  = 1f;                                                                           // The distance to increae the row width by.
+        int referencePossition = 0;                                                                            // Reference point for the map placement.                    
+        float ySparatedDistance = (water.GetComponent<Renderer>().bounds.size.y / 1.65f);                       // Separation distance on the y-axis.
+        float xSparatedDistance = ySparatedDistance * 2.3f;                                                     // Separation distance on the x-axis.
+        float xCoordinate = referencePossition;                                                           // X-Coordinate for the next square.
+        float yCoordinate = referencePossition;                                                           // Y-Coordinate for the next square.      
+        float zCoordinate = referencePossition;                                                           // Z-Coordinate for the next square.
+        float rowWidthIncreaser = 1f;                                                                           // The distance to increae the row width by.
 
         for (int level = 0; level < 60; level++)
         {
@@ -233,11 +242,11 @@ public class map_manager : MonoBehaviour
 
     // Removes the map.
     // Parameters = []
-    public void remove_map (string[] parameters)
+    public void remove_map(string[] parameters)
     {
         foreach (map_item item in map)
         {
-                Destroy(item.ground);
+            Destroy(item.ground);
         }
     }
 
@@ -260,26 +269,18 @@ public class map_manager : MonoBehaviour
     // Set the current character to a given character object
     public void set_current_character(string[] character)
     {
-        Debug.Log("Setting current Character in map to " + character[0]);
         currentCharacter = character[0];
     }
 
     // sends the string currentChar to the calling script
     public string get_current_character()
     {
-        Debug.Log("Returning the current character as " + currentCharacter);
         return currentCharacter;
     }
 
     // Sets the given tile as the currently selected Tile.
     public void set_current_tile(GameObject tile)
     {
-        if (currentSelectedTile != null)
-        {
-            currentSelectedTile.GetComponent<Tile>().set_as_not_current();
-        }
-
-        tile.GetComponent<Tile>().set_as_current();
         currentSelectedTile = tile;
     }
 
@@ -293,10 +294,10 @@ public class map_manager : MonoBehaviour
     // Parameter = [int xVirtualPosition, int yVirtualPosition, string functionName, string parameter].
     public void run_on_map_item(string[] parameter)
     {
-        int          xVirtualPosition = int.Parse(parameter[0]);     // The x position on the virtual of the map_item needing selected.
-        int          yVirtualPosition = int.Parse(parameter[1]);     // The y position on the virtual of the map_item needing selected.
-        string       functionName     = parameter[2];                // The name of the function that is to be ran on the select tile.
-        List<string> parameterList    = new List<string>(parameter); // The parameters for the function that will run on the selected tile.
+        int xVirtualPosition = int.Parse(parameter[0]);     // The x position on the virtual of the map_item needing selected.
+        int yVirtualPosition = int.Parse(parameter[1]);     // The y position on the virtual of the map_item needing selected.
+        string functionName = parameter[2];                // The name of the function that is to be ran on the select tile.
+        List<string> parameterList = new List<string>(parameter); // The parameters for the function that will run on the selected tile.
 
         parameterList.RemoveAt(0);
         parameterList.RemoveAt(0);

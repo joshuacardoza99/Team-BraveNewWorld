@@ -32,7 +32,7 @@ public class building_manager : MonoBehaviour
         if (Input.GetMouseButtonDown(0) 
             && !EventSystem.current.IsPointerOverGameObject()
             && activeBuildingType != null
-            && (map_manager.get_current_tile().GetComponent<Tile>().walkable))
+            && (map_manager.get_current_tile().GetComponent<Tile>().is_walkable()))
         {
             Vector3 tilePosition = map_manager.get_current_tile().transform.position;
 

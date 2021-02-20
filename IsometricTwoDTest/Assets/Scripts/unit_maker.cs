@@ -7,16 +7,16 @@ public class unit_maker : MonoBehaviour
 {
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
-    Tile           Tile;            // Importing the Tile class.
-    PlayerMove     PlayerMove;      // Importing the PlayerMove class.
-    map_manager    map_manager;     // Importing the map_manager class.
+    Tile Tile;            // Importing the Tile class.
+    PlayerMove PlayerMove;      // Importing the PlayerMove class.
+    map_manager map_manager;     // Importing the map_manager class.
 
     // Public Global Variables //
     public GameObject asianChampion;
     public GameObject asianMelee;
     public GameObject asianRanged;
     public GameObject asianTank;
-   
+
     public GameObject greekChampion;
     public GameObject greekMelee;
     public GameObject greekRanged;
@@ -31,23 +31,23 @@ public class unit_maker : MonoBehaviour
     void Start()
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
-        map_manager    = GameObject.Find("Map").GetComponent<map_manager>();
+        map_manager = GameObject.Find("Map").GetComponent<map_manager>();
     }
 
     // Parameters = [string civilization, string championName, int randomTile]
     public void add_champion(string[] parameters)
     {
-        string           championName = parameters[0] + "_" + parameters[1];     // Holds the name for the champion.
-        int              randomTile   = int.Parse(parameters[2]);                // Holds the random number that allows for the selection of the same random tile across the network.
-        int              civilization = int.Parse(parameters[0]);                // The civilization of the champion needing created.
-        GameObject       champion     = null;                                    // The champion GameObject.
-        List<GameObject> tiles        = map_manager.get_land(civilization);      // The list of tiles that a random tile to place the champion on is chosen from.
-        GameObject       tile         = tiles[(int)(randomTile / tiles.Count)];  // The randomly selected tile to add the champion to.
-        int[]            tileGrid     = tile.GetComponent<Tile>().get_grid();    // The grid position of the selected tile.
-        Vector3          tilePosition = tile.transform.position;                 // The actual position to of the selected tile.
+        string championName = parameters[0] + "_" + parameters[1];     // Holds the name for the champion.
+        int randomTile = int.Parse(parameters[2]);                // Holds the random number that allows for the selection of the same random tile across the network.
+        int civilization = int.Parse(parameters[0]);                // The civilization of the champion needing created.
+        GameObject champion = null;                                    // The champion GameObject.
+        List<GameObject> tiles = map_manager.get_land(civilization);      // The list of tiles that a random tile to place the champion on is chosen from.
+        GameObject tile = tiles[(int)(randomTile / tiles.Count)];  // The randomly selected tile to add the champion to.
+        int[] tileGrid = tile.GetComponent<Tile>().get_grid();    // The grid position of the selected tile.
+        Vector3 tilePosition = tile.transform.position;                 // The actual position to of the selected tile.
 
         tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
-            
+
         // Civilization 0 is Asian civilization.
         if (tile.GetComponent<Tile>().get_civilization() == 0)
         {
@@ -60,10 +60,10 @@ public class unit_maker : MonoBehaviour
         }
         // Civilization 2 is Viking civilization.
         else if (tile.GetComponent<Tile>().get_civilization() == 2)
-         {
+        {
             champion = Instantiate(vikingChampion, tilePosition, Quaternion.identity);
-         }
-        
+        }
+
         champion.name = championName;
         champion.GetComponent<PlayerMove>().set_civilization(tile.GetComponent<Tile>().get_civilization());
         import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tileGrid[0].ToString(), tileGrid[1].ToString(), "set_occupied", championName });
@@ -78,8 +78,8 @@ public class unit_maker : MonoBehaviour
     public void add_unit(string[] parameters)
     {
         // for tile coordinates, also figure out scaling for buildings
-        GameObject tile         = GameObject.Find(parameters[0]); // Selecting the given tile from its name.
-        Vector3    tilePosition = tile.transform.position;        // The actual position of the select tile.
+        GameObject tile = GameObject.Find(parameters[0]); // Selecting the given tile from its name.
+        Vector3 tilePosition = tile.transform.position;        // The actual position of the select tile.
 
         tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y;
 
@@ -141,10 +141,10 @@ public class unit_maker : MonoBehaviour
 
     // Removes the all units on the map.
     // Parameters = []
-    public void remove_all_units (string[] parameters)
+    public void remove_all_units(string[] parameters)
     {
-        object[] sceneGameObjects = GameObject.FindSceneObjectsOfType(typeof (GameObject)); // List of all GameObjects the scene.
-     
+        object[] sceneGameObjects = GameObject.FindSceneObjectsOfType(typeof(GameObject)); // List of all GameObjects the scene.
+
         foreach (GameObject sceneObject in sceneGameObjects)
         {
             if (Regex.IsMatch(sceneObject.name.ToLower(), "asian_*", RegexOptions.IgnoreCase) ||
