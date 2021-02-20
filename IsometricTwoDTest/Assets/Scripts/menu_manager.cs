@@ -38,4 +38,18 @@ public class menu_manager : MonoBehaviour
     {
         ChangeGroup(GameObject.Find("Canvas").transform.GetChild(3).gameObject);
     }
+
+    // Removes the wait panel blocking the game.
+    // Parameter = []
+    public void open_unit_menu()
+    {
+        ChangeGroup(groups[6]);
+    }
+
+    // Removes the wait panel blocking the game.
+    // Parameter = []
+    public void close_menus()
+    {
+        ChangeGroup(groups[2]);
+    }
 }

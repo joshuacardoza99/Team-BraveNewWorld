@@ -52,7 +52,7 @@ public class building_manager : MonoBehaviour
                 Instantiate(activeBuildingType.viking, tilePosition, Quaternion.identity);
 
             activeBuildingType = null;
-        }    
+        }
     }
    
     //  Set active building to which ever the user selected
@@ -61,3 +61,4 @@ public class building_manager : MonoBehaviour
         activeBuildingType = building_Type;
     }
 }
+

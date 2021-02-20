@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f5e829aac125644afc840d4882860f, type: 3}
   m_Name: Ranged
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 0485fc01f4ea3f649a2997262df7059e, type: 3}
   asian: {fileID: 3480862566136248020, guid: a112f9a7f775e184a8ab17fe3b1e7e75, type: 3}
   viking: {fileID: 3439820194571976798, guid: c09edde1a994af343bc32a3450dcf3e2, type: 3}
   greek: {fileID: 5836595746069545413, guid: cdddc313cc9c2ec4d9c71541b393510e, type: 3}

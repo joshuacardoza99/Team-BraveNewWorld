@@ -31,7 +31,6 @@ public class unit_manager : MonoBehaviour
         Tile.OnSelected += add_unit;
     }
 
-
     // This runs when the tile is disabled.
     void OnDisable()
     {
