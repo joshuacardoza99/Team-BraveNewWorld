@@ -83,11 +83,13 @@ public class Tile : MonoBehaviour
             // This will make you able to walk on top of other players in multiplayer.
             // set_occupied(new string[1] { currentCharacter.name });
             select(new string[1] { currentCharacter.GetComponent<PlayerMove>().moveRange.ToString() });
+            // checks to see if player is not in cooldown 
             if (Time.time > currentCharacter.GetComponent<cooldown>().nextAttack)
             {
                 // check if this characters civ is the same as the character clicking on it
                 if (currentCharacter.GetComponent<PlayerMove>().civilization == currentCharacter.GetComponent<PlayerMove>().civilization)
                 {
+                    // insert attack animation here  
                     currentCharacter.GetComponent<PlayerMove>().health -= currentCharacter.GetComponent<PlayerMove>().damage;
                     Debug.Log("Health equals " + currentCharacter.GetComponent<PlayerMove>().health);
                     currentCharacter.GetComponent<cooldown>().initiate_attack_cooldown();
