@@ -14,6 +14,7 @@ public class Tile : MonoBehaviour
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
     map_manager map_manager;     // This imports the map_manager class to help with interactions with othe tiles.
+    cooldown cooldowns;
 
     // Events
     public delegate void  TileSelected   (Tile selectedTile, PlayerMove occupyingCharacter);   // Template function for the TileSelected Event.
@@ -41,6 +42,7 @@ public class Tile : MonoBehaviour
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
         map_manager    = GameObject.Find("Map").GetComponent<map_manager>();
+        cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
     }
 
     // This runs when the character is enabled.
@@ -288,16 +290,20 @@ public class Tile : MonoBehaviour
     // Attacks the character on selected tile.
     public void attack(Tile tile, PlayerMove character)
     {
+        if(cooldowns == null)
+        {
+            cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
+        }
         if (tile == this && occupied && attackable) // and in range, and not a friendly civ
         {
-            if (Time.time > currentCharacter.GetComponent<cooldown>().nextAttack)
+            if (Time.time > cooldowns.nextAttack)
             {
                 // check if this characters civ is the same as the character clicking on it
-                if (currentCharacter.GetComponent<PlayerMove>().civilization == currentCharacter.GetComponent<PlayerMove>().civilization)
+                if (currentCharacter.GetComponent<PlayerMove>().civilization != currentCharacter.GetComponent<PlayerMove>().civilization)
                 {
                     currentCharacter.GetComponent<PlayerMove>().health -= currentCharacter.GetComponent<PlayerMove>().damage;
                     Debug.Log("Health equals " + currentCharacter.GetComponent<PlayerMove>().health);
-                    currentCharacter.GetComponent<cooldown>().initiate_attack_cooldown();
+                    cooldowns.initiate_attack_cooldown();
                     if (currentCharacter.GetComponent<PlayerMove>().health <= 0)
                     {
                         Debug.Log("YOUR SOLDIER HAS FALLEN !!");
