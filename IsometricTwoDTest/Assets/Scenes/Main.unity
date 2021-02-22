@@ -241,6 +241,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bf700c1b68b39984fa0337f5ba7c63bd, type: 3}
   m_PrefabInstance: {fileID: 2101738850}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &342042267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 342042269}
+  - component: {fileID: 342042268}
+  m_Layer: 0
+  m_Name: Cooldown
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &342042268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342042267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae03cdc4ad67e814eaf12f54f2fc46d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextAttack: 0
+  nextMove: 0
+  nextResurceCollect: 0
+  coolDown: 3
+--- !u!4 &342042269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342042267}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 18.230349, y: -43.52986, z: -32.900936}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &432795677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -405,7 +452,7 @@ MonoBehaviour:
   controlCamera: 1
   cam: {fileID: 0}
   ignoreUI: 0
-  useBounds: 0
+  useBounds: 1
   boundMinX: -150
   boundMaxX: 150
   boundMinY: -150

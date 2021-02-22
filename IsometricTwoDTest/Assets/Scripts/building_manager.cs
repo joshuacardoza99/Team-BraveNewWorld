@@ -67,7 +67,7 @@ public class building_manager : MonoBehaviour
                 Debug.Log("Don't have enough Gold");
         }
     }
-   
+
     //  Set active building to which ever the user selected
     public void set_active_building_type(building_type building_Type)
     {
