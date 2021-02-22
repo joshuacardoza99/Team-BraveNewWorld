@@ -55,6 +55,9 @@ public class unit_manager : MonoBehaviour
             else
                 Instantiate(activeUnitType.viking, tilePosition, Quaternion.identity);
 
+            activeUnitType.print_message();
+            activeUnitType.print_attributes();
+
             activeUnitType = null;
         }
     }

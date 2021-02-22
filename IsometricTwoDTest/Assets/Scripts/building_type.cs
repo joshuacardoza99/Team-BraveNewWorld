@@ -24,8 +24,20 @@ public class building_type : ScriptableObject
 
     [Space(5)]                                // 5 pixels of spacing here.
     [Header("Building Attributes")]           // Shows text in inspector
-    public int resourcesAmount;               // Amount of resources building generates
-    public int resourceCooldown;              // Cooldown on resource
+    public int   resourcesAmount;               // Amount of resources building generates
+    public int   buildCost;
+
+    public float resourceCooldown;              // Cooldown on resource
+
+    public void print_message()
+    {
+        Debug.Log("A " + unitType + " has been spawned");
+    }
+
+    public void print_attributes()
+    {
+        Debug.Log("\nResource Cooldown: " + resourceCooldown + "\nResource Amount: " + resourcesAmount);
+    }
 }
 
 public enum BuildingType

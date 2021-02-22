@@ -11,6 +11,8 @@ public class building_select : MonoBehaviour
     [SerializeField]
     private building_manager building_manager;   // Makes varible visible in inspector and connect it to building_manager
 
+    public int buildingNumber;
+
     private void Awake()
     {
         Transform buildingTemplate = transform.Find("buildTemplate");  // Use the template button made in unity for the button creation
@@ -32,8 +34,14 @@ public class building_select : MonoBehaviour
             buildingTransform.GetComponent<Button>().onClick.AddListener(() =>
             {
                 building_manager.set_active_building_type(building_type);
+               // Debug.Log(buildingTypeList.IndexOf(building_type));
+                buildingNumber = buildingTypeList.IndexOf(building_type);
+                Debug.Log("this buidling number is working " + buildingNumber);
+
             });
             index++;
+
+            
         }
     }
 }

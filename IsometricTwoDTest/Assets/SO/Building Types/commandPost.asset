@@ -16,5 +16,8 @@ MonoBehaviour:
   asian: {fileID: 4171119226685994408, guid: 9ad1e514625bf034db01a8417556e880, type: 3}
   viking: {fileID: 3836359362536473918, guid: c43602e2d105c32459a04c95ae53a63e, type: 3}
   greek: {fileID: 2786063593081427463, guid: 83a62580cbc09754195e12273e738c0c, type: 3}
-  canChampionSpawn: 1
-  Health: 100
+  isConquered: 0
+  unitType: 0
+  resourcesAmount: 0
+  buildCost: 500
+  resourceCooldown: 0

@@ -462,6 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   civNumber: 0
   activeBuildingType: {fileID: 0}
+  building_select: {fileID: 1263738955}
 --- !u!4 &640418262
 Transform:
   m_ObjectHideFlags: 0
@@ -491,6 +492,10 @@ PrefabInstance:
       propertyPath: water
       value: 
       objectReference: {fileID: 3909690650225517432, guid: c923e0107c6fb184bbe3081289560780, type: 3}
+    - target: {fileID: 3696094326087606782, guid: 24a3a132c19477d41ba80d52ca889a6f, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4972295199435703156, guid: 24a3a132c19477d41ba80d52ca889a6f, type: 3}
       propertyPath: m_Text
       value: Build
@@ -1444,6 +1449,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a7aa921099f1a343b4cd6f28a001b7f, type: 3}
+--- !u!114 &1015937707 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3696094326087606782, guid: 24a3a132c19477d41ba80d52ca889a6f, type: 3}
+  m_PrefabInstance: {fileID: 647891207}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1023793585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,6 +1585,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7225120771434035338, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
   m_PrefabInstance: {fileID: 3753470237240160785}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1263738955 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8833372564142822147, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
+  m_PrefabInstance: {fileID: 3753470237240160785}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263738953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f8b30af1bcfaf54f9ada997d2acfe51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1315649248 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1e99579c0cc09cc4d8ec9c5d99ae4e17, type: 3}
@@ -1782,6 +1809,72 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5100340471292589195, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
   m_PrefabInstance: {fileID: 1848077866}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1750551916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1750551918}
+  - component: {fileID: 1750551917}
+  - component: {fileID: 1750551919}
+  m_Layer: 0
+  m_Name: civManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1750551917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750551916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6589d39ca91adf24284eb0807524fa00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  building_type:
+  - {fileID: 11400000, guid: 7a0c2510b46c124429a08bb9dd8f2dff, type: 2}
+  - {fileID: 11400000, guid: 0c250dc03851ef74ba78cca97f5e70c5, type: 2}
+  - {fileID: 11400000, guid: 57c33a5f3ed89df4a84d1d4039ba4c01, type: 2}
+  numberOfFarms: 0
+  numberOfMines: 0
+  amountFood: 0
+  amountGold: 0
+  timeRemanining: 10
+--- !u!4 &1750551918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750551916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.932365, y: -20.998024, z: -32.29274}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1750551919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750551916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3988af26e4ee1f14ba971bc00cbfb66d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourcesText: {fileID: 1015937707}
 --- !u!1001 &1801559174
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3863,20 +3956,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8833372564142822147, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: buildingTypeList.Array.size
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8833372564142822147, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: buildingTypeList.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 4058bf08d40abbf4cb193caf21affeef, type: 2}
+      objectReference: {fileID: 11400000, guid: 7a0c2510b46c124429a08bb9dd8f2dff, type: 2}
     - target: {fileID: 8833372564142822147, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: buildingTypeList.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 57c33a5f3ed89df4a84d1d4039ba4c01, type: 2}
+      objectReference: {fileID: 11400000, guid: 0c250dc03851ef74ba78cca97f5e70c5, type: 2}
     - target: {fileID: 8833372564142822147, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: buildingTypeList.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 7a0c2510b46c124429a08bb9dd8f2dff, type: 2}
+      objectReference: {fileID: 11400000, guid: 57c33a5f3ed89df4a84d1d4039ba4c01, type: 2}
     - target: {fileID: 8833372564142822147, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: buildingTypeList.Array.data[3]
       value: 

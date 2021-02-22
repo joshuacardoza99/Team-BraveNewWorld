@@ -28,6 +28,22 @@ public class unit_type : ScriptableObject
     [Header("Unit Cooldowns")]                // Shows text in inspector
     public float attackCooldown;              // Unit attack cooldown
     public float movementCooldown;            // unit movement cooldown
+
+    public void print_message()
+    {
+        Debug.Log("A " + unitType + " unit has been spawned");
+    }
+
+    public void print_attributes()
+    {
+        Debug.Log("\nHealth: " + health + "\nAttack Range: " + attackRange + "\nAttack Damage: " + attackDamage);
+    }
+
+    public void print_cooldowns()
+    {
+        Debug.Log(attackCooldown);
+        Debug.Log(movementCooldown);
+    }
 }
 
 
