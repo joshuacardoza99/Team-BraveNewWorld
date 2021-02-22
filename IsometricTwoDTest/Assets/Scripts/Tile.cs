@@ -15,6 +15,7 @@ public class Tile : MonoBehaviour
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
     map_manager map_manager;     // This imports the map_manager class to help with interactions with othe tiles.
     cooldown cooldowns;
+    menu_manager menu_manager;
 
     // Events
     public delegate void  TileSelected   (Tile selectedTile, PlayerMove occupyingCharacter);   // Template function for the TileSelected Event.
@@ -43,6 +44,7 @@ public class Tile : MonoBehaviour
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
         map_manager    = GameObject.Find("Map").GetComponent<map_manager>();
         cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
+        menu_manager = GameObject.Find("MenuManager").GetComponent<menu_manager>();
     }
 
     // This runs when the character is enabled.

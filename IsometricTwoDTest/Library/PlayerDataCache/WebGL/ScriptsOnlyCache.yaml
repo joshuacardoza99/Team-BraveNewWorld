@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - GroundTypes
     - PanZoom
     - PlayerMove
     - Tile
@@ -16,9 +17,13 @@ ScriptsOnlyBuild:
     - map_manager
     - match_manager
     - menu_manager
+    - open_unit_menu
     - panel_toggle
     - server_manager
     - unit_maker
+    - unit_manager
+    - unit_select
+    - unit_type
     Unity.2D.Animation.Editor.dll:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
@@ -98,63 +103,73 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11798}
     - Class: 114
-      Script: {instanceID: 11842}
+      Script: {instanceID: 11836}
     - Class: 114
-      Script: {instanceID: 12220}
+      Script: {instanceID: 12016}
     - Class: 114
-      Script: {instanceID: 12242}
+      Script: {instanceID: 12216}
     - Class: 114
-      Script: {instanceID: 12362}
+      Script: {instanceID: 12238}
     - Class: 114
-      Script: {instanceID: 12446}
+      Script: {instanceID: 12358}
     - Class: 114
-      Script: {instanceID: 12716}
+      Script: {instanceID: 12442}
+    - Class: 114
+      Script: {instanceID: 12466}
+    - Class: 114
+      Script: {instanceID: 12596}
+    - Class: 114
+      Script: {instanceID: 12714}
     - Class: 114
       Script: {instanceID: 12812}
     - Class: 114
-      Script: {instanceID: 13012}
+      Script: {instanceID: 13014}
     - Class: 114
-      Script: {instanceID: 13148}
+      Script: {instanceID: 13150}
     - Class: 114
-      Script: {instanceID: 13424}
+      Script: {instanceID: 13362}
     - Class: 114
-      Script: {instanceID: 13698}
+      Script: {instanceID: 13428}
     - Class: 114
       Script: {instanceID: 13702}
     - Class: 114
-      Script: {instanceID: 13844}
+      Script: {instanceID: 13706}
     - Class: 114
-      Script: {instanceID: 13876}
+      Script: {instanceID: 13848}
     - Class: 114
-      Script: {instanceID: 13974}
+      Script: {instanceID: 13880}
     - Class: 114
-      Script: {instanceID: 14040}
+      Script: {instanceID: 13976}
     - Class: 114
-      Script: {instanceID: 14216}
+      Script: {instanceID: 14010}
     - Class: 114
-      Script: {instanceID: 14272}
+      Script: {instanceID: 14044}
     - Class: 114
-      Script: {instanceID: 14586}
+      Script: {instanceID: 14220}
     - Class: 114
-      Script: {instanceID: 14642}
+      Script: {instanceID: 14276}
     - Class: 114
-      Script: {instanceID: 14712}
+      Script: {instanceID: 14590}
     - Class: 114
-      Script: {instanceID: 14740}
+      Script: {instanceID: 14646}
     - Class: 114
-      Script: {instanceID: 14756}
+      Script: {instanceID: 14716}
     - Class: 114
-      Script: {instanceID: 14792}
+      Script: {instanceID: 14744}
     - Class: 114
-      Script: {instanceID: 14956}
+      Script: {instanceID: 14760}
     - Class: 114
-      Script: {instanceID: 15140}
+      Script: {instanceID: 14796}
     - Class: 114
-      Script: {instanceID: 15456}
+      Script: {instanceID: 14960}
     - Class: 114
-      Script: {instanceID: 15524}
+      Script: {instanceID: 15144}
     - Class: 114
-      Script: {instanceID: 32806}
+      Script: {instanceID: 15458}
+    - Class: 114
+      Script: {instanceID: 15526}
+    - Class: 114
+      Script: {instanceID: 37094}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -238,6 +253,12 @@ ScriptsOnlyBuild:
     className: CameraControl
   - hash:
       serializedVersion: 2
+      Hash: 0c7292c4acca577979132b79ac0ebb1f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GroundTypes
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: TrilleonAutomation
@@ -286,7 +307,7 @@ ScriptsOnlyBuild:
     className: Scrollbar
   - hash:
       serializedVersion: 2
-      Hash: 2b4d348e4fe47f2726fa99b2273217f5
+      Hash: 9943d02d67a418f6f1b0be07fefebd6d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tile
@@ -370,6 +391,12 @@ ScriptsOnlyBuild:
     className: SignalAsset
   - hash:
       serializedVersion: 2
+      Hash: bcd779f533d2ace023431736f673b7cd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: unit_select
+  - hash:
+      serializedVersion: 2
       Hash: 0dbc3be398b4869a5c8d0d8481ee402c
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -406,7 +433,7 @@ ScriptsOnlyBuild:
     className: AspectRatioFitter
   - hash:
       serializedVersion: 2
-      Hash: 6786dc84a8262f2aea403d0e72e8afe0
+      Hash: 67b7c626b3e2b6963ad6877731a51f37
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: unit_manager
@@ -442,7 +469,7 @@ ScriptsOnlyBuild:
     className: PixelPerfectCamera
   - hash:
       serializedVersion: 2
-      Hash: 3b89d83f5f42d733818e81a25a977896
+      Hash: ecff868dab8560dc9fc148f49751d118
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: unit_maker
@@ -470,6 +497,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: TrilleonAutomation
     className: AutomationMaster
+  - hash:
+      serializedVersion: 2
+      Hash: 251e0c04a0510282ffb9ba64cd24c000
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: cooldown
   - hash:
       serializedVersion: 2
       Hash: cc4274b586df3c02688bac01b88bd16c
@@ -544,13 +577,19 @@ ScriptsOnlyBuild:
     className: WebGLBroker
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: open_unit_menu
+  - hash:
+      serializedVersion: 2
       Hash: 909243d6c976c56434687e91b0e3b9e0
     assemblyName: Assembly-CSharp.dll
     namespaceName: TrilleonAutomation
     className: AutoHud
   - hash:
       serializedVersion: 2
-      Hash: a9068eea350290838740069cdd82a942
+      Hash: d16f860676dada105738ec70c02bb7f1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: building_manager
@@ -622,13 +661,13 @@ ScriptsOnlyBuild:
     className: TextContainer
   - hash:
       serializedVersion: 2
-      Hash: 52893a989ee134ce670e5f29c200d661
+      Hash: da1bbd45bfcd516711882bdff84f20af
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: character_selection
   - hash:
       serializedVersion: 2
-      Hash: 97f1ad62e28a956e13ff867bb8ebe936
+      Hash: ac154b864acc7ae5fafa00fc174ddf44
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: building_type
@@ -638,12 +677,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: RawImage
-  - hash:
-      serializedVersion: 2
-      Hash: 48b7c69db93718385298016223e3babf
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: building_civ
   - hash:
       serializedVersion: 2
       Hash: c5b286ca3cff0f60f5a226dbe9f6f941
@@ -656,6 +689,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: TrilleonAutomation
     className: AutomationRecorder
+  - hash:
+      serializedVersion: 2
+      Hash: dbf2230a7a71300eb0308bb0038be2b9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: unit_type
   - hash:
       serializedVersion: 2
       Hash: 3164bc883ff663a5cdb32d1ef7e7c0c5
@@ -826,7 +865,7 @@ ScriptsOnlyBuild:
     className: AudioTrack
   - hash:
       serializedVersion: 2
-      Hash: cefcfeec7e8e623a1eec16bf8268be70
+      Hash: bb5b8ae81ad0be59541d6e3af89d876c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: map_manager
@@ -838,7 +877,7 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 627bab22db5e6db36c1753539133c262
+      Hash: e11686b0973b0751e0a5ee7a5143e2a1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMove
@@ -952,12 +991,6 @@ ScriptsOnlyBuild:
     className: Outline
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: attack
-  - hash:
-      serializedVersion: 2
       Hash: 134322c9293c1896357cce271b819ce4
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -1030,7 +1063,7 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
-      Hash: c26ce128aa3843a6f15816ae022d8e5a
+      Hash: 9b5aba6047b27bec8cdac111017f4722
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: building_select

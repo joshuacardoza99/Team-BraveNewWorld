@@ -266,30 +266,6 @@ public class map_manager : MonoBehaviour
         return landOfType;
     }
 
-    // Set the current character to a given character object
-    public void set_current_character(string[] character)
-    {
-        currentCharacter = character[0];
-    }
-
-    // sends the string currentChar to the calling script
-    public string get_current_character()
-    {
-        return currentCharacter;
-    }
-
-    // Sets the given tile as the currently selected Tile.
-    public void set_current_tile(GameObject tile)
-    {
-        currentSelectedTile = tile;
-    }
-
-    // Gets the tile that is currently selected.
-    public GameObject get_current_tile()
-    {
-        return currentSelectedTile;
-    }
-
     // Finds the wanted map item and runs the given function on it.
     // Parameter = [int xVirtualPosition, int yVirtualPosition, string functionName, string parameter].
     public void run_on_map_item(string[] parameter)

@@ -26,9 +26,7 @@ public class building_type : ScriptableObject
     [Header("Building Attributes")]           // Shows text in inspector
     public int resourcesAmount;               // Amount of resources building generates
     public int resourceCooldown;              // Cooldown on resource
-
 }
-
 
 public enum BuildingType
 {

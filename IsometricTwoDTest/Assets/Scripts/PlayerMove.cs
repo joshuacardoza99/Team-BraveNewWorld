@@ -44,72 +44,64 @@ public class PlayerMove : MonoBehaviour
     // This runs when the character is enabled.
     void OnEnable()
     {
-        Tile.OnSelected += move;
+        Tile.OnSelected += handle_move;
     }
 
 
     // This runs when the character is disabled.
     void OnDisable()
     {
-        Tile.OnSelected -= move;
+        Tile.OnSelected -= handle_move;
     }
 
-    // if the current tile is occupied, highlight all surrounding tiles.
-    public void set_selectable(string[] parameter)
-    {
-        //import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_current_character", this.name});
-
-        // set all tiles in range to selectable
-        /*if (moveRange >= 1) // if the character can move at least once
-        {
-            foreach (Tile tile in currentTile.get_walkable_tiles(moveRange)) // get the adjacent tiles
-            {
-                if (!tile.is_occupied())
-                {
-                    tile.set_selectable(new string[0] { }); // this is currently not doing anything
-                }
-            }
-        }*/
-    }
-
-    // Moves the player to the selected tile.
-    public void move(Tile moveToTile, PlayerMove unusedCharacter)
+    // Handles running the move on the current players computer and over the network.
+    public void handle_move(Tile moveToTile, PlayerMove ususedCharacter)
     {
         if (!moveToTile.is_occupied() && moveToTile.is_selectable())
         {
-            Vector3 targetPosition; // The actual position of the tile this character is about to move to.
             currentTile.unselect(currentTile, this);
-            grid[0] = moveToTile.get_grid()[0];
-            grid[1] = moveToTile.get_grid()[1];
-
             import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
+           
+            import_manager.run_function_all(this.gameObject.name, "move", new string[2] { moveToTile.get_grid()[0].ToString(), moveToTile.get_grid()[1].ToString() });
+            move(new string[2] { moveToTile.get_grid()[0].ToString(), moveToTile.get_grid()[1].ToString() });
 
-            targetPosition = map_manager.map[grid[0], grid[1]].ground.transform.position;
-            currentTile = map_manager.map[grid[0], grid[1]].ground.GetComponent<Tile>();
-
-            // Condition if character moved
-            //if (currentTile.Position != targetPosition)
-            try
-            {
-                anim.SetBool("isWalking", true);
-            }
-            catch { }
-
-            this.transform.LookAt(targetPosition);
-
-
-            this.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - currentTile.GetComponent<Renderer>().bounds.size.z);
-
-            this.transform.rotation = Quaternion.identity;
-
-            try
-            {
-                if (anim.GetBool("isWalking"))
-                    anim.SetBool("isWalking", false);
-            }
-            catch { }
             import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied", this.name });
         }
+    }
+
+    // Moves the player to the selected tile.
+    // Parameters = [int xTilePosition, int yTilePosition]
+    public void move(string[] parameters)
+    {
+        Tile moveToTile = map_manager.map[int.Parse(parameters[0]), int.Parse(parameters[1])].ground.GetComponent<Tile>();
+        Vector3 targetPosition; // The actual position of the tile this character is about to move to.
+        grid[0] = moveToTile.get_grid()[0];
+        grid[1] = moveToTile.get_grid()[1];
+
+        targetPosition = map_manager.map[grid[0], grid[1]].ground.transform.position;
+        currentTile = map_manager.map[grid[0], grid[1]].ground.GetComponent<Tile>();
+
+        // Condition if character moved
+        //if (currentTile.Position != targetPosition)
+        try
+        {
+            anim.SetBool("isWalking", true);
+        }
+        catch { }
+
+        this.transform.LookAt(targetPosition);
+
+
+        this.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - currentTile.GetComponent<Renderer>().bounds.size.z);
+
+        this.transform.rotation = Quaternion.identity;
+
+        try
+        {
+            if (anim.GetBool("isWalking"))
+                anim.SetBool("isWalking", false);
+        }
+        catch { }
     }
 
     // Sets the civilization this character is apart of.
