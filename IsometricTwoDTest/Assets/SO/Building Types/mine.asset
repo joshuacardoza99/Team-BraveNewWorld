@@ -18,5 +18,6 @@ MonoBehaviour:
   greek: {fileID: 6001181614200676741, guid: 5f40469189e4afa479d795f878314c1b, type: 3}
   isConquered: 0
   unitType: 3
-  resourcesAmount: 0
-  resourceCooldown: 0
+  resourcesAmount: 10
+  buildCost: 250
+  resourceCooldown: 10
