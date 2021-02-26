@@ -35,7 +35,7 @@ namespace TrilleonAutomation {
 
         /// <summary>
         /// Add all valid commands with accompanying logic to launch in region below. Command aliases cannot contains spaces.
-        /// </summary>
+        /// //
         public static List<Command> RegisteredCommands = new List<Command> {
 
 			#region Trilleon commands.
@@ -366,7 +366,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Send string command to console for execution. Can be accessed from the GUI console input, or by programmatically calling this and sending a raw command.
-		/// </summary>
+		/// //
 		void SendCommandInstance() {
 
 			SendCommand(consoleInput.text);
@@ -484,7 +484,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Add the console to the AutomationCustodian object, and begin watching for commands.
-		/// </summary>
+		/// //
 		public void Initialize() {
 
 			console = new GameObject("Console", typeof(Canvas), typeof(CanvasGroup), typeof(GraphicRaycaster));
@@ -552,7 +552,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Posts messages from executed commands to the scrollable console above the input.
-		/// </summary>
+		/// //
 		static void UpdateCommandConsoleOutput(string message, bool clearExisting = false) {
 
 			string timestamp = System.DateTime.UtcNow.ToLongTimeString();
@@ -573,7 +573,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Sort up and down through history of commands issued during the current session.
-		/// </summary>
+		/// //
 		IEnumerator ArrowCommandHistory(bool isUp) {
 
 			//Prevents scrolling over multiple history commands at once.

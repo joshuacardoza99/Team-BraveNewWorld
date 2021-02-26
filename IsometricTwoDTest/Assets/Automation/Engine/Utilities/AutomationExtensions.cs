@@ -30,7 +30,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Convert string into numerical value. Return -1 if not convertable.
-		/// </summary>
+		/// //
 		/// <param name="isMoneyString">If set to <c>true</c>, remove characters often seen in currency, such as comma and $ sign.</param>
 		public static int ToInt(this string value, bool isMoneyString = false) {
 
@@ -52,7 +52,7 @@ namespace TrilleonAutomation {
         /// <summary>
         /// Determines if two floating point or double values are effectively equal in a low precision sense. If a float or double is used to represent money, their exact values to the maximum decimal place are not likely to be identical.
         /// This allows you to compare these values to others in a manner similar to if you converted the values to an integer to cause rounding in finite decimal place values.
-        /// </summary>
+        /// //
         public static bool ApproximatelyEqual(this float current, float compareTo) {
 
             return ApproximatelyEqual((double)current, (double)compareTo); //Ignore IDE. Cast is not redundant. Without cast, either ambiguous call error or infinite loop.
@@ -68,7 +68,7 @@ namespace TrilleonAutomation {
 		/// <summary>
 		/// Offers option to retrieve length of array as count, so that there is consistancy between list count calls and array count calls.
 		/// Arguably, Length makes more sense in determining array character count, rather than how many items are contained in an object.
-		/// </summary>
+		/// //
 		public static int Count<T>(this T[] vals) {
 
 			return vals.Length;
@@ -77,7 +77,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Does this string contain a supplied substring, or (also) is it equal to that string? Replaces need to check both seperately.
-		/// </summary>
+		/// //
 		public static bool ContainsOrEquals(this string val, string subString) {
 
 			return val.Contains(subString) || val == subString;
@@ -86,7 +86,7 @@ namespace TrilleonAutomation {
 			
 		/// <summary>
 		/// Diplicate a provided string the number of requested times.
-		/// </summary>
+		/// //
 		public static string Duplicate(this string val, int howManyTimesToDuplicate) {
 
 			StringBuilder returnVal = new StringBuilder();
@@ -139,7 +139,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Use with 'new List()' to instantiate a list of specific size where all values are the supplied default.
-		/// </summary>
+		/// //
 		public static List<T> OfSpecificValues<T>(this List<T> list, int size, T defaultValue) {
 
 			List<T> newList = new List<T>();
@@ -158,7 +158,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Takes a list of GameObjects or Components, and returns a list of requested components that are attached to each GameOject(or Component.gameObject).
-		/// </summary>
+		/// //
 		/// <returns>The componenent list.</returns>
 		public static List<T> ToComponenentList<T>(this List<GameObject> list){
 
@@ -223,7 +223,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Remove duplicate items in a list.
-		/// </summary>
+		/// //
 		public static List<T> Distinct<T>(this List<T> List) {
 
 			return new List<T>(new HashSet<T>(List));
@@ -232,7 +232,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Get the first item in the list, if not empty.
-		/// </summary>
+		/// //
 		public static T First<T>(this List<T> list) {
 
 			if(!Any(list)) {
@@ -257,7 +257,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Prepend item(s) to list.
-		/// </summary>
+		/// //
 		public static List<T> Prepend<T>(this List<T> List, T item) {
 
 			List<T> vals = new List<T> { item };
@@ -275,7 +275,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Get the last item in the list, if not empty.
-		/// </summary>
+		/// //
 		public static T Last<T>(this List<T> list) {
 
 			if(!Any(list)) {
@@ -300,7 +300,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Return the index of the matching item in a list.
-		/// </summary>
+		/// //
 		/// <returns>The index of.</returns>
 		/// <param name="list">List.</param>
 		/// <param name="item">Item.</param>
@@ -329,7 +329,7 @@ namespace TrilleonAutomation {
 		/// <summary>
 		/// Gets the item at the requested index. Enforces failure if item does not exist at that index. 
 		/// Different than square bracket index call in that no exception occurs, and any currently-executing test is automatically failed.
-		/// </summary>
+		/// //
 		public static T GetIndex<T>(this List<T> list, int index) {
 
 			if (!Any(list)) {
@@ -347,7 +347,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Gets the item at the requested order (index + 1). Does not err if item does not exist at that order. 
-		/// </summary>
+		/// //
 		public static T GetItemNumber<T>(this T[] array, int order) {
 
 			if(array.Length == 0) {
@@ -422,7 +422,7 @@ namespace TrilleonAutomation {
 		/// <summary>
 		/// Alternative to base "Add(item)". Adds item to list if item is not default (ex: null/empty).
 		/// Intended for use if null values are not checked in code preceding list add call.
-		/// </summary>
+		/// //
 		public static void AddIfNotDefault<T>(this List<T> list, List<T> itemToAdd) {
 
 			if(typeof(T).IsPrimitive || itemToAdd.FindAll(x => !EqualityComparer<T>.Default.Equals(x, default(T))).Any()) {
@@ -718,7 +718,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Return all of the children objects in the provided GameObject(s).
-		/// </summary>
+		/// //
 		/// <returns>The children of these.</returns>
 		/// <param name="objs">Objects.</param>
 		public static List<GameObject> GetChildren(this List<GameObject> objs) {
@@ -785,7 +785,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Return only active and visible objects from the provided set.
-		/// </summary>
+		/// //
 		/// <returns>The active and visible objects in list.</returns>
 		public static List<GameObject> GetActiveAndVisibleObjectsInList(this List<GameObject> objs) {
 
@@ -822,7 +822,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Return unique values between two lists.
-		/// </summary>
+		/// //
 		/// <returns>The unique objects between two lists.</returns>
 		/// <param name="listOne">List one.</param>
 		/// <param name="listTwo">List two.</param>

@@ -303,6 +303,7 @@ public class Tile : MonoBehaviour
                 // check if this characters civ is the same as the character clicking on it
                 if (currentCharacter.GetComponent<PlayerMove>().civilization != currentCharacter.GetComponent<PlayerMove>().civilization)
                 {
+                    // attach attack animation here
                     currentCharacter.GetComponent<PlayerMove>().health -= currentCharacter.GetComponent<PlayerMove>().damage;
                     Debug.Log("Health equals " + currentCharacter.GetComponent<PlayerMove>().health);
                     cooldowns.initiate_attack_cooldown();

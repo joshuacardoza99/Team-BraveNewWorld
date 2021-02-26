@@ -41,7 +41,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// TODO: Ignore assertions if the requestion actions fails to execute properly.
-		/// </summary>
+		/// //
 		public Driver Try { 
 			get {
 				isTry = true;
@@ -119,7 +119,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Sets the text field of an InputField object. Sets text character by character for a typing effect that would also trigger update listeners.
-		/// </summary>
+		/// //
 		public IEnumerator SendKeys(InputField field, string keysToSend, bool isAppend = false){
 
 			PreCommandCheck(true);
@@ -184,7 +184,7 @@ namespace TrilleonAutomation {
 		//TODO: Handle BOTH horizontal and vertical scroller possibility.
 		/// <summary>
 		/// Scroll a ScrollRect.
-		/// </summary>
+		/// //
 		/// <param name="scrollRectObject">ScrollRect or GameObject containing ScrollRect.</param>
 		/// <param name="durationOfScroll">How long does the scrolling action take to complete?</param>
 		/// <param name="scrollDownwardOrToTheRight">Is this scrolling direction down/right or up/left?</param>
@@ -335,7 +335,7 @@ namespace TrilleonAutomation {
 		/// 2) Is the object active in its hierarchy?
 		/// 3) Is the object active itself?
 		/// 4) Performs game-specific checks as defined in GameMaster. For example, do you have a Tutorial mask that blocks raycasts down to the object, despite it being otherwise active? (you will need to explicitly add the logic to check that)
-		/// </summary>
+		/// //
 		public bool IsActiveVisibleAndInteractable(GameObject g, bool checkComponents = true) {
 
 
@@ -485,7 +485,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Find single object by attribute type and provided value.
-		/// </summary>
+		/// //
 		/// <param name="by">By.</param>
 		/// <param name="val">Value.</param>
 		public GameObject FindIn(GameObject obj, By by, string val, bool isContains = true) {
@@ -624,7 +624,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Methods for finding GameObjects by "Contains Component".
-		/// </summary>
+		/// //
 		public T Find<T>() {
 
 			GameObject result = SceneMaster.GetObjectPool().FindAll(c => c.GetComponent<T>() != null && IsActiveVisibleAndInteractable(c)).First();
@@ -661,7 +661,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Find single object by attribute type and provided value.
-		/// </summary>
+		/// //
 		public GameObject Find(By by, string val, bool isContains = true) {
 
 			PreCommandCheck();
@@ -724,7 +724,7 @@ namespace TrilleonAutomation {
 		}
 		/// <summary>
 		/// Find single object by attribute type and provided value.
-		/// </summary>
+		/// //
 		/// <param name="by">By.</param>
 		/// <param name="val">Value.</param>
 		public List<GameObject> FindAll(By by, string val, bool isContains = true) {
@@ -766,7 +766,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Find all objects by attribute type and provided value. To find all objects under a specific object, use Q.help.Children instead.
-		/// </summary>
+		/// //
 		/// <returns>All matching objects.</returns>
 		/// <param name="by">By.</param>
 		/// <param name="val">Value.</param>
@@ -911,7 +911,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Select the supplied object using pointer handlers
-		/// </summary>
+		/// //
 		/// <param name="g">GameObject to click.</param>
 		/// <param name="optionalOnFailMessage">Click fail message.</param>
 		/// <param name="timeout">Timeout period where the driver will wait for the clickable object to be interactable.</param>
@@ -1102,7 +1102,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Buttons may have a Long-hold script that expects the button to be held down for a certain period of time to launch the button event.
-		/// </summary>
+		/// //
 		public IEnumerator ClickAndHold(GameObject g, float timeToHoldSimulateTouch, string optionalOnFailMessage = DEFAULT_ERROR_MESSAGE, float timeout =  TIMEOUT_DEFAULT, bool clickInactive = false) {
 
 			PreCommandCheck();
@@ -1253,7 +1253,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Waits for a single value to not be null or default. Waits for a list of values to return more than 0. Waits for object(s) to be active, visible, and interactable.
-		/// </summary>
+		/// //
 		/// <param name="propertyExpression">Lamba expression representing the check you wish to perform with each iteration of the loop. This is syntactically as simple as "() => SomeCondition && SomeOtherCondition", for example.</param>
 		public IEnumerator WaitFor(Func<bool> condition, string optionalOnFailMessage = "", float timeout = TIMEOUT_DEFAULT, params int[] testCaseIds) {
 
@@ -1300,7 +1300,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Waits for real time rather than game time.
-		/// </summary>
+		/// //
 		/// <returns>The real time.</returns>
 		/// <param name="waitTime">Wait time.</param>
 		public IEnumerator WaitRealTime(float waitTime) {
@@ -1347,7 +1347,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Find objects that contain the Text value provided.
-		/// </summary>
+		/// //
 		/// <returns>All matching objects.</returns>
 		/// <param name="val">Value.</param>
 		/// <param name="isContains">If set to <c>true</c> is contains.</param>
@@ -1427,7 +1427,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Get all active objects that exist in the scene.
-		/// </summary>
+		/// //
 		/// <returns>All active objects.</returns>
 		private List<GameObject> GetAllActiveObjects() {
 

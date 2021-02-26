@@ -84,7 +84,7 @@ namespace redisU.framework
 		
 		/// <summary>
 		/// Returns the timeout for the specified key in seconds
-		/// </summary>
+		/// //
 		/// <param name='key'>
 		/// Key.
 		/// </param>/
@@ -182,7 +182,7 @@ namespace redisU.framework
 		/// <summary>
 		/// Sets the expiry for the specified key.
 		/// timeout is specified in unix timestamp i.e. seconds since January 1, 1970.
-		/// </summary>
+		/// //
 		/// <returns>
 		/// The <see cref="System.Boolean"/>.
 		/// </returns>
@@ -237,7 +237,7 @@ namespace redisU.framework
 		/// <summary>
 		/// Appends the 'val' to the specified key's existing value.
 		/// Returns the length of the final apended string.
-		/// </summary>
+		/// //
 		/// <param name='key'>
 		/// Key.
 		/// </param>
@@ -549,7 +549,7 @@ namespace redisU.framework
 		/// If all of the specified lists are empty, the connection is blocked until an element
 		/// is inserted using LPUSH or RPUSH or timeout expires.
 		/// A timeout of zero can be used to block indefinitely.
-		/// </summary>
+		/// //
 		/// <returns>
 		/// The pop left blocking.
 		/// </returns>
@@ -606,7 +606,7 @@ namespace redisU.framework
 		/// If all of the specified lists are empty, the connection is blocked until an element
 		/// is inserted using LPUSH or RPUSH or timeout expires.
 		/// A timeout of zero can be used to block indefinitely.
-		/// </summary>
+		/// //
 		/// <returns>
 		/// The pop right blocking.
 		/// </returns>
@@ -1149,7 +1149,7 @@ namespace redisU.framework
 		
 		/// <summary>
 		/// Connection is closed as soon as all the pending replies are written to the client.
-		/// </summary>
+		/// //
 		public void Close()
 		{
 			ExecuteCommand(RedisCommand.QUIT);	

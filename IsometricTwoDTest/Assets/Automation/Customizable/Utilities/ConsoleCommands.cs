@@ -28,12 +28,12 @@ namespace TrilleonAutomation {
 
 	/// <summary>
 	/// All game-specific cheat/commands go here. ConsoleCommandsCore and ConsoleCommandsBase cannot be implemented. This class implements the full suite of Cheat Console logic, even if no commands currently exist in this class.
-	/// </summary>
+	/// //
 	public class ConsoleCommands : ConsoleCommandsCore {
 
 		/// <summary>
 		/// Add all valid commands with accompanying logic to launch in region below. Command aliases cannot contains spaces.
-		/// </summary>
+		/// //
 		void Start() {
 
 			ImplementCore(); //Required to add Core framework commands.

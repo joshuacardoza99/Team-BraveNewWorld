@@ -25,7 +25,7 @@ namespace TrilleonAutomation {
 	/// <summary>
 	/// This class demonstrates how DependencyWeb attributes form relationships that determine
 	/// the order tests execute in, along with whether tests are skipped or run.
-	/// </summary>
+	/// //
 	[AutomationClass]
 	[DebugClass]
 	public class DependencyWebTests : MonoBehaviour {

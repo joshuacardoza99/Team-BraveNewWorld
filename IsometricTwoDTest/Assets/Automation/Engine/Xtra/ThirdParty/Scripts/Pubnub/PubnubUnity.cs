@@ -107,7 +107,7 @@ namespace PubNubMessaging.Core
         /// <summary>
         /// Gets or sets the set game object.
         /// This method should be called before init
-        /// </summary>
+        /// //
         /// <value>The set game object.</value>
         public static GameObject SetGameObject {
             get {
@@ -295,7 +295,7 @@ namespace PubNubMessaging.Core
         /// <summary>
         /// This property sets presence expiry timeout.
         /// Presence expiry value in seconds.
-        /// </summary>
+        /// //
         public int PresenceHeartbeat {
             get {
                 return pubnubPresenceHeartbeatInSeconds;
@@ -462,7 +462,7 @@ namespace PubNubMessaging.Core
         /// <summary>
         /// Workaround for the bug described here
         /// https://bugzilla.xamarin.com/show_bug.cgi?id=6501
-        /// </summary>
+        /// //
         /// <param name="sender">Sender.</param>
         /// <param name="certificate">Certificate.</param>
         /// <param name="chain">Chain.</param>
@@ -627,7 +627,7 @@ namespace PubNubMessaging.Core
 
         /// <summary>
         /// To unsubscribe a channel
-        /// </summary>
+        /// //
         /// <typeparam name="T"></typeparam>
         /// <param name="channel"></param>
         /// <param name="userCallback"></param>
@@ -1081,7 +1081,7 @@ namespace PubNubMessaging.Core
 
     /// <summary>
     /// must be called on reset.
-    /// </summary>
+    /// //
         public void CleanUp (){
             publishMessageCounter.Reset ();
 

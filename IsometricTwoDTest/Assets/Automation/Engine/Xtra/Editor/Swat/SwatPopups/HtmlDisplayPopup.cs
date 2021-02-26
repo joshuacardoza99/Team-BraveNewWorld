@@ -6,7 +6,7 @@ namespace TrilleonAutomation {
 
 	/// <summary>
 	/// Open a webview within Unity editor. (similar as AssetStore window)
-	/// </summary>
+	/// //
 	public class HtmlDisplayPopup : SwatPopup {
 
 		static string Url { get; set; }

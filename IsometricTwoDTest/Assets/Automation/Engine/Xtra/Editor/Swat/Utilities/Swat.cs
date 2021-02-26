@@ -29,7 +29,7 @@ namespace TrilleonAutomation {
 	/// Single Window Accessability Template (SWAT).
 	/// Used to create an editor window logically grouping several sub windows.
 	/// In the spirit of the Single Page Application (SPA) model.
-	/// </summary>
+	/// //
 	public class Swat : EditorWindow {
 
 		public delegate void SwatDelegate();
@@ -105,7 +105,7 @@ namespace TrilleonAutomation {
 		/// <summary>
 		/// Window tabs that will be displayed at the top of the Editor Window.
 		/// A priority ID that is a negative value indicates that the window is hidden, and no tab buttons should appear. Only direct references can open these windows.
-		/// </summary>
+		/// //
 		/// <value> The Tab ID is the Key, and the value is a list of tab name values based on the rendered sizes, along with the colors and font sizes of each tab size and its content.</value>
 		public List<TabDetails> SwatWindows { 
 			get { 
@@ -119,7 +119,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Window tabs that will be displayed at the top of the Editor Window.
-		/// </summary>
+		/// //
 		/// <value> The Tab ID is the Key, and the value is a list of tab name values based on the rendered sizes, along with the colors and font sizes of each tab size and its content.</value>
 		public List<SwatPopup> SwatPopups { 
 			get { 
@@ -391,7 +391,7 @@ namespace TrilleonAutomation {
 		/// <summary>
 		/// Called every pass whether window is in focus or not.
 		/// Some windows should be repainted regardless of focus.
-		/// </summary>
+		/// //
 		void Update() {
 
 			if(SelectedTab == null) {
@@ -462,7 +462,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Render all tabs and selected SWAT window.
-		/// </summary>
+		/// //
 		public void Render() {
 
 			RenderToolTip = false;
@@ -647,7 +647,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Use this in static instances of SwatWindow classes where GetWindow is used to reinstantiate a null instance.
-		/// </summary>
+		/// //
 		static KeyValuePair<Type,DateTime> ClosedWindow = new KeyValuePair<Type,DateTime>();
 		public static bool Closing(Type swatWindow) {
 
@@ -671,7 +671,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Set this control's tooltip.
-		/// </summary>
+		/// //
 		public void SetToolTip(string tooltip, int floatOffsetY = 0) {
 
 			this._floatOffsetY = floatOffsetY;
@@ -696,7 +696,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// If hovering over the last-rendered control, show its tooltip (if one exists).
-		/// </summary>
+		/// //
 		/// <param name="position">Position.</param>
 		public void RenderToolTipIfHovering(Rect position) {
 
@@ -711,7 +711,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Detect if the cursor is hovering over the last-rendered control.
-		/// </summary>
+		/// //
 		/// <returns><c>true</c>, if over was moused, <c>false</c> otherwise.</returns>
 		public bool MouseOver() {
 
@@ -782,7 +782,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Creates extended text field that allows for placeholder text functionality.
-		/// </summary>
+		/// //
 		/// <returns>The field.</returns>
 		/// <param name="uniqueFieldName">Unique field name that differentiates this field from others rendered in the same pass.</param>
 		/// <param name="textField">Text field that this field updates.</param>
@@ -1139,7 +1139,7 @@ namespace TrilleonAutomation {
 
 /// <summary>
 /// Used to declare where a new window should be docked in the Unity Editor.
-/// </summary>
+/// //
 public enum DockNextTo {
 	Default,
 	Inspector,

@@ -33,7 +33,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Add all valid commands with accompanying logic to launch in region below. Command aliases cannot contains spaces.
-		/// </summary>
+		/// //
 		protected void ImplementCore() {
 
 			ImplementBase(); //Required to add Base framework commands.

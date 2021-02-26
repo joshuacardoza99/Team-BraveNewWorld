@@ -26,7 +26,7 @@ namespace TrilleonAutomation {
 	/// This class demonstrates how DependencyTest attributes affect test execution when used in classes that lack
 	/// the DependencyClass attribute. Note that all tests are, by default, grouped and run in the order they are discovered.
 	/// This means that all tests under a class will be handled (executed, skipped, deferred etc) before the test runner moves on to another class.
-	/// </summary>
+	/// //
 	[AutomationClass]
 	[DebugClass]
 	public class DependencyMasterlessTests : MonoBehaviour {

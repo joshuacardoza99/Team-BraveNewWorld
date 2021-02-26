@@ -31,7 +31,7 @@ namespace TrilleonAutomation {
 
       /// <summary>
       /// Add item to cache. Throw exception if it already exists.
-      /// </summary>
+      /// //
       /// <param name="key">Key.</param>
       /// <param name="value">Value.</param>
       public void Add(string key, string value) {
@@ -56,7 +56,7 @@ namespace TrilleonAutomation {
 
       /// <summary>
       /// Modify item in cache. Throw exception if it does not exist in cache.
-      /// </summary>
+      /// //
       /// <param name="key">Key.</param>
       /// <param name="value">Value.</param>
       public void Modify(string key, string value) {
@@ -83,7 +83,7 @@ namespace TrilleonAutomation {
 
       /// <summary>
       /// Add item to cache if it does not exist, or modify the existing item if it already exists.
-      /// </summary>
+      /// //
       /// <param name="key">Key.</param>
       /// <param name="value">Value.</param>
       public void AddOrModify(string key, string value) {
@@ -111,7 +111,7 @@ namespace TrilleonAutomation {
 
       /// <summary>
       /// Return the value from a provided key. Throw exception if the key does not exist in the cache and if calling method does not explicitly allow this iperation to fail.
-      /// </summary>
+      /// //
       /// <param name="key">Key.</param>
       /// <param name="isTry">If set to <c>true</c> is try.</param>
       public string Get(string key, bool isTry = true) {
@@ -132,7 +132,7 @@ namespace TrilleonAutomation {
 
       /// <summary>
       /// Remove the value from the cache for the provided key. Throw exception if the key does not exist in the cache and if calling method does not explicitly allow this iperation to fail.
-      /// </summary>
+      /// //
       /// <param name="key">Key.</param>
       /// <param name="isTry">If set to <c>true</c> is try.</param>
       public void Remove(string key, bool isTry = true) {
@@ -151,7 +151,7 @@ namespace TrilleonAutomation {
 
       /// <summary>
       /// Get all has key/values as a single delimited string.
-      /// </summary>
+      /// //
       /// <returns>The all.</returns>
       public string GetAll() {
          
@@ -168,7 +168,7 @@ namespace TrilleonAutomation {
 
       /// <summary>
       /// Sets cache to values stored in delimited string.
-      /// </summary>
+      /// //
       /// <param name="hash">Hash.</param>
       public void SetAll(string hash) {
          

@@ -24,7 +24,7 @@ namespace TrilleonAutomation {
 
 	/// <summary>
 	/// This class demonstrates how DependencyClass and  DependencyTest attributes used in unison affect test execution.
-	/// </summary>
+	/// //
 	[AutomationClass]
 	[DependencyClass(0)]
 	[DebugClass]

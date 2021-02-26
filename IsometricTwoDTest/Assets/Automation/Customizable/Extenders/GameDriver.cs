@@ -28,7 +28,7 @@ namespace TrilleonAutomation {
 
    /// <summary>
    /// Put game-specific driver code here!
-   /// </summary>
+   /// //
    public class GameDriver : Driver {
 
 /* TODO: EXTEND CODE?!

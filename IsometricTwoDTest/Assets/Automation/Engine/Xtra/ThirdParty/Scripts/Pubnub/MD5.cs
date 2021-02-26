@@ -16,7 +16,7 @@ namespace PubNubMessaging.Core
     #region "Crypto"
     /// <summary>
     /// MD5 Service provider
-    /// </summary>
+    /// //
     internal class MD5CryptoServiceProvider : MD5
     {
         public MD5CryptoServiceProvider ()
@@ -27,7 +27,7 @@ namespace PubNubMessaging.Core
 
     /// <summary>
     /// MD5 messaging-digest algorithm is a widely used cryptographic hash function that produces 128-bit hash value.
-    /// </summary>
+    /// //
     internal class MD5 : IDisposable
     {
         static public MD5 Create (string hashName)
@@ -123,7 +123,7 @@ namespace PubNubMessaging.Core
 
         /// <summary>
         /// rotates x left n bits.
-        /// </summary>
+        /// //
         /// <param name="x"></param>
         /// <param name="n"></param>
         /// <returns></returns>
@@ -173,15 +173,15 @@ namespace PubNubMessaging.Core
 
         /// <summary>
         /// state (ABCD)
-        /// </summary>
+        /// //
         uint[] state = new uint[4];
         /// <summary>
         /// number of bits, modulo 2^64 (LSB first)
-        /// </summary>
+        /// //
         uint[] count = new uint[2];
         /// <summary>
         /// input buffer
-        /// </summary>
+        /// //
         byte[] buffer = new byte[64];
 
         #endregion
@@ -193,7 +193,7 @@ namespace PubNubMessaging.Core
 
         /// <summary>
         /// MD5 initialization. Begins an MD5 operation, writing a new context.
-        /// </summary>
+        /// //
         /// <remarks>
         /// The RFC named it "MD5Init"
         /// </remarks>
@@ -212,7 +212,7 @@ namespace PubNubMessaging.Core
         /// MD5 block update operation. Continues an MD5 message-digest
         /// operation, processing another message block, and updating the
         /// context.
-        /// </summary>
+        /// //
         /// <param name="input"></param>
         /// <param name="offset"></param>
         /// <param name="count"></param>
@@ -252,7 +252,7 @@ namespace PubNubMessaging.Core
         /// <summary>
         /// MD5 finalization. Ends an MD5 message-digest operation, writing the
         /// the message digest and zeroizing the context.
-        /// </summary>
+        /// //
         /// <returns>message digest</returns>
         /// <remarks>The RFC named it MD5Final</remarks>
         protected virtual byte[] HashFinal ()
@@ -290,7 +290,7 @@ namespace PubNubMessaging.Core
 
         /// <summary>
         /// MD5 basic transformation. Transforms state based on 64 bytes block.
-        /// </summary>
+        /// //
         /// <param name="block"></param>
         /// <param name="offset"></param>
         private void Transform (byte[] block, int offset)
@@ -384,7 +384,7 @@ namespace PubNubMessaging.Core
         /// <summary>
         /// Encodes input (uint) into output (byte). Assumes len is
         ///  multiple of 4.
-        /// </summary>
+        /// //
         /// <param name="output"></param>
         /// <param name="outputOffset"></param>
         /// <param name="input"></param>
@@ -405,7 +405,7 @@ namespace PubNubMessaging.Core
         /// <summary>
         /// Decodes input (byte) into output (uint). Assumes len is
         /// a multiple of 4.
-        /// </summary>
+        /// //
         /// <param name="output"></param>
         /// <param name="outputOffset"></param>
         /// <param name="input"></param>
@@ -583,7 +583,7 @@ namespace PubNubMessaging.Core
 
         /// <summary>
         /// Computes the hash using the specified algo
-        /// </summary>
+        /// //
         /// <returns>
         /// The hash.
         /// </returns>
@@ -634,7 +634,7 @@ namespace PubNubMessaging.Core
 
         /// <summary>
         /// Converts the upper case hex to lower case hex.
-        /// </summary>
+        /// //
         /// <returns>The lower case hex.</returns>
         /// <param name="value">Hex Value.</param>
         public static string ConvertHexToUnicodeChars (string value)
@@ -650,7 +650,7 @@ namespace PubNubMessaging.Core
 
         /// <summary>
         /// Encodes the non ASCII characters.
-        /// </summary>
+        /// //
         /// <returns>
         /// The non ASCII characters.
         /// </returns>
