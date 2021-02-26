@@ -1333,7 +1333,7 @@ namespace TrilleonAutomation {
 
         /// <summary>
         /// Add test methods and their declaring types to list for later use.
-        /// </summary>
+        /// //
         void SetTestData() {
 
             for(int x = 0; x < _methods.Count; x++) {
@@ -1347,7 +1347,7 @@ namespace TrilleonAutomation {
 
         /// <summary>
         /// Gather all primary test and class attributes applied to the selected test. This will be used for display in the test details box.
-        /// </summary>
+        /// //
         void SelectedMethodsGetData() {
 
             _selectedMethodAttributes = new List<KeyValuePair<string, string>>();
@@ -1466,7 +1466,7 @@ namespace TrilleonAutomation {
 
         /// <summary>
         /// Find whatever dependencies are declared for the given test(s), and present them to the user for potential inclusion in the run.
-        /// </summary>
+        /// //
         /// <param name="name">Launch command name (May be a single test, a category name, or a comma-delmited list of either.</param>
         /// <param name="type">Type of run, telling logic if the name is a test, a category, a comma-delmited list of either, or a reserved command such as "all".</param>
         void LaunchTestDependenciesCheck(string name, string type) {

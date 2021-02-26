@@ -26,7 +26,7 @@ namespace TrilleonAutomation {
 
 	/// <summary>
 	/// U: The Unit test version of the custodian wrapper (Q) object to centralize all test functionality.
-	/// </summary>
+	/// //
 	public static class U {
 
 		#region Driver
@@ -89,7 +89,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// The Game object allowing interaction with GameMaster, MonoBehaviour, game-specific methods and variables.
-		/// </summary>
+		/// //
 		/// <value>The game.</value>
 		public static GameMaster game {
 			get { 
@@ -107,7 +107,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Broker that sends commands to the server (if any) that launched the current test run.
-		/// </summary>
+		/// //
 		/// <value>The game.</value>
 		public static BuildServerBroker request {
 			get { 

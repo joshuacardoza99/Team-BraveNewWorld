@@ -37,7 +37,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Grant current account all requested values.
-		/// </summary>
+		/// //
 		/// <param name="grant">Grant.</param>
 		public IEnumerator GrantPlayer(Grant grant) {
 

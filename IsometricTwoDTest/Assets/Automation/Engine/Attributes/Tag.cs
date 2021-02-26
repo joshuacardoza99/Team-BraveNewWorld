@@ -25,7 +25,7 @@ namespace TrilleonAutomation {
 	/// <summary>
 	/// Apply to any AutomationClass or Automation test method that should display a notification (reminder? important note? etc) in automation report.
 	/// Will appear in description of test, and will also be noted in Warnings section of report.
-	/// </summary>
+	/// //
 	[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = false)]
 	public class Tag : Attribute {
 

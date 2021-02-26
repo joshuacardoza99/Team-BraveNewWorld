@@ -6,7 +6,7 @@ namespace TrilleonAutomation {
 	/// <summary>
 	/// Created by Bunny83 05-07-2016 as an offered solution(Unity Answers) for the problem of stopped 
 	/// child coroutines failing to return control to a parent coroutine that called it by yeild return.
-	/// </summary>
+	/// //
 	public class StoppableCoroutine {
 
 		bool terminated = false;

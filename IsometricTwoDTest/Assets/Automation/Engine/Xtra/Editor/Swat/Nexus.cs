@@ -311,7 +311,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Used to make any updates necessary to the Nexus when playmode state has changed between play/pause/stop.
-		/// </summary>
+		/// //
 		static void PlaymodeStateChangeUpdates() {
 
 			if(EditorApplication.isPlaying) {
@@ -325,7 +325,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// If an exception occurs, make sure that loading overlay is removed.
-		/// </summary>
+		/// //
 		static void ExceptionCallback(string message, string stackTrace, LogType type) {
 				
 			if(type == LogType.Exception || type == LogType.Error) {

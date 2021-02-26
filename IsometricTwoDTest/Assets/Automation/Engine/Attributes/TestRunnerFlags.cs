@@ -34,7 +34,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Adds special flags to an Automation test that cause important behavioral changes in the test runner (AutomationMaster).
-		/// </summary>
+		/// //
 		/// <param name="testCategoryName"> TestFlag to add. </param>
 		public TestRunnerFlags(params TestFlag[] Flags) {
 

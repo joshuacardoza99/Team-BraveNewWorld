@@ -550,7 +550,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Reset test runner for any future test runs in the same session.
-		/// </summary>
+		/// //
 		public void ResetTestRunner() {
 
 			LoopTests = new List<KeyValuePair<string, int>>();
@@ -568,7 +568,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Prepare test runner by performing phase 1 framework validation, insuring proper usage of attributes and test formatting.
-		/// </summary>
+		/// //
 		public IEnumerator BeginTestLaunch(string message) {
 
 			GameLaunchCompleted = DateTime.UtcNow;
@@ -653,7 +653,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Set test information and begin launch procedure.
-		/// </summary>
+		/// //
 		public IEnumerator LaunchTests(string message) {
 
 			SessionRunCount++;
@@ -669,7 +669,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Launch tests run, test by test.
-		/// </summary>
+		/// //
 		private IEnumerator LaunchInOrder(string command) {
 
 			_launchCommand = command;
@@ -904,7 +904,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Launchs a provided test.
-		/// </summary>
+		/// //
 		/// <returns>Run the provided test.</returns>
 		/// <param name="method">Test method.</param>
 		/// <param name="m">Index of current method in all Methods.</param>
@@ -2305,7 +2305,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Checks on state of test runner throughout course of test run.
-		/// </summary>
+		/// //
 		IEnumerator TestRunnerMonitor() {
 
 			AutoConsole.PostMessage("TestRunnerMonitor Launching", MessageLevel.Abridged);
@@ -2380,7 +2380,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Recognizes server heartbeat that extends test run timeout.
-		/// </summary>
+		/// //
 		void CheckServerHeartbeat() {
 
 			//If a server instance launched this test run, but has ceased broadcasting heartbeats, the test run should full stop (with no reporting since nothing can receive the results).
@@ -2422,7 +2422,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Recursively determine all dependencies needed for a successful test run when user chooses a partial test run to execute.
-		/// </summary>
+		/// //
 		/// <param name="requestedTests">Requested tests.</param>
 		public List<KeyValuePair<string,MethodInfo>> GatherAllTestsThatNeedToBeRunToSatisfyAllDependenciesForPartialTestRun(List<KeyValuePair<string,MethodInfo>> requestedTests) {
 
@@ -2757,7 +2757,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Gather all tests that are directly requested by the test run command.
-		/// </summary>
+		/// //
 		public List<KeyValuePair<string, MethodInfo>> GetAllMethodsToRun(string command) {
 
 			if(!AllMethodsInFramework.Any()) {
@@ -3251,7 +3251,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Report test success or failure.
-		/// </summary>
+		/// //
 		public void ReportOnTest(string reportOnMessage = "", bool isFinalReport = false, MessageLevel messageLevel = MessageLevel.Verbose) {
 
 			string message = !string.IsNullOrEmpty(reportOnMessage) ? reportOnMessage : 
@@ -3263,7 +3263,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Launches SetUp/Class, TearDown/Class Methods.
-		/// </summary>
+		/// //
 		/// <returns>The support method.</returns>
 		/// <param name="type">Type.</param>
 		/// <param name="supportAttributeName">Support attribute's name.</param>
@@ -3352,7 +3352,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Get all classes that have the AutomationClass attribute assigned to them.
-		/// </summary>
+		/// //
 		/// <returns>The automation classes.</returns>
 		public static List<Type> GetAutomationClasses(bool isEditor = false) {
 
@@ -3380,7 +3380,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Get all classes that have the UnityTestClass attribute assigned to them.
-		/// </summary>
+		/// //
 		/// <returns>The automation classes.</returns>
 		public static List<Type> GetUnityTestClasses() {
 
@@ -3398,7 +3398,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		///
-		/// </summary>
+		/// //
 		/// <returns>The automation classes.</returns>
 		private static List<MethodInfo> GetClassTestSetup(Type type) {
 			
@@ -3408,7 +3408,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		///
-		/// </summary>
+		/// //
 		/// <returns>The automation classes.</returns>
 		private static List<MethodInfo> GetClassSetup(Type type) {
 			
@@ -3418,7 +3418,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		///
-		/// </summary>
+		/// //
 		/// <returns>The automation classes.</returns>
 		private List<MethodInfo> GetClassTestTearDown(Type type) {
 			
@@ -3428,7 +3428,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		///
-		/// </summary>
+		/// //
 		/// <returns>The automation classes.</returns>
 		private static List<MethodInfo> GetClassTearDown(Type type) {
 			
@@ -3459,7 +3459,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Tell Appium server driver to take a screenshot of the device. Nothing will happen if there is no Appium server.
-		/// </summary>
+		/// //
 		/// <returns>The screen shot.</returns>
 		public IEnumerator TakeScreenshot(bool isInterval = false, string overrideName = "") {
 

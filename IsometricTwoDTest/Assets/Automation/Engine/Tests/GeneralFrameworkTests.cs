@@ -45,7 +45,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// This empty test can be used to insert code/debug/play around with logic. No other Debug tests should be altered in any way.
-		/// </summary>
+		/// //
 		[Automation("Debug")]
 		[TestRunnerFlags(TestFlag.DisregardSetUpClassGlobal, TestFlag.DisregardSetUpGlobal)]
 		public IEnumerator Test() {

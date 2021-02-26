@@ -28,7 +28,7 @@ namespace TrilleonAutomation {
 	/// and can be requested at any point (or not at all) in the current test.
 	/// NOTE: While this functionality could easily be accomplished without the use of an
 	/// attribute, there is a need for validation, which is easily accomplished this way.
-	/// </summary>
+	/// //
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
 	public class FloatingDependency : Attribute {
 

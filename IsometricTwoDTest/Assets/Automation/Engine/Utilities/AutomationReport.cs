@@ -54,7 +54,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Begin an XML report for device farm to determine test results.
-		/// </summary>
+		/// //
 		public static void Initialize() { 
 
 			TEST_RAILS_STATUSES = new Dictionary<string,int>{
@@ -239,7 +239,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Create x
-		/// </summary>
+		/// //
 		public static void AddToReport(bool isSuccess, double runTime, bool skipped = false) {
 
 			if(AutomationMaster.ValidationRun) {
@@ -490,7 +490,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Write to XML report for device farm to determine test results.
-		/// </summary>
+		/// //
 		public IEnumerator SaveReport() {
 
 			AutoConsole.ReportOnce = true;

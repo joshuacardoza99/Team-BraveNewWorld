@@ -459,7 +459,7 @@ namespace TrilleonAutomation {
 
       /// <summary>
       /// While this client is in the Primary Buddy role, run Action tests, and await completion of Secondary Buddy's Reaction tests.
-      /// </summary>
+      /// //
       /// <returns>The buddy test run.</returns>
       public IEnumerator PrimaryBuddyTestRun() {
 
@@ -709,7 +709,7 @@ namespace TrilleonAutomation {
 
       /// <summary>
       /// Send command received from Pubnub to IEnumerator handler.
-      /// </summary>
+      /// //
       /// <param name="commandsRaw">Commands raw.</param>
       public void PreTestCommandReceived(string commandsRaw){
 
@@ -719,7 +719,7 @@ namespace TrilleonAutomation {
 
       /// <summary>
       /// Handle a pretest command received through joint Buddy Pubnub channel.
-      /// </summary>
+      /// //
       /// <returns>The pretest command.</returns>
       /// <param name="commandsRaw">Commands raw.</param>
       private IEnumerator RunPretestCommand(string commandsRaw){

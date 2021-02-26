@@ -72,11 +72,11 @@ namespace MiniJSON {
 	///
 	/// JSON uses Arrays and Objects. These correspond here to the datatypes IList and IDictionary.
 	/// All numbers are parsed to doubles.
-	/// </summary>
+	/// //
 	public static class Json {
 		/// <summary>
 		/// Parses the string json into a value
-		/// </summary>
+		/// //
 		/// <param name="json">A JSON string.</param>
 		/// <returns>An List&lt;object&gt;, a Dictionary&lt;string, object&gt;, a double, an integer,a string, null, true, or false</returns>
 		public static object Deserialize(string json) {
@@ -395,7 +395,7 @@ namespace MiniJSON {
 
 		/// <summary>
 		/// Converts a IDictionary / IList object or a simple type (string, int, etc.) into a JSON string
-		/// </summary>
+		/// //
 		/// <param name="json">A Dictionary&lt;string, object&gt; / List&lt;object&gt;</param>
 		/// <returns>A JSON encoded string, or null if object 'json' is not serializable</returns>
 		public static string Serialize(object obj) {

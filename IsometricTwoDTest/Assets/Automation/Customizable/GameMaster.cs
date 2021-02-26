@@ -46,7 +46,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Commands allowing you to set account information for the current player.
-		/// </summary>
+		/// //
 		/// <value>The game.</value>
 		public  Commands commands {
 			get { 

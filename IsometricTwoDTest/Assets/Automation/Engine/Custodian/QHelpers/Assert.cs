@@ -28,7 +28,7 @@ namespace TrilleonAutomation {
 	/// <summary>
 	/// Assert that a condition is true and end the test if a failure occurs.
 	/// Why are these IEnumerators? Because StopAllCoroutines waits until the end of the current frame to stop. A parent coroutine, such as a TestObject step will continue to execute for 1 frame after an assertion failure. That causes problems and potential exceptions.
-	/// </summary>
+	/// //
 	public class Assert : MonoBehaviour {
 
 		#region Soft Assert
@@ -38,7 +38,7 @@ namespace TrilleonAutomation {
 		/// Useful in preventing errors in later tests due to current test not executing functionality.
 		/// Concurrent failures in the same test are ignored when reporting the cause of the test's failure,
 		/// but if the failure is for a non-Soft assertion, the test's execution will still be halted.
-		/// </summary>
+		/// //
 		public Assert Soft { 
 			get {
 				isSoft = true;
@@ -58,7 +58,7 @@ namespace TrilleonAutomation {
 		/// this action to see if they are still visible to the player. You may not want to see essentially 
 		/// the same assertion repeated ad nauseum in youy report. Use this to make that assertion only 
 		/// visible if there is a failure.
-		/// </summary>
+		/// //
 		public Assert Quiet { 
 			get {
 				quiet = true;
@@ -76,7 +76,7 @@ namespace TrilleonAutomation {
 		/// It reports the step taken as a special color-coded assertion step. It does not affect the success of a test. 
 		/// It essentially turns an assertion into a special log that merely records that an assertion was checked.
 		/// (Used primarily by "Try-based" driver commands)
-		/// </summary>
+		/// //
 		public Assert Try { 
 			get {
 				isTry = true;
@@ -89,7 +89,7 @@ namespace TrilleonAutomation {
 
         /// <summary>
         /// Kills execution of entire test run. Starting with next test execution, the provided message (value) is posted as a "test result" in reports, explaining that all tests are skipped for the provided reason.
-        /// </summary>
+        /// //
         public void CriticalTestRunFailure(string reason) {
             
             _critical_Test_Run_Failure = new KeyValuePair<bool, string>(true, reason);
@@ -108,7 +108,7 @@ namespace TrilleonAutomation {
 		/// <summary>
 		/// Setting this to true will tell the Assert class to not kill test execution if any assertion of any variety fails from this point until the current test completes.
 		/// Essentially acts identically to TestFlag.TryContinueAfterFail, but only becomes active when you want it to, at some critical point in your test's execution.
-		/// </summary>
+		/// //
 		public bool MideExecution_MarkTestToTryContinueAfterFail { get; set; }
 
 		private static DateTime screenshotRequestTime;
@@ -305,7 +305,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Adds this test to an override list that tells any tests dependeny on this one that they do not have to skip, even if this test fails later in its execution.
-		/// </summary>
+		/// //
 		public void MarkTestAsRunDependenciesRegardlessOfFailure() {
 
 			AutomationMaster.RunDependenciesOverride.Add(AutomationMaster.CurrentTestContext.TestName);
@@ -471,7 +471,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Get test name and line number where error occurred.
-		/// </summary>
+		/// //
 		private static void SetReflectedTestData() {
             
 			StackTrace st = new StackTrace(true);

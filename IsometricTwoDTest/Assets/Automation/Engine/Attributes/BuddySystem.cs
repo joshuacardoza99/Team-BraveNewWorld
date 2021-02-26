@@ -23,7 +23,7 @@ namespace TrilleonAutomation {
 
 	/// <summary>
 	/// Link a test to a dependency on a seperate device. Forces these tests to be run last, when a "buddy" device can be found and a relationship can be mapped between them.
-	/// </summary>
+	/// //
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
 	public class BuddySystem : Attribute {
 

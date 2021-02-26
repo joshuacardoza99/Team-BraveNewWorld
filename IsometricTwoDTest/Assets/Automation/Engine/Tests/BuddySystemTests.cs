@@ -28,7 +28,7 @@ namespace TrilleonAutomation {
 	///   1) Communication tool for multiple devices/servers to communicate on.
 	///   2) Another client to communicate with this one.
 	///   3) Explicit or implicit avenue for these two devices to determine that they should form a "Buddy" relationship.
-	/// </summary>
+	/// //
 	[AutomationClass]
 	[DebugClass]
 	public class BuddySystemTests : MonoBehaviour {
