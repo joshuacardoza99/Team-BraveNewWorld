@@ -140,7 +140,7 @@ public class match_manager : MonoBehaviour
         this.isHost = bool.Parse(parameters[1]);
         this.map = int.Parse(parameters[2]);
 
-        GameObject.Find("Main Camera").GetComponent<PanZoom>().enabled = true;
+        //GameObject.Find("Main Camera").GetComponent<pan_zoom>().enabled = true;
         import_manager.run_function("Map", "load_map", new string[1] { this.map.ToString() });
         import_manager.run_function_all("unit_manager", "add_champion", new string[3] { this.playerCivilization, this.championName, Random.Range(1000, 2000).ToString() });
         import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] { });
@@ -175,10 +175,12 @@ public class match_manager : MonoBehaviour
         if (this.type == "network")
         {
             import_manager.run_function_all("server_functions", "add_player", new string[2] { this.championName, this.playerCivilization });
+            GameObject.Find("Main Camera").GetComponent<pan_zoom>().enabled = true;
         }
         else if (this.type == "local")
         {
             setup_match(new string[3] { "0", "true", "1000" });
+            GameObject.Find("Main Camera").GetComponent<pan_zoom>().enabled = true;
         }
 
     }
