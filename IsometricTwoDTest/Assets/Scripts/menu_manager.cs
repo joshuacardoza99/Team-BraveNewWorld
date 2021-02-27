@@ -18,6 +18,7 @@ public class menu_manager : MonoBehaviour
     public void ChangeGroup(GameObject groupToActivate)
     {
         GameObject newGroup = groupToActivate;
+        currentGroup = groupToActivate;
 
         foreach (GameObject group in groups)
         {
@@ -39,11 +40,19 @@ public class menu_manager : MonoBehaviour
         ChangeGroup(GameObject.Find("Canvas").transform.GetChild(3).gameObject);
     }
 
-    // Removes the wait panel blocking the game.
-    // Parameter = []
+    // Open or close the unit menu
     public void open_unit_menu()
     {
-        ChangeGroup(groups[6]);
+        if (currentGroup == groups[6])
+        {
+            ChangeGroup(groups[2]);
+            Debug.Log("Close Unit Menu");
+        }
+        else
+        {
+            ChangeGroup(groups[6]);
+            Debug.Log("Open Unit Menu");
+        }
     }
 
     // Removes the wait panel blocking the game.
