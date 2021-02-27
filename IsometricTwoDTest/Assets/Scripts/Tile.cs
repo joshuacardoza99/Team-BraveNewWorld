@@ -7,6 +7,7 @@ using UnityEngine.Assertions.Must;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 // This class handles the different interactions on a single tile. //
 public class Tile : MonoBehaviour
@@ -75,10 +76,15 @@ public class Tile : MonoBehaviour
     // Listens for a mouse click and translates to an OnSelected event.
     public void OnMouseDown()
     {
-        if (OnSelected != null)
+        if (!EventSystem.current.IsPointerOverGameObject())
         {
-            OnSelected(this, currentCharacter);
+            if (OnSelected != null)
+            {
+                OnSelected(this, currentCharacter);
+            }
         }
+        else
+            Debug.Log("Click on the UI");
     }
 
     // Returns a List of Tiles with all tiles in the given range away from this tile.
@@ -315,7 +321,6 @@ public class Tile : MonoBehaviour
                     }
                 }
             }
-
         }
     }
 
