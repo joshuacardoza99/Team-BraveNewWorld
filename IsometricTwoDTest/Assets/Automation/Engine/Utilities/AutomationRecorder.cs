@@ -33,7 +33,7 @@ namespace TrilleonAutomation {
 	/// <summary>
 	/// Enables interactable objects to be assigned a listener that captures and records activity in the game.
 	/// NOTE: Gameobjects stripped from a destroyed scene and existing solely int DontDestroyOnLoad cannot be assigned listeners, and will not be interactable using Record & Playback.
-	/// </summary>
+	/// //
 	public class AutomationRecorder : MonoBehaviour {
 
 		const float UPDATE_COOLDOWN = 5f;
@@ -146,7 +146,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Add Automation listener to all objects.
-		/// </summary>
+		/// //
 		public void Initialize() {
 
 			if(AutomationMaster.StaticSelf.GetComponent<AutomationRecorder>() == null) {
@@ -341,7 +341,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Remove Automation listener from all objects.
-		/// </summary>
+		/// //
 		public static void AutomationRelevantActionTaken(AutomationListener listener) {
 
 			List<Component> components = listener.gameObject.GetComponents<Component>().ToList();
@@ -480,7 +480,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Change the "chronological" order of a recorded action. Returns the moved object's new index in the entire action list.
-		/// </summary>
+		/// //
 		/// <param name="currentIndex"> Action's current index in the list. </param>
 		/// <param name="moveUp"> Move the action up in the list? False moves the object down in the list. </param>
 		public static int ReOrderAction(int currentIndex, bool moveUp) {
@@ -523,7 +523,7 @@ namespace TrilleonAutomation {
 		/// <summary>
 		/// Grabs the object containing this one that should be used for searching and finding the correct object in test execution. 
 		/// It is very likely that objects in the game share names, but much less likely that objects under the same parent level object share the same name.
-		/// </summary>
+		/// //
 		/// <returns>The top level parent object.</returns>
 		/// <param name="obj">Object.</param>
 		public static KeyValuePair<string,List<string>> GetTopLevelParentObject(GameObject obj) {

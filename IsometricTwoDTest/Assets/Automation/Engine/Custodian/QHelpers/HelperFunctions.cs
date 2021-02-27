@@ -94,7 +94,7 @@ namespace TrilleonAutomation {
 
         /// <summary>
         /// Returns a random number between 0 and 2 for indexes which constitute a common number of choice options.
-        /// </summary>
+        /// //
         /// <returns> Random number betweeen 0 and 2. </returns>
         public int RandomSmallIndex() {
 
@@ -105,7 +105,7 @@ namespace TrilleonAutomation {
         /// <summary>
         /// Returns a random number between 0 and x (literal) for indexes. 
         /// Ex: supplying a min of 1 and a max of 3 will allow for 1, 2, or 3 to be returned.
-        /// </summary>
+        /// //
         /// <returns> A random number between 0 and x. </returns>
         public int RandomIndex(int max) {
 
@@ -226,7 +226,7 @@ namespace TrilleonAutomation {
 
         /// <summary>
         /// Removes all non alpha numeric characters except for periods and dashes.
-        /// </summary>
+        /// //
         public string ReturnStringAsAlphaNumericWithExceptions(string rawString) {
 
             char[] arr = rawString.ToCharArray();
@@ -240,7 +240,7 @@ namespace TrilleonAutomation {
 
         /// <summary>
         /// Returns if supplied string is alpha numeric (with additional characters allowed).
-        /// </summary>
+        /// //
         /// <returns>The string as alpha numeric.</returns>
         /// <param name="rawString">Raw string.</param>
         public bool IsAlphaNumeric(string rawString, params char[] specialCharactersAllowed) {
@@ -254,7 +254,7 @@ namespace TrilleonAutomation {
 
         /// <summary>
         /// Generate a valid credit card number based on provider using Luhn's (Mod10) formula.
-        /// </summary>
+        /// //
         /// <returns>The random valid credit card number.</returns>
         public string GetRandomValidCreditCardNumber(CreditCard provider) {
 

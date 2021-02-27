@@ -3,19 +3,19 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
-/// <summary> A modular and easily customisable Unity MonoBehaviour for handling swipe and pinch motions on mobile. </summary>
+// A modular and easily customisable Unity MonoBehaviour for handling swipe and pinch motions on mobile. 
 public class pan_zoom : MonoBehaviour
 {
 
-    /// <summary> Called as soon as the player touches the screen. The argument is the screen position. </summary>
+    // Called as soon as the player touches the screen. The argument is the screen position. //
     public event Action<Vector2> onStartTouch;
-    /// <summary> Called as soon as the player stops touching the screen. The argument is the screen position. </summary>
+    // Called as soon as the player stops touching the screen. The argument is the screen position. //
     public event Action<Vector2> onEndTouch;
-    /// <summary> Called if the player completed a quick tap motion. The argument is the screen position. </summary>
+    // Called if the player completed a quick tap motion. The argument is the screen position. //
     public event Action<Vector2> onTap;
-    /// <summary> Called if the player swiped the screen. The argument is the screen movement delta. </summary>
+    // Called if the player swiped the screen. The argument is the screen movement delta. //
     public event Action<Vector2> onSwipe;
-    /// <summary> Called if the player pinched the screen. The arguments are the distance between the fingers before and after. </summary>
+    // Called if the player pinched the screen. The arguments are the distance between the fingers before and after. //
     public event Action<float, float> onPinch;
 
     [Header("Tap")]
@@ -57,10 +57,10 @@ public class pan_zoom : MonoBehaviour
 
     bool canUseMouse;
 
-    /// <summary> Has the player at least one finger on the screen? </summary>
+    // Has the player at least one finger on the screen? //
     public bool isTouching { get; private set; }
 
-    /// <summary> The point of contact if it exists in Screen space. </summary>
+    // The point of contact if it exists in Screen space. //
     public Vector2 touchPosition { get { return touch0LastPosition; } }
 
     void Start()
@@ -265,7 +265,7 @@ public class pan_zoom : MonoBehaviour
         }
     }
 
-    /// <summary> Checks if the the current input is over canvas UI </summary>
+    // Checks if the the current input is over canvas UI //
     public bool IsPointerOverUIObject()
     {
 
@@ -277,7 +277,7 @@ public class pan_zoom : MonoBehaviour
         return results.Count > 0;
     }
 
-    /// <summary> Cancels camera movement for the current motion. Resets to use camera at the end of the touch motion.</summary>
+    // Cancels camera movement for the current motion. Resets to use camera at the end of the touch motion.//
     public void CancelCamera()
     {
         cameraControlEnabled = false;

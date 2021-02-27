@@ -25,7 +25,7 @@ namespace TrilleonAutomation {
 	/// Q: The custodian wrapper object to centralize all test functionality.
 	/// This is the master abstraction for all functionality that a tester writing an automation script will need.
 	/// If a function is not available through Q, then a tester should not be using it in their automation script.
-	/// </summary>
+	/// //
 	public static class Q {
 
 		#region Driver
@@ -94,7 +94,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// The Game object allowing interaction with GameMaster, MonoBehaviour, game-specific methods and variables.
-		/// </summary>
+		/// //
 		/// <value>The game.</value>
 		public static GameMaster game {
 			get { 
@@ -112,7 +112,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Broker that sends commands to the server (if any) that launched the current test run.
-		/// </summary>
+		/// //
 		/// <value>The game.</value>
 		public static BuildServerBroker request {
 			get { 
@@ -128,7 +128,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Queues a deferrment scenario. Based on the predicate supplied, the supplied test will be deferred (BASED ON SET NUMBER OF TIMES) if the condition returns false.
-		/// </summary>
+		/// //
 		public static void AddConditionalDeferrment(ConditionalDeferrment scenario) {
 
 			if(!AutomationMaster.ConditionalDeferrments.FindAll(x => x.TestMethod == scenario.TestMethod).Any()) {

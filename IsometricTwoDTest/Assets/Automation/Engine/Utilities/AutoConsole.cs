@@ -200,7 +200,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Return list of most recent logs. Stores a maximum of 25 most recent logs.
-		/// </summary>
+		/// //
 		/// <returns>The latest logs.</returns>
 		/// <param name="numberOfMostRecentLogsToReturn">Number of most recent logs to return.</param>
 		public static string ReturnLatestLogs(int numberOfMostRecentLogsToReturn) {

@@ -26,7 +26,7 @@ namespace TrilleonAutomation {
 	/// <summary>
 	/// Brokers communication between Trilleon logic and the browser that contains a WebGL canvas game. 
 	/// This is an alternative way to communicate with a server running a WebGL test run, as opposed to using Pubsub services.
-	/// </summary>
+	/// //
 	public class WebGLBroker : MonoBehaviour {
 
 		bool AwaitingScreenshot { get; set; }

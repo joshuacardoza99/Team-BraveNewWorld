@@ -1094,7 +1094,7 @@ namespace PubNubMessaging.Core
         /// <summary>
         /// Gets or sets the set game object.
         /// This method should be called before init
-        /// </summary>
+        /// //
         /// <value>The set game object.</value>
         public static GameObject SetGameObject {
             get {

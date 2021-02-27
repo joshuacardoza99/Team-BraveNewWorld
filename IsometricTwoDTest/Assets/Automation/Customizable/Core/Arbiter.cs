@@ -119,7 +119,7 @@ namespace TrilleonAutomation {
 
         /// <summary>
         /// Handles incoming pubsub messages. Expects JSON format.
-        /// </summary>
+        /// //
         public IEnumerator HandleMessage(string result) {
 
             //Ignore duplicate or empty messages. Ignore messages not meant for this client.
@@ -451,7 +451,7 @@ namespace TrilleonAutomation {
         /// <summary>
         /// Basic deserializer of JSON messages. Designed to avoid extra third party dependencies that weren't ideal to include in the framework.
         /// Also allows for certain cusomizations specific to Trilleon.
-        /// </summary>
+        /// //
         public static List<KeyValuePair<string, string>> DeserializeJsonString(string jsonString) {
 
             if(!jsonString.Contains("}")) {

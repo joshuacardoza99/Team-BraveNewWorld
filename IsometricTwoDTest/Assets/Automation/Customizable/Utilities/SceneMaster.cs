@@ -27,7 +27,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// All objects in scene.
-		/// </summary>
+		/// //
 		/// <value>The object pool.</value>
 		public static List<GameObject> GetObjectPool(string sceneName) {
 
@@ -37,7 +37,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// All objects in scene.
-		/// </summary>
+		/// //
 		/// <value>The object pool.</value>
 		public static List<GameObject> GetObjectPool() {
 

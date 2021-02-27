@@ -320,7 +320,7 @@ namespace TrilleonAutomation {
 
         /// <summary>
         /// Change the "chronological" order of a recorded action. Returns the moved object's new index in the entire action list.
-        /// </summary>
+        /// //
         /// <param name="currentIndex"> Action's current index in the list. </param>
         /// <param name="moveUp"> Move the action up in the list? False moves the object down in the list. </param>
         public static int ReOrderAction(int currentIndex, bool moveUp) {

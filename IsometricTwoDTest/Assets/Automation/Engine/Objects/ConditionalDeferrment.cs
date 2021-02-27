@@ -27,7 +27,7 @@ namespace TrilleonAutomation {
 	/// For example: If you have three tests, and once is deferred, the MonoBehaviour is destroyed and removed from its GameObject. This will result in 
 	/// your instance variables to be lost. Make sure you save data necessary between tests in a static variable within your test class, or save it in the 
 	/// Q.hash system so that the test data is always available from anywhere.
-	/// </summary>
+	/// //
 	public class ConditionalDeferrment {
 
 		private const int DEFAULT_DEFERRMENTS_ALLOWED = 2;

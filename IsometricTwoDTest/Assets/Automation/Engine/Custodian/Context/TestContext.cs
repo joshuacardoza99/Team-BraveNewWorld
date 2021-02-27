@@ -37,42 +37,42 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Is test a success?
-		/// </summary>
+		/// //
 		public bool IsSuccess { get; set; }
 
 		/// <summary>
 		/// Start time.
-		/// </summary>
+		/// //
 		public DateTime StartTime { get; set; }
 
 		/// <summary>
 		/// Categories
-		/// </summary>
+		/// //
 		public List<string> Categories { get; set; }
 
 		/// <summary>
 		/// Important messages that should be communicated in reports, but are NOT failures.
-		/// </summary>
+		/// //
 		public List<string> Notices { get; set; }
 
 		/// <summary>
 		/// Warning messages that should be communicated in the Warnings panel of reports, but are NOT considered failures.
-		/// </summary>
+		/// //
 		public List<string> Warnings { get; set; }
 
 		/// <summary>
 		/// Name of test currently being run.
-		/// </summary>
+		/// //
 		public string TestName { get; set; }
 
 		/// <summary>
 		/// Class name of test currently being run.
-		/// </summary>
+		/// //
 		public string ClassName { get; set; }
 
 		/// <summary>
 		/// Details of current test's failure (if any).
-		/// </summary>
+		/// //
 		public string ErrorDetails { 
 			get { 
 				return _errorDetails;
@@ -85,7 +85,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Status of test set by failure.
-		/// </summary>
+		/// //
 		public List<string> Assertions { 
 			get { 
 				return _assertions;
@@ -109,17 +109,17 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// System.Reflection object for current test method.
-		/// </summary>
+		/// //
 		public MethodInfo Method { get; set; }
 
 		/// <summary>
 		/// Is current test's context data initialized, or is this context instance not related to any test?
-		/// </summary>
+		/// //
 		public bool IsInitialized { get; set; }
 
 		/// <summary>
 		/// ID's of test cases which are reported to the QA test case web software (if any integrated into this framework, and marked in tes).
-		/// </summary>
+		/// //
 		public List<int> TestCaseIds {
 			get{ return _testCaseIds; }
 			set{ _testCaseIds = value; }
@@ -128,7 +128,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Base test initialization. This explicitly ties a new context object to a specific test that is actively being run by the Test Runner.
-		/// </summary>
+		/// //
 		/// <param name="testName">Test name.</param>
 		public void TestInitialize(MethodInfo method) {
 
@@ -138,7 +138,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Sets each property for this context object.
-		/// </summary>
+		/// //
 		/// <param name="method">Method.</param>
 		/// <param name="initialize">Tells this object that it has been given its test to build context for. Only false if empty constructor.</param>
 		private void TestInitialize(MethodInfo method, bool initialize) {

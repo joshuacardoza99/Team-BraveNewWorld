@@ -359,7 +359,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Returns the text resource by the resource enumeration name, or by the provided string name if it is an extendable resource.
-		/// </summary>
+		/// //
 		public static string GetNonUnityTextResource(FileResource file, string extendableResourceName = "") {
 
 			if(!isSet) {

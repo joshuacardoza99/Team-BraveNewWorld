@@ -16,7 +16,7 @@ namespace TrilleonAutomation {
 
     /// <summary>
     /// A local-run pubsub system hosted by the machine(s) that launch automation onto devices. Eliminates need for a third party system and internet access (if game under test does not require internet access).
-    /// </summary>
+    /// //
     public class SocketConnectionStrategy : MonoBehaviour {
 
         public static int SOCKET_PORT { get; private set; } //CUSTOMIZE: Change this value in TrilleonConfig.txt. Should remain identical to the port used by pubsub master scripts.
@@ -65,7 +65,7 @@ namespace TrilleonAutomation {
 
         /// <summary>
         /// Async connection. Main thread will stall without this if connection cannot instantly be made.
-        /// </summary>
+        /// //
         public void ConnectAll() {
 
             List<string> hosts = AutomationMaster.ConfigReader.GetString("SOCKET_HOSTS_PIPE_SEPERATED").Split('|').ToList();

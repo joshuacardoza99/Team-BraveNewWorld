@@ -25,7 +25,7 @@ namespace TrilleonAutomation {
 		
 	/// <summary>
 	/// Incomplete. Conceptual for connecting to game server APIs.
-	/// </summary>
+	/// //
 	public class GameServerBroker : MonoBehaviour {
 
 		public enum RequestType { POST, GET }

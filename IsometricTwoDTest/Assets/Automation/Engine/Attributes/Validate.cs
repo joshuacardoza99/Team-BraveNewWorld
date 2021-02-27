@@ -34,7 +34,7 @@ namespace TrilleonAutomation {
 
       /// <summary>
       /// Used for Expectations that do not require additional information. Duplicate Expectations are ignored.
-      /// </summary>
+      /// //
       /// <param name="Expectations">Expectations.</param>
       public Validate(params Expect[] Expectations) {
 
@@ -48,7 +48,7 @@ namespace TrilleonAutomation {
 
       /// <summary>
       /// Use for Expectations that require an accompanying argument value. Duplicate Expectations are ignored.
-      /// </summary>
+      /// //
       /// <param name="Expectations">Expectations.</param>
       /// <param name="OrderExpectation">Order expectation.</param>
       public Validate(Expect Expectation, string Argument) {

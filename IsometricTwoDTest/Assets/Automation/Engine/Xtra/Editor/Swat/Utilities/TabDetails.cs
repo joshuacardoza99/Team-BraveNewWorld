@@ -40,7 +40,7 @@ namespace TrilleonAutomation {
       /// Rank/Priority for tab visibility and order when being displayed.
       /// Rank Zero always appears last in the tab list and is never hidden. 
       /// It should be a tools window that allows access to hidden tabs.
-      /// </summary>
+      /// //
       public int PriorityID { get; set; } 
       public bool OverrideScroll { get; set; } 
       public SwatWindow Window { get; set; }

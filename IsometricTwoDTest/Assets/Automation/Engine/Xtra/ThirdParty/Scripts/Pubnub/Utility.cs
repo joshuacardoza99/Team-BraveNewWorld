@@ -287,7 +287,7 @@ namespace PubNubMessaging.Core
 
         /// <summary>
         /// Convert the UTC/GMT DateTime to Unix Nano Seconds format
-        /// </summary>
+        /// //
         /// <param name="dotNetUTCDateTime"></param>
         /// <returns></returns>
         public static long TranslateDateTimeToPubnubUnixNanoSeconds (DateTime dotNetUTCDateTime)
@@ -299,7 +299,7 @@ namespace PubNubMessaging.Core
 
         /// <summary>
         /// Convert the Unix Nano Seconds format time to UTC/GMT DateTime
-        /// </summary>
+        /// //
         /// <param name="unixNanoSecondTime"></param>
         /// <returns></returns>
         public static DateTime TranslatePubnubUnixNanoSecondsToDateTime (long unixNanoSecondTime)

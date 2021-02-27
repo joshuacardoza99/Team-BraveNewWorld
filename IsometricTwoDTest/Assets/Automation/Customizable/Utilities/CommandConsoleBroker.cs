@@ -26,7 +26,7 @@ namespace TrilleonAutomation {
 
 	/// <summary>
 	/// Simple wrapper class that allows you to seemlessly switch between using your own command/cheat console to invoke cheats, or you can use the native Trilleon CommandConsole (default).
-	/// </summary>
+	/// //
 	public static class CommandConsoleBroker  {
 
 		public static ConsoleCommands ConsoleInstance {
@@ -53,7 +53,7 @@ namespace TrilleonAutomation {
 
 		/// <summary>
 		/// Take provided command string and delegate it to the requested command console logic.
-		/// </summary>
+		/// //
 		public static void SendCommand(string fullRawCommand) {
 
 			if (extend) {
