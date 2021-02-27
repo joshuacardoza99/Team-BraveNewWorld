@@ -297,6 +297,19 @@ public class Tile : MonoBehaviour
         return selectable;
     }
 
+    // Determines if this tile is within the borders of a city
+    public bool is_in_city()
+    {
+        return inCity;
+    }
+
+    // Set this tile to within the borders of a city
+    public void set_in_city()
+    {
+        inCity = true;
+    }
+
+
     // Attacks the character on selected tile.
     public void attack(Tile tile, PlayerMove character)
     {

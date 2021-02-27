@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7921402240359472726}
   - component: {fileID: 7938849674279630507}
   - component: {fileID: -1022899222536583979}
+  - component: {fileID: 3613191134677091635}
   m_Layer: 0
   m_Name: asiancommandpost
   m_TagString: Untagged
@@ -71,6 +72,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603163bdf8e51c24cb4e8947a1794c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentTile: {fileID: 0}
+--- !u!114 &3613191134677091635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3650478087820013330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3e1105115f88a4d95390892098c578, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTile: {fileID: 0}
 --- !u!1 &7580420319998019956
 GameObject:
   m_ObjectHideFlags: 0
