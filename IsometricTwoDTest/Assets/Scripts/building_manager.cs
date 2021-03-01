@@ -49,15 +49,17 @@ public class building_manager : MonoBehaviour
             if (civilization.amountGold >= activeBuildingType.buildCost)
             {
                 Vector3 tilePosition = tile.transform.position;
+                Building newBuilding; // Building that was just placed
 
                 // Choose prefab depeding on which civ user choose
                 if (civNumber == 0)
-                    Instantiate(activeBuildingType.asian, tilePosition, Quaternion.identity);
+                    newBuilding = Instantiate(activeBuildingType.asian, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
                 else if (civNumber == 1)
-                    Instantiate(activeBuildingType.greek, tilePosition, Quaternion.identity);
+                    newBuilding = Instantiate(activeBuildingType.greek, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
                 else
-                    Instantiate(activeBuildingType.viking, tilePosition, Quaternion.identity);
+                    newBuilding = Instantiate(activeBuildingType.viking, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
 
+                newBuilding.set_current_tile(tile);
                 civilization.deduct_cost(building_select.buildingNumber);
 
                 activeBuildingType.print_message();
