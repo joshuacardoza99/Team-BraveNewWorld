@@ -22,6 +22,7 @@ public class City : MonoBehaviour
     void set_city_limits(int range)
     {
         in_city = currentTile.get_adjacenct_tiles(range);
+        currentTile.set_in_city();
 
         foreach(Tile tile in in_city)
         {
