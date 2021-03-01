@@ -34,109 +34,119 @@ public class unit_maker : MonoBehaviour
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
     }
 
+    // Adds the champion of the given civilization to a random tile.
     // Parameters = [string civilization, string championName, int randomTile]
     public void add_champion(string[] parameters)
     {
-        string championName = parameters[0] + "_" + parameters[1];     // Holds the name for the champion.
-        int randomTile = int.Parse(parameters[2]);                // Holds the random number that allows for the selection of the same random tile across the network.
-        int civilization = int.Parse(parameters[0]);                // The civilization of the champion needing created.
-        GameObject champion = null;                                    // The champion GameObject.
-        List<GameObject> tiles = map_manager.get_land(civilization);      // The list of tiles that a random tile to place the champion on is chosen from.
-        GameObject tile = tiles[(int)(randomTile / tiles.Count)];  // The randomly selected tile to add the champion to.
-        int[] tileGrid = tile.GetComponent<Tile>().get_grid();    // The grid position of the selected tile.
-        Vector3 tilePosition = tile.transform.position;                 // The actual position to of the selected tile.
-
-        tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
+        int randomTile = int.Parse(parameters[2]);                                      // Holds the random number that allows for the selection of the same random tile across the network.
+        int civilization = int.Parse(parameters[0]);                                      // The civilization of the champion needing created.
+        GameObject champion = null;                                                          // The champion GameObject.
+        List<GameObject> tiles = map_manager.get_land(civilization);                            // The list of tiles that a random tile to place the champion on is chosen from.
+        Tile tile = (tiles[(int)(randomTile / tiles.Count)]).GetComponent<Tile>(); // The randomly selected tile to add the champion to.
+        int[] tileGrid = tile.GetComponent<Tile>().get_grid();                          // The grid position of the selected tile.
 
         // Civilization 0 is Asian civilization.
-        if (tile.GetComponent<Tile>().get_civilization() == 0)
+        if (civilization == 0)
         {
-            champion = Instantiate(asianChampion, tilePosition, Quaternion.identity);
+            champion = place_object(asianChampion, tile);
         }
         // Civilization 1 is Greek civilization.
-        else if (tile.GetComponent<Tile>().get_civilization() == 1)
+        else if (civilization == 1)
         {
-            champion = Instantiate(greekChampion, tilePosition, Quaternion.identity);
+            champion = place_object(greekChampion, tile);
         }
         // Civilization 2 is Viking civilization.
-        else if (tile.GetComponent<Tile>().get_civilization() == 2)
+        else if (civilization == 2)
         {
-            champion = Instantiate(vikingChampion, tilePosition, Quaternion.identity);
+            champion = place_object(vikingChampion, tile);
         }
 
-        champion.name = championName;
-        champion.GetComponent<PlayerMove>().set_civilization(tile.GetComponent<Tile>().get_civilization());
-        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tileGrid[0].ToString(), tileGrid[1].ToString(), "set_occupied", championName });
-        Vector3 cameraPosition = GameObject.Find("Main Camera").transform.position;
-        cameraPosition.y = tilePosition.y;
-        cameraPosition.x = tilePosition.x;
+        champion.name = parameters[0] + "_" + parameters[1];
+        champion.GetComponent<PlayerMove>().set_civilization(civilization);
+        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tileGrid[0].ToString(), tileGrid[1].ToString(), "set_occupied", champion.name });
 
-        GameObject.Find("Main Camera").transform.position = cameraPosition;
+        focus_camera_on(champion);
     }
 
-    // Parameters = [string civilization, string unitType, string unitNumber]
-    public void add_unit(string[] parameters)
+    // Places a copy of the given GameObject on the given tile.
+    public GameObject place_object(GameObject item, Tile tile)
     {
-        // for tile coordinates, also figure out scaling for buildings
-        GameObject tile = GameObject.Find(parameters[0]); // Selecting the given tile from its name.
-        Vector3 tilePosition = tile.transform.position;        // The actual position of the select tile.
+        Vector3 tilePosition = tile.transform.position;                  // The actual position to of the selected tile.
+        tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
+        tilePosition.x -= 0.0f;
+        tilePosition.y += 0.2f;
 
-        tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y;
+        GameObject itemCopy = Instantiate(item, tilePosition, Quaternion.Euler(new Vector3(0, 0, 0)));
+        face_forward(itemCopy);
+        itemCopy.GetComponent<PlayerMove>().set_grid(tile.get_grid()[0], tile.get_grid()[1]);
 
-        if (parameters[0] == "asian")
-        {
-            if (parameters[1] == "Melee")
-            {
-                asianMelee.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(asianMelee, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "Ranged")
-            {
-                asianRanged.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(asianRanged, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "Tank")
-            {
-                asianTank.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(asianTank, tilePosition, Quaternion.identity);
-            }
-        }
-        else if (parameters[0] == "greek")
-        {
-            if (parameters[1] == "Melee")
-            {
-                greekMelee.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(greekMelee, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "Ranged")
-            {
-                greekRanged.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(greekRanged, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "Tank")
-            {
-                greekTank.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(greekTank, tilePosition, Quaternion.identity);
-            }
-        }
-        else if (parameters[0] == "viking")
-        {
-            if (parameters[1] == "Melee")
-            {
-                vikingMelee.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(vikingMelee, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "Ranged")
-            {
-                vikingRanged.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(vikingRanged, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "Tank")
-            {
-                vikingTank.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(vikingTank, tilePosition, Quaternion.identity);
-            }
-        }
+        return itemCopy;
+    }
+
+    // Removes the given game object from the scene.
+    public void remove_object(GameObject item)
+    {
+        Destroy(item);
+    }
+
+    // Rotates the given gameobject to face forwards towards the screen.
+    public void face_forward(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(60, 180, 0));
+    }
+
+    // Rotates the given gameobject to face forwards towards the screen off to the left.
+    public void face_left_forward(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(150, 70, 225));
+    }
+
+    // Rotates the given gameobject to face forwards towards the screen off to the left.
+    public void face_right_forward(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(150, -60, 130));
+    }
+
+    // Rotates the given gameobject to face backwards away from the screen.
+    public void face_backward(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(-60, 0, 0));
+    }
+
+    // Rotates the given gameobject to face forwards towards the screen off to the left.
+    public void face_left_backward(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(-30, -45, 30));
+    }
+
+    // Rotates the given gameobject to face forwards towards the screen off to the left.
+    public void face_right_backward(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(-30, 45, -30));
+    }
+
+    // Rotates the given gameobject to face right towards the right edge of the screen.
+    public void face_right(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(0, 90, -60));
+    }
+
+    // Rotates the given gameobject to face left towards the left edge of the screen.
+    public void face_left(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 60));
+    }
+
+    // Centers the given object in the camera view.
+    public void focus_camera_on(GameObject item)
+    {
+        GameObject camera = GameObject.Find("Main Camera"); // Holds the GameObjcet for the scene's camera.
+        Vector3 cameraPosition = camera.transform.position;
+
+        cameraPosition.y = item.transform.position.y;
+        cameraPosition.x = item.transform.position.x;
+
+        camera.transform.position = cameraPosition;
     }
 
     // Removes the all units on the map.
@@ -151,7 +161,7 @@ public class unit_maker : MonoBehaviour
                 Regex.IsMatch(sceneObject.name.ToLower(), "greek_*", RegexOptions.IgnoreCase) ||
                 Regex.IsMatch(sceneObject.name.ToLower(), "viking_*", RegexOptions.IgnoreCase))
             {
-                Destroy(sceneObject);
+                remove_object(sceneObject);
             }
         }
     }

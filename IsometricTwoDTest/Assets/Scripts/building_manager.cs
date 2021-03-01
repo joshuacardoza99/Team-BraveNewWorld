@@ -39,7 +39,7 @@ public class building_manager : MonoBehaviour
     }
 
     // Champion Spawn command post (still need to figure out how to get this to work outside update function)
-    public void add_building(Tile tile, PlayerMove character)
+    public void add_building(Tile tile, GameObject character)
     {
         // Check conditions for spawining a command post
         if (!EventSystem.current.IsPointerOverGameObject()

@@ -19,9 +19,9 @@ public class Tile : MonoBehaviour
     menu_manager menu_manager;
 
     // Events
-    public delegate void  TileSelected   (Tile selectedTile, PlayerMove occupyingCharacter);   // Template function for the TileSelected Event.
+    public delegate void  TileSelected   (Tile selectedTile, GameObject occupyingCharacter);   // Template function for the TileSelected Event.
     public static   event TileSelected   OnSelected;                                           // The TileSelected function call stub.
-    public delegate void  TileUnselected (Tile unselectedTile, PlayerMove occupyingCharacter); // Template function for the TileUnselected Event.
+    public delegate void  TileUnselected (Tile unselectedTile, GameObject occupyingCharacter); // Template function for the TileUnselected Event.
     public static   event TileUnselected OnUnselected;                                         // The TileSelected function call stub.
 
     // Global Variables //
@@ -34,7 +34,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private bool       target                  = false; // Determines if this tile is being targeted by another player.
     [SerializeField] private bool       selectable              = false; // Determines if the player can click on click on this tile.
     [SerializeField] private bool       attackable              = false; // Determines if another player can attach this tile.
-    [SerializeField] private PlayerMove currentCharacter        = null;  // the character currently occupying this tile.
+    [SerializeField] private GameObject currentCharacter        = null;  // the character currently occupying this tile.
     [SerializeField] private float      nextAttack              = 0;     // Determines if another player is attaching this tile.
     [SerializeField] private bool       isAttacking             = false; // Determines if the player on this tile it attaching another tile.
     [SerializeField] private float      cooldown                = 3;     // The amount of seconds a character must wast before moving again.
@@ -173,14 +173,14 @@ public class Tile : MonoBehaviour
     // Sets the surounding tiles in the given range to be selectable.
     // Test Instruction: Manually select the tile with map_manager.map and make sure the tile color is blue and if tile.selectable is true.
     // parameter = [int range]
-    public void select(Tile tile, PlayerMove character)// use this for attack range 
+    public void select(Tile tile, GameObject character)// use this for attack range 
     {
         if (tile == this && tile.is_occupied())
         {
             Debug.Log("Selecting all the tiles around this one.");
             tile.set_selectable(new string[0] { });
 
-            foreach (Tile nearByTile in get_walkable_tiles(character.moveRange))
+            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
                nearByTile.set_selectable(new string[0] { });
             }
@@ -190,14 +190,14 @@ public class Tile : MonoBehaviour
     // Sets the surounding tiles in the given range to be unselectable.
     // Test Instruction: Manually select the tile with map_manager.map and make sure the tile color is its normal color and if tile.selectable is false.
     // parameter = [int range]
-    public void unselect(Tile tile, PlayerMove character)
+    public void unselect(Tile tile, GameObject character)
     {
         if (tile == this && tile.is_occupied())
         {
             Debug.Log("Unselecting all the tiles around this one.");
             tile.set_unselectable(new string[0] { });
 
-            foreach (Tile nearByTile in get_walkable_tiles(character.moveRange))
+            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
                 nearByTile.set_unselectable(new string[0] { });
             }
@@ -237,8 +237,8 @@ public class Tile : MonoBehaviour
             map_manager = GameObject.Find("Map").GetComponent<map_manager>();
         }
         occupied = true;
-        currentCharacter = GameObject.Find(parameter[0]).GetComponent<PlayerMove>();
-        currentCharacter.set_current_tile(this);
+        currentCharacter = GameObject.Find(parameter[0]);
+        currentCharacter.GetComponent<PlayerMove>().set_current_tile(this);
         this.GetComponent<Renderer>().material = map_manager.types.occupied;
     }
 
@@ -247,7 +247,7 @@ public class Tile : MonoBehaviour
     public void set_unoccupied(string[] parameter)
     {
         occupied = false;
-        currentCharacter.set_current_tile(null);
+        currentCharacter.GetComponent<PlayerMove>().set_current_tile(null);
         this.GetComponent<Renderer>().material = map_manager.types.get_material(civilization);
         currentCharacter = null;
     }
@@ -311,7 +311,7 @@ public class Tile : MonoBehaviour
 
 
     // Attacks the character on selected tile.
-    public void attack(Tile tile, PlayerMove character)
+    public void attack(Tile tile, GameObject character)
     {
         if(cooldowns == null)
         {
@@ -338,11 +338,11 @@ public class Tile : MonoBehaviour
     }
 
     // Sets the nearby tiles to be attackable.
-    public void select_attackable(Tile tile, PlayerMove character)
+    public void select_attackable(Tile tile, GameObject character)
     {
         if (tile == this && tile.is_occupied())
         {
-            foreach (Tile nearByTile in get_walkable_tiles(character.moveRange))
+            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
                 if (nearByTile.is_occupied() && nearByTile.get_civilization() != get_civilization())
                 {
@@ -353,11 +353,11 @@ public class Tile : MonoBehaviour
     }
 
     // Unsets the nearby tiles from being attackable.
-    public void unselect_attackable(Tile tile, PlayerMove character)
+    public void unselect_attackable(Tile tile, GameObject character)
     {
         if (tile == this && tile.is_occupied())
         {
-            foreach (Tile nearByTile in get_walkable_tiles(character.moveRange))
+            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
                 if (nearByTile.is_attackable())
                 {
@@ -380,7 +380,7 @@ public class Tile : MonoBehaviour
     }
 
     // Gets the current character for this tile.
-    public PlayerMove get_current_character()
+    public GameObject get_current_character()
     {
         return currentCharacter;
     }
@@ -396,7 +396,7 @@ public class Tile : MonoBehaviour
     }
 
     // Sets this tile to be selectable.
-    public void handle_selection(Tile selectedTile, PlayerMove unusedCharacter)
+    public void handle_selection(Tile selectedTile, GameObject unusedCharacter)
     {
         if (selectedTile == this)
         {
