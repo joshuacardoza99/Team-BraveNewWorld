@@ -53,20 +53,69 @@ public class building_manager : MonoBehaviour
 
                 // Choose prefab depeding on which civ user choose
                 if (civNumber == 0)
-                    newBuilding = Instantiate(activeBuildingType.asian, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                {
+                    if ((activeBuildingType.unitType == 0) && (!tile.is_in_city()))
+                    {
+                        newBuilding = Instantiate(activeBuildingType.asian, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                        newBuilding.set_current_tile(tile);
+                        civilization.deduct_cost(building_select.buildingNumber);
+                        activeBuildingType.print_message();
+                    }
+                    else if (tile.is_in_city())
+                    {
+                        newBuilding = Instantiate(activeBuildingType.asian, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                        newBuilding.set_current_tile(tile);
+                        civilization.deduct_cost(building_select.buildingNumber);
+                        activeBuildingType.print_message();
+                    }
+                    else
+                        Debug.Log("Building cannot be placed Here");
+                }
                 else if (civNumber == 1)
-                    newBuilding = Instantiate(activeBuildingType.greek, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                {
+                    if ((activeBuildingType.unitType == 0) && (!tile.is_in_city()))
+                    {
+                        newBuilding = Instantiate(activeBuildingType.greek, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                        newBuilding.set_current_tile(tile);
+                        civilization.deduct_cost(building_select.buildingNumber);
+                        activeBuildingType.print_message();
+                    }
+                    else if (tile.is_in_city())
+                    {
+                        newBuilding = Instantiate(activeBuildingType.greek, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                        newBuilding.set_current_tile(tile);
+                        civilization.deduct_cost(building_select.buildingNumber);
+                        activeBuildingType.print_message();
+                    }
+                    else
+                        Debug.Log("Building cannot be placed Here");
+                }
                 else
-                    newBuilding = Instantiate(activeBuildingType.viking, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
-
-                newBuilding.set_current_tile(tile);
-                civilization.deduct_cost(building_select.buildingNumber);
-
-                activeBuildingType.print_message();
+                {
+                    if ((activeBuildingType.unitType == 0) && (!tile.is_in_city()))
+                    {
+                        newBuilding = Instantiate(activeBuildingType.viking, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                        newBuilding.set_current_tile(tile);
+                        civilization.deduct_cost(building_select.buildingNumber);
+                        activeBuildingType.print_message();
+                    }
+                    else if (tile.is_in_city())
+                    {
+                        newBuilding = Instantiate(activeBuildingType.viking, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                        newBuilding.set_current_tile(tile);
+                        civilization.deduct_cost(building_select.buildingNumber);
+                        activeBuildingType.print_message();
+                    }
+                    else
+                        Debug.Log("Building cannot be placed Here");
+                }
                 activeBuildingType = null;
             }
             else
+            {
                 Debug.Log("Don't have enough Gold");
+                activeBuildingType = null;
+            }
         }
     }
 

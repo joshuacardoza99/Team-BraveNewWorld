@@ -43,7 +43,6 @@ public class building_type : ScriptableObject
 public enum BuildingType
 {
     commandPost,
-    barracks,
     farm,
     mine
 }
