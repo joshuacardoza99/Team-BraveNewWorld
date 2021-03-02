@@ -182,7 +182,10 @@ public class Tile : MonoBehaviour
 
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
-               nearByTile.set_selectable(new string[0] { });
+                if (!nearByTile.is_occupied())
+                {
+                    nearByTile.set_selectable(new string[0] { });
+                }
             }
         }
     }
