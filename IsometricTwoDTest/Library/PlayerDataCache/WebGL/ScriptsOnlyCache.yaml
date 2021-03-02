@@ -1,8 +1,9 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Building
+    - City
     - GroundTypes
-    - PanZoom
     - PlayerMove
     - Tile
     - building_manager
@@ -12,12 +13,16 @@ ScriptsOnlyBuild:
     - change_scene
     - character_selection
     - civ_description
+    - civ_resources_display
+    - civilization
+    - cooldown
     - debug_menu
     - import_manager
     - map_manager
     - match_manager
     - menu_manager
     - open_unit_menu
+    - pan_zoom
     - panel_toggle
     - server_manager
     - unit_maker
@@ -103,29 +108,37 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11798}
     - Class: 114
-      Script: {instanceID: 11836}
+      Script: {instanceID: 11830}
     - Class: 114
-      Script: {instanceID: 12016}
+      Script: {instanceID: 12010}
     - Class: 114
-      Script: {instanceID: 12216}
+      Script: {instanceID: 12210}
     - Class: 114
-      Script: {instanceID: 12238}
+      Script: {instanceID: 12232}
     - Class: 114
-      Script: {instanceID: 12358}
+      Script: {instanceID: 12352}
     - Class: 114
-      Script: {instanceID: 12442}
+      Script: {instanceID: 12436}
     - Class: 114
-      Script: {instanceID: 12466}
+      Script: {instanceID: 12460}
     - Class: 114
-      Script: {instanceID: 12596}
+      Script: {instanceID: 12590}
     - Class: 114
-      Script: {instanceID: 12714}
+      Script: {instanceID: 12708}
     - Class: 114
-      Script: {instanceID: 12812}
+      Script: {instanceID: 12806}
     - Class: 114
-      Script: {instanceID: 13014}
+      Script: {instanceID: 12990}
     - Class: 114
-      Script: {instanceID: 13150}
+      Script: {instanceID: 13008}
+    - Class: 114
+      Script: {instanceID: 13044}
+    - Class: 114
+      Script: {instanceID: 13146}
+    - Class: 114
+      Script: {instanceID: 13314}
+    - Class: 114
+      Script: {instanceID: 13360}
     - Class: 114
       Script: {instanceID: 13362}
     - Class: 114
@@ -138,8 +151,6 @@ ScriptsOnlyBuild:
       Script: {instanceID: 13848}
     - Class: 114
       Script: {instanceID: 13880}
-    - Class: 114
-      Script: {instanceID: 13976}
     - Class: 114
       Script: {instanceID: 14010}
     - Class: 114
@@ -161,15 +172,19 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14796}
     - Class: 114
-      Script: {instanceID: 14960}
+      Script: {instanceID: 14830}
     - Class: 114
-      Script: {instanceID: 15144}
+      Script: {instanceID: 14962}
     - Class: 114
-      Script: {instanceID: 15458}
+      Script: {instanceID: 15080}
     - Class: 114
-      Script: {instanceID: 15526}
+      Script: {instanceID: 15148}
     - Class: 114
-      Script: {instanceID: 37094}
+      Script: {instanceID: 15462}
+    - Class: 114
+      Script: {instanceID: 15530}
+    - Class: 114
+      Script: {instanceID: 26984}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -307,7 +322,7 @@ ScriptsOnlyBuild:
     className: Scrollbar
   - hash:
       serializedVersion: 2
-      Hash: 9943d02d67a418f6f1b0be07fefebd6d
+      Hash: 915346f56b52fe6c64b7c148ce53f445
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tile
@@ -499,7 +514,7 @@ ScriptsOnlyBuild:
     className: AutomationMaster
   - hash:
       serializedVersion: 2
-      Hash: 251e0c04a0510282ffb9ba64cd24c000
+      Hash: e03d271bcff1ddd392a833a334b58b24
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: cooldown
@@ -527,6 +542,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.SpriteShape.Runtime.dll
     namespaceName: UnityEngine.U2D
     className: SpriteShape
+  - hash:
+      serializedVersion: 2
+      Hash: d6c331c056c362c6cf3f41afc029007a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Building
   - hash:
       serializedVersion: 2
       Hash: 5cc439bf63c0539d39588e69465ac2ab
@@ -577,6 +598,18 @@ ScriptsOnlyBuild:
     className: WebGLBroker
   - hash:
       serializedVersion: 2
+      Hash: 04b79f98e171d3b1d2f7ed37b25dc9d1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: civ_resources_display
+  - hash:
+      serializedVersion: 2
+      Hash: c5b286ca3cff0f60f5a226dbe9f6f941
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: pan_zoom
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -589,7 +622,7 @@ ScriptsOnlyBuild:
     className: AutoHud
   - hash:
       serializedVersion: 2
-      Hash: d16f860676dada105738ec70c02bb7f1
+      Hash: f5d30f54a37f2b5ac5bba1f3eaa64e84
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: building_manager
@@ -667,7 +700,7 @@ ScriptsOnlyBuild:
     className: character_selection
   - hash:
       serializedVersion: 2
-      Hash: ac154b864acc7ae5fafa00fc174ddf44
+      Hash: ee2597adb22ac24ef8d3d33a1058a1e5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: building_type
@@ -895,6 +928,12 @@ ScriptsOnlyBuild:
     className: Commands
   - hash:
       serializedVersion: 2
+      Hash: 9f4c27a50b1da7c52f140293111531f1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: civilization
+  - hash:
+      serializedVersion: 2
       Hash: b0e5c8c7916bf3fafbb6df49ef6e0807
     assemblyName: Assembly-CSharp.dll
     namespaceName: TrilleonAutomation
@@ -911,6 +950,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: MarkerTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 2538503d27282fa2b2c8449c3d865a50
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: City
   - hash:
       serializedVersion: 2
       Hash: d791aa6007fa3640be1164ea75bb087d
@@ -1063,7 +1108,7 @@ ScriptsOnlyBuild:
     className: Slider
   - hash:
       serializedVersion: 2
-      Hash: 9b5aba6047b27bec8cdac111017f4722
+      Hash: 30fbe2d8b3af7c2ede4ed748b72a079b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: building_select

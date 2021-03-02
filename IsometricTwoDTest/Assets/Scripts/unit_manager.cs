@@ -38,7 +38,7 @@ public class unit_manager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void add_unit(Tile tile, PlayerMove character)
+    void add_unit(Tile tile, GameObject character)
     {
         // Check conditions for spawining a command post
         if (!EventSystem.current.IsPointerOverGameObject()

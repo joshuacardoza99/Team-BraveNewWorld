@@ -212,20 +212,29 @@ public class map_manager : MonoBehaviour
         float yCoordinate = referencePossition;                                                           // Y-Coordinate for the next square.      
         float zCoordinate = referencePossition;                                                           // Z-Coordinate for the next square.
         float rowWidthIncreaser = 1f;                                                                           // The distance to increae the row width by.
+        int mapDiagonal = (int) Mathf.Ceil(Mathf.Sqrt((mapWidth * mapWidth) + (mapWidth + mapWidth)));
+        int[] rowCompletionStatus = new int[mapWidth];
 
-        for (int level = 0; level < 60; level++)
+        for (int level = 0; level < (mapDiagonal * 2); level++)
         {
-            for (int row = 0; row <= level; row++)
-            {
-                if (map.GetLength(0) > (level - row))
-                {
-                    try
-                    {
-                        create_ground(xCoordinate, yCoordinate, zCoordinate, map[row, (level - row)]);
+            int newRowStarted = 0;
 
-                        xCoordinate -= xSparatedDistance;
-                    }
-                    catch { }
+            for (int index = 0; index < rowCompletionStatus.Length; index++)
+            {
+                if (rowCompletionStatus[index] == 0 && newRowStarted == 0)
+                {
+                    create_ground(xCoordinate, yCoordinate, zCoordinate, map[index, rowCompletionStatus[index]]);
+
+                    xCoordinate -= xSparatedDistance;
+                    rowCompletionStatus[index]++;
+                    newRowStarted++;
+                }
+                else if (rowCompletionStatus[index] != 0 && rowCompletionStatus[index] < mapWidth)
+                {
+                    create_ground(xCoordinate, yCoordinate, zCoordinate, map[index, rowCompletionStatus[index]]);
+
+                    xCoordinate -= xSparatedDistance;
+                    rowCompletionStatus[index]++;
                 }
             }
 
