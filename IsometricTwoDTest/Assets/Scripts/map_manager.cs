@@ -203,6 +203,7 @@ public class map_manager : MonoBehaviour
     // Parameter = [int seed]
     public void load_map(string[] parameters)
     {
+        Debug.Log("In map_manager loading map with a seed of " + int.Parse(parameters[0]));
         generate_map(mapWidth, mapWidth, new int[4] { -1, 0, 1, 2 }, 80, int.Parse(parameters[0])); // Stores the square paderian for the map.
 
         int referencePossition = 0;                                                                            // Reference point for the map placement.                    

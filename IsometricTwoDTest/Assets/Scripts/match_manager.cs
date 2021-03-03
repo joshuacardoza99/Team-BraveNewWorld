@@ -52,6 +52,7 @@ public class match_manager : MonoBehaviour
     public void set_map(string[] parameters)
     {
         this.map = int.Parse(parameters[0]);
+        Debug.Log("Set_map is setting map to " + this.map);
     }
 
     // Starts a multiplayer game over the network.
@@ -97,7 +98,8 @@ public class match_manager : MonoBehaviour
     // Parameters = the topography design for the game's map.
     public void set_match_map(string[] parameters)
     {
-        //currentMatch.set_map(parameters);
+        Debug.Log("Set_match_map has a seed of " + int.Parse(parameters[0]));
+        set_map(parameters);
     }
 
     // Sets the number of players that their will be in this match.
@@ -118,7 +120,7 @@ public class match_manager : MonoBehaviour
         {
             isReady = new List<bool>();
             this.map = Random.Range(1000, 2000);
-
+            Debug.Log("Setup_match is setting the host's map to " + this.map);
             // Add the map seed to the database.
 
             import_manager.run_function_all("server_functions", "set_match_map", new string[1] { this.map.ToString() });
