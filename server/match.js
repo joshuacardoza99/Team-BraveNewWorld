@@ -140,9 +140,9 @@ exports.match = function(id = 0)
 		if (message.gameObject == "server_functions")
 		{
 			// Did not work in the past
-			if (message.function == "get_player")
+		/*	if (message.function == "get_player")
 			{
-			/*	database_api.get_player((data) =>
+				database_api.get_player((data) =>
 				{
 					let response = {   // JSON message to send to a player.
 										gameObject: message.parameters[0],
@@ -154,7 +154,8 @@ exports.match = function(id = 0)
 				})
 			}
 			// Sets the map seed for the match.
-			else if (message.function == "set_match_map")
+			else */
+			if (message.function == "set_match_map")
 			{
 				mapSeed = parseInt(message.parameters[0]);
 
@@ -162,7 +163,7 @@ exports.match = function(id = 0)
 				//database_api.update_map([this.matchId.toString(), message.parameters[0]]);
 			}
 			// Updates the characters position on the map.
-			else if (message.function == "update_character_position")
+			/*else if (message.function == "update_character_position")
 			{
 				let player = get_player(playerSocket);
 
@@ -188,11 +189,11 @@ exports.match = function(id = 0)
 
 					playerSocket.send(JSON.stringify(response));
 				})*/
-			}
+			/*}
 			else
 			{
 				//database_api[message.function](message.parameters);
-			}
+			}*/
 		}
 		else
 		{
