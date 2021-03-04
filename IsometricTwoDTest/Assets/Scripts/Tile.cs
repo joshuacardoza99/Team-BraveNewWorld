@@ -177,7 +177,7 @@ public class Tile : MonoBehaviour
     // parameter = [int range]
     public void select(Tile tile, GameObject character)// use this for attack range 
     {
-        if (tile == this && tile.is_occupied())
+        if (tile == this && tile.is_occupied() && (match_manager.get_player_civilization() == tile.get_current_character().GetComponent<PlayerMove>().get_civilization()))
         {
             Debug.Log("Selecting all the tiles around this one.");
             tile.set_selectable(new string[0] { });
@@ -411,12 +411,12 @@ public class Tile : MonoBehaviour
         if (selectedTile == this)
         {
             Debug.Log("Local player is civ type " + match_manager.get_player_civilization());
-            if (is_occupied() && !isCurrentlySelectedTile && (match_manager.get_player_civilization() == selectedTile.get_current_character().GetComponent<PlayerMove>().get_civilization()))
+            if (is_occupied() && !isCurrentlySelectedTile)
             {
                 Debug.Log("the selected tile is occupied by a character of civ type " + selectedTile.get_current_character().GetComponent<PlayerMove>().get_civilization());
                 this.isCurrentlySelectedTile = true;
             }
-            else if (is_occupied() && isCurrentlySelectedTile && (match_manager.get_player_civilization() == selectedTile.get_current_character().GetComponent<PlayerMove>().get_civilization()))
+            else if (is_occupied() && isCurrentlySelectedTile)
             {
                 Debug.Log("the selected tile is occupied by a character of civ type " + selectedTile.get_current_character().GetComponent<PlayerMove>().get_civilization());
                 OnUnselected(this, currentCharacter);
