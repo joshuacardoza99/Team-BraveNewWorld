@@ -9,8 +9,10 @@ public class PlayerMove : MonoBehaviour
 {
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
+    match_manager match_manager;
     map_manager    map_manager;     // Importing the map_manager class.
     unit_maker     unit_maker;      // Importing the unit_maker class.
+    Tile Tile;
 
     // Unit attribiutes //
     public int health = 10;                  // The current health of this character.
@@ -37,6 +39,7 @@ public class PlayerMove : MonoBehaviour
         halfHeight = GetComponent<Collider>().bounds.extents.y;
 
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
+        match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
         unit_maker = GameObject.Find("unit_manager").GetComponent<unit_maker>();
 
@@ -59,14 +62,13 @@ public class PlayerMove : MonoBehaviour
     // Handles running the move on the current players computer and over the network.
     public void handle_move(Tile moveToTile, GameObject ususedCharacter)
     {
-        if (!moveToTile.is_occupied() && moveToTile.is_selectable())
+        if (!moveToTile.is_occupied() && moveToTile.is_selectable() && (match_manager.get_player_civilization() == get_civilization()))
         {
             currentTile.unselect(currentTile, this.gameObject);
             import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
 
             import_manager.run_function_all(this.gameObject.name, "move", new string[2] { moveToTile.get_grid()[0].ToString(), moveToTile.get_grid()[1].ToString() });
-            move(new string[2] { moveToTile.get_grid()[0].ToString(), moveToTile.get_grid()[1].ToString() });
-
+         
             import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied", this.name });
         }
     }
@@ -77,9 +79,8 @@ public class PlayerMove : MonoBehaviour
     {
         Tile moveToTile = map_manager.map[int.Parse(parameters[0]), int.Parse(parameters[1])].ground.GetComponent<Tile>();
         Vector3 targetPosition; // The actual position of the tile this character is about to move to.
-
-        targetPosition = map_manager.map[grid[0], grid[1]].ground.transform.position;
-        currentTile = map_manager.map[grid[0], grid[1]].ground.GetComponent<Tile>();
+        targetPosition = map_manager.map[int.Parse(parameters[0]), int.Parse(parameters[1])].ground.transform.position;
+        Debug.Log("Target Position is " + targetPosition.x + " by " + targetPosition.y);
 
         try
         {
@@ -87,8 +88,9 @@ public class PlayerMove : MonoBehaviour
         }
         catch { }
 
-        this.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - currentTile.GetComponent<Renderer>().bounds.size.z);
-
+        Debug.Log("Position is " + this.transform.position.x + " by " + this.transform.position.y);
+        this.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - moveToTile.GetComponent<Renderer>().bounds.size.z);
+        Debug.Log("Position is " + this.transform.position.x + " by " + this.transform.position.y);
         if ((moveToTile.get_grid()[0] > grid[0]) && (moveToTile.get_grid()[1] > grid[1]))
         {
             unit_maker.face_forward(this.gameObject);
@@ -127,9 +129,9 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("The Tiles Y position is greater");
         }
 
-
-        grid[0] = moveToTile.get_grid()[0];
-        grid[1] = moveToTile.get_grid()[1];
+        currentTile = moveToTile;
+        grid[0]     = moveToTile.get_grid()[0];
+        grid[1]     = moveToTile.get_grid()[1];
 
         try
         {

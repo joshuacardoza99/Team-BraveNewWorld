@@ -1,7 +1,6 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - Building
     - City
     - GroundTypes
     - PlayerMove
@@ -108,83 +107,81 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11798}
     - Class: 114
-      Script: {instanceID: 11830}
+      Script: {instanceID: 11834}
     - Class: 114
-      Script: {instanceID: 12010}
+      Script: {instanceID: 12014}
     - Class: 114
-      Script: {instanceID: 12210}
+      Script: {instanceID: 12214}
     - Class: 114
-      Script: {instanceID: 12232}
+      Script: {instanceID: 12236}
     - Class: 114
-      Script: {instanceID: 12352}
+      Script: {instanceID: 12356}
     - Class: 114
-      Script: {instanceID: 12436}
+      Script: {instanceID: 12440}
     - Class: 114
-      Script: {instanceID: 12460}
+      Script: {instanceID: 12464}
     - Class: 114
-      Script: {instanceID: 12590}
+      Script: {instanceID: 12594}
     - Class: 114
-      Script: {instanceID: 12708}
+      Script: {instanceID: 12712}
     - Class: 114
-      Script: {instanceID: 12806}
+      Script: {instanceID: 12810}
     - Class: 114
-      Script: {instanceID: 12990}
+      Script: {instanceID: 12994}
     - Class: 114
-      Script: {instanceID: 13008}
+      Script: {instanceID: 13012}
     - Class: 114
-      Script: {instanceID: 13044}
+      Script: {instanceID: 13150}
     - Class: 114
-      Script: {instanceID: 13146}
+      Script: {instanceID: 13318}
     - Class: 114
-      Script: {instanceID: 13314}
+      Script: {instanceID: 13364}
     - Class: 114
-      Script: {instanceID: 13360}
+      Script: {instanceID: 13366}
     - Class: 114
-      Script: {instanceID: 13362}
-    - Class: 114
-      Script: {instanceID: 13428}
-    - Class: 114
-      Script: {instanceID: 13702}
+      Script: {instanceID: 13432}
     - Class: 114
       Script: {instanceID: 13706}
     - Class: 114
-      Script: {instanceID: 13848}
+      Script: {instanceID: 13710}
     - Class: 114
-      Script: {instanceID: 13880}
+      Script: {instanceID: 13852}
     - Class: 114
-      Script: {instanceID: 14010}
+      Script: {instanceID: 13884}
     - Class: 114
-      Script: {instanceID: 14044}
+      Script: {instanceID: 14014}
     - Class: 114
-      Script: {instanceID: 14220}
+      Script: {instanceID: 14048}
     - Class: 114
-      Script: {instanceID: 14276}
+      Script: {instanceID: 14224}
     - Class: 114
-      Script: {instanceID: 14590}
+      Script: {instanceID: 14280}
     - Class: 114
-      Script: {instanceID: 14646}
+      Script: {instanceID: 14594}
     - Class: 114
-      Script: {instanceID: 14716}
+      Script: {instanceID: 14650}
     - Class: 114
-      Script: {instanceID: 14744}
+      Script: {instanceID: 14720}
     - Class: 114
-      Script: {instanceID: 14760}
+      Script: {instanceID: 14748}
     - Class: 114
-      Script: {instanceID: 14796}
+      Script: {instanceID: 14764}
     - Class: 114
-      Script: {instanceID: 14830}
+      Script: {instanceID: 14800}
     - Class: 114
-      Script: {instanceID: 14962}
+      Script: {instanceID: 14834}
     - Class: 114
-      Script: {instanceID: 15080}
+      Script: {instanceID: 14966}
     - Class: 114
-      Script: {instanceID: 15148}
+      Script: {instanceID: 15084}
     - Class: 114
-      Script: {instanceID: 15462}
+      Script: {instanceID: 15152}
     - Class: 114
-      Script: {instanceID: 15530}
+      Script: {instanceID: 15466}
     - Class: 114
-      Script: {instanceID: 26984}
+      Script: {instanceID: 15534}
+    - Class: 114
+      Script: {instanceID: 26828}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -544,7 +541,7 @@ ScriptsOnlyBuild:
     className: SpriteShape
   - hash:
       serializedVersion: 2
-      Hash: d6c331c056c362c6cf3f41afc029007a
+      Hash: f9a1d8ec8e711a00f83f187a5d69408f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Building
