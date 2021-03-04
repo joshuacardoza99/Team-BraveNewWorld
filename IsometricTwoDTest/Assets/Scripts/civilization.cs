@@ -31,8 +31,8 @@ public class civilization : MonoBehaviour
 
     public void Update()
     {
-        numberOfFarms = GameObject.FindGameObjectsWithTag("Farm").Length;
-        numberOfMines = GameObject.FindGameObjectsWithTag("Mine").Length;
+        //numberOfFarms = GameObject.FindGameObjectsWithTag("Farm").Length;
+        //numberOfMines = GameObject.FindGameObjectsWithTag("Mine").Length;
 
         civ_resources_display.update_resources();
 
