@@ -4,9 +4,10 @@
     "\\IsometricTwoDTest",
     "\\IsometricTwoDTest\\Assets",
     "\\IsometricTwoDTest\\Assets\\Data",
+    "\\IsometricTwoDTest\\Assets\\Data\\Types",
     "\\IsometricTwoDTest\\Assets\\Scripts",
     "\\IsometricTwoDTest\\Assets\\SO"
   ],
-  "SelectedNode": "\\IsometricTwoDTest\\Assets\\Scripts\\civilization.cs",
+  "SelectedNode": "\\IsometricTwoDTest\\Assets\\Data\\Types\\GroundTypes.cs",
   "PreviewInSolutionExplorer": false
 }
