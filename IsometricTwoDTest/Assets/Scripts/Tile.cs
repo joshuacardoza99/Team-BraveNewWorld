@@ -244,7 +244,11 @@ public class Tile : MonoBehaviour
         occupied = true;
         currentCharacter = GameObject.Find(parameter[0]);
         currentCharacter.GetComponent<PlayerMove>().set_current_tile(this);
-        this.GetComponent<Renderer>().material = map_manager.types.occupied;
+
+        if ((match_manager.get_player_civilization() == get_current_character().GetComponent<PlayerMove>().get_civilization()))
+        {
+            this.GetComponent<Renderer>().material = map_manager.types.occupied;
+        }
     }
 
     // Sets this tile into unoccupied mode.
@@ -350,13 +354,14 @@ public class Tile : MonoBehaviour
     // Sets the nearby tiles to be attackable.
     public void select_attackable(Tile tile, GameObject character)
     {
-        if (tile == this && tile.is_occupied())
+        Debug.Log("Setting the surounding tiles as attackable ");
+        if (tile == this && is_occupied())
         {
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
-                if (nearByTile.is_occupied() && nearByTile.get_civilization() != get_civilization())
+                if (nearByTile.is_occupied())// && nearByTile.get_civilization() != get_civilization())
                 {
-                    nearByTile.set_attackable(new string[0] { });
+                    nearByTile.set_attackable();
                 }
             }
         }
@@ -365,22 +370,30 @@ public class Tile : MonoBehaviour
     // Unsets the nearby tiles from being attackable.
     public void unselect_attackable(Tile tile, GameObject character)
     {
-        if (tile == this && tile.is_occupied())
+        if (tile == this && is_occupied())
         {
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
                 if (nearByTile.is_attackable())
                 {
-                    nearByTile.set_attackable(new string[0] { });
+                    nearByTile.set_unattackable();
                 }
             }
         }
     }
 
     // Sets his tile to be attackable .
-    public void set_attackable(string[] parameter)
+    public void set_attackable()
     {
         attackable = true;
+        this.GetComponent<Renderer>().material = map_manager.types.attackable;
+    }
+
+    // Sets this tile to not be attackable.
+    public void set_unattackable()
+    {
+        attackable = false;
+        this.GetComponent<Renderer>().material = map_manager.types.get_material(civilization);
     }
 
     // Determines if this tile is attackable.
@@ -401,7 +414,7 @@ public class Tile : MonoBehaviour
         foreach (Tile tile in get_walkable_tiles(currentCharacter.GetComponent<PlayerMove>().attackRange))
         {
             if (tile.occupied)
-                tile.set_attackable(new string[0] { });
+                tile.set_attackable();
         }
     }
 
@@ -442,7 +455,7 @@ public class Tile : MonoBehaviour
 
             this.isCurrentlySelectedTile = false;
 
-            if (!isCurrentlySelectedTile && !is_occupied() && !is_selectable())
+            if ((!isCurrentlySelectedTile && !is_occupied() && !is_selectable()) || (is_occupied() && (match_manager.get_player_civilization() != get_current_character().GetComponent<PlayerMove>().get_civilization())))
             {
                 this.GetComponent<Renderer>().material = map_manager.types.get_material(civilization);
             }
