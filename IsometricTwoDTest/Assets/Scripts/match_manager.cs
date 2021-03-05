@@ -76,6 +76,7 @@ public class match_manager : MonoBehaviour
     // Parameter = [string gameObject, string function]
     public int get_player_civilization()
     {
+        Debug.Log("Returning the current local player as " + playerCivilization);
         return playerCivilization;
     }
 

@@ -241,11 +241,16 @@ public class Tile : MonoBehaviour
         {
             map_manager = GameObject.Find("Map").GetComponent<map_manager>();
         }
+
+        if (match_manager == null)
+        {
+            match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
+        }
         occupied = true;
         currentCharacter = GameObject.Find(parameter[0]);
         currentCharacter.GetComponent<PlayerMove>().set_current_tile(this);
 
-        if ((match_manager.get_player_civilization() == get_current_character().GetComponent<PlayerMove>().get_civilization()))
+        if (match_manager.get_player_civilization() == get_current_character().GetComponent<PlayerMove>().get_civilization())
         {
             this.GetComponent<Renderer>().material = map_manager.types.occupied;
         }
