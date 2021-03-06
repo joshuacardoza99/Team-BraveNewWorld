@@ -347,6 +347,7 @@ public class Tile : MonoBehaviour
                     currentCharacter.GetComponent<PlayerMove>().health -= currentCharacter.GetComponent<PlayerMove>().damage;
                     Debug.Log("Health equals " + currentCharacter.GetComponent<PlayerMove>().health);
                     cooldowns.initiate_attack_cooldown();
+
                     if (currentCharacter.GetComponent<PlayerMove>().health <= 0)
                     {
                         Debug.Log("YOUR SOLDIER HAS FALLEN !!");
@@ -364,7 +365,7 @@ public class Tile : MonoBehaviour
         {
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
-                if (nearByTile.is_occupied())// && nearByTile.get_civilization() != get_civilization())
+                if (nearByTile.is_occupied() && (nearByTile.get_current_character().GetComponent<PlayerMove>().get_civilization() != match_manager.get_player_civilization()))
                 {
                     nearByTile.set_attackable();
                 }
@@ -375,7 +376,7 @@ public class Tile : MonoBehaviour
     // Unsets the nearby tiles from being attackable.
     public void unselect_attackable(Tile tile, GameObject character)
     {
-        if (tile == this && is_occupied())
+        if (is_occupied())
         {
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
