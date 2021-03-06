@@ -99,7 +99,7 @@ public class match_manager : MonoBehaviour
     // Parameters = the topography design for the game's map.
     public void set_match_map(string[] parameters)
     {
-        //currentMatch.set_map(parameters);
+        set_map(parameters);
     }
 
     // Sets the number of players that their will be in this match.

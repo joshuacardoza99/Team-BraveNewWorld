@@ -154,7 +154,8 @@ exports.match = function(id = 0)
 				})
 			}
 			// Sets the map seed for the match.
-			else*/ if (message.function == "set_match_map")
+			else*/ 
+			if (message.function == "set_match_map")
 			{
 				mapSeed = parseInt(message.parameters[0]);
 
