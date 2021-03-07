@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: mine
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 329975fb78391c04cbb5af74a2b9df66, type: 3}
-  asian: {fileID: 6001181614200676741, guid: 5f40469189e4afa479d795f878314c1b, type: 3}
-  viking: {fileID: 6001181614200676741, guid: 5f40469189e4afa479d795f878314c1b, type: 3}
-  greek: {fileID: 6001181614200676741, guid: 5f40469189e4afa479d795f878314c1b, type: 3}
+  asian: {fileID: 3331152357556402804, guid: 61a62e464149c594ba6c7141a12c07a0, type: 3}
+  viking: {fileID: 3331152357556402804, guid: 61a62e464149c594ba6c7141a12c07a0, type: 3}
+  greek: {fileID: 3331152357556402804, guid: 61a62e464149c594ba6c7141a12c07a0, type: 3}
   isConquered: 0
   unitType: 3
   resourcesAmount: 10
