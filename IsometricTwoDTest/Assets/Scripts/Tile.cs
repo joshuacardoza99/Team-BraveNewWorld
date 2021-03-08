@@ -35,6 +35,9 @@ public class Tile : MonoBehaviour
     [SerializeField] private bool       selectable              = false; // Determines if the player can click on click on this tile.
     [SerializeField] private bool       attackable              = false; // Determines if another player can attach this tile.
     [SerializeField] private GameObject currentCharacter        = null;  // the character currently occupying this tile.
+    [SerializeField] private float      nextAttack              = 0;     // Determines if another player is attaching this tile.
+    [SerializeField] private bool       isAttacking             = false; // Determines if the player on this tile it attaching another tile.
+    [SerializeField] private float      cooldown                = 3;     // The amount of seconds a character must wast before moving again.
     [SerializeField] private int        civilization;                    // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     [SerializeField] private int[]      grid;                            // Stores the position of the Tile in the virtual grid. [x position, y position]
 
