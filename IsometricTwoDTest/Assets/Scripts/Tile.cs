@@ -320,7 +320,7 @@ public class Tile : MonoBehaviour
         {
             cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
         }
-        if (tile == this && occupied && attackable) // and in range, and not a friendly civ
+        if (tile == this && attackable) // and in range, and not a friendly civ
         {
             if (Time.time > cooldowns.nextAttack)
             {
