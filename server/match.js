@@ -140,9 +140,9 @@ exports.match = function(id = 0)
 		if (message.gameObject == "server_functions")
 		{
 			// Did not work in the past
-			if (message.function == "get_player")
+			/*if (message.function == "get_player")
 			{
-			/*	database_api.get_player((data) =>
+				database_api.get_player((data) =>
 				{
 					let response = {   // JSON message to send to a player.
 										gameObject: message.parameters[0],
