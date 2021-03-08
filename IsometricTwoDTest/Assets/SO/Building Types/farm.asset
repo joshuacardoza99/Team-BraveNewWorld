@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: farm
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 691c5a97b0c87994eac9f0ea9cf210ce, type: 3}
-  asian: {fileID: 3814490536550466924, guid: ee2c97a1b49f7d944adab5223d88d1f7, type: 3}
-  viking: {fileID: 3814490536550466924, guid: ee2c97a1b49f7d944adab5223d88d1f7, type: 3}
-  greek: {fileID: 3814490536550466924, guid: ee2c97a1b49f7d944adab5223d88d1f7, type: 3}
+  asian: {fileID: 4327281725862393606, guid: c1d271fe9b4d33e4c96e1022cba45e2b, type: 3}
+  viking: {fileID: 4327281725862393606, guid: c1d271fe9b4d33e4c96e1022cba45e2b, type: 3}
+  greek: {fileID: 4327281725862393606, guid: c1d271fe9b4d33e4c96e1022cba45e2b, type: 3}
   isConquered: 0
   unitType: 2
   resourcesAmount: 5
