@@ -49,16 +49,19 @@ public class unit_maker : MonoBehaviour
         if (civilization == 0)
         {
             champion = place_object(asianChampion, tile);
+            champion.gameObject.tag = "Player";
         }
         // Civilization 1 is Greek civilization.
         else if (civilization == 1)
         {
             champion = place_object(greekChampion, tile);
+            champion.gameObject.tag = "Player";
         }
         // Civilization 2 is Viking civilization.
         else if (civilization == 2)
         {
             champion = place_object(vikingChampion, tile);
+            champion.gameObject.tag = "Player";
         }
 
         champion.name = parameters[0] + "_" + parameters[1];

@@ -21,7 +21,7 @@ public class City : MonoBehaviour
     // Sets or expands the city borders
     void set_city_limits(int range)
     {
-        currentTile.set_in_city();
+       // currentTile.set_in_city();
 
         in_city = currentTile.get_adjacenct_tiles(range);
         currentTile.set_in_city();

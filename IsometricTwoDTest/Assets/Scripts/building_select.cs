@@ -34,7 +34,7 @@ public class building_select : MonoBehaviour
             buildingTransform.GetComponent<Button>().onClick.AddListener(() =>
             {
                 building_manager.set_active_building_type(building_type);
-               // Debug.Log(buildingTypeList.IndexOf(building_type));
+                // Debug.Log(buildingTypeList.IndexOf(building_type));
                 buildingNumber = buildingTypeList.IndexOf(building_type);
                 Debug.Log("this buidling number is working " + buildingNumber);
 
