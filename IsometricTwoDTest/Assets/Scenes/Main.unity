@@ -397,9 +397,9 @@ MonoBehaviour:
   ignoreUI: 0
   useBounds: 1
   boundMinX: -80
-  boundMaxX: 40
+  boundMaxX: 50
   boundMinY: -80
-  boundMaxY: 40
+  boundMaxY: 50
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
