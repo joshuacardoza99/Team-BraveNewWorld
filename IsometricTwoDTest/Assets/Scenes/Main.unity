@@ -385,7 +385,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0afc766f39833040b6382dccf61a878, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f25fcd0d2c62f044a2c99c60b13ff8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistanceForTap: 40
@@ -393,7 +393,7 @@ MonoBehaviour:
   useMouse: 1
   mouseScrollSpeed: 2
   controlCamera: 1
-  cam: {fileID: 519420031}
+  cam: {fileID: 0}
   ignoreUI: 0
   useBounds: 1
   boundMinX: -80

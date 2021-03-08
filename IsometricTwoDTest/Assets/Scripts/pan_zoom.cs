@@ -3,19 +3,19 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
-// A modular and easily customisable Unity MonoBehaviour for handling swipe and pinch motions on mobile. 
+/// <summary> A modular and easily customisable Unity MonoBehaviour for handling swipe and pinch motions on mobile. //
 public class pan_zoom : MonoBehaviour
 {
 
-    // Called as soon as the player touches the screen. The argument is the screen position. //
+    /// <summary> Called as soon as the player touches the screen. The argument is the screen position. //
     public event Action<Vector2> onStartTouch;
-    // Called as soon as the player stops touching the screen. The argument is the screen position. //
+    /// <summary> Called as soon as the player stops touching the screen. The argument is the screen position. //
     public event Action<Vector2> onEndTouch;
-    // Called if the player completed a quick tap motion. The argument is the screen position. //
+    /// <summary> Called if the player completed a quick tap motion. The argument is the screen position. //
     public event Action<Vector2> onTap;
-    // Called if the player swiped the screen. The argument is the screen movement delta. //
+    /// <summary> Called if the player swiped the screen. The argument is the screen movement delta. //
     public event Action<Vector2> onSwipe;
-    // Called if the player pinched the screen. The arguments are the distance between the fingers before and after. //
+    /// <summary> Called if the player pinched the screen. The arguments are the distance between the fingers before and after. //
     public event Action<float, float> onPinch;
 
     [Header("Tap")]
@@ -44,10 +44,10 @@ public class pan_zoom : MonoBehaviour
     [Tooltip("Is the camera bound to an area?")]
     public bool useBounds;
 
-    public float boundMinX = -150;
-    public float boundMaxX = 150;
-    public float boundMinY = -150;
-    public float boundMaxY = 150;
+    public float boundMinX = -80;
+    public float boundMaxX = 40;
+    public float boundMinY = -80;
+    public float boundMaxY = 40;
 
     Vector2 touch0StartPosition;
     Vector2 touch0LastPosition;
@@ -57,10 +57,10 @@ public class pan_zoom : MonoBehaviour
 
     bool canUseMouse;
 
-    // Has the player at least one finger on the screen? //
+    /// <summary> Has the player at least one finger on the screen? //
     public bool isTouching { get; private set; }
 
-    // The point of contact if it exists in Screen space. //
+    /// <summary> The point of contact if it exists in Screen space. //
     public Vector2 touchPosition { get { return touch0LastPosition; } }
 
     void Start()
@@ -265,7 +265,7 @@ public class pan_zoom : MonoBehaviour
         }
     }
 
-    // Checks if the the current input is over canvas UI //
+    /// <summary> Checks if the the current input is over canvas UI //
     public bool IsPointerOverUIObject()
     {
 
@@ -277,7 +277,7 @@ public class pan_zoom : MonoBehaviour
         return results.Count > 0;
     }
 
-    // Cancels camera movement for the current motion. Resets to use camera at the end of the touch motion.//
+    /// <summary> Cancels camera movement for the current motion. Resets to use camera at the end of the touch motion.//
     public void CancelCamera()
     {
         cameraControlEnabled = false;
@@ -287,7 +287,7 @@ public class pan_zoom : MonoBehaviour
     {
         if (controlCamera && useBounds && cam != null && cam.orthographic)
         {
-            cam.orthographicSize = Mathf.Min(cam.orthographicSize, ((boundMaxY - boundMinY) / 2) - 0.001f);
+            cam.orthographicSize = Mathf.Min(cam.orthographicSize, ((boundMaxY - boundMinY) / 3) - 0.001f);
             cam.orthographicSize = Mathf.Min(cam.orthographicSize, (Screen.height * (boundMaxX - boundMinX) / (2 * Screen.width)) - 0.001f);
 
             Vector2 margin = cam.ScreenToWorldPoint((Vector2.up * Screen.height / 2) + (Vector2.right * Screen.width / 2)) - cam.ScreenToWorldPoint(Vector2.zero);

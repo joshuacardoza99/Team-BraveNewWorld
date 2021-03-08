@@ -44,10 +44,10 @@ public class PanZoom : MonoBehaviour
     [Tooltip("Is the camera bound to an area?")]
     public bool useBounds;
 
-    public float boundMinX = -150;
-    public float boundMaxX = 150;
-    public float boundMinY = -150;
-    public float boundMaxY = 150;
+    public float boundMinX = -80;
+    public float boundMaxX = 40;
+    public float boundMinY = -80;
+    public float boundMaxY = 40;
 
     Vector2 touch0StartPosition;
     Vector2 touch0LastPosition;
