@@ -47,7 +47,7 @@ public class building_manager : MonoBehaviour
         Tile.OnSelected -= add_building;
     }
 
-    void Update()
+  /*  void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -63,7 +63,7 @@ public class building_manager : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     // Champion Spawn command post (still need to figure out how to get this to work outside update function)
     public void add_building(Tile tile, GameObject character)
@@ -170,5 +170,6 @@ public class building_manager : MonoBehaviour
             preview.tag = "previewBuilding";
         }
     }
+
 }
 
