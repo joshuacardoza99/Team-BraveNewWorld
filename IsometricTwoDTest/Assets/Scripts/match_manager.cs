@@ -14,7 +14,7 @@ public class match_manager : MonoBehaviour
     private bool isHost;                            // Determines if the player's computer is hosting the match.
     private string type;                              // Type of game the match consist of.
     private int map;                               // Holds the seed for the map design for the game's map.
-    private string playerCivilization;                // The civilization the local player is playing as in this match.
+    private int playerCivilization;                // The civilization the local player is playing as in this match.
     private string championName = "startName"; // The name of the players champion.
 
     // Private Global Variables //
@@ -75,16 +75,17 @@ public class match_manager : MonoBehaviour
 
     // Gets the civilization of the local player.
     // Parameter = [string gameObject, string function]
-    public void get_player_civilization(string[] parameters)
+    public int get_player_civilization()
     {
-        import_manager.run_function(parameters[0], parameters[1], new string[1] { this.playerCivilization });
+        return playerCivilization;
     }
 
     // Sets the civilization of the local player.
-    // Parameter = [string civilization]
-    public void set_player_civilization(string[] parameters)
+    // Parameter = [int civilization]
+    public void set_player_civilization(string[] parameter)
     {
-        this.playerCivilization = parameters[0].ToLower();
+        Debug.Log("Player Civilization is being set to " + parameter[0]);
+        this.playerCivilization = int.Parse(parameter[0]);
     }
 
     // Sets the championName for the player.
@@ -144,7 +145,7 @@ public class match_manager : MonoBehaviour
 
         //GameObject.Find("Main Camera").GetComponent<pan_zoom>().enabled = true;
         import_manager.run_function("Map", "load_map", new string[1] { this.map.ToString() });
-        import_manager.run_function_all("unit_manager", "add_champion", new string[3] { this.playerCivilization, this.championName, Random.Range(1000, 2000).ToString() });
+        import_manager.run_function_all("unit_manager", "add_champion", new string[3] { this.playerCivilization.ToString(), this.championName, Random.Range(1000, 2000).ToString() });
         import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] { });
         //import_manager.run_function_all("server_function", "get_characters", new string[2]{"network_manager", "load_characters"});
     }
@@ -176,7 +177,7 @@ public class match_manager : MonoBehaviour
     {
         if (this.type == "network")
         {
-            import_manager.run_function_all("server_functions", "add_player", new string[2] { this.championName, this.playerCivilization });
+            import_manager.run_function_all("server_functions", "add_player", new string[2] { this.championName, this.playerCivilization.ToString() });
             GameObject.Find("Main Camera").GetComponent<pan_zoom>().enabled = true;
         }
         else if (this.type == "local")
@@ -191,7 +192,7 @@ public class match_manager : MonoBehaviour
     // Parameters = []
     public void start_playing(string[] parameters)
     {
-        import_manager.run_function_all("unit_manager", "add_champion", new string[3] { this.playerCivilization, this.championName, Random.Range(1000, 2000).ToString() });
+        import_manager.run_function_all("unit_manager", "add_champion", new string[3] { this.playerCivilization.ToString(), this.championName, Random.Range(1000, 2000).ToString() });
         import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] { });
     }
 
@@ -202,7 +203,6 @@ public class match_manager : MonoBehaviour
         this.isHost = false;
         this.type = null;
         this.map = 0;
-        this.playerCivilization = null;
         this.championName = "startName";
         this.numberOfPlayers = 1000;
         this.isReady = null;

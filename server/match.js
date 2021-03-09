@@ -140,7 +140,7 @@ exports.match = function(id = 0)
 		if (message.gameObject == "server_functions")
 		{
 			// Did not work in the past
-		/*	if (message.function == "get_player")
+			/*if (message.function == "get_player")
 			{
 				database_api.get_player((data) =>
 				{
@@ -188,8 +188,9 @@ exports.match = function(id = 0)
 									};
 
 					playerSocket.send(JSON.stringify(response));
-				})*/
-			/*}
+
+				})
+			}
 			else
 			{
 				//database_api[message.function](message.parameters);
