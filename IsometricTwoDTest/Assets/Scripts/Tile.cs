@@ -339,6 +339,12 @@ public class Tile : MonoBehaviour
         return currentBuilding;
     }
 
+    // Determines if this tile has a building
+    public bool has_building()
+    {
+        return hasBuilding;
+    }
+
     // Attacks the character on selected tile.
     public void attack(Tile tile, GameObject character)
     {

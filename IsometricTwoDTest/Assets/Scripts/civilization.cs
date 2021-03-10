@@ -25,7 +25,7 @@ public class civilization : MonoBehaviour
 
     public void Awake()
     {
-        amountGold = 1000;
+        amountGold = 5000;
         Debug.Log("Civ Resources init to--> \n Civ Gold: " + amountGold + "\n Civ Food: " + amountFood);
     }
 

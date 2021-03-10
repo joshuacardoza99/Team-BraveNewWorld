@@ -11,11 +11,13 @@ public class building_manager : MonoBehaviour
     preview_object preview_object;
 
     // Public Global Variables 
-    public int civNumber;                              // Number of the civilization
-    bool canPlace = false;                             // Can building be placed
-    public List<Tile> showPreview = new List<Tile>();  // List of tiles with building previews
-    public Tile currentTile = null;                    // The tile this character is currently on.
-    public Tile playerTile = null;                     // The tile the champion is currently on.
+    public int civNumber;                                   // Number of the civilization
+    bool canPlace = false;                                  // Can building be placed
+    public List<Tile> showPreview = new List<Tile>();       // List of tiles with building previews
+    public List<Tile> listCommandPostTiles = new List<Tile>();  // List of tiles with Command Posts
+    public List<GameObject> commandPost = new List<GameObject>();
+    public Tile currentTile = null;                         // The tile this character is currently on.
+    public Tile playerTile = null;                          // The tile the champion is currently on.
 
     [SerializeField]
     private building_type activeBuildingType; // Make varibale public and attach it to building_type
@@ -59,26 +61,29 @@ public class building_manager : MonoBehaviour
                 Building newBuilding; // Building that was just placed
 
                 set_current_tile(tile);
-                can_place_builing();
+                can_place();
+
+                playerTile = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile;
 
                 // Choose prefab depeding on which civ user choose
                 if (civNumber == 0)
                 {
                     if ((activeBuildingType.unitType == 0)
                         && !tile.is_in_city()
-                        && canPlace)
-                    {
-                        playerTile = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile;
+                        && canPlace
+                        && !tile.has_building())
+                    {                       
                         newBuilding = preview_object.place(activeBuildingType.asian, tilePosition).GetComponent<Building>();
+                        newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
                     else if (tile.is_in_city()
-                             && canPlace)
+                             && canPlace
+                             && !tile.has_building())
                     {
-                        newBuilding = Instantiate(activeBuildingType.asian, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
                         newBuilding = preview_object.place(activeBuildingType.asian, tilePosition).GetComponent<Building>();
                         newBuilding.set_current_tile(tile);
                         tile.set_building(newBuilding.gameObject);
@@ -93,45 +98,63 @@ public class building_manager : MonoBehaviour
                 }
                 else if (civNumber == 1)
                 {
-                    if ((activeBuildingType.unitType == 0) && (!tile.is_in_city()))
+                    if ((activeBuildingType.unitType == 0)
+                        && !tile.is_in_city()
+                        && canPlace
+                        && !tile.has_building())
                     {
-                        newBuilding = Instantiate(activeBuildingType.greek, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.greek, tilePosition).GetComponent<Building>();
+                        newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
-                    else if (tile.is_in_city())
+                    else if (tile.is_in_city()
+                             && canPlace
+                             && !tile.has_building())
                     {
-                        newBuilding = Instantiate(activeBuildingType.greek, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.greek, tilePosition).GetComponent<Building>();
                         newBuilding.set_current_tile(tile);
                         tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
                     else
-                        Debug.Log("Building cannot be placed Here");
+                    {
+                        Debug.Log("Building cannot be placed here, destroying previews");
+                        preview_object.destroy_previews();
+                    }
                 }
                 else
                 {
-                    if ((activeBuildingType.unitType == 0) && (!tile.is_in_city()))
+                    if ((activeBuildingType.unitType == 0)
+                        && !tile.is_in_city()
+                        && canPlace
+                        && !tile.has_building())
                     {
-                        newBuilding = Instantiate(activeBuildingType.viking, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.viking, tilePosition).GetComponent<Building>();
+                        newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
-                    else if (tile.is_in_city())
+                    else if (tile.is_in_city()
+                             && canPlace
+                             && !tile.has_building())
                     {
-                        newBuilding = Instantiate(activeBuildingType.viking, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.viking, tilePosition).GetComponent<Building>();
                         newBuilding.set_current_tile(tile);
                         tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
                     else
-                        Debug.Log("Building cannot be placed Here");
+                    {
+                        Debug.Log("Building cannot be placed here, destroying previews");
+                        preview_object.destroy_previews();
+                    }
                 }
             }
             else
@@ -152,25 +175,63 @@ public class building_manager : MonoBehaviour
     public void place_previews(Transform aPrefab)
     {
         preview_object preview;
-        showPreview = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile.get_walkable_tiles(1);
+        showPreview      = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile.get_walkable_tiles(1);
 
-        foreach (Tile tile in showPreview)
+        if (activeBuildingType.unitType == 0)
         {
-            Vector3 tilePosition = tile.transform.position;
-            preview = preview_object.create_preview(aPrefab, tilePosition);
-            preview.tag = "previewBuilding";
+            foreach (Tile tile in showPreview)
+            {
+                if (!tile.has_building() 
+                    && !tile.is_in_city())
+                {
+                    Vector3 tilePosition = tile.transform.position;
+                    preview = preview_object.create_preview(aPrefab, tilePosition);
+                    preview.tag = "previewBuilding";
+                }
+            }
+        }
+        else
+        {
+            foreach (GameObject commandPost in GameObject.FindGameObjectsWithTag("commandPost"))
+            {
+               listCommandPostTiles = GameObject.FindWithTag("commandPost").GetComponent<Building>().currentTile.get_walkable_tiles(1);
+
+                foreach (Tile post in commandPost.GetComponent<Building>().currentTile.get_walkable_tiles(1))
+                {
+                    if (!post.has_building())
+                    {
+                        Vector3 tilePosition = post.transform.position;
+                        preview = preview_object.create_preview(aPrefab, tilePosition);
+                        preview.tag = "previewBuilding";
+                        canPlace = true;
+                    }
+                }
+            }
         }
     }
 
-    public void can_place_builing()
+    public void can_place()
     {
-        foreach (Tile preview in showPreview)
+        if (activeBuildingType.unitType == 0)
         {
-            if (currentTile == preview)
+            foreach (Tile preview in showPreview)
             {
-                canPlace = true;
+                if (currentTile == preview)
+                {
+                    canPlace = true;
+                }
             }
         }
+        /*else
+        {
+            foreach (Tile preview in listCommandPostTiles)
+            {
+                if (currentTile == preview)
+                {
+                    canPlace = true;
+                }
+            }
+        }*/
     }
 
     public void set_current_tile(Tile tile)
