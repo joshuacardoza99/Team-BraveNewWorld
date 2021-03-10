@@ -508,6 +508,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   civNumber: 0
+  showPreview: []
+  currentTile: {fileID: 0}
+  playerTile: {fileID: 0}
   activeBuildingType: {fileID: 0}
   building_select: {fileID: 1263738955}
 --- !u!4 &640418262
@@ -1080,6 +1083,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &817184400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 817184402}
+  - component: {fileID: 817184401}
+  m_Layer: 0
+  m_Name: preview_object
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &817184401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817184400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fceb43b5af66821479a17cb8adb64ff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PreviewMaterial: {fileID: 2100000, guid: df8496986ec1b9541b7d7a89c44b1126, type: 2}
+--- !u!4 &817184402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817184400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.515985, y: -40.530865, z: -38.72985}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &887863129
 GameObject:
@@ -3747,7 +3794,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5948754653826700893, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5948754653826700893, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
@@ -3759,11 +3806,11 @@ PrefabInstance:
       objectReference: {fileID: 640418261}
     - target: {fileID: 5948754653826700893, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: add_building
+      value: place_previews
       objectReference: {fileID: 0}
     - target: {fileID: 5948754653826700893, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
+      value: UnityEngine.Transform, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6006655946526007097, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: m_Name
