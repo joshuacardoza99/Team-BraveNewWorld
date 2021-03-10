@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Building
     - City
     - GroundTypes
     - PlayerMove
@@ -131,6 +132,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13008}
     - Class: 114
+      Script: {instanceID: 13044}
+    - Class: 114
       Script: {instanceID: 13146}
     - Class: 114
       Script: {instanceID: 13314}
@@ -181,7 +184,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15530}
     - Class: 114
-      Script: {instanceID: 29918}
+      Script: {instanceID: 26984}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -541,7 +544,7 @@ ScriptsOnlyBuild:
     className: SpriteShape
   - hash:
       serializedVersion: 2
-      Hash: f9a1d8ec8e711a00f83f187a5d69408f
+      Hash: d6c331c056c362c6cf3f41afc029007a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Building

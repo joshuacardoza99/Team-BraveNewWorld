@@ -68,7 +68,7 @@ public class PlayerMove : MonoBehaviour
             import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
 
             import_manager.run_function_all(this.gameObject.name, "move", new string[2] { moveToTile.get_grid()[0].ToString(), moveToTile.get_grid()[1].ToString() });
-         
+
             import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied", this.name });
         }
     }
@@ -79,8 +79,8 @@ public class PlayerMove : MonoBehaviour
     {
         Tile moveToTile = map_manager.map[int.Parse(parameters[0]), int.Parse(parameters[1])].ground.GetComponent<Tile>();
         Vector3 targetPosition; // The actual position of the tile this character is about to move to.
+
         targetPosition = map_manager.map[int.Parse(parameters[0]), int.Parse(parameters[1])].ground.transform.position;
-        Debug.Log("Target Position is " + targetPosition.x + " by " + targetPosition.y);
 
         try
         {
@@ -88,9 +88,8 @@ public class PlayerMove : MonoBehaviour
         }
         catch { }
 
-        Debug.Log("Position is " + this.transform.position.x + " by " + this.transform.position.y);
         this.transform.position = new Vector3(targetPosition.x, targetPosition.y, targetPosition.z - moveToTile.GetComponent<Renderer>().bounds.size.z);
-        Debug.Log("Position is " + this.transform.position.x + " by " + this.transform.position.y);
+
         if ((moveToTile.get_grid()[0] > grid[0]) && (moveToTile.get_grid()[1] > grid[1]))
         {
             unit_maker.face_forward(this.gameObject);
@@ -129,9 +128,10 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("The Tiles Y position is greater");
         }
 
+
         currentTile = moveToTile;
-        grid[0]     = moveToTile.get_grid()[0];
-        grid[1]     = moveToTile.get_grid()[1];
+        grid[0] = moveToTile.get_grid()[0];
+        grid[1] = moveToTile.get_grid()[1];
 
         try
         {

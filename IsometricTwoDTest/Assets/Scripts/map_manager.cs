@@ -8,7 +8,7 @@ public class map_manager : MonoBehaviour
 {
     // External Classes//
     import_manager import_manager;                 // Import_Manager Class that facilitates cross class, player, and server function calls.
-    Tile Tile;                           // Importing the Tile class.sldkjfjlsd
+    Tile Tile;                           // Importing the Tile class.
 
     // Public Global Variables //
     public int mapWidth = 10;              // The number of tiles across the width and height of the map is.

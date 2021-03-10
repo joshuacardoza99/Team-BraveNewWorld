@@ -11,26 +11,13 @@ public class Building : MonoBehaviour
 
     // Variables      //
     public Tile currentTile = null; // The tile this character is currently on.
-    public int civilization = 0;    // The number associated with the civ that owns this building. -1 = water, 0 = asian, 1 = greek, 2 = viking
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("A building has been placed!");
-
-        // initially set the civ ownership
-        if (this.name.Contains("asian"))
-            civilization = 0;
-        else if (this.name.Contains("greek"))
-            civilization = 1;
-        else if (this.name.Contains("viking"))
-            civilization = 2;
     }
 
-    private void Update()
-    {
-        civilization = currentTile.get_civilization();
-    }
     public void set_current_tile(Tile tile)
     {
         currentTile = tile;

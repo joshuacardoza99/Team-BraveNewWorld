@@ -8,9 +8,14 @@ public class building_manager : MonoBehaviour
     // External Classes
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
     civilization civilization;
+    preview_object preview_object;
 
     // Public Global Variables 
-    public int civNumber;          // Number of the civilization
+    public int civNumber;                              // Number of the civilization
+    bool canPlace = false;                             // Can building be placed
+    public List<Tile> showPreview = new List<Tile>();  // List of tiles with building previews
+    public Tile currentTile = null;                    // The tile this character is currently on.
+    public Tile playerTile = null;                     // The tile the champion is currently on.
 
     [SerializeField]
     private building_type activeBuildingType; // Make varibale public and attach it to building_type
@@ -23,6 +28,8 @@ public class building_manager : MonoBehaviour
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
         civilization = GameObject.Find("civManager").GetComponent<civilization>(); // Connects to the import_manager.
+
+        preview_object = GameObject.Find("preview_object").GetComponent<preview_object>();
     }
 
     // This runs when the character is enabled.
@@ -51,25 +58,36 @@ public class building_manager : MonoBehaviour
                 Vector3 tilePosition = tile.transform.position;
                 Building newBuilding; // Building that was just placed
 
+                set_current_tile(tile);
+                can_place_builing();
+
                 // Choose prefab depeding on which civ user choose
                 if (civNumber == 0)
                 {
-                    if ((activeBuildingType.unitType == 0) && (!tile.is_in_city()))
+                    if ((activeBuildingType.unitType == 0)
+                        && !tile.is_in_city()
+                        && canPlace)
                     {
-                        newBuilding = Instantiate(activeBuildingType.asian, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                        playerTile = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile;
+                        newBuilding = preview_object.place(activeBuildingType.asian, tilePosition).GetComponent<Building>();
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
-                    else if (tile.is_in_city())
+                    else if (tile.is_in_city()
+                             && canPlace)
                     {
                         newBuilding = Instantiate(activeBuildingType.asian, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.asian, tilePosition).GetComponent<Building>();
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
                     else
-                        Debug.Log("Building cannot be placed Here");
+                    {
+                        Debug.Log("Building cannot be placed here, destroying previews");
+                        preview_object.destroy_previews();
+                    }
                 }
                 else if (civNumber == 1)
                 {
@@ -109,20 +127,49 @@ public class building_manager : MonoBehaviour
                     else
                         Debug.Log("Building cannot be placed Here");
                 }
-                activeBuildingType = null;
             }
             else
             {
                 Debug.Log("Don't have enough Gold");
-                activeBuildingType = null;
             }
         }
+        activeBuildingType = null;
+        canPlace = false;
     }
 
     //  Set active building to which ever the user selected
     public void set_active_building_type(building_type building_Type)
     {
         activeBuildingType = building_Type;
+    }
+
+    public void place_previews(Transform aPrefab)
+    {
+        preview_object preview;
+        showPreview = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile.get_walkable_tiles(1);
+
+        foreach (Tile tile in showPreview)
+        {
+            Vector3 tilePosition = tile.transform.position;
+            preview = preview_object.create_preview(aPrefab, tilePosition);
+            preview.tag = "previewBuilding";
+        }
+    }
+
+    public void can_place_builing()
+    {
+        foreach (Tile preview in showPreview)
+        {
+            if (currentTile == preview)
+            {
+                canPlace = true;
+            }
+        }
+    }
+
+    public void set_current_tile(Tile tile)
+    {
+        currentTile = tile;
     }
 }
 

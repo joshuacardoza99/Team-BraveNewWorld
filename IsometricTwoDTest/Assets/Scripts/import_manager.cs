@@ -21,7 +21,6 @@ public class import_manager : MonoBehaviour
     {
         try
         {
-            Debug.Log(gameObject + "." + function + "(" + parameters + ")");
             GameObject.Find(gameObject).SendMessage(function, parameters);
         }
         catch
