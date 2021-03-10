@@ -342,24 +342,28 @@ public class Tile : MonoBehaviour
     // Attacks the character on selected tile.
     public void attack(Tile tile, GameObject character)
     {
-        if(cooldowns == null)
+        if (tile == this && is_attackable()) // and in range, and not a friendly civ
         {
-            cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
-        }
-        if (tile == this && attackable) // and in range, and not a friendly civ
-        {
+            if (cooldowns == null)
+            {
+                cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
+            }
+
+            PlayerMove defendingUnit = character.GetComponent<PlayerMove>();
+
             if (Time.time > cooldowns.nextAttack)
             {
                 // check if this characters civ is the same as the character clicking on it
-                if (currentCharacter.GetComponent<PlayerMove>().civilization != currentCharacter.GetComponent<PlayerMove>().civilization)
+                if (defendingUnit.get_civilization() != match_manager.get_player_civilization())
                 {
                     // attach attack animation here
-                    currentCharacter.GetComponent<PlayerMove>().health -= currentCharacter.GetComponent<PlayerMove>().damage;
-                    Debug.Log("Health equals " + currentCharacter.GetComponent<PlayerMove>().health);
+                    defendingUnit.health -= character.GetComponent<PlayerMove>().damage;
+                    Debug.Log("Health equals " + defendingUnit.health);
                     cooldowns.initiate_attack_cooldown();
-                    if (currentCharacter.GetComponent<PlayerMove>().health <= 0)
+                    if (defendingUnit.health <= 0)
                     {
                         Debug.Log("YOUR SOLDIER HAS FALLEN !!");
+                        import_manager.run_function_all(character.name, "suicide", new string[0] { });
                     }
                 }
             }
@@ -384,8 +388,9 @@ public class Tile : MonoBehaviour
     // Unsets the nearby tiles from being attackable.
     public void unselect_attackable(Tile tile, GameObject character)
     {
-        if (is_occupied())
+        if (tile == this && tile.is_occupied())
         {
+            Debug.Log("Setting unattackable");
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
                 if (nearByTile.is_attackable())
