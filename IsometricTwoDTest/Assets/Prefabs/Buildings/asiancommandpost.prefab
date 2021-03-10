@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4171119226685994408}
-  - component: {fileID: 7921402240359472726}
   - component: {fileID: 7938849674279630507}
   - component: {fileID: -1022899222536583979}
   - component: {fileID: 3613191134677091635}
@@ -35,19 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7921402240359472726
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3650478087820013330}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 30.061028, y: 46.122494, z: 1}
-  m_Center: {x: -0.33023834, y: 9.711555, z: 0}
 --- !u!114 &7938849674279630507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,6 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTile: {fileID: 0}
+  in_city: []
 --- !u!114 &3613191134677091635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTile: {fileID: 0}
+  civilization: 0
 --- !u!1 &7580420319998019956
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,6 +85,7 @@ GameObject:
   - component: {fileID: 6557019375792735916}
   - component: {fileID: 2226129994166204794}
   - component: {fileID: 3653214268229749432}
+  - component: {fileID: 8663359930354765546}
   m_Layer: 0
   m_Name: castle-japan
   m_TagString: Untagged
@@ -172,3 +161,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8663359930354765546
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7580420319998019956}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 22, y: 11.880464, z: 22.925434}
+  m_Center: {x: 0.00040826015, y: 21.788282, z: 0.46268097}

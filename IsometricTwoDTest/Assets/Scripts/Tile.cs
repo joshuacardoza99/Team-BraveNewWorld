@@ -343,7 +343,12 @@ public class Tile : MonoBehaviour
     // Sets the nearby tiles to be attackable.
     public void select_attackable(Tile tile, GameObject character)
     {
+<<<<<<< Updated upstream
         if (tile == this && tile.is_occupied())
+=======
+      //  Debug.Log("Setting the surounding tiles as attackable ");
+        if (tile == this && is_occupied())
+>>>>>>> Stashed changes
         {
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
@@ -403,6 +408,10 @@ public class Tile : MonoBehaviour
     {
         if (selectedTile == this)
         {
+<<<<<<< Updated upstream
+=======
+          //  Debug.Log("Local player is civ type " + match_manager.get_player_civilization());
+>>>>>>> Stashed changes
             if (is_occupied() && !isCurrentlySelectedTile)
             {
                 this.isCurrentlySelectedTile = true;

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class building_select : MonoBehaviour
 {
+    match_manager match_manager;
+
     [SerializeField]
     private List<building_type> buildingTypeList; // List of SO, connects any building type being scripted
 
@@ -12,6 +14,12 @@ public class building_select : MonoBehaviour
     private building_manager building_manager;   // Makes varible visible in inspector and connect it to building_manager
 
     public int buildingNumber;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        match_manager = GameObject.Find("network_manager").GetComponent<match_manager>(); // Connects to the import_manager.
+    }
 
     private void Awake()
     {
@@ -38,6 +46,12 @@ public class building_select : MonoBehaviour
                 buildingNumber = buildingTypeList.IndexOf(building_type);
                 Debug.Log("this buidling number is working " + buildingNumber);
 
+                    if (match_manager.get_player_civilization() == 0)
+                        building_manager.place_previews(building_type.asian);
+                    else if (match_manager.get_player_civilization() == 1)
+                        building_manager.place_previews(building_type.greek);
+                    else
+                        building_manager.place_previews(building_type.viking);
             });
             index++;
 

@@ -508,6 +508,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   civNumber: 0
+<<<<<<< Updated upstream
+=======
+  showPreview: []
+  currentTile: {fileID: 0}
+  playerTile: {fileID: 0}
+>>>>>>> Stashed changes
   activeBuildingType: {fileID: 0}
   building_select: {fileID: 1263738955}
 --- !u!4 &640418262
@@ -2791,7 +2797,7 @@ PrefabInstance:
       objectReference: {fileID: 967303544}
     - target: {fileID: 6120365707997063665, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6120365707997063665, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -3759,7 +3765,7 @@ PrefabInstance:
       objectReference: {fileID: 640418261}
     - target: {fileID: 5948754653826700893, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: add_building
+      value: place_previews
       objectReference: {fileID: 0}
     - target: {fileID: 5948754653826700893, guid: 22f20b8ad41917f408bcefa03401d4bf, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
