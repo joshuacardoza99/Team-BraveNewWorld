@@ -36,6 +36,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private bool       selectable              = false; // Determines if the player can click on click on this tile.
     [SerializeField] private bool       attackable              = false; // Determines if another player can attach this tile.
     [SerializeField] private GameObject currentCharacter        = null;  // the character currently occupying this tile.
+    [SerializeField] private GameObject currentBuilding         = null;  // the building occupying this tile
     [SerializeField] private float      nextAttack              = 0;     // Determines if another player is attaching this tile.
     [SerializeField] private bool       isAttacking             = false; // Determines if the player on this tile it attaching another tile.
     [SerializeField] private float      cooldown                = 3;     // The amount of seconds a character must wast before moving again.
@@ -324,6 +325,19 @@ public class Tile : MonoBehaviour
         inCity = true;
     }
 
+
+    // Recieve a building gameobject and set it to the current building
+    public void set_building(GameObject newBuilding)
+    {
+        currentBuilding = newBuilding;
+        hasBuilding = true;
+    }
+
+    // Get the building object on this tile
+    public GameObject get_buidling()
+    {
+        return currentBuilding;
+    }
 
     // Attacks the character on selected tile.
     public void attack(Tile tile, GameObject character)
