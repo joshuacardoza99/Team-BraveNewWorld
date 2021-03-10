@@ -61,6 +61,7 @@ public class unit_maker : MonoBehaviour
             champion = place_object(vikingChampion, tile);
         }
 
+        champion.tag = "Player";
         champion.name = parameters[0] + "_" + parameters[1];
         champion.GetComponent<PlayerMove>().set_civilization(civilization);
         import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tileGrid[0].ToString(), tileGrid[1].ToString(), "set_occupied", champion.name });
