@@ -71,6 +71,7 @@ public class building_manager : MonoBehaviour
                         playerTile = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile;
                         newBuilding = preview_object.place(activeBuildingType.asian, tilePosition).GetComponent<Building>();
                         newBuilding.set_current_tile(tile);
+                        tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
@@ -80,6 +81,7 @@ public class building_manager : MonoBehaviour
                         newBuilding = Instantiate(activeBuildingType.asian, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
                         newBuilding = preview_object.place(activeBuildingType.asian, tilePosition).GetComponent<Building>();
                         newBuilding.set_current_tile(tile);
+                        tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
@@ -95,6 +97,7 @@ public class building_manager : MonoBehaviour
                     {
                         newBuilding = Instantiate(activeBuildingType.greek, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
                         newBuilding.set_current_tile(tile);
+                        tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
@@ -102,6 +105,7 @@ public class building_manager : MonoBehaviour
                     {
                         newBuilding = Instantiate(activeBuildingType.greek, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
                         newBuilding.set_current_tile(tile);
+                        tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
@@ -114,6 +118,7 @@ public class building_manager : MonoBehaviour
                     {
                         newBuilding = Instantiate(activeBuildingType.viking, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
                         newBuilding.set_current_tile(tile);
+                        tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
@@ -121,6 +126,7 @@ public class building_manager : MonoBehaviour
                     {
                         newBuilding = Instantiate(activeBuildingType.viking, tilePosition, Quaternion.identity).gameObject.GetComponent<Building>();
                         newBuilding.set_current_tile(tile);
+                        tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
