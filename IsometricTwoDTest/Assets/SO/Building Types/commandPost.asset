@@ -16,6 +16,9 @@ MonoBehaviour:
   asian: {fileID: 4171119226685994408, guid: 9ad1e514625bf034db01a8417556e880, type: 3}
   viking: {fileID: 3836359362536473918, guid: c43602e2d105c32459a04c95ae53a63e, type: 3}
   greek: {fileID: 2786063593081427463, guid: 83a62580cbc09754195e12273e738c0c, type: 3}
+  previewAsian: {fileID: 4171119226685994408, guid: a10b766302d93444b932230715b80cd6, type: 3}
+  previewViking: {fileID: 3836359362536473918, guid: d98751257b8c2d84da8e998f9f9dae31, type: 3}
+  preivewGreek: {fileID: 2786063593081427463, guid: 115eb9ef1ca9b234590470dcad7ea9cd, type: 3}
   isConquered: 0
   unitType: 0
   resourcesAmount: 0
