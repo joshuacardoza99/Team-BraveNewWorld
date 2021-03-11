@@ -139,6 +139,8 @@ public class PlayerMove : MonoBehaviour
                 anim.SetBool("isWalking", false);
         }
         catch { }
+
+        Debug.Log(this.gameObject.name);
     }
 
     // Sets the civilization this character is apart of.

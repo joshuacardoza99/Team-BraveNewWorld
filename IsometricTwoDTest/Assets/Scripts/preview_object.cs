@@ -8,7 +8,7 @@ public class preview_object : MonoBehaviour
 
     public Transform place(Transform prefab, Vector3 position)
     {
-        Transform obj = (Transform)Instantiate(prefab, position, Quaternion.identity);
+        Transform obj = Instantiate(prefab, position, Quaternion.identity);
 
         destroy_previews();
 

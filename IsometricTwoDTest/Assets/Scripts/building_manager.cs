@@ -9,6 +9,7 @@ public class building_manager : MonoBehaviour
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
     civilization civilization;
     preview_object preview_object;
+    menu_manager menu_manager;
 
     // Public Global Variables 
     public int civNumber;                                   // Number of the civilization
@@ -30,8 +31,8 @@ public class building_manager : MonoBehaviour
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
         civilization = GameObject.Find("civManager").GetComponent<civilization>(); // Connects to the import_manager.
-
         preview_object = GameObject.Find("preview_object").GetComponent<preview_object>();
+        menu_manager = GameObject.Find("MenuManager").GetComponent<menu_manager>(); // Connects to the match_manager.
     }
 
     // This runs when the character is enabled.
@@ -79,6 +80,7 @@ public class building_manager : MonoBehaviour
                         tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
+                        Debug.Log(activeBuildingType.asian.name);
                     }
                     else if (tile.is_in_city()
                              && canPlace
@@ -155,13 +157,13 @@ public class building_manager : MonoBehaviour
                         Debug.Log("Building cannot be placed here, destroying previews");
                         preview_object.destroy_previews();
                     }
-                }
+                }               
             }
             else
             {
                 Debug.Log("Don't have enough Gold");
             }
-        }
+        }      
         activeBuildingType = null;
         canPlace = false;
     }

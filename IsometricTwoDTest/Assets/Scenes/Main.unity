@@ -509,6 +509,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   civNumber: 0
   showPreview: []
+  listCommandPostTiles: []
+  commandPost: []
   currentTile: {fileID: 0}
   playerTile: {fileID: 0}
   activeBuildingType: {fileID: 0}
@@ -624,7 +626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6088478907887241504, guid: 24a3a132c19477d41ba80d52ca889a6f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1896.4224
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6088478907887241504, guid: 24a3a132c19477d41ba80d52ca889a6f, type: 3}
       propertyPath: m_LocalScale.x
@@ -880,7 +882,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7764369387294408806, guid: 24a3a132c19477d41ba80d52ca889a6f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1896.4224
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7764369387294408806, guid: 24a3a132c19477d41ba80d52ca889a6f, type: 3}
       propertyPath: m_LocalScale.x

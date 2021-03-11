@@ -20,7 +20,7 @@ MonoBehaviour:
   previewViking: {fileID: 3814490536550466924, guid: 74212f70f729e944c9f7329e9b8082af, type: 3}
   preivewGreek: {fileID: 3814490536550466924, guid: 74212f70f729e944c9f7329e9b8082af, type: 3}
   isConquered: 0
-  unitType: 2
+  unitType: 1
   resourcesAmount: 5
   buildCost: 150
   resourceCooldown: 10

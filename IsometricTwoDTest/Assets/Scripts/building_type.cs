@@ -24,16 +24,16 @@ public class building_type : ScriptableObject
     [Space(5)]                                // 5 pixels of spacing here.
     public bool isConquered = false;          // Ability for building to spawn units
 
-
     [Space(5)]                                // 5 pixels of spacing here.
-    public BuildingType unitType = new BuildingType(); // Adds drop down list for attack type
+    public BuildingType unitType = new BuildingType();
+                                              // Adds drop down list for attack type
 
     [Space(5)]                                // 5 pixels of spacing here.
     [Header("Building Attributes")]           // Shows text in inspector
-    public int   resourcesAmount;               // Amount of resources building generates
+    public int   resourcesAmount;             // Amount of resources building generates
     public int   buildCost;
 
-    public float resourceCooldown;              // Cooldown on resource
+    public float resourceCooldown;            // Cooldown on resource
 
     public void print_message()
     {

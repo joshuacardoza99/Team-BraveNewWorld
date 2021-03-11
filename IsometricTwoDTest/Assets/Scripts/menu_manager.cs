@@ -8,6 +8,19 @@ public class menu_manager : MonoBehaviour
 
     public GameObject currentGroup; // Current menu scene being displayed
 
+    // This runs when the character is enabled.
+    void OnEnable()
+    {
+        Tile.OnSelected += open_unit_menu;
+    }
+
+
+    // This runs when the character is disabled.
+    void OnDisable()
+    {
+        Tile.OnSelected -= open_unit_menu;
+    }
+
     void Awake()
     {
         //TrilleonAutomation.AutomationMaster.Initialize();
@@ -35,23 +48,27 @@ public class menu_manager : MonoBehaviour
 
     // Removes the wait panel blocking the game.
     // Parameter = []
-    public void removeWaitPanel (string[] parameter)
+    public void removeWaitPanel(string[] parameter)
     {
         ChangeGroup(GameObject.Find("Canvas").transform.GetChild(3).gameObject);
     }
 
     // Open or close the unit menu
-    public void open_unit_menu()
+    public void open_unit_menu(Tile tile, GameObject Character)
     {
-        if (currentGroup == groups[6])
+        if (tile.get_buidling() != null
+            && tile.get_buidling().tag == "commandPost")
         {
-            ChangeGroup(groups[2]);
-            Debug.Log("Close Unit Menu");
-        }
-        else
-        {
-            ChangeGroup(groups[6]);
-            Debug.Log("Open Unit Menu");
+            if (currentGroup == groups[6])
+            {
+                ChangeGroup(groups[2]);
+                Debug.Log("Close Unit Menu");
+            }
+            else
+            {
+                ChangeGroup(groups[6]);
+                Debug.Log("Open Unit Menu");
+            }
         }
     }
 
