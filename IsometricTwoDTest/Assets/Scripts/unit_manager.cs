@@ -8,9 +8,13 @@ public class unit_manager : MonoBehaviour
 {
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
+    unit_maker unit_maker;
+    match_manager match_manager;
+    menu_manager menu_manager;
 
     // Public Global Variables //
     public int civNumber;
+    public int counter = 0;
 
     [SerializeField]
     private unit_type activeUnitType; // Make varibale public and attach it to unit_type
@@ -23,6 +27,9 @@ public class unit_manager : MonoBehaviour
     void Start()
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
+        unit_maker = GameObject.Find("unit_manager").GetComponent<unit_maker>();
+        match_manager = GameObject.Find("network_manager").GetComponent<match_manager>(); // Connects to the match_manager.
+        menu_manager = GameObject.Find("MenuManager").GetComponent<menu_manager>(); // Connects to the match_manager.
     }
 
     // This runs when the character is enabled.
@@ -45,20 +52,33 @@ public class unit_manager : MonoBehaviour
             && activeUnitType != null
             && (tile.is_walkable()))
         {
+            GameObject unit = null;
+
             Vector3 tilePosition = tile.transform.position;
 
-            // Choose prefab depeding on which civ user choose
-            if (civNumber == 0)
-                Instantiate(activeUnitType.asian, tilePosition, Quaternion.identity);
-            else if (civNumber == 1)
-                Instantiate(activeUnitType.greek, tilePosition, Quaternion.identity);
-            else
-                Instantiate(activeUnitType.viking, tilePosition, Quaternion.identity);
-
-            activeUnitType.print_message();
-            activeUnitType.print_attributes();
+            if (tile.get_buidling() != null 
+                && tile.get_buidling().tag == "commandPost")
+            {
+                // Choose prefab depeding on which civ user choose
+                if (civNumber == 0)
+                    unit = unit_maker.place_object(activeUnitType.asian.gameObject, tile);
+                // Instantiate(activeUnitType.asian, tilePosition, Quaternion.identity);
+                else if (civNumber == 1)
+                    unit = unit_maker.place_object(activeUnitType.greek.gameObject, tile);
+                else
+                    unit = unit_maker.place_object(activeUnitType.viking.gameObject, tile);
+            }
 
             activeUnitType = null;
+            menu_manager.close_menus();
+
+            if (unit != null)
+            {
+                unit.tag = "unit";
+                unit.name = match_manager.get_player_civilization() + "_" + unit.name + "_" + counter++;
+                unit.GetComponent<PlayerMove>().set_civilization(match_manager.get_player_civilization());
+                import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), "set_occupied", unit.name });
+            }
         }
     }
 

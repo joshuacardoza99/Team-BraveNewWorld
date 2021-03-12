@@ -139,6 +139,8 @@ public class PlayerMove : MonoBehaviour
                 anim.SetBool("isWalking", false);
         }
         catch { }
+
+        Debug.Log(this.gameObject.name);
     }
 
     // Sets the civilization this character is apart of.
@@ -176,6 +178,14 @@ public class PlayerMove : MonoBehaviour
     private void OnMouseDown()
     {
         currentTile.OnMouseDown();
+    }
+
+    // Remove the unit from the game.
+    // Parameter = []
+    public void suicide(string[] parameter)
+    {
+        Destroy(this.gameObject);
+        import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
     }
 
 }

@@ -47,11 +47,17 @@ public class building_select : MonoBehaviour
                 Debug.Log("this buidling number is working " + buildingNumber);
 
                 if (match_manager.get_player_civilization() == 0)
-                    building_manager.place_previews(building_type.asian);
+                {
+                    building_manager.place_previews(building_type.previewAsian);
+                }
                 else if (match_manager.get_player_civilization() == 1)
-                    building_manager.place_previews(building_type.greek);
+                {
+                    building_manager.place_previews(building_type.preivewGreek);
+                }
                 else
-                    building_manager.place_previews(building_type.viking);
+                {
+                    building_manager.place_previews(building_type.previewViking);
+                }
             });
             index++;            
         }

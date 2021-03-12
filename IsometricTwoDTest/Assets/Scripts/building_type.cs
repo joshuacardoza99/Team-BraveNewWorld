@@ -16,18 +16,24 @@ public class building_type : ScriptableObject
     public Transform greek;                   // Greek civ prefabs
 
     [Space(5)]                                // 5 pixels of spacing here.
-    public bool isConquered = false;          // Ability for building to spawn units
-
+    [Header("Preview used for budiling")]     // Shows text in inspector
+    public Transform previewAsian;            // Asian civ prefabs
+    public Transform previewViking;           // Viking civ prefabs
+    public Transform preivewGreek;            // Greek civ prefabs
 
     [Space(5)]                                // 5 pixels of spacing here.
-    public BuildingType unitType = new BuildingType(); // Adds drop down list for attack type
+    public bool isConquered = false;          // Ability for building to spawn units
+
+    [Space(5)]                                // 5 pixels of spacing here.
+    public BuildingType unitType = new BuildingType();
+                                              // Adds drop down list for attack type
 
     [Space(5)]                                // 5 pixels of spacing here.
     [Header("Building Attributes")]           // Shows text in inspector
-    public int   resourcesAmount;               // Amount of resources building generates
+    public int   resourcesAmount;             // Amount of resources building generates
     public int   buildCost;
 
-    public float resourceCooldown;              // Cooldown on resource
+    public float resourceCooldown;            // Cooldown on resource
 
     public void print_message()
     {

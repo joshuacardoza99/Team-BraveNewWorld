@@ -16,8 +16,11 @@ MonoBehaviour:
   asian: {fileID: 6001181614200676741, guid: 5f40469189e4afa479d795f878314c1b, type: 3}
   viking: {fileID: 6001181614200676741, guid: 5f40469189e4afa479d795f878314c1b, type: 3}
   greek: {fileID: 6001181614200676741, guid: 5f40469189e4afa479d795f878314c1b, type: 3}
+  previewAsian: {fileID: 6001181614200676741, guid: c13c24bddc3585e4ba09a66111b0ad90, type: 3}
+  previewViking: {fileID: 6001181614200676741, guid: c13c24bddc3585e4ba09a66111b0ad90, type: 3}
+  preivewGreek: {fileID: 6001181614200676741, guid: c13c24bddc3585e4ba09a66111b0ad90, type: 3}
   isConquered: 0
-  unitType: 3
+  unitType: 2
   resourcesAmount: 10
   buildCost: 250
   resourceCooldown: 10

@@ -9,13 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4171119226685994408}
-  - component: {fileID: 7921402240359472726}
-  - component: {fileID: 7938849674279630507}
   - component: {fileID: -1022899222536583979}
   - component: {fileID: 3613191134677091635}
   m_Layer: 0
   m_Name: asiancommandpost
-  m_TagString: Untagged
+  m_TagString: commandPost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,31 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7921402240359472726
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3650478087820013330}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 30.061028, y: 46.122494, z: 1}
-  m_Center: {x: -0.33023834, y: 9.711555, z: 0}
---- !u!114 &7938849674279630507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3650478087820013330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 872af966cdd0be64faf3581f0cf55d36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1022899222536583979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTile: {fileID: 0}
+  in_city: []
 --- !u!114 &3613191134677091635
 MonoBehaviour:
   m_ObjectHideFlags: 0
