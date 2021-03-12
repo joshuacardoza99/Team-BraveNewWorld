@@ -10,11 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3836359362536473918}
   - component: {fileID: 5349660033332446275}
-  - component: {fileID: 5812942195243607580}
   - component: {fileID: -1355133093283891233}
   m_Layer: 0
   m_Name: vikingcommandpost
-  m_TagString: Untagged
+  m_TagString: commandPost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48,18 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTile: {fileID: 0}
   in_city: []
---- !u!114 &5812942195243607580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4500974196272881540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 872af966cdd0be64faf3581f0cf55d36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1355133093283891233
 MonoBehaviour:
   m_ObjectHideFlags: 0

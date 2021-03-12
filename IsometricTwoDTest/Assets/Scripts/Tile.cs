@@ -33,7 +33,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private bool       inCity                  = false; // Determines if this tile is in the borders of a city
     [SerializeField] private bool       isCurrentlySelectedTile = false; // Tells when this tile is selected by the player.
     [SerializeField] private bool       target                  = false; // Determines if this tile is being targeted by another player.
-    [SerializeField] private bool       selectable              = false; // Determines if the player can click on click on this tile.
+    [SerializeField] private GameObject selectable              = null; // Determines if the player can click on click on this tile.
     [SerializeField] private bool       attackable              = false; // Determines if another player can attach this tile.
     [SerializeField] private GameObject currentCharacter        = null;  // the character currently occupying this tile.
     [SerializeField] private GameObject currentBuilding         = null;  // the building occupying this tile
@@ -181,13 +181,13 @@ public class Tile : MonoBehaviour
         if (tile == this && tile.is_occupied() && (match_manager.get_player_civilization() == tile.get_current_character().GetComponent<PlayerMove>().get_civilization()))
         {
             Debug.Log("Selecting all the tiles around this one.");
-            tile.set_selectable(new string[0] { });
+            tile.set_selectable(character);
 
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
                 if (!nearByTile.is_occupied())
                 {
-                    nearByTile.set_selectable(new string[0] { });
+                    nearByTile.set_selectable(character);
                 }
             }
         }
@@ -275,14 +275,14 @@ public class Tile : MonoBehaviour
     }
 
     // Sets this tile to be selectable.
-    public void set_selectable(string[] parameter)
+    public void set_selectable(GameObject character)
     {
         if (map_manager == null)
         {
             map_manager = GameObject.Find("Map").GetComponent<map_manager>();
         }
 
-        selectable = true;
+        selectable = character;
         this.GetComponent<Renderer>().material = map_manager.types.selectable;
     }
 
@@ -296,9 +296,15 @@ public class Tile : MonoBehaviour
 
         if (!occupied)
         {
-            selectable = false;
+            selectable = null;
             this.GetComponent<Renderer>().material = map_manager.types.get_material(civilization);
         }
+    }
+
+    // get the gameobject of the character that selected this tile
+    public GameObject get_selectable()
+    {
+        return selectable;
     }
 
     // Determines if a character can walk on top of this tile.
@@ -310,7 +316,7 @@ public class Tile : MonoBehaviour
     // Determines if this tile can be selected to move a character onto.
     public bool is_selectable()
     {
-        return selectable;
+        return (selectable != null);
     }
 
     // Determines if this tile is within the borders of a city
