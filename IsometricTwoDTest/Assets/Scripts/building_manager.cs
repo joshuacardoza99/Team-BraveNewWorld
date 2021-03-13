@@ -87,10 +87,10 @@ public class building_manager : MonoBehaviour
                     {
                         newBuilding = preview_object.place(activeBuildingType.asian, tile);
 
-                        if (((int)activeBuildingType.unitType) == 2)
-                            newBuilding.tag = "Mine";
-                        else
-                            newBuilding.tag = "Farm";
+                        //if (((int)activeBuildingType.unitType) == 2)
+                        //    newBuilding.tag = "Mine";
+                        //else
+                        //    newBuilding.tag = "Farm";
 
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
@@ -121,10 +121,10 @@ public class building_manager : MonoBehaviour
                     {
                         newBuilding = preview_object.place(activeBuildingType.greek, tile);
 
-                        if (((int)activeBuildingType.unitType) == 2)
+                        /*if (((int)activeBuildingType.unitType) == 2)
                             newBuilding.tag = "Mine";
                         else
-                            newBuilding.tag = "Farm";
+                            newBuilding.tag = "Farm";*/
 
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
@@ -155,10 +155,10 @@ public class building_manager : MonoBehaviour
                     {
                         newBuilding = preview_object.place(activeBuildingType.viking, tile);
 
-                        if (((int)activeBuildingType.unitType) == 2)
+                        /*if (((int)activeBuildingType.unitType) == 2)
                             newBuilding.tag = "Mine";
                         else
-                            newBuilding.tag = "Farm";
+                            newBuilding.tag = "Farm";*/
 
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);

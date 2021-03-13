@@ -16,10 +16,21 @@ public class Building : MonoBehaviour
     void Start()
     {
         Debug.Log("A building has been placed!");
+
+        tag_me();
     }
 
     public void set_current_tile(Tile tile)
     {
         currentTile = tile;
+    }
+
+    private void tag_me()
+    {
+        if (this.name == "farm(Clone)")
+            this.tag = "Farm";
+        else if (this.name == "mine(Clone)")
+            this.tag = "Mine";
+        Debug.Log("tagged with" + this.tag);
     }
 }
