@@ -16,16 +16,9 @@ public class civ_resources_display : MonoBehaviour
         civilization = GameObject.Find("civManager").GetComponent<civilization>(); // Connects to the import_manager.
     }
 
+    // Displays the amount of resources the user has on the screen
     public void update_resources()
     {
         resourcesText.text = "FOOD: " + civilization.amountFood + "\nGOLD: " + civilization.amountGold;
     }
-
-
-
-    //  private void update_resources()
-    //  {
-    //     transform.Find("GOLD").GetComponent<Text>().text = "GOLD: " + game_resources.get_resource_amount(game_resources.resource_type.gold);
-    //     transform.Find("FOOD").GetComponent<Text>().text = "FOOD: " + game_resources.get_resource_amount(game_resources.resource_type.gold);
-    //  }
 }

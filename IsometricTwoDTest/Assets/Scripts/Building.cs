@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 // This script should be attached to all city buildings, and facilitates building functions and whatnot
 public class Building : MonoBehaviour
@@ -21,5 +22,10 @@ public class Building : MonoBehaviour
     public void set_current_tile(Tile tile)
     {
         currentTile = tile;
+    }
+
+    public Tile get_current_tile()
+    {
+        return currentTile;
     }
 }
