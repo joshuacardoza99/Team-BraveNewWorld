@@ -9,13 +9,57 @@ public class match_manager : MonoBehaviour
 {
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
+    change_scene change_scene;
 
+    // Private Custom Classes //
+
+    // The Player class will hold all the game relevant information for a player.
+    public class Player
+    {
+        public int civilization = 0;
+        public PlayerMove champion;
+        public List<PlayerMove> units = new List<PlayerMove>();
+        public List<Building> buildings = new List<Building>();
+
+        // Finds the unit/champion from the name.
+        public PlayerMove get_unit (string name)
+        {
+            PlayerMove unit;
+
+            if (champion.gameObject.name == name)
+            {
+                unit = champion;
+            }
+            else
+            {
+                unit = units.FindAll(nextUnit => nextUnit.gameObject.name == name)[0];
+            }
+
+            return unit;
+        }
+
+        public Player(int newCivilization)
+        {
+            civilization = newCivilization;
+        }
+
+        public Player(int newCivilization, PlayerMove newChampion)
+        {
+            civilization = newCivilization;
+            champion = newChampion;
+        }
+    }
+
+    // Private Global Variables //
     private int matchId;                           // Id for the current match.
     private bool isHost;                            // Determines if the player's computer is hosting the match.
     private string type;                              // Type of game the match consist of.
     private int map;                               // Holds the seed for the map design for the game's map.
-    private int playerCivilization;                // The civilization the local player is playing as in this match.
     private string championName = "startName"; // The name of the players champion.
+    private Player asianPlayer;
+    private Player greekPlayer;
+    private Player vikingPlayer;
+    private int    localPlayer;
 
     // Private Global Variables //
     private int numberOfPlayers = 1000; // The number of current players in the game.
@@ -25,6 +69,7 @@ public class match_manager : MonoBehaviour
     void Start()
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
+        change_scene = GameObject.Find("Canvas").GetComponentInChildren<change_scene>();
     }
 
     // Parameter = [int matchId]
@@ -72,17 +117,106 @@ public class match_manager : MonoBehaviour
         this.type = "host";
     }
 
-    // Gets the civilization of the local player.
-    public int get_player_civilization()
+    // Choses the correct player from a civilizaiton.
+    public Player choose_player (int civilization)
     {
-        return playerCivilization;
+        Player chosenPlayer = null;
+        Debug.Log("Choosing the player from " + civilization);
+
+        switch (civilization)
+        {
+            case 0:
+                chosenPlayer = asianPlayer;
+                break;
+            case 1:
+                chosenPlayer = greekPlayer;
+                break;
+            case 2:
+                chosenPlayer = vikingPlayer;
+                break;
+        }
+
+        return chosenPlayer;
     }
 
-    // Sets the civilization of the local player.
-    // Parameter = [int civilization]
-    public void set_player_civilization(string[] parameter)
+    // Adds the player's data to the current match.
+    // Paramater = [int civilization]
+    public void add_player(string[] parameter)
     {
-        this.playerCivilization = int.Parse(parameter[0]);
+        int civilization = int.Parse(parameter[0]);
+        Debug.Log("Adding Player " + civilization);
+
+        switch (civilization)
+        {
+            case 0:
+                asianPlayer = new Player(civilization);
+                break;
+            case 1:
+                greekPlayer = new Player(civilization);
+                break;
+            case 2:
+                vikingPlayer = new Player(civilization);
+                break;
+        }
+    }
+
+    // Update a player's champion.
+    // Parameter = [int civilizaiton, string championName]
+    public void update_player_champion (string[] parameters)
+    {
+        choose_player(int.Parse(parameters[0])).champion = GameObject.Find(parameters[1]).GetComponent<PlayerMove>();
+    }
+
+    // Removes the given unit/champion from the given player.
+    // Parameter = [int civilizaiton, string (unit/champion)Name]
+    public void remove_player_unit(string[] parameters)
+    {
+        Player chosenPlayer = choose_player(int.Parse(parameters[0]));
+        string unitName     = parameters[1];
+
+        if (chosenPlayer.champion != null && chosenPlayer.champion.gameObject.name == unitName)
+        {
+            chosenPlayer.champion = null;
+        }
+        else
+        {
+            chosenPlayer.units = chosenPlayer.units.FindAll(unit => unit.gameObject.name != unitName);
+        }
+
+        check_end_conditions();
+    }
+
+    // Updates the health of a unit/champion.
+    // Parameters = [int civilization, string (unit/champion)Name, int removeHealthAmount]
+    public void update_unit_health(string[] parameters)
+    {
+        choose_player(int.Parse(parameters[0])).get_unit(parameters[1]).update_health(int.Parse(parameters[2]));
+    }
+
+    // Controls the conditions for the player leaving the game.
+    public void check_end_conditions()
+    {
+        if (get_local_player().units.Count > 0 && get_local_player().champion == null)
+        {
+            leave_match();
+            change_scene.buttonChangeScene("Main");
+        }
+    }
+
+    // Sets the local player.
+    // Parameter = [int civilization]
+    public void set_local_player(string[] parameter)
+    {
+        int civilization = int.Parse(parameter[0]);
+        add_player(parameter);
+
+        localPlayer = civilization;
+    }
+
+    // Gets the local player.
+    public Player get_local_player()
+    {
+        return choose_player(localPlayer);
     }
 
     // Sets the championName for the player.
@@ -141,7 +275,7 @@ public class match_manager : MonoBehaviour
 
         //GameObject.Find("Main Camera").GetComponent<pan_zoom>().enabled = true;
         import_manager.run_function("Map", "load_map", new string[1] { this.map.ToString() });
-        import_manager.run_function_all("unit_manager", "add_champion", new string[3] { this.playerCivilization.ToString(), this.championName, Random.Range(1000, 2000).ToString() });
+        import_manager.run_function_all("unit_manager", "add_champion", new string[3] { get_local_player().civilization.ToString(), this.championName, Random.Range(1000, 2000).ToString() });
         import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] { });
         //import_manager.run_function_all("server_function", "get_characters", new string[2]{"network_manager", "load_characters"});
     }
@@ -173,7 +307,7 @@ public class match_manager : MonoBehaviour
     {
         if (this.type == "network")
         {
-            import_manager.run_function_all("server_functions", "add_player", new string[2] { this.championName, this.playerCivilization.ToString() });
+            import_manager.run_function_all("server_functions", "add_player", new string[2] { this.championName, get_local_player().civilization.ToString() });
             GameObject.Find("Main Camera").GetComponent<pan_zoom>().enabled = true;
         }
         else if (this.type == "local")
@@ -188,7 +322,8 @@ public class match_manager : MonoBehaviour
     // Parameters = []
     public void start_playing(string[] parameters)
     {
-        import_manager.run_function_all("unit_manager", "add_champion", new string[3] { this.playerCivilization.ToString(), this.championName, Random.Range(1000, 2000).ToString() });
+        import_manager.run_function_all("network_manager", "add_player", new string[1] { get_local_player().civilization.ToString() });
+        import_manager.run_function_all("unit_manager", "add_champion", new string[3] { get_local_player().civilization.ToString(), this.championName, Random.Range(1000, 2000).ToString() });
         import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] { });
     }
 
