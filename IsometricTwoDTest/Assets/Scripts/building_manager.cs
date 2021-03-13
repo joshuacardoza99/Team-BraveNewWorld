@@ -109,7 +109,7 @@ public class building_manager : MonoBehaviour
                         && canPlace
                         && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.greek, tile);
+                        newBuilding = preview_object.place(activeBuildingType.asian, tile);  // using asian comandpost because greek is broken
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
