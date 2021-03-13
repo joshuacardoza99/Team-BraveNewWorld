@@ -64,7 +64,8 @@ public class PlayerMove : MonoBehaviour
     {
         if (!moveToTile.is_occupied() && moveToTile.is_selectable() && (match_manager.get_player_civilization() == get_civilization()) && (moveToTile.get_selectable() == this.gameObject))
         {
-            currentTile.unselect(currentTile, this.gameObject);
+            currentTile.RunOnUnselected(currentTile, this.gameObject);
+
             import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
 
             import_manager.run_function_all(this.gameObject.name, "move", new string[2] { moveToTile.get_grid()[0].ToString(), moveToTile.get_grid()[1].ToString() });

@@ -42,7 +42,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private float      cooldown                = 3;     // The amount of seconds a character must wast before moving again.
     [SerializeField] private int        civilization;                    // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     [SerializeField] private int[]      grid;                            // Stores the position of the Tile in the virtual grid. [x position, y position]
-
+    [SerializeField] private bool       selectedNearBy          = false;
     // Use this for initialization.
     void Start()
     {
@@ -198,8 +198,9 @@ public class Tile : MonoBehaviour
     // parameter = [int range]
     public void unselect(Tile tile, GameObject character)
     {
-        if (tile == this && tile.is_occupied())
+        if (tile == this)
         {
+            selectedNearBy = false;
             Debug.Log("Unselecting all the tiles around this one.");
             tile.set_unselectable(new string[0] { });
 
@@ -439,13 +440,11 @@ public class Tile : MonoBehaviour
         return currentCharacter;
     }
 
-    // Gets the range of tiles that are attackable.
-    public void get_attack_range()
+    public void RunOnUnselected(Tile tile, GameObject character)
     {
-        foreach (Tile tile in get_walkable_tiles(currentCharacter.GetComponent<PlayerMove>().attackRange))
+        if (OnUnselected != null)
         {
-            if (tile.occupied)
-                tile.set_attackable();
+            OnUnselected(tile, character);
         }
     }
 
@@ -458,10 +457,13 @@ public class Tile : MonoBehaviour
             {
                 this.isCurrentlySelectedTile = true;
             }
-            else if (is_occupied() && isCurrentlySelectedTile)
+            else if (isCurrentlySelectedTile)
             {
-                OnUnselected(this, currentCharacter);
-                this.isCurrentlySelectedTile = false;
+                if (OnUnselected != null)
+                {
+                    OnUnselected(this, currentCharacter);
+                    this.isCurrentlySelectedTile = false;
+                }
             }
             else
             {
@@ -477,8 +479,10 @@ public class Tile : MonoBehaviour
         {
             if (is_occupied() && (!selectedTile.is_selectable() || selectedTile.is_occupied()))
             {
-                unselect(this, currentCharacter);
-                
+                if (OnUnselected != null)
+                {
+                    unselect(this, currentCharacter);
+                }
             }
 
             this.isCurrentlySelectedTile = false;

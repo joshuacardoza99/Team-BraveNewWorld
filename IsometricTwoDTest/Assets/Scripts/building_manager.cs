@@ -73,11 +73,10 @@ public class building_manager : MonoBehaviour
                         && !tile.is_in_city()
                         && canPlace
                         && !tile.has_building())
-                    {                       
-                        newBuilding = preview_object.place(activeBuildingType.asian, tilePosition).GetComponent<Building>();
+                    {
+                        newBuilding = preview_object.place(activeBuildingType.asian, tile);
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
-                        tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                         Debug.Log(activeBuildingType.asian.name);
@@ -86,9 +85,8 @@ public class building_manager : MonoBehaviour
                              && canPlace
                              && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.asian, tilePosition).GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.asian, tile);
                         newBuilding.set_current_tile(tile);
-                        tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
@@ -105,10 +103,9 @@ public class building_manager : MonoBehaviour
                         && canPlace
                         && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.greek, tilePosition).GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.greek, tile);
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
-                        tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
@@ -116,9 +113,8 @@ public class building_manager : MonoBehaviour
                              && canPlace
                              && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.greek, tilePosition).GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.greek, tile);
                         newBuilding.set_current_tile(tile);
-                        tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
@@ -135,10 +131,9 @@ public class building_manager : MonoBehaviour
                         && canPlace
                         && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.viking, tilePosition).GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.viking, tile);
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
-                        tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
@@ -146,9 +141,8 @@ public class building_manager : MonoBehaviour
                              && canPlace
                              && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.viking, tilePosition).GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.viking, tile);
                         newBuilding.set_current_tile(tile);
-                        tile.set_building(newBuilding.gameObject);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
