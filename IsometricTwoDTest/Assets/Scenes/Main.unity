@@ -1147,10 +1147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fceb43b5af66821479a17cb8adb64ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mines: {fileID: 11400000, guid: 0c250dc03851ef74ba78cca97f5e70c5, type: 2}
-  barracks: {fileID: 11400000, guid: 4058bf08d40abbf4cb193caf21affeef, type: 2}
-  commandPost: {fileID: 11400000, guid: 57c33a5f3ed89df4a84d1d4039ba4c01, type: 2}
-  farm: {fileID: 11400000, guid: 7a0c2510b46c124429a08bb9dd8f2dff, type: 2}
   PreviewMaterial: {fileID: 2100000, guid: df8496986ec1b9541b7d7a89c44b1126, type: 2}
 --- !u!4 &817184402
 Transform:

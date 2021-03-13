@@ -86,6 +86,12 @@ public class building_manager : MonoBehaviour
                              && !tile.has_building())
                     {
                         newBuilding = preview_object.place(activeBuildingType.asian, tile);
+
+                        if (((int)activeBuildingType.unitType) == 2)
+                            newBuilding.tag = "Mine";
+                        else
+                            newBuilding.tag = "Farm";
+
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
@@ -114,6 +120,12 @@ public class building_manager : MonoBehaviour
                              && !tile.has_building())
                     {
                         newBuilding = preview_object.place(activeBuildingType.greek, tile);
+
+                        if (((int)activeBuildingType.unitType) == 2)
+                            newBuilding.tag = "Mine";
+                        else
+                            newBuilding.tag = "Farm";
+
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
@@ -142,6 +154,12 @@ public class building_manager : MonoBehaviour
                              && !tile.has_building())
                     {
                         newBuilding = preview_object.place(activeBuildingType.viking, tile);
+
+                        if (((int)activeBuildingType.unitType) == 2)
+                            newBuilding.tag = "Mine";
+                        else
+                            newBuilding.tag = "Farm";
+
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
@@ -190,8 +208,6 @@ public class building_manager : MonoBehaviour
         {
             foreach (GameObject commandPost in GameObject.FindGameObjectsWithTag("commandPost"))
             {
-               listCommandPostTiles = GameObject.FindWithTag("commandPost").GetComponent<Building>().currentTile.get_walkable_tiles(1);
-
                 foreach (Tile post in commandPost.GetComponent<Building>().currentTile.get_walkable_tiles(1))
                 {
                     if (!post.has_building())
@@ -218,16 +234,6 @@ public class building_manager : MonoBehaviour
                 }
             }
         }
-        /*else
-        {
-            foreach (Tile preview in listCommandPostTiles)
-            {
-                if (currentTile == preview)
-                {
-                    canPlace = true;
-                }
-            }
-        }*/
     }
 
     public void set_current_tile(Tile tile)
