@@ -1975,8 +1975,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 57c33a5f3ed89df4a84d1d4039ba4c01, type: 2}
   numberOfFarms: []
   numberOfMines: []
-  amountFood: 0
-  amountGold: 0
+  amountFood: 2000
+  amountGold: 2000
   timeRemanining: 10
   currentTile: {fileID: 0}
 --- !u!4 &1750551918
