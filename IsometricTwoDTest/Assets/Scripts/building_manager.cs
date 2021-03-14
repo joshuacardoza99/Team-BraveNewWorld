@@ -114,6 +114,8 @@ public class building_manager : MonoBehaviour
                     {
                         addScript = preview_object.place(activeBuildingType.greek, tile);
                                       addScript.AddComponent<City>();
+                                      addScript.AddComponent<open_unit_menu>();
+                                      addScript.AddComponent<BoxCollider>();
                         newBuilding = addScript.AddComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);

@@ -62,4 +62,9 @@ public class menu_manager : MonoBehaviour
     {
         ChangeGroup(groups[2]);
     }
+
+    public void quit_game()
+    {
+        Application.Quit();
+    }
 }
