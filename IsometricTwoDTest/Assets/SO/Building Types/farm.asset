@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609c0da8d4167184bad12b13e612d074, type: 3}
   m_Name: farm
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 691c5a97b0c87994eac9f0ea9cf210ce, type: 3}
-  asian: {fileID: 3814490536550466924, guid: ee2c97a1b49f7d944adab5223d88d1f7, type: 3}
-  viking: {fileID: 3814490536550466924, guid: ee2c97a1b49f7d944adab5223d88d1f7, type: 3}
-  greek: {fileID: 3814490536550466924, guid: ee2c97a1b49f7d944adab5223d88d1f7, type: 3}
+  sprite: {fileID: 0}
+  asian: {fileID: 6290777885211300935, guid: 7d3533953a8df7a46a3eee63fd3f4e6d, type: 3}
+  viking: {fileID: 6290777885211300935, guid: 7d3533953a8df7a46a3eee63fd3f4e6d, type: 3}
+  greek: {fileID: 6290777885211300935, guid: 7d3533953a8df7a46a3eee63fd3f4e6d, type: 3}
   previewAsian: {fileID: 3814490536550466924, guid: 74212f70f729e944c9f7329e9b8082af, type: 3}
   previewViking: {fileID: 3814490536550466924, guid: 74212f70f729e944c9f7329e9b8082af, type: 3}
-  preivewGreek: {fileID: 3814490536550466924, guid: 74212f70f729e944c9f7329e9b8082af, type: 3}
+  previewGreek: {fileID: 3814490536550466924, guid: 74212f70f729e944c9f7329e9b8082af, type: 3}
   isConquered: 0
   unitType: 1
   resourcesAmount: 5

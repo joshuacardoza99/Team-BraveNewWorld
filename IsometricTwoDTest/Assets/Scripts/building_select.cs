@@ -52,7 +52,7 @@ public class building_select : MonoBehaviour
                 }
                 else if (match_manager.get_player_civilization() == 1)
                 {
-                    building_manager.place_previews(building_type.preivewGreek);
+                    building_manager.place_previews(building_type.previewGreek);
                 }
                 else
                 {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4519660335033160043}
   m_Layer: 0
   m_Name: greekcommandpost
-  m_TagString: commandPost
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

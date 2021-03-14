@@ -8,13 +8,6 @@ public class preview_object : MonoBehaviour
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
     map_manager map_manager;        // This imports the map_manager class to help with interactions with othe tiles.
     unit_maker unit_maker;
-    public building_type mines;
-    public building_type barracks;
-    public building_type commandPost;
-    public building_type farm;
-
-    private GameObject[,] gameBuildings;
-
 
     public Material PreviewMaterial;
 

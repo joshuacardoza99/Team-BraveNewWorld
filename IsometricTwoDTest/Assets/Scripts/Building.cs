@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 // This script should be attached to all city buildings, and facilitates building functions and whatnot
 public class Building : MonoBehaviour
@@ -17,6 +16,8 @@ public class Building : MonoBehaviour
     void Start()
     {
         Debug.Log("A building has been placed!");
+
+        tag_me();
     }
 
     public void set_current_tile(Tile tile)
@@ -24,8 +25,12 @@ public class Building : MonoBehaviour
         currentTile = tile;
     }
 
-    public Tile get_current_tile()
+    private void tag_me()
     {
-        return currentTile;
+        if (this.name == "farm(Clone)")
+            this.tag = "Farm";
+        else if (this.name == "mine(Clone)")
+            this.tag = "Mine";
+        Debug.Log("tagged with" + this.tag);
     }
 }

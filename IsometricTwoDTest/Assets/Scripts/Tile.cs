@@ -178,7 +178,8 @@ public class Tile : MonoBehaviour
     // parameter = [int range]
     public void select(Tile tile, GameObject character)// use this for attack range 
     {
-        if (tile == this && tile.is_occupied() && (match_manager.get_player_civilization() == tile.get_current_character().GetComponent<PlayerMove>().get_civilization()))
+        if (tile == this && tile.is_occupied() && character != null
+            && (match_manager.get_player_civilization() == tile.get_current_character().GetComponent<PlayerMove>().get_civilization()))
         {
             Debug.Log("Selecting all the tiles around this one.");
             tile.set_selectable(character);
@@ -198,7 +199,7 @@ public class Tile : MonoBehaviour
     // parameter = [int range]
     public void unselect(Tile tile, GameObject character)
     {
-        if (tile == this)
+        if (tile == this && character != null)
         {
             selectedNearBy = false;
             Debug.Log("Unselecting all the tiles around this one.");
@@ -386,7 +387,7 @@ public class Tile : MonoBehaviour
     // Sets the nearby tiles to be attackable.
     public void select_attackable(Tile tile, GameObject character)
     {
-        if (tile == this && tile.is_occupied())
+        if (tile == this && character!= null && tile.is_occupied())
         {
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
@@ -451,6 +452,8 @@ public class Tile : MonoBehaviour
     // Sets this tile to be selectable.
     public void handle_selection(Tile selectedTile, GameObject unusedCharacter)
     {
+        menu_manager.close_menus();
+
         if (selectedTile == this)
         {
             if (is_occupied() && !isCurrentlySelectedTile)
