@@ -8,6 +8,7 @@ TagManager:
   - Mine
   - Farm
   - previewBuilding
+  - commandPost
   layers:
   - Default
   - TransparentFX

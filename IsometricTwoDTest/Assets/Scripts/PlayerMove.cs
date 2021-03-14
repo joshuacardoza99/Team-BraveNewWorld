@@ -59,12 +59,19 @@ public class PlayerMove : MonoBehaviour
         Tile.OnSelected -= handle_move;
     }
 
+    // Updates the players health.
+    public void update_health(int healthToRemove)
+    {
+        health -= healthToRemove;
+    }
+
     // Handles running the move on the current players computer and over the network.
     public void handle_move(Tile moveToTile, GameObject ususedCharacter)
     {
-        if (!moveToTile.is_occupied() && moveToTile.is_selectable() && (match_manager.get_player_civilization() == get_civilization()))
+        if (!moveToTile.is_occupied() && moveToTile.is_selectable() && (match_manager.get_local_player().civilization == get_civilization()) && (moveToTile.get_selectable() == this.gameObject))
         {
-            currentTile.unselect(currentTile, this.gameObject);
+            currentTile.RunOnUnselected(currentTile, this.gameObject);
+
             import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
 
             import_manager.run_function_all(this.gameObject.name, "move", new string[2] { moveToTile.get_grid()[0].ToString(), moveToTile.get_grid()[1].ToString() });
@@ -185,7 +192,9 @@ public class PlayerMove : MonoBehaviour
     public void suicide(string[] parameter)
     {
         Destroy(this.gameObject);
-        import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
+        //import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
+        currentTile.set_unoccupied(new string[0] { });
+        match_manager.remove_player_unit(new string[2] { get_civilization().ToString(), this.gameObject.name });
     }
 
 }

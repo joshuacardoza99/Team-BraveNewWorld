@@ -46,13 +46,13 @@ public class building_select : MonoBehaviour
                 buildingNumber = buildingTypeList.IndexOf(building_type);
                 Debug.Log("this buidling number is working " + buildingNumber);
 
-                if (match_manager.get_player_civilization() == 0)
+                if (match_manager.get_local_player().civilization == 0)
                 {
                     building_manager.place_previews(building_type.previewAsian);
                 }
-                else if (match_manager.get_player_civilization() == 1)
+                else if (match_manager.get_local_player().civilization == 1)
                 {
-                    building_manager.place_previews(building_type.preivewGreek);
+                    building_manager.place_previews(building_type.previewGreek);
                 }
                 else
                 {

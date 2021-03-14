@@ -19,7 +19,7 @@ public class building_type : ScriptableObject
     [Header("Preview used for budiling")]     // Shows text in inspector
     public Transform previewAsian;            // Asian civ prefabs
     public Transform previewViking;           // Viking civ prefabs
-    public Transform preivewGreek;            // Greek civ prefabs
+    public Transform previewGreek;            // Greek civ prefabs
 
     [Space(5)]                                // 5 pixels of spacing here.
     public bool isConquered = false;          // Ability for building to spawn units

@@ -109,85 +109,85 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11798}
     - Class: 114
-      Script: {instanceID: 11834}
+      Script: {instanceID: 11830}
     - Class: 114
-      Script: {instanceID: 11998}
+      Script: {instanceID: 11994}
     - Class: 114
-      Script: {instanceID: 12016}
+      Script: {instanceID: 12012}
     - Class: 114
-      Script: {instanceID: 12216}
+      Script: {instanceID: 12212}
     - Class: 114
-      Script: {instanceID: 12238}
+      Script: {instanceID: 12234}
     - Class: 114
-      Script: {instanceID: 12358}
+      Script: {instanceID: 12354}
     - Class: 114
-      Script: {instanceID: 12442}
+      Script: {instanceID: 12438}
     - Class: 114
-      Script: {instanceID: 12466}
+      Script: {instanceID: 12462}
     - Class: 114
-      Script: {instanceID: 12596}
+      Script: {instanceID: 12592}
     - Class: 114
-      Script: {instanceID: 12714}
+      Script: {instanceID: 12710}
     - Class: 114
-      Script: {instanceID: 12812}
+      Script: {instanceID: 12808}
     - Class: 114
-      Script: {instanceID: 12996}
+      Script: {instanceID: 12992}
     - Class: 114
-      Script: {instanceID: 13014}
+      Script: {instanceID: 13010}
     - Class: 114
-      Script: {instanceID: 13050}
+      Script: {instanceID: 13046}
     - Class: 114
-      Script: {instanceID: 13152}
+      Script: {instanceID: 13148}
     - Class: 114
-      Script: {instanceID: 13214}
+      Script: {instanceID: 13210}
     - Class: 114
-      Script: {instanceID: 13322}
+      Script: {instanceID: 13318}
     - Class: 114
-      Script: {instanceID: 13368}
+      Script: {instanceID: 13364}
     - Class: 114
-      Script: {instanceID: 13434}
+      Script: {instanceID: 13430}
+    - Class: 114
+      Script: {instanceID: 13704}
     - Class: 114
       Script: {instanceID: 13708}
     - Class: 114
-      Script: {instanceID: 13712}
+      Script: {instanceID: 13850}
     - Class: 114
-      Script: {instanceID: 13854}
+      Script: {instanceID: 13882}
     - Class: 114
-      Script: {instanceID: 13886}
+      Script: {instanceID: 14012}
     - Class: 114
-      Script: {instanceID: 14016}
+      Script: {instanceID: 14046}
     - Class: 114
-      Script: {instanceID: 14050}
+      Script: {instanceID: 14222}
     - Class: 114
-      Script: {instanceID: 14226}
+      Script: {instanceID: 14278}
     - Class: 114
-      Script: {instanceID: 14282}
+      Script: {instanceID: 14592}
     - Class: 114
-      Script: {instanceID: 14596}
+      Script: {instanceID: 14648}
     - Class: 114
-      Script: {instanceID: 14652}
+      Script: {instanceID: 14718}
     - Class: 114
-      Script: {instanceID: 14722}
+      Script: {instanceID: 14746}
     - Class: 114
-      Script: {instanceID: 14750}
+      Script: {instanceID: 14762}
     - Class: 114
-      Script: {instanceID: 14766}
+      Script: {instanceID: 14798}
     - Class: 114
-      Script: {instanceID: 14802}
+      Script: {instanceID: 14832}
     - Class: 114
-      Script: {instanceID: 14836}
+      Script: {instanceID: 14964}
     - Class: 114
-      Script: {instanceID: 14968}
+      Script: {instanceID: 15082}
     - Class: 114
-      Script: {instanceID: 15086}
+      Script: {instanceID: 15150}
     - Class: 114
-      Script: {instanceID: 15154}
+      Script: {instanceID: 15464}
     - Class: 114
-      Script: {instanceID: 15468}
+      Script: {instanceID: 15532}
     - Class: 114
-      Script: {instanceID: 15536}
-    - Class: 114
-      Script: {instanceID: 26956}
+      Script: {instanceID: 20962}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -199,6 +199,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -331,7 +333,7 @@ ScriptsOnlyBuild:
     className: Scrollbar
   - hash:
       serializedVersion: 2
-      Hash: 465635e8620e34b0357b2caba05f6a26
+      Hash: f812f28ecfc94a8889988fea75beafa0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tile
@@ -583,7 +585,7 @@ ScriptsOnlyBuild:
     className: import_manager
   - hash:
       serializedVersion: 2
-      Hash: eca9d66072f8b8e90cb8a0530ad938f1
+      Hash: 6a12dceaf68f881c5182ea3ebfd191c4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: preview_object
@@ -631,7 +633,7 @@ ScriptsOnlyBuild:
     className: AutoHud
   - hash:
       serializedVersion: 2
-      Hash: 645e09e35367a47da8d8b73fc7e836a1
+      Hash: 4397c8228e4379c80033b3161a24a313
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: building_manager
@@ -709,7 +711,7 @@ ScriptsOnlyBuild:
     className: character_selection
   - hash:
       serializedVersion: 2
-      Hash: ee2597adb22ac24ef8d3d33a1058a1e5
+      Hash: 428800677a1cf4c90263e9dbb81d18a4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: building_type

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3613191134677091635}
   m_Layer: 0
   m_Name: asiancommandpost
-  m_TagString: commandPost
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

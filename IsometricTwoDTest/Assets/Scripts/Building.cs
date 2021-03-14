@@ -16,10 +16,14 @@ public class Building : MonoBehaviour
     void Start()
     {
         Debug.Log("A building has been placed!");
+
     }
 
     public void set_current_tile(Tile tile)
     {
-        currentTile = tile;
+        currentTile = tile; // set this buildings tile to the given tile
+        tile.set_building(this.gameObject); // set the tiles building to this
     }
+
+
 }

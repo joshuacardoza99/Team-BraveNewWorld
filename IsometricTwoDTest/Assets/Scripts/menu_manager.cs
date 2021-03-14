@@ -8,18 +8,6 @@ public class menu_manager : MonoBehaviour
 
     public GameObject currentGroup; // Current menu scene being displayed
 
-    // This runs when the character is enabled.
-    void OnEnable()
-    {
-        Tile.OnSelected += open_unit_menu;
-    }
-
-
-    // This runs when the character is disabled.
-    void OnDisable()
-    {
-        Tile.OnSelected -= open_unit_menu;
-    }
 
     void Awake()
     {
@@ -54,21 +42,17 @@ public class menu_manager : MonoBehaviour
     }
 
     // Open or close the unit menu
-    public void open_unit_menu(Tile tile, GameObject Character)
+    public void open_unit_menu()//Tile tile, GameObject Character)
     {
-        if (tile.get_buidling() != null
-            && tile.get_buidling().tag == "commandPost")
+        if (currentGroup == groups[6])
         {
-            if (currentGroup == groups[6])
-            {
-                ChangeGroup(groups[2]);
-                Debug.Log("Close Unit Menu");
-            }
-            else
-            {
-                ChangeGroup(groups[6]);
-                Debug.Log("Open Unit Menu");
-            }
+            ChangeGroup(groups[2]);
+            Debug.Log("Close Unit Menu");
+        }
+        else
+        {
+            ChangeGroup(groups[6]);
+            Debug.Log("Open Unit Menu");
         }
     }
 
@@ -77,5 +61,10 @@ public class menu_manager : MonoBehaviour
     public void close_menus()
     {
         ChangeGroup(groups[2]);
+    }
+
+    public void quit_game()
+    {
+        Application.Quit();
     }
 }

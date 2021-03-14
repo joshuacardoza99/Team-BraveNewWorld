@@ -56,8 +56,8 @@ public class unit_manager : MonoBehaviour
 
             Vector3 tilePosition = tile.transform.position;
 
-            if (tile.get_buidling() != null 
-                && tile.get_buidling().tag == "commandPost")
+            if (//tile.get_buidling() != null 
+                tile.is_in_city())
             {
                 // Choose prefab depeding on which civ user choose
                 if (civNumber == 0)
@@ -75,8 +75,8 @@ public class unit_manager : MonoBehaviour
             if (unit != null)
             {
                 unit.tag = "unit";
-                unit.name = match_manager.get_player_civilization() + "_" + unit.name + "_" + counter++;
-                unit.GetComponent<PlayerMove>().set_civilization(match_manager.get_player_civilization());
+                unit.name = match_manager.get_local_player().civilization + "_" + unit.name + "_" + counter++;
+                unit.GetComponent<PlayerMove>().set_civilization(match_manager.get_local_player().civilization);
                 import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), "set_occupied", unit.name });
             }
         }

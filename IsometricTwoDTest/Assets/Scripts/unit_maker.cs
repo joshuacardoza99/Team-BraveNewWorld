@@ -10,6 +10,7 @@ public class unit_maker : MonoBehaviour
     Tile Tile;            // Importing the Tile class.
     PlayerMove PlayerMove;      // Importing the PlayerMove class.
     map_manager map_manager;     // Importing the map_manager class.
+    match_manager match_manager;
 
     // Public Global Variables //
     public GameObject asianChampion;
@@ -32,6 +33,7 @@ public class unit_maker : MonoBehaviour
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
+        match_manager = GameObject.Find("network_manager").GetComponent<match_manager>(); // Connects to the import_manager.
     }
 
     // Adds the champion of the given civilization to a random tile.
@@ -61,12 +63,18 @@ public class unit_maker : MonoBehaviour
             champion = place_object(vikingChampion, tile);
         }
 
-        champion.tag = "Player";
+        if (match_manager.get_local_player().civilization == civilization)
+        {
+            champion.tag = "Player";
+        }
+        
         champion.name = parameters[0] + "_" + parameters[1];
         champion.GetComponent<PlayerMove>().set_civilization(civilization);
         import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tileGrid[0].ToString(), tileGrid[1].ToString(), "set_occupied", champion.name });
 
         focus_camera_on(champion);
+
+        match_manager.update_player_champion(new string[2] { civilization.ToString(), champion.name});
     }
 
     // Places a copy of the given GameObject on the given tile.

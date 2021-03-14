@@ -8,12 +8,14 @@ var Express = require("express");
 var App     = Express();
 
 // Global variables.
+App.use("/game", Express.static(__dirname + "/WebBuild/"));
+let webServer = App.listen(80);
 let socketOptions = {      "host": '0.0.0.0',//"172.31.7.174",             // Holds the options for the WebSocket server.
 	                       "port": 5678,
 	                       "path": "/",
 	                 "maxPayload": 10e7
 	                }
-let server        = new web_socket.Server(socketOptions); // Holds the WebSocket server.
+let server        = new web_socket.Server({"server": webServer}); // Holds the WebSocket server.
 let matches       = [];                                   // All matches on this server.
 let matchNumber   = 0;                                    // Next match id.
 let players       = [];                                   // All the players connected to this server.
@@ -103,8 +105,7 @@ let message_handler = function(message, playerSocket)
 }
 
 // Starts the HTTP server to listen for request.
-App.use("/game", Express.static(__dirname + "/WebBuild/"));
-App.listen(80);
+
 
 // Starts the match server listing for connections.
 server.on("connection", (playerSocket) =>
