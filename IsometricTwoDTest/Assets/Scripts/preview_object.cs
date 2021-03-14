@@ -19,10 +19,10 @@ public class preview_object : MonoBehaviour
         unit_maker = GameObject.Find("unit_manager").GetComponent<unit_maker>();
     }
 
-    public Building place(Transform prefab, Tile tile)
+    public GameObject place(Transform prefab, Tile tile)
     {
         import_manager.run_function_all("preview_object", "build_building", new string[3] { prefab.name, tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString() });
-        Building building = tile.get_buidling().GetComponent<Building>();
+        GameObject building = tile.get_buidling();
 
         destroy_previews();
 

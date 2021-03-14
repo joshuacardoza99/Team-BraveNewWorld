@@ -178,8 +178,7 @@ public class Tile : MonoBehaviour
     // parameter = [int range]
     public void select(Tile tile, GameObject character)// use this for attack range 
     {
-        if (tile == this && tile.is_occupied() && character != null
-            && (match_manager.get_player_civilization() == tile.get_current_character().GetComponent<PlayerMove>().get_civilization()))
+        if (tile == this && tile.is_occupied() && character != null&& (match_manager.get_local_player().civilization == tile.get_current_character().GetComponent<PlayerMove>().get_civilization()))
         {
             Debug.Log("Selecting all the tiles around this one.");
             tile.set_selectable(character);
@@ -254,7 +253,7 @@ public class Tile : MonoBehaviour
         currentCharacter = GameObject.Find(parameter[0]);
         currentCharacter.GetComponent<PlayerMove>().set_current_tile(this);
 
-        if (match_manager.get_player_civilization() == get_current_character().GetComponent<PlayerMove>().get_civilization())
+        if (match_manager.get_local_player().civilization == get_current_character().GetComponent<PlayerMove>().get_civilization())
         {
             this.GetComponent<Renderer>().material = map_manager.types.occupied;
         }
@@ -368,10 +367,10 @@ public class Tile : MonoBehaviour
             if (Time.time > cooldowns.nextAttack)
             {
                 // check if this characters civ is the same as the character clicking on it
-                if (defendingUnit.get_civilization() != match_manager.get_player_civilization())
+                if (defendingUnit.get_civilization() != match_manager.get_local_player().civilization)
                 {
                     // attach attack animation here
-                    defendingUnit.health -= character.GetComponent<PlayerMove>().damage;
+                    import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, character.GetComponent<PlayerMove>().damage.ToString() });
                     Debug.Log("Health equals " + defendingUnit.health);
                     cooldowns.initiate_attack_cooldown();
                     if (defendingUnit.health <= 0)
@@ -391,7 +390,7 @@ public class Tile : MonoBehaviour
         {
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
             {
-                if (nearByTile.is_occupied() && (nearByTile.get_current_character().GetComponent<PlayerMove>().get_civilization() != match_manager.get_player_civilization()))
+                if (nearByTile.is_occupied() && (nearByTile.get_current_character().GetComponent<PlayerMove>().get_civilization() != match_manager.get_local_player().civilization))
                 {
                     nearByTile.set_attackable();
                 }
@@ -490,7 +489,7 @@ public class Tile : MonoBehaviour
 
             this.isCurrentlySelectedTile = false;
 
-            if ((!isCurrentlySelectedTile && !is_occupied() && !is_selectable()) || (is_occupied() && (match_manager.get_player_civilization() != get_current_character().GetComponent<PlayerMove>().get_civilization())))
+            if ((!isCurrentlySelectedTile && !is_occupied() && !is_selectable()) || (is_occupied() && (match_manager.get_local_player().civilization != get_current_character().GetComponent<PlayerMove>().get_civilization())))
             {
                 this.GetComponent<Renderer>().material = map_manager.types.get_material(civilization);
             }

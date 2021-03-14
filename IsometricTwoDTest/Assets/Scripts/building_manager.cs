@@ -60,6 +60,7 @@ public class building_manager : MonoBehaviour
             {
                 Vector3 tilePosition = tile.transform.position;
                 Building newBuilding; // Building that was just placed
+                GameObject addScript; 
 
                 set_current_tile(tile);
                 can_place();
@@ -74,7 +75,7 @@ public class building_manager : MonoBehaviour
                         && canPlace
                         && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.asian, tile);
+                        newBuilding = preview_object.place(activeBuildingType.asian, tile).GetComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
@@ -85,12 +86,14 @@ public class building_manager : MonoBehaviour
                              && canPlace
                              && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.asian, tile);
+                        //newBuilding = preview_object.place(activeBuildingType.asian, tile);
+                        addScript = preview_object.place(activeBuildingType.asian, tile); // clean this up later
+                        newBuilding = addScript.AddComponent<Building>();
 
-                        //if (((int)activeBuildingType.unitType) == 2)
-                        //    newBuilding.tag = "Mine";
-                        //else
-                        //    newBuilding.tag = "Farm";
+                        if (newBuilding.name == "farm(Clone)")
+                            newBuilding.tag = "Farm";
+                        else if (newBuilding.name == "mine(Clone)")
+                            newBuilding.tag = "Mine";
 
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
@@ -109,7 +112,9 @@ public class building_manager : MonoBehaviour
                         && canPlace
                         && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.asian, tile);  // using asian comandpost because greek is broken
+                        addScript = preview_object.place(activeBuildingType.greek, tile);
+                                      addScript.AddComponent<City>();
+                        newBuilding = addScript.AddComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
@@ -119,12 +124,15 @@ public class building_manager : MonoBehaviour
                              && canPlace
                              && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.greek, tile);
+                        //newBuilding = preview_object.place(activeBuildingType.greek, tile).GetComponent<Building>();
 
-                        /*if (((int)activeBuildingType.unitType) == 2)
+                        addScript = preview_object.place(activeBuildingType.asian, tile); // clean this up later
+                        newBuilding = addScript.AddComponent<Building>();
+
+                        if (newBuilding.name == "farm(Clone)")
+                            newBuilding.tag = "Farm";
+                        else if (newBuilding.name == "mine(Clone)")
                             newBuilding.tag = "Mine";
-                        else
-                            newBuilding.tag = "Farm";*/
 
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
@@ -143,7 +151,7 @@ public class building_manager : MonoBehaviour
                         && canPlace
                         && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.viking, tile);
+                        newBuilding = preview_object.place(activeBuildingType.viking, tile).GetComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
@@ -153,12 +161,15 @@ public class building_manager : MonoBehaviour
                              && canPlace
                              && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.viking, tile);
+                        //newBuilding = preview_object.place(activeBuildingType.viking, tile).GetComponent<Building>();
 
-                        /*if (((int)activeBuildingType.unitType) == 2)
+                        addScript = preview_object.place(activeBuildingType.asian, tile); // clean this up later
+                        newBuilding = addScript.AddComponent<Building>();
+
+                        if (newBuilding.name == "farm(Clone)")
+                            newBuilding.tag = "Farm";
+                        else if (newBuilding.name == "mine(Clone)")
                             newBuilding.tag = "Mine";
-                        else
-                            newBuilding.tag = "Farm";*/
 
                         newBuilding.set_current_tile(tile);
                         civilization.deduct_cost(building_select.buildingNumber);
