@@ -50,7 +50,7 @@ public class civilization : MonoBehaviour
             // Pop up for Food
             if (building_type[0])
             {
-                amountFood += (numberOfFarms.Length * building_type[0].resourcesAmount); // Increment the food amount
+                amountFood += (numberOfFarms.Length * (building_type[0].resourcesAmount + 5)); // Increment the food amount
                 resource_pop_up(numberOfFarms);
             }
 
