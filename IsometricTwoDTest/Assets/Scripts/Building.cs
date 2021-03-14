@@ -17,20 +17,13 @@ public class Building : MonoBehaviour
     {
         Debug.Log("A building has been placed!");
 
-        tag_me();
     }
 
     public void set_current_tile(Tile tile)
     {
-        currentTile = tile;
+        currentTile = tile; // set this buildings tile to the given tile
+        tile.set_building(this.gameObject); // set the tiles building to this
     }
 
-    private void tag_me()
-    {
-        if (this.name == "farm(Clone)")
-            this.tag = "Farm";
-        else if (this.name == "mine(Clone)")
-            this.tag = "Mine";
-        Debug.Log("tagged with" + this.tag);
-    }
+
 }

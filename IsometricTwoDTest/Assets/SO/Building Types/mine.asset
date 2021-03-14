@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609c0da8d4167184bad12b13e612d074, type: 3}
   m_Name: mine
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 329975fb78391c04cbb5af74a2b9df66, type: 3}
   asian: {fileID: 4658616661287914432, guid: 40106da533a6f45469aeb461401aec26, type: 3}
   viking: {fileID: 4658616661287914432, guid: 40106da533a6f45469aeb461401aec26, type: 3}
   greek: {fileID: 4658616661287914432, guid: 40106da533a6f45469aeb461401aec26, type: 3}
