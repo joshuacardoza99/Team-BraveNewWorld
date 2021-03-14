@@ -56,8 +56,8 @@ public class unit_manager : MonoBehaviour
 
             Vector3 tilePosition = tile.transform.position;
 
-            if (tile.get_buidling() != null 
-                && tile.get_buidling().tag == "commandPost")
+            if (//tile.get_buidling() != null 
+                tile.is_in_city())
             {
                 // Choose prefab depeding on which civ user choose
                 if (civNumber == 0)
