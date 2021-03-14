@@ -9,8 +9,8 @@ public class civilization : MonoBehaviour
     public GameObject goldPopUp;          // Pop up for the Gold
     public string goldToDisplay;          // string of gold amount that has been put into the users resources
     public building_type[] building_type; // Array of building types
-    public GameObject[]   numberOfFarms;           // Number of farms the user owns
-    public GameObject[]   numberOfMines;           // Number of mines the user owns
+    public GameObject[]   numberOfFarms;  // Number of farms the user owns
+    public GameObject[]   numberOfMines;  // Number of mines the user owns
     public int   amountFood;              // The amount of food the user owns
     public int   amountGold;              // The amount of gold the user owns
     public float timeRemanining = 10;     // The amount of time it takes to refresh resources
@@ -28,7 +28,7 @@ public class civilization : MonoBehaviour
 
     public void Awake()
     {
-        amountFood = 1000;
+        amountFood = 2000;
         amountGold = 2000;
     }
 
@@ -76,7 +76,7 @@ public class civilization : MonoBehaviour
         {
             Vector3 tilePosition = building.GetComponent<Building>().currentTile.transform.position;
 
-            GameObject goldInstance = Instantiate(goldPopUp, tilePosition, Quaternion.identity);  // Instantiate the prefab
+            GameObject goldInstance = Instantiate(goldPopUp, tilePosition, Quaternion.identity);   // Instantiate the prefab
             goldInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(goldToDisplay); // Display the string
         }        
     }

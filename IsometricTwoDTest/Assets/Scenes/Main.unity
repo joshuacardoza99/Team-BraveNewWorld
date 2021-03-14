@@ -1968,16 +1968,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldPopUp: {fileID: 8168666491733117633, guid: 6d057a6003ceec54b8cb1c6a5d38b721, type: 3}
-  goldToDisplay: 50
+  goldToDisplay: +10
   building_type:
   - {fileID: 11400000, guid: 7a0c2510b46c124429a08bb9dd8f2dff, type: 2}
   - {fileID: 11400000, guid: 0c250dc03851ef74ba78cca97f5e70c5, type: 2}
   - {fileID: 11400000, guid: 57c33a5f3ed89df4a84d1d4039ba4c01, type: 2}
-  numberOfFarms: 0
-  numberOfMines: 0
+  numberOfFarms: []
+  numberOfMines: []
   amountFood: 0
   amountGold: 0
   timeRemanining: 10
+  currentTile: {fileID: 0}
 --- !u!4 &1750551918
 Transform:
   m_ObjectHideFlags: 0
