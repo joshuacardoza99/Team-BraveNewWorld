@@ -9,6 +9,7 @@ TagManager:
   - Farm
   - previewBuilding
   - commandPost
+  - unit
   layers:
   - Default
   - TransparentFX
