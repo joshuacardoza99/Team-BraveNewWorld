@@ -327,7 +327,8 @@ public class Tile : MonoBehaviour
     }
 
     // Set this tile to within the borders of a city
-    public void set_in_city()
+    // Parameter = []
+    public void set_in_city(string[] parameter)
     {
         inCity = true;
     }

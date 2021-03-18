@@ -11,6 +11,7 @@ public class unit_manager : MonoBehaviour
     unit_maker unit_maker;
     match_manager match_manager;
     menu_manager menu_manager;
+    map_manager map_manager;
 
     // Public Global Variables //
     public int civNumber;
@@ -30,55 +31,67 @@ public class unit_manager : MonoBehaviour
         unit_maker = GameObject.Find("unit_manager").GetComponent<unit_maker>();
         match_manager = GameObject.Find("network_manager").GetComponent<match_manager>(); // Connects to the match_manager.
         menu_manager = GameObject.Find("MenuManager").GetComponent<menu_manager>(); // Connects to the match_manager.
+        map_manager = GameObject.Find("Map").GetComponent<map_manager>(); // Connects to the map_manager.
     }
 
     // This runs when the character is enabled.
     void OnEnable()
     {
-        Tile.OnSelected += add_unit;
+        Tile.OnSelected += handle_add_unit;
     }
 
     // This runs when the tile is disabled.
     void OnDisable()
     {
-        Tile.OnSelected -= add_unit;
+        Tile.OnSelected -= handle_add_unit;
     }
 
-    // Update is called once per frame
-    void add_unit(Tile tile, GameObject character)
+    // Handles the add units on selected action.
+    void handle_add_unit(Tile tile, GameObject unusedCharacter)
     {
         // Check conditions for spawining a command post
         if (!EventSystem.current.IsPointerOverGameObject()
             && activeUnitType != null
-            && (tile.is_walkable()))
+            && (tile.is_walkable())
+            && tile.is_in_city())
         {
-            GameObject unit = null;
+            GameObject unitToCreate = activeUnitType.asian.gameObject;
 
-            Vector3 tilePosition = tile.transform.position;
-
-            if (//tile.get_buidling() != null 
-                tile.is_in_city())
+            switch (match_manager.get_local_player().civilization)
             {
-                // Choose prefab depeding on which civ user choose
-                if (civNumber == 0)
-                    unit = unit_maker.place_object(activeUnitType.asian.gameObject, tile);
-                // Instantiate(activeUnitType.asian, tilePosition, Quaternion.identity);
-                else if (civNumber == 1)
-                    unit = unit_maker.place_object(activeUnitType.greek.gameObject, tile);
-                else
-                    unit = unit_maker.place_object(activeUnitType.viking.gameObject, tile);
+                case 0:
+                    unitToCreate = activeUnitType.asian.gameObject;
+                    break;
+                case 1:
+                    unitToCreate = activeUnitType.greek.gameObject;
+                    break;
+                case 2:
+                    unitToCreate = activeUnitType.viking.gameObject;
+                    break;
             }
 
+            import_manager.run_function_all("unit_manager", "add_unit", new string[4] { tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), unitToCreate.gameObject.name, match_manager.get_local_player().civilization.ToString() });
             activeUnitType = null;
             menu_manager.close_menus();
+        }
+    }
 
-            if (unit != null)
-            {
-                unit.tag = "unit";
-                unit.name = match_manager.get_local_player().civilization + "_" + unit.name + "_" + counter++;
-                unit.GetComponent<PlayerMove>().set_civilization(match_manager.get_local_player().civilization);
-                import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), "set_occupied", unit.name });
-            }
+    // Update is called once per frame
+    // Parameter = [int tileXPosition, int tileYPosition, string prefabName, int civilization]
+    void add_unit(string[] parameter)
+    {
+        Tile tile = map_manager.map[int.Parse(parameter[0]), int.Parse(parameter[1])].ground.GetComponent<Tile>();
+
+        GameObject unit = (GameObject)Resources.Load("Units/" + parameter[2]);
+        unit = unit_maker.place_object(unit, tile);
+
+        if (unit != null)
+        {
+            unit.AddComponent<PlayerMove>();
+            unit.tag = "unit";
+            unit.name = parameter[3] + "_" + unit.name + "_" + counter++;
+            unit.GetComponent<PlayerMove>().set_civilization(int.Parse(parameter[3]));
+            tile.set_occupied(new string[1] { unit.name });
         }
     }
 

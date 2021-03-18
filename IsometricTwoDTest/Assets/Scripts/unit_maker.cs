@@ -87,6 +87,8 @@ public class unit_maker : MonoBehaviour
 
         GameObject itemCopy = Instantiate(item, tilePosition, Quaternion.Euler(new Vector3(0, 0, 0)));
         face_forward(itemCopy);
+
+        itemCopy.AddComponent<PlayerMove>();
         itemCopy.GetComponent<PlayerMove>().set_grid(tile.get_grid()[0], tile.get_grid()[1]);
 
         return itemCopy;
