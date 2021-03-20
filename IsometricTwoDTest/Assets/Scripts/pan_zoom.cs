@@ -66,6 +66,10 @@ public class pan_zoom : MonoBehaviour
     void Start()
     {
         canUseMouse = Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer && Input.mousePresent;
+        if (SystemInfo.deviceType == DeviceType.Handheld)
+        {
+            useMouse = false;
+        }
     }
 
     void Update()
