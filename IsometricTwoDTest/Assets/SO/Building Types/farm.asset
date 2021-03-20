@@ -21,6 +21,8 @@ MonoBehaviour:
   previewGreek: {fileID: 3814490536550466924, guid: 74212f70f729e944c9f7329e9b8082af, type: 3}
   isConquered: 0
   unitType: 1
-  resourcesAmount: 5
+  foodAmount: 10
+  goldAmount: 0
   buildCost: 150
+  type: Farm
   resourceCooldown: 10

@@ -21,6 +21,8 @@ MonoBehaviour:
   previewGreek: {fileID: 2786063593081427463, guid: 115eb9ef1ca9b234590470dcad7ea9cd, type: 3}
   isConquered: 0
   unitType: 0
-  resourcesAmount: 0
+  foodAmount: 0
+  goldAmount: 0
   buildCost: 500
+  type: commandPost
   resourceCooldown: 0

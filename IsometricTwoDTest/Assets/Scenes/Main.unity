@@ -391,15 +391,15 @@ MonoBehaviour:
   maxDistanceForTap: 40
   maxDurationForTap: 0.4
   useMouse: 1
-  mouseScrollSpeed: 2
+  mouseScrollSpeed: 1.05
   controlCamera: 1
   cam: {fileID: 0}
-  ignoreUI: 0
+  ignoreUI: 1
   useBounds: 1
-  boundMinX: -80
-  boundMaxX: 40
-  boundMinY: -80
-  boundMaxY: 40
+  boundMinX: -60
+  boundMaxX: 60
+  boundMinY: -75
+  boundMaxY: 20
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0

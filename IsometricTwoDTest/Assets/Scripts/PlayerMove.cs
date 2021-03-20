@@ -30,7 +30,7 @@ public class PlayerMove : MonoBehaviour
 
     // Varibles for movement 
     public Tile actualTargetTile;        // Does not appear to be used.
-    public float halfHeight = 0;    // Apears to only be assigned half-of the height of this character.
+    //public float halfHeight = 0;    // Apears to only be assigned half-of the height of this character.
     public Tile currentTile = null; // The tile this character is currently on.
 
     // Animation Controller
@@ -39,7 +39,7 @@ public class PlayerMove : MonoBehaviour
     // Use this for initialization.
     void Start()
     {
-        halfHeight = GetComponent<Collider>().bounds.extents.y;
+        //halfHeight = GetComponent<Collider>().bounds.extents.y;
 
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
         match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();

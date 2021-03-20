@@ -10,6 +10,7 @@ public class building_manager : MonoBehaviour
     civilization civilization;
     preview_object preview_object;
     menu_manager menu_manager;
+    match_manager match_manager;
 
     // Public Global Variables 
     public int civNumber;                                   // Number of the civilization
@@ -33,6 +34,7 @@ public class building_manager : MonoBehaviour
         civilization = GameObject.Find("civManager").GetComponent<civilization>(); // Connects to the import_manager.
         preview_object = GameObject.Find("preview_object").GetComponent<preview_object>();
         menu_manager = GameObject.Find("MenuManager").GetComponent<menu_manager>(); // Connects to the match_manager.
+        match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
     }
 
     // This runs when the character is enabled.
@@ -56,10 +58,10 @@ public class building_manager : MonoBehaviour
             && activeBuildingType != null
             && (tile.is_walkable()))
         {
-            if (civilization.amountGold >= activeBuildingType.buildCost)
+            if (match_manager.get_local_player().gold >= activeBuildingType.buildCost)
             {
                 Vector3 tilePosition = tile.transform.position;
-                Building newBuilding; // Building that was just placed
+                Building newBuilding = null; // Building that was just placed
                 GameObject addScript; 
 
                 set_current_tile(tile);
@@ -78,7 +80,6 @@ public class building_manager : MonoBehaviour
                         newBuilding = preview_object.place(activeBuildingType.asian, tile).GetComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
-                        civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                         Debug.Log(activeBuildingType.asian.name);
                     }
@@ -96,7 +97,6 @@ public class building_manager : MonoBehaviour
                             newBuilding.tag = "Mine";
 
                         newBuilding.set_current_tile(tile);
-                        civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
                     else
@@ -117,7 +117,6 @@ public class building_manager : MonoBehaviour
                         newBuilding = addScript.AddComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
-                        civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
                     else if (tile.is_in_city()
@@ -135,7 +134,6 @@ public class building_manager : MonoBehaviour
                             newBuilding.tag = "Mine";
 
                         newBuilding.set_current_tile(tile);
-                        civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
                     else
@@ -154,7 +152,6 @@ public class building_manager : MonoBehaviour
                         newBuilding = preview_object.place(activeBuildingType.viking, tile).GetComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
-                        civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
                     else if (tile.is_in_city()
@@ -172,7 +169,6 @@ public class building_manager : MonoBehaviour
                             newBuilding.tag = "Mine";
 
                         newBuilding.set_current_tile(tile);
-                        civilization.deduct_cost(building_select.buildingNumber);
                         activeBuildingType.print_message();
                     }
                     else
@@ -180,7 +176,14 @@ public class building_manager : MonoBehaviour
                         Debug.Log("Building cannot be placed here, destroying previews");
                         preview_object.destroy_previews();
                     }
-                }               
+                }      
+                
+                if (newBuilding != null)
+                {
+                    import_manager.run_function_all("network_manager", "subtract_player_resources", new string[3] { "0", activeBuildingType.buildCost.ToString(), civNumber.ToString() });
+                    match_manager.choose_player(civNumber).buildings.Add(newBuilding);
+
+                }
             }
             else
             {
