@@ -180,7 +180,7 @@ public class Tile : MonoBehaviour
     {
         if (tile == this && tile.is_occupied() && character != null&& (match_manager.get_local_player().civilization == tile.get_current_character().GetComponent<PlayerMove>().get_civilization()))
         {
-            Debug.Log("Selecting all the tiles around this one.");
+            //Debug.Log("Selecting all the tiles around this one.");
             tile.set_selectable(character);
 
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
@@ -372,7 +372,7 @@ public class Tile : MonoBehaviour
                     // attach attack animation here
                     import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, character.GetComponent<PlayerMove>().damage.ToString() });
                     Debug.Log("Health equals " + defendingUnit.health);
-                    cooldowns.initiate_attack_cooldown();
+                    cooldowns.initiate_attack_cooldown(character.GetComponent<PlayerMove>().cooldown);
                     if (defendingUnit.health <= 0)
                     {
                         Debug.Log("YOUR SOLDIER HAS FALLEN !!");
@@ -388,7 +388,7 @@ public class Tile : MonoBehaviour
     {
         if (tile == this && character!= null && tile.is_occupied())
         {
-            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
+            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().attackRange))
             {
                 if (nearByTile.is_occupied() && (nearByTile.get_current_character().GetComponent<PlayerMove>().get_civilization() != match_manager.get_local_player().civilization))
                 {
@@ -404,7 +404,7 @@ public class Tile : MonoBehaviour
         if (tile == this && tile.is_occupied())
         {
             Debug.Log("Setting unattackable");
-            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
+            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().attackRange))
             {
                 if (nearByTile.is_attackable())
                 {

@@ -114,8 +114,6 @@ public class building_manager : MonoBehaviour
                     {
                         addScript = preview_object.place(activeBuildingType.greek, tile);
                                       addScript.AddComponent<City>();
-                                      addScript.AddComponent<open_unit_menu>();
-                                      addScript.AddComponent<BoxCollider>();
                         newBuilding = addScript.AddComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
@@ -187,6 +185,7 @@ public class building_manager : MonoBehaviour
             else
             {
                 Debug.Log("Don't have enough Gold");
+                preview_object.destroy_previews();
             }
         }      
         activeBuildingType = null;

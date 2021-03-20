@@ -121,7 +121,7 @@ public class match_manager : MonoBehaviour
     public Player choose_player (int civilization)
     {
         Player chosenPlayer = null;
-        Debug.Log("Choosing the player from " + civilization);
+        //Debug.Log("Choosing the player from " + civilization);
 
         switch (civilization)
         {
