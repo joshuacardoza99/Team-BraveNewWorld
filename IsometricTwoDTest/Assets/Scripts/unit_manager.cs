@@ -70,7 +70,12 @@ public class unit_manager : MonoBehaviour
                     break;
             }
 
-            import_manager.run_function_all("unit_manager", "add_unit", new string[4] { tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), unitToCreate.gameObject.name, match_manager.get_local_player().civilization.ToString() });
+            if (match_manager.get_local_player().food >= activeUnitType.food)
+            {
+                import_manager.run_function_all("network_manager", "subtract_player_resources", new string[3] { activeUnitType.food.ToString(), "0", match_manager.get_local_player().civilization.ToString()});
+                import_manager.run_function_all("unit_manager", "add_unit", new string[4] { tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), unitToCreate.gameObject.name, match_manager.get_local_player().civilization.ToString() });
+            }
+
             activeUnitType = null;
             menu_manager.close_menus();
         }
@@ -92,6 +97,7 @@ public class unit_manager : MonoBehaviour
             unit.name = parameter[3] + "_" + unit.name + "_" + counter++;
             unit.GetComponent<PlayerMove>().set_civilization(int.Parse(parameter[3]));
             tile.set_occupied(new string[1] { unit.name });
+            match_manager.choose_player(int.Parse(parameter[3])).units.Add(unit.GetComponent<PlayerMove>());
         }
     }
 
