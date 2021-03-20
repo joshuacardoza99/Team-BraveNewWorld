@@ -29,6 +29,10 @@ public class unit_type : ScriptableObject
     public float attackCooldown;              // Unit attack cooldown
     public float movementCooldown;            // unit movement cooldown
 
+    [Space(5)]                                // 5 pixels of spacing here.
+    [Header("Cost")]                          // Shows text in inspector
+    public int food;
+
     public void print_message()
     {
         Debug.Log("A " + unitType + " unit has been spawned");

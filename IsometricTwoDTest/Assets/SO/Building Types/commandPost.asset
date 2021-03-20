@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609c0da8d4167184bad12b13e612d074, type: 3}
   m_Name: commandPost
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: c11b75c1abd3399489117297f63f4618, type: 3}
+  sprite: {fileID: 21300000, guid: 89a425fdd838868498e3a781f224722b, type: 3}
   asian: {fileID: 7413098188490291201, guid: 1670c7f4fdb10744aaa7d0cb811529cc, type: 3}
   viking: {fileID: 2585649468242109966, guid: 4e68fc85c3123e942bda735fdb13ec2e, type: 3}
   greek: {fileID: 7503095687767798603, guid: 8555c0a87d490a64eb0752999ca83ee8, type: 3}
@@ -21,6 +21,8 @@ MonoBehaviour:
   previewGreek: {fileID: 2786063593081427463, guid: 115eb9ef1ca9b234590470dcad7ea9cd, type: 3}
   isConquered: 0
   unitType: 0
-  resourcesAmount: 0
+  foodAmount: 0
+  goldAmount: 0
   buildCost: 500
+  type: commandPost
   resourceCooldown: 0

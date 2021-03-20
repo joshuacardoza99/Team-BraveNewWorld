@@ -276,7 +276,7 @@ public class map_manager : MonoBehaviour
     }
 
     // Finds the wanted map item and runs the given function on it.
-    // Parameter = [int xVirtualPosition, int yVirtualPosition, string functionName, string parameter].
+    // Parameter = [int xVirtualPosition, int yVirtualPosition, string functionName, string[] parameter].
     public void run_on_map_item(string[] parameter)
     {
         int xVirtualPosition = int.Parse(parameter[0]);     // The x position on the virtual of the map_item needing selected.

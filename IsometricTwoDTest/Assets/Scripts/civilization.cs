@@ -6,15 +6,20 @@ using TMPro;
 
 public class civilization : MonoBehaviour
 {
+    // External Classes //
+    match_manager match_manager;
+    import_manager import_manager;
+
     public GameObject goldPopUp;          // Pop up for the Gold
     public string goldToDisplay;          // string of gold amount that has been put into the users resources
-    public building_type[] building_type; // Array of building types
+    public List<building_type> building_type; // Array of building types
     public GameObject[]   numberOfFarms;  // Number of farms the user owns
     public GameObject[]   numberOfMines;  // Number of mines the user owns
-    public int   amountFood;              // The amount of food the user owns
-    public int   amountGold;              // The amount of gold the user owns
+    private int   amountFood;              // The amount of food the user owns
+    private int   amountGold;              // The amount of gold the user owns
     public float timeRemanining = 10;     // The amount of time it takes to refresh resources
     public Tile  currentTile = null;      // The tile this character is currently on.
+    private List<int> playersNeededUpdated = new List<int>();
 
     // External Classes
     civ_resources_display civ_resources_display;  // Import_Manager Class that facilitates cross class, player, and server function calls.
@@ -22,8 +27,10 @@ public class civilization : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        civ_resources_display = GameObject.Find("civManager").GetComponent<civ_resources_display>(); // Connects to the import_manager.
+        civ_resources_display = GameObject.Find("civManager").GetComponent<civ_resources_display>();
         Building = GameObject.Find("civManager").GetComponent<Building>();
+        match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
+        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
     }
 
     public void Awake()
@@ -34,10 +41,6 @@ public class civilization : MonoBehaviour
 
     public void Update()
     {
-        numberOfFarms = GameObject.FindGameObjectsWithTag("Farm"); // Find the farm tag
-        numberOfMines = GameObject.FindGameObjectsWithTag("Mine"); // Find the mine tag
-
-        civ_resources_display.update_resources();
 
         if (timeRemanining > 0)
         {
@@ -47,37 +50,50 @@ public class civilization : MonoBehaviour
         {
             timeRemanining = 10;
 
-            // Pop up for Food
-            if (building_type[0])
+            match_manager.for_each_player((player) =>
             {
-                amountFood += (numberOfFarms.Length * (building_type[0].resourcesAmount + 5)); // Increment the food amount
-                resource_pop_up(numberOfFarms);
-            }
-
-            // Pop for Gold
-            if (building_type[1])
-            {
-                amountGold += (numberOfMines.Length * building_type[1].resourcesAmount); //Increment the gold amount
-                resource_pop_up(numberOfMines);
-            }
+                Debug.Log("About to run update resources.");
+                update_resources(player.civilization);
+            });
         }
     }
-    // Deduct the cost of the specific building from the amount of resources the user owns.
-    public void deduct_cost(int buildingNumber)
+
+    // Updates the resource based on the buildings the given civilization owns.
+    public void update_resources(int civilization)
     {
-        amountGold = amountGold - building_type[buildingNumber].buildCost;
+        Debug.Log("Running update resource");
+        match_manager.choose_player(civilization).buildings.ForEach((Building building) =>
+        {
+            building_type.FindAll(buildingType => buildingType.type == building.gameObject.tag).ForEach((buildingType) =>
+            {
+                Debug.Log("About to add Food " + buildingType.foodAmount + " and Gold = " + buildingType.goldAmount);
+                match_manager.choose_player(civilization).gold += buildingType.goldAmount;
+                match_manager.choose_player(civilization).food += buildingType.foodAmount;
+
+                if (match_manager.get_local_player().civilization == civilization)
+                {
+                    resource_pop_up(building, buildingType);
+                    civ_resources_display.update_resources();
+                }
+            });
+        });
     }
 
-    public void resource_pop_up(GameObject[] buildings)
+    public void resource_pop_up(Building building, building_type type)
     {
         //GameObject[] numberOfFarms = GameObject.FindGameObjectsWithTag("Farm");
 
-        foreach (GameObject building in buildings)
+        if (type.goldAmount > 0)
         {
-            Vector3 tilePosition = building.GetComponent<Building>().currentTile.transform.position;
+            Vector3 tilePosition = building.currentTile.transform.position;
 
             GameObject goldInstance = Instantiate(goldPopUp, tilePosition, Quaternion.identity);   // Instantiate the prefab
             goldInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(goldToDisplay); // Display the string
-        }        
+        }
+        
+        if (type.foodAmount > 0)
+        {
+            // Shows the food pop up here.
+        }
     }
 }
