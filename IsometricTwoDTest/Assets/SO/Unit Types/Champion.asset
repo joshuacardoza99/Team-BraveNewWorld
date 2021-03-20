@@ -17,10 +17,10 @@ MonoBehaviour:
   viking: {fileID: 0}
   greek: {fileID: 0}
   unitType: 0
-  health: 0
-  attackRange: 0
-  moveRange: 0
-  attackDamage: 0
-  attackCooldown: 0
-  movementCooldown: 0
-  food: 0
+  health: 200
+  attackRange: 3
+  moveRange: 2
+  attackDamage: 50
+  attackCooldown: 20
+  movementCooldown: 20
+  food: 20

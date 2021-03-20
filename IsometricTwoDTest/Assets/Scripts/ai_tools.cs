@@ -26,7 +26,7 @@ namespace AI
             }
 
             import_manager.run_function_all("network_manager", "add_player", new string[1] { civilization.ToString() });
-            import_manager.run_function_all("unit_manager", "add_champion", new string[3] { civilization.ToString(), championName, Random.Range(1000, 2000).ToString() });
+            import_manager.run_function_all("unit_manager", "add_champion", new string[2] { civilization.ToString(), Random.Range(1000, 2000).ToString() });
         }
 
         public void move_unit(Tile tile, PlayerMove unit, int civilization)

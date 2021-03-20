@@ -17,6 +17,7 @@ public class building_manager : MonoBehaviour
     bool canPlace = false;                                  // Can building be placed
     public List<Tile> showPreview = new List<Tile>();       // List of tiles with building previews
     public List<Tile> listCommandPostTiles = new List<Tile>();  // List of tiles with Command Posts
+    public List<Tile> previews = new List<Tile>();
     public List<GameObject> commandPost = new List<GameObject>();
     public Tile currentTile = null;                         // The tile this character is currently on.
     public Tile playerTile = null;                          // The tile the champion is currently on.
@@ -67,13 +68,13 @@ public class building_manager : MonoBehaviour
                 set_current_tile(tile);
                 can_place();
 
-                playerTile = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile;
+               playerTile = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile;
 
                 // Choose prefab depeding on which civ user choose
                 if (civNumber == 0)
                 {
-                    if ((activeBuildingType.unitType == 0)
-                        && !tile.is_in_city()
+                    if (!tile.is_in_city()
+                        && (activeBuildingType.unitType == 0)                        
                         && canPlace
                         && !tile.has_building())
                     {
@@ -124,8 +125,7 @@ public class building_manager : MonoBehaviour
                              && !tile.has_building())
                     {
                         //newBuilding = preview_object.place(activeBuildingType.greek, tile).GetComponent<Building>();
-
-                        addScript = preview_object.place(activeBuildingType.asian, tile); // clean this up later
+                        addScript = preview_object.place(activeBuildingType.greek, tile); // clean this up later
                         newBuilding = addScript.AddComponent<Building>();
 
                         if (newBuilding.name == "farm(Clone)")
@@ -160,7 +160,7 @@ public class building_manager : MonoBehaviour
                     {
                         //newBuilding = preview_object.place(activeBuildingType.viking, tile).GetComponent<Building>();
 
-                        addScript = preview_object.place(activeBuildingType.asian, tile); // clean this up later
+                        addScript = preview_object.place(activeBuildingType.viking, tile); // clean this up later
                         newBuilding = addScript.AddComponent<Building>();
 
                         if (newBuilding.name == "farm(Clone)")
@@ -190,7 +190,8 @@ public class building_manager : MonoBehaviour
                 Debug.Log("Don't have enough Gold");
                 preview_object.destroy_previews();
             }
-        }      
+        }
+        showPreview.Clear();
         activeBuildingType = null;
         canPlace = false;
     }
@@ -204,11 +205,11 @@ public class building_manager : MonoBehaviour
     public void place_previews(Transform aPrefab)
     {
         preview_object preview;
-        showPreview      = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile.get_walkable_tiles(1);
+       // showPreview      = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile.get_walkable_tiles(1);
 
         if (activeBuildingType.unitType == 0)
         {
-            foreach (Tile tile in showPreview)
+            foreach (Tile tile in GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile.get_walkable_tiles(1))
             {
                 if (!tile.has_building() 
                     && !tile.is_in_city())
@@ -216,6 +217,7 @@ public class building_manager : MonoBehaviour
                     Vector3 tilePosition = tile.transform.position;
                     preview = preview_object.create_preview(aPrefab, tilePosition);
                     preview.tag = "previewBuilding";
+                    showPreview.Add(tile);
                 }
             }
         }
@@ -230,7 +232,8 @@ public class building_manager : MonoBehaviour
                         Vector3 tilePosition = post.transform.position;
                         preview = preview_object.create_preview(aPrefab, tilePosition);
                         preview.tag = "previewBuilding";
-                        canPlace = true;
+                       // canPlace = true;
+                        showPreview.Add(post);
                     }
                 }
             }
@@ -249,6 +252,7 @@ public class building_manager : MonoBehaviour
                 }
             }
         }
+
     }
 
     public void set_current_tile(Tile tile)
