@@ -27,22 +27,22 @@ public class Tile : MonoBehaviour
 
     // Global Variables //
     [SerializeField] private bool       walkable                = true;  // Determines if this tile can be walked on.
-    [SerializeField] private bool       current                 = false; // Determines if the player is currently using this tile
+    //[SerializeField] private bool       current                 = false; // Determines if the player is currently using this tile
     [SerializeField] private bool       occupied                = false; // Determines if there is a character currently on this tile
     [SerializeField] private bool       hasBuilding             = false; // Determines if there is a building currently on this tile
     [SerializeField] private bool       inCity                  = false; // Determines if this tile is in the borders of a city
     [SerializeField] private bool       isCurrentlySelectedTile = false; // Tells when this tile is selected by the player.
-    [SerializeField] private bool       target                  = false; // Determines if this tile is being targeted by another player.
+    //[SerializeField] private bool       target                  = false; // Determines if this tile is being targeted by another player.
     [SerializeField] private GameObject selectable              = null; // Determines if the player can click on click on this tile.
     [SerializeField] private bool       attackable              = false; // Determines if another player can attach this tile.
     [SerializeField] private GameObject currentCharacter        = null;  // the character currently occupying this tile.
     [SerializeField] private GameObject currentBuilding         = null;  // the building occupying this tile
-    [SerializeField] private float      nextAttack              = 0;     // Determines if another player is attaching this tile.
-    [SerializeField] private bool       isAttacking             = false; // Determines if the player on this tile it attaching another tile.
-    [SerializeField] private float      cooldown                = 3;     // The amount of seconds a character must wast before moving again.
+    //[SerializeField] private float      nextAttack              = 0;     // Determines if another player is attaching this tile.
+    //[SerializeField] private bool       isAttacking             = false; // Determines if the player on this tile it attaching another tile.
+    //[SerializeField] private float      cooldown                = 3;     // The amount of seconds a character must wast before moving again.
     [SerializeField] private int        civilization;                    // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     [SerializeField] private int[]      grid;                            // Stores the position of the Tile in the virtual grid. [x position, y position]
-    [SerializeField] private bool       selectedNearBy          = false;
+    //[SerializeField] private bool       selectedNearBy          = false;
     // Use this for initialization.
     void Start()
     {
@@ -200,7 +200,7 @@ public class Tile : MonoBehaviour
     {
         if (tile == this && character != null)
         {
-            selectedNearBy = false;
+            //selectedNearBy = false;
             Debug.Log("Unselecting all the tiles around this one.");
             tile.set_unselectable(new string[0] { });
 
