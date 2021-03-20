@@ -493,8 +493,8 @@ MonoBehaviour:
   nextAttack: 0
   isAttacking: 0
   civilization: 0
+  unit: {fileID: 11400000, guid: 2592dd4a4e0ba7d438926bc00c9fccfe, type: 2}
   actualTargetTile: {fileID: 0}
-  halfHeight: 0
   currentTile: {fileID: 0}
   anim: {fileID: 0}
 --- !u!1 &4545768408254739799

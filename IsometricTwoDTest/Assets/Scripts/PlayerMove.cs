@@ -13,13 +13,15 @@ public class PlayerMove : MonoBehaviour
     map_manager    map_manager;     // Importing the map_manager class.
     unit_maker     unit_maker;      // Importing the unit_maker class.
     Tile Tile;
+    cooldown cooldown;
 
     // Unit attribiutes //
     public int health;                  // The current health of this character.
     public int damage;                   // The amount of damage this character gives in an attach.
     public int attackRange;                   // The range this character can attach from.
     public int moveRange;                   // The range this character can move to.
-    public float cooldown;                   // The seconds this player needs to wait between actions.
+    public float attackCooldown;                   // The seconds this player needs to wait between actions.
+    public float moveCooldown;
     public float nextAttack = 0;                   // Does not appear to be used.
     public bool isAttacking = false;               // Determines if this player is currently attaching.
     public int civilization = 0;                   // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
@@ -45,6 +47,7 @@ public class PlayerMove : MonoBehaviour
         match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
         unit_maker = GameObject.Find("unit_manager").GetComponent<unit_maker>();
+        cooldown = GameObject.Find("Cooldown").GetComponent<cooldown>();
 
         anim = this.GetComponent<Animator>();
 
@@ -206,11 +209,12 @@ public class PlayerMove : MonoBehaviour
 
     public void load_stats()
     {
-        health      = unit.health;             
-        damage      = unit.attackDamage;                  
-        attackRange = unit.attackRange;               
-        moveRange   = unit.attackRange - 1;                 
-        cooldown    = unit.attackCooldown;
+        health          = unit.health;             
+        damage          = unit.attackDamage;                  
+        attackRange     = unit.attackRange;
+        moveRange       = unit.moveRange;
+        attackCooldown  = unit.attackCooldown;
+        moveCooldown    = unit.movementCooldown;
     }
 
 }

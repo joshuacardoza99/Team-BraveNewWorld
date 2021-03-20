@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class cooldown : MonoBehaviour
 {
-
     public float nextAttack = 0;
     public float nextMove = 0;
     public float nextResurceCollect = 0;
@@ -16,13 +15,13 @@ public class cooldown : MonoBehaviour
         nextAttack = Time.time + cooldown;
     }
 
-    public void initiate_move_cooldown()
+    public void initiate_move_cooldown(float cooldown)
     {
         Debug.Log("IN COOLDOWN");
         nextMove = Time.time + coolDown;
     }
 
-    public void initiate_resource_cooldown()
+    public void initiate_resource_cooldown(float cooldown)
     {
         Debug.Log("IN COOLDOWN");
         nextResurceCollect = Time.time + coolDown;

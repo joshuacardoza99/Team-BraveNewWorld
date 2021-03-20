@@ -14,11 +14,6 @@ public class civ_description : MonoBehaviour
     {
         getText = GetComponent<Text>();
     }
-    
-    public void show_text()
-    {   
-        getText.text = inputText.text;
-    }
 
     void Update()
     {

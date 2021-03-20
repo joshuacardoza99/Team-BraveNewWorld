@@ -22,6 +22,7 @@ public class unit_type : ScriptableObject
     [Header("Unit Attributes")]               // Shows text in inspector
     public int health;                        // Unit health
     public int attackRange;                   // Unit attack range
+    public int moveRange;
     public int attackDamage;                  // Unit attack damage
 
     [Space(5)]                                // 5 pixels of spacing here.

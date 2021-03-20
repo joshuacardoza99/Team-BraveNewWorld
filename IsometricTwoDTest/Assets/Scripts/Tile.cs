@@ -373,7 +373,7 @@ public class Tile : MonoBehaviour
                     // attach attack animation here
                     import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, character.GetComponent<PlayerMove>().damage.ToString() });
                     Debug.Log("Health equals " + defendingUnit.health);
-                    cooldowns.initiate_attack_cooldown(character.GetComponent<PlayerMove>().cooldown);
+                    cooldowns.initiate_attack_cooldown(character.GetComponent<PlayerMove>().attackCooldown);
                     if (defendingUnit.health <= 0)
                     {
                         Debug.Log("YOUR SOLDIER HAS FALLEN !!");
