@@ -577,11 +577,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdfb57c639781a438bc2f6fd21e1554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 20
   damage: 2
   attackRange: 4
   moveRange: 2
-  cooldown: 3
+  cooldown: 5
   nextAttack: 0
   isAttacking: 0
   civilization: 0
