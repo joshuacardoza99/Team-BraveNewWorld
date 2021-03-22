@@ -92,7 +92,6 @@ public class unit_manager : MonoBehaviour
 
         if (unit != null)
         {
-            unit.AddComponent<PlayerMove>();
             unit.tag = "unit";
             unit.name = parameter[3] + "_" + unit.name + "_" + counter++;
             unit.GetComponent<PlayerMove>().set_civilization(int.Parse(parameter[3]));

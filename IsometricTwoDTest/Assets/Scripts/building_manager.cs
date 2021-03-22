@@ -242,8 +242,8 @@ public class building_manager : MonoBehaviour
 
     public void can_place()
     {
-        if (activeBuildingType.unitType == 0)
-        {
+      //  if (activeBuildingType.unitType == 0)
+      //  {
             foreach (Tile preview in showPreview)
             {
                 if (currentTile == preview)
@@ -251,7 +251,7 @@ public class building_manager : MonoBehaviour
                     canPlace = true;
                 }
             }
-        }
+     //   }
 
     }
 
