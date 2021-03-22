@@ -2222,7 +2222,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea05bf7773808748a0b35605c34c8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  championName: startName
+  championName: '  '
+  buildingTypeList:
+  - {fileID: 11400000, guid: 57c33a5f3ed89df4a84d1d4039ba4c01, type: 2}
+  - {fileID: 11400000, guid: 7a0c2510b46c124429a08bb9dd8f2dff, type: 2}
+  - {fileID: 11400000, guid: 0c250dc03851ef74ba78cca97f5e70c5, type: 2}
+  unitTypeList:
+  - {fileID: 11400000, guid: 908ac721b737e034d853340d94a5f0c9, type: 2}
+  - {fileID: 11400000, guid: 170360ce56294104898532840e7bdc9f, type: 2}
+  - {fileID: 11400000, guid: 2592dd4a4e0ba7d438926bc00c9fccfe, type: 2}
+  - {fileID: 11400000, guid: d56c77add73bae54488244d9854f3d0c, type: 2}
 --- !u!114 &1379151759
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,7 +52,6 @@ public class civilization : MonoBehaviour
 
             match_manager.for_each_player((player) =>
             {
-                Debug.Log("About to run update resources.");
                 update_resources(player.civilization);
             });
         }
@@ -61,12 +60,10 @@ public class civilization : MonoBehaviour
     // Updates the resource based on the buildings the given civilization owns.
     public void update_resources(int civilization)
     {
-        Debug.Log("Running update resource");
         match_manager.choose_player(civilization).buildings.ForEach((Building building) =>
         {
             building_type.FindAll(buildingType => buildingType.type == building.gameObject.tag).ForEach((buildingType) =>
             {
-                Debug.Log("About to add Food " + buildingType.foodAmount + " and Gold = " + buildingType.goldAmount);
                 match_manager.choose_player(civilization).gold += buildingType.goldAmount;
                 match_manager.choose_player(civilization).food += buildingType.foodAmount;
 

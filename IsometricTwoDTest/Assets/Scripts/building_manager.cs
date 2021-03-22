@@ -178,11 +178,10 @@ public class building_manager : MonoBehaviour
                     }
                 }      
                 
-                if (newBuilding != null)
+               if (newBuilding != null)
                 {
                     import_manager.run_function_all("network_manager", "subtract_player_resources", new string[3] { "0", activeBuildingType.buildCost.ToString(), civNumber.ToString() });
                     match_manager.choose_player(civNumber).buildings.Add(newBuilding);
-
                 }
             }
             else

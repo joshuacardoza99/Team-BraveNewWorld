@@ -46,6 +46,26 @@ public class building_type : ScriptableObject
     {
         Debug.Log("\nResource Cooldown: " + resourceCooldown + "\nResource Amount: Food = " + foodAmount + " Gold = " + goldAmount);
     }
+
+    public Transform get_building_of_civilization(int civilization)
+    {
+        Transform selectedBuilding = null;
+
+        if (civilization == 0)
+        {
+            selectedBuilding = asian;
+        }
+        else if (civilization == 1)
+        {
+            selectedBuilding = greek;
+        }
+        else if (civilization == 2)
+        {
+            selectedBuilding = viking;
+        }
+
+        return selectedBuilding;
+    }
 }
 
 public enum BuildingType

@@ -19,6 +19,7 @@ MonoBehaviour:
   unitType: 0
   health: 50
   attackRange: 6
+  moveRange: 2
   attackDamage: 30
   attackCooldown: 3
   movementCooldown: 3

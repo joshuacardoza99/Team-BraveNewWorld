@@ -9,7 +9,7 @@ public class building_select : MonoBehaviour
     match_manager match_manager;
 
     [SerializeField]
-    private List<building_type> buildingTypeList; // List of SO, connects any building type being scripted
+    public List<building_type> buildingTypeList; // List of SO, connects any building type being scripted
 
     [SerializeField]
     private building_manager building_manager;   // Makes varible visible in inspector and connect it to building_manager
