@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 8551123318102672238}
   - component: {fileID: 9096877172898450010}
   - component: {fileID: 6257488843035682671}
-  - component: {fileID: -1880690154217161970}
-  - component: {fileID: -4122798884779765930}
   m_Layer: 0
   m_Name: asiancommandpost
   m_TagString: Untagged
@@ -117,28 +115,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentTile: {fileID: 0}
---- !u!65 &-1880690154217161970
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7902494814619198139}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 22.000002, y: 21.143578, z: 21.999985}
-  m_Center: {x: -0.000034295605, y: 17.236864, z: 0.000012914}
---- !u!114 &-4122798884779765930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7902494814619198139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 592437d84100196458e8dcef74542e6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

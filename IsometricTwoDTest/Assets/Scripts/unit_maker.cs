@@ -37,10 +37,11 @@ public class unit_maker : MonoBehaviour
     }
 
     // Adds the champion of the given civilization to a random tile.
-    // Parameters = [string civilization, string championName, int randomTile]
+    // Parameters = [string civilization, int randomTile]
     public void add_champion(string[] parameters)
     {
-        int randomTile = int.Parse(parameters[2]);                                      // Holds the random number that allows for the selection of the same random tile across the network.
+        int randomTile = int.Parse(parameters[1]);                                      // Holds the random number that allows for the selection of the same random tile across the network.
+        Debug.Log("Random Range is " + randomTile);
         int civilization = int.Parse(parameters[0]);                                      // The civilization of the champion needing created.
         GameObject champion = null;                                                          // The champion GameObject.
         List<GameObject> tiles = map_manager.get_land(civilization);                            // The list of tiles that a random tile to place the champion on is chosen from.
@@ -68,7 +69,7 @@ public class unit_maker : MonoBehaviour
             champion.tag = "Player";
         }
         
-        champion.name = parameters[0] + "_" + parameters[1];
+        champion.name = parameters[0] + "_";
         champion.GetComponent<PlayerMove>().set_civilization(civilization);
         import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tileGrid[0].ToString(), tileGrid[1].ToString(), "set_occupied", champion.name });
 
@@ -87,6 +88,8 @@ public class unit_maker : MonoBehaviour
 
         GameObject itemCopy = Instantiate(item, tilePosition, Quaternion.Euler(new Vector3(0, 0, 0)));
         face_forward(itemCopy);
+
+        itemCopy.AddComponent<PlayerMove>();
         itemCopy.GetComponent<PlayerMove>().set_grid(tile.get_grid()[0], tile.get_grid()[1]);
 
         return itemCopy;

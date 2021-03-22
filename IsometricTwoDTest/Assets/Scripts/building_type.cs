@@ -30,8 +30,10 @@ public class building_type : ScriptableObject
 
     [Space(5)]                                // 5 pixels of spacing here.
     [Header("Building Attributes")]           // Shows text in inspector
-    public int   resourcesAmount;             // Amount of resources building generates
+    public int   foodAmount;                  // Amount of food this building generates.
+    public int   goldAmount;                  // Amount of gold this building generates.
     public int   buildCost;
+    public string type = "not a building";
 
     public float resourceCooldown;            // Cooldown on resource
 
@@ -42,7 +44,7 @@ public class building_type : ScriptableObject
 
     public void print_attributes()
     {
-        Debug.Log("\nResource Cooldown: " + resourceCooldown + "\nResource Amount: " + resourcesAmount);
+        Debug.Log("\nResource Cooldown: " + resourceCooldown + "\nResource Amount: Food = " + foodAmount + " Gold = " + goldAmount);
     }
 }
 

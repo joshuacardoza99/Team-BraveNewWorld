@@ -27,13 +27,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2998451163597735178}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &2089134125840690987
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -109,12 +109,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkable: 1
+  current: 0
+  occupied: 0
+  hasBuilding: 0
+  inCity: 0
+  isCurrentlySelectedTile: 0
   target: 0
-  adjacencyList: []
-  currentchar: {fileID: 0}
-  visited: 0
-  parent: {fileID: 0}
-  distance: 0
-  f: 0
-  g: 0
-  h: 0
+  selectable: {fileID: 0}
+  attackable: 0
+  currentCharacter: {fileID: 0}
+  currentBuilding: {fileID: 0}
+  nextAttack: 0
+  isAttacking: 0
+  cooldown: 3
+  civilization: 0
+  grid: 
+  selectedNearBy: 0

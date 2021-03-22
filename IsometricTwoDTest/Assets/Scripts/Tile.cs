@@ -27,22 +27,22 @@ public class Tile : MonoBehaviour
 
     // Global Variables //
     [SerializeField] private bool       walkable                = true;  // Determines if this tile can be walked on.
-    [SerializeField] private bool       current                 = false; // Determines if the player is currently using this tile
+    //[SerializeField] private bool       current                 = false; // Determines if the player is currently using this tile
     [SerializeField] private bool       occupied                = false; // Determines if there is a character currently on this tile
     [SerializeField] private bool       hasBuilding             = false; // Determines if there is a building currently on this tile
     [SerializeField] private bool       inCity                  = false; // Determines if this tile is in the borders of a city
     [SerializeField] private bool       isCurrentlySelectedTile = false; // Tells when this tile is selected by the player.
-    [SerializeField] private bool       target                  = false; // Determines if this tile is being targeted by another player.
+    //[SerializeField] private bool       target                  = false; // Determines if this tile is being targeted by another player.
     [SerializeField] private GameObject selectable              = null; // Determines if the player can click on click on this tile.
     [SerializeField] private bool       attackable              = false; // Determines if another player can attach this tile.
     [SerializeField] private GameObject currentCharacter        = null;  // the character currently occupying this tile.
     [SerializeField] private GameObject currentBuilding         = null;  // the building occupying this tile
-    [SerializeField] private float      nextAttack              = 0;     // Determines if another player is attaching this tile.
-    [SerializeField] private bool       isAttacking             = false; // Determines if the player on this tile it attaching another tile.
-    [SerializeField] private float      cooldown                = 3;     // The amount of seconds a character must wast before moving again.
+    //[SerializeField] private float      nextAttack              = 0;     // Determines if another player is attaching this tile.
+    //[SerializeField] private bool       isAttacking             = false; // Determines if the player on this tile it attaching another tile.
+    //[SerializeField] private float      cooldown                = 3;     // The amount of seconds a character must wast before moving again.
     [SerializeField] private int        civilization;                    // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     [SerializeField] private int[]      grid;                            // Stores the position of the Tile in the virtual grid. [x position, y position]
-    [SerializeField] private bool       selectedNearBy          = false;
+    //[SerializeField] private bool       selectedNearBy          = false;
     // Use this for initialization.
     void Start()
     {
@@ -180,7 +180,7 @@ public class Tile : MonoBehaviour
     {
         if (tile == this && tile.is_occupied() && character != null&& (match_manager.get_local_player().civilization == tile.get_current_character().GetComponent<PlayerMove>().get_civilization()))
         {
-            Debug.Log("Selecting all the tiles around this one.");
+            //Debug.Log("Selecting all the tiles around this one.");
             tile.set_selectable(character);
 
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
@@ -200,7 +200,7 @@ public class Tile : MonoBehaviour
     {
         if (tile == this && character != null)
         {
-            selectedNearBy = false;
+            //selectedNearBy = false;
             Debug.Log("Unselecting all the tiles around this one.");
             tile.set_unselectable(new string[0] { });
 
@@ -327,7 +327,8 @@ public class Tile : MonoBehaviour
     }
 
     // Set this tile to within the borders of a city
-    public void set_in_city()
+    // Parameter = []
+    public void set_in_city(string[] parameter)
     {
         inCity = true;
     }
@@ -372,7 +373,7 @@ public class Tile : MonoBehaviour
                     // attach attack animation here
                     import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, character.GetComponent<PlayerMove>().damage.ToString() });
                     Debug.Log("Health equals " + defendingUnit.health);
-                    cooldowns.initiate_attack_cooldown();
+                    cooldowns.initiate_attack_cooldown(character.GetComponent<PlayerMove>().attackCooldown);
                     if (defendingUnit.health <= 0)
                     {
                         Debug.Log("YOUR SOLDIER HAS FALLEN !!");
@@ -388,7 +389,7 @@ public class Tile : MonoBehaviour
     {
         if (tile == this && character!= null && tile.is_occupied())
         {
-            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
+            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().attackRange))
             {
                 if (nearByTile.is_occupied() && (nearByTile.get_current_character().GetComponent<PlayerMove>().get_civilization() != match_manager.get_local_player().civilization))
                 {
@@ -404,7 +405,7 @@ public class Tile : MonoBehaviour
         if (tile == this && tile.is_occupied())
         {
             Debug.Log("Setting unattackable");
-            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
+            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().attackRange))
             {
                 if (nearByTile.is_attackable())
                 {

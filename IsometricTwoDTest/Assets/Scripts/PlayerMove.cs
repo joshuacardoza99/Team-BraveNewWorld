@@ -13,21 +13,26 @@ public class PlayerMove : MonoBehaviour
     map_manager    map_manager;     // Importing the map_manager class.
     unit_maker     unit_maker;      // Importing the unit_maker class.
     Tile Tile;
+    cooldown cooldown;
 
     // Unit attribiutes //
-    public int health = 10;                  // The current health of this character.
-    public int damage = 2;                   // The amount of damage this character gives in an attach.
-    public int attackRange = 4;                   // The range this character can attach from.
-    public int moveRange = 3;                   // The range this character can move to.
-    public float cooldown = 3;                   // The seconds this player needs to wait between actions.
+    public int health;                  // The current health of this character.
+    public int damage;                   // The amount of damage this character gives in an attach.
+    public int attackRange;                   // The range this character can attach from.
+    public int moveRange;                   // The range this character can move to.
+    public float attackCooldown;                   // The seconds this player needs to wait between actions.
+    public float moveCooldown;
     public float nextAttack = 0;                   // Does not appear to be used.
     public bool isAttacking = false;               // Determines if this player is currently attaching.
     public int civilization = 0;                   // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     private int[] grid = new int[2] { 0, 0 }; // Stores the position of the Tile in the virtual grid. [x position, y position]
 
+    // Reference to SO
+    public unit_type unit;
+
     // Varibles for movement 
     public Tile actualTargetTile;        // Does not appear to be used.
-    public float halfHeight = 0;    // Apears to only be assigned half-of the height of this character.
+    //public float halfHeight = 0;    // Apears to only be assigned half-of the height of this character.
     public Tile currentTile = null; // The tile this character is currently on.
 
     // Animation Controller
@@ -36,14 +41,19 @@ public class PlayerMove : MonoBehaviour
     // Use this for initialization.
     void Start()
     {
-        halfHeight = GetComponent<Collider>().bounds.extents.y;
+        //halfHeight = GetComponent<Collider>().bounds.extents.y;
 
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
         match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
         unit_maker = GameObject.Find("unit_manager").GetComponent<unit_maker>();
+        cooldown = GameObject.Find("Cooldown").GetComponent<cooldown>();
 
         anim = this.GetComponent<Animator>();
+
+        load_stats();
+        unit.print_attributes();
+
     }
 
     // This runs when the character is enabled.
@@ -195,6 +205,16 @@ public class PlayerMove : MonoBehaviour
         //import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
         currentTile.set_unoccupied(new string[0] { });
         match_manager.remove_player_unit(new string[2] { get_civilization().ToString(), this.gameObject.name });
+    }
+
+    public void load_stats()
+    {
+        health          = unit.health;             
+        damage          = unit.attackDamage;                  
+        attackRange     = unit.attackRange;
+        moveRange       = unit.moveRange;
+        attackCooldown  = unit.attackCooldown;
+        moveCooldown    = unit.movementCooldown;
     }
 
 }

@@ -22,12 +22,17 @@ public class unit_type : ScriptableObject
     [Header("Unit Attributes")]               // Shows text in inspector
     public int health;                        // Unit health
     public int attackRange;                   // Unit attack range
+    public int moveRange;
     public int attackDamage;                  // Unit attack damage
 
     [Space(5)]                                // 5 pixels of spacing here.
     [Header("Unit Cooldowns")]                // Shows text in inspector
     public float attackCooldown;              // Unit attack cooldown
     public float movementCooldown;            // unit movement cooldown
+
+    [Space(5)]                                // 5 pixels of spacing here.
+    [Header("Cost")]                          // Shows text in inspector
+    public int food;
 
     public void print_message()
     {
