@@ -56,6 +56,12 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+    /*private void Update()
+    {
+        if(currentTile.is_current())
+            Tile.handle_selection(currentTile, this.gameObject);
+    }*/
+
     // This runs when the character is enabled.
     void OnEnable()
     {

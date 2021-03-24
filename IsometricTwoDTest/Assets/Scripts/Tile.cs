@@ -320,6 +320,12 @@ public class Tile : MonoBehaviour
         return (selectable != null);
     }
 
+    // Returns if this is the currently selected tile
+    public bool is_current()
+    {
+        return isCurrentlySelectedTile;
+    }
+
     // Determines if this tile is within the borders of a city
     public bool is_in_city()
     {
@@ -353,6 +359,9 @@ public class Tile : MonoBehaviour
         return hasBuilding;
     }
 
+
+             // Attach Scripts //
+    
     // Attacks the character on selected tile.
     public void attack(Tile tile, GameObject character)
     {
