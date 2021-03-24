@@ -5172,7 +5172,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8168666491733117633, guid: 6d057a6003ceec54b8cb1c6a5d38b721, type: 3}
       propertyPath: m_Name
-      value: textHolder
+      value: resourceTextHolder
       objectReference: {fileID: 0}
     - target: {fileID: 8168666493213459108, guid: 6d057a6003ceec54b8cb1c6a5d38b721, type: 3}
       propertyPath: m_fontSize
