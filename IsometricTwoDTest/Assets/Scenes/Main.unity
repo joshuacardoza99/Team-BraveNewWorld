@@ -3111,6 +3111,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3878798630384995090, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: aefd5b50a4c3761459cb0d928544e1fe, type: 3}
     - target: {fileID: 4645324947673410228, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_FontData.m_FontSize
       value: 50
@@ -3159,13 +3163,25 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5080009282195197504, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -1112.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080009282195197504, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 471.29633
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080009282195197504, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 156
+      objectReference: {fileID: 0}
     - target: {fileID: 5100340471292589192, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_Name
       value: chooseCiv
       objectReference: {fileID: 0}
     - target: {fileID: 5100340471292589192, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5100340471292589195, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3251,6 +3267,10 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5100340471474828708, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e34071b4aa658684996d0d67a2b7dc52, type: 3}
     - target: {fileID: 5100340471474828709, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -3307,6 +3327,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5100340471474828762, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 588
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100340471898985116, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -597
+      objectReference: {fileID: 0}
+    - target: {fileID: 5100340471898985118, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2a48f62e2e5eac34d8668247a295cae2, type: 3}
     - target: {fileID: 5100340471898985119, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -3631,6 +3663,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6293787641321211698, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 834.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 6293787641321211698, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 136
+      objectReference: {fileID: 0}
+    - target: {fileID: 7371350879549805206, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7dacb019257e2e84dafdfa216d478098, type: 3}
     - target: {fileID: 7429093035132325013, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: descriptionText
       value: 
