@@ -27,23 +27,21 @@ public class Tile : MonoBehaviour
 
     // Global Variables //
     [SerializeField] private bool       walkable                = true;  // Determines if this tile can be walked on.
-    //[SerializeField] private bool       current                 = false; // Determines if the player is currently using this tile
     [SerializeField] private bool       occupied                = false; // Determines if there is a character currently on this tile
     [SerializeField] private bool       hasBuilding             = false; // Determines if there is a building currently on this tile
     [SerializeField] private bool       inCity                  = false; // Determines if this tile is in the borders of a city
     [SerializeField] private bool       isCurrentlySelectedTile = false; // Tells when this tile is selected by the player.
-    //[SerializeField] private bool       target                  = false; // Determines if this tile is being targeted by another player.
     [SerializeField] private GameObject selectable              = null; // Determines if the player can click on click on this tile.
     [SerializeField] private bool       attackable              = false; // Determines if another player can attach this tile.
     [SerializeField] private GameObject currentCharacter        = null;  // the character currently occupying this tile.
     [SerializeField] private GameObject currentBuilding         = null;  // the building occupying this tile
-    //[SerializeField] private float      nextAttack              = 0;     // Determines if another player is attaching this tile.
-    //[SerializeField] private bool       isAttacking             = false; // Determines if the player on this tile it attaching another tile.
-    //[SerializeField] private float      cooldown                = 3;     // The amount of seconds a character must wast before moving again.
     [SerializeField] private int        civilization;                    // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     [SerializeField] private int[]      grid;                            // Stores the position of the Tile in the virtual grid. [x position, y position]
-    //[SerializeField] private bool       selectedNearBy          = false;
+
     // Use this for initialization.
+    [SerializeField] private GameObject decoration = null;
+    [SerializeField] private GameObject cloud = null;
+
     void Start()
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
@@ -372,7 +370,7 @@ public class Tile : MonoBehaviour
                 cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
             }
 
-            PlayerMove defendingUnit = character.GetComponent<PlayerMove>();
+            PlayerMove defendingUnit = this.currentCharacter.GetComponent<PlayerMove>();
 
             if (Time.time > cooldowns.nextAttack)
             {
@@ -512,5 +510,40 @@ public class Tile : MonoBehaviour
                 this.GetComponent<Renderer>().material = map_manager.types.selectable;
             }
         }
+    }
+
+
+    // Adds a tree onto the tile.
+    public void add_tree(int type)
+    {
+        if(map_manager == null)
+        {
+            map_manager = GameObject.Find("Map").GetComponent<map_manager>();
+        }
+
+        decoration = map_manager.typesOfTrees.build_tree(this, get_civilization(), type);
+    }
+
+    // Remove decoration.
+    public void remove_decoration ()
+    {
+        if (decoration != null)
+        {
+            Destroy(decoration);
+            decoration = null;
+        }
+    }
+
+    // Sets the cloud that is covering this tile.
+    public void set_cloud(GameObject cloud)
+    {
+        this.cloud = cloud;
+    }
+
+    // Removes the cloud that is covering this tile.
+    public void remove_cloud()
+    {
+        Destroy(this.cloud);
+        this.cloud = null;
     }
 }

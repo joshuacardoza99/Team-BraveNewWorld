@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Champion
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
-  asian: {fileID: 0}
-  viking: {fileID: 0}
-  greek: {fileID: 0}
+  asian: {fileID: 3991519020496169387, guid: 55b76b08a60c08a4c843d34d04971adf, type: 3}
+  viking: {fileID: 1296134598327430887, guid: 3b6f519a961b7524089820e577530581, type: 3}
+  greek: {fileID: 8612826712256427940, guid: 6ad213543c9403a46ae0c115b4c20121, type: 3}
   unitType: 0
   health: 200
   attackRange: 3

@@ -55,7 +55,7 @@ public class unit_manager : MonoBehaviour
             && (tile.is_walkable())
             && tile.is_in_city())
         {
-            GameObject unitToCreate = activeUnitType.asian.gameObject;
+            GameObject unitToCreate = null;
 
             switch (match_manager.get_local_player().civilization)
             {

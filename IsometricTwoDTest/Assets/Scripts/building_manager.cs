@@ -13,14 +13,14 @@ public class building_manager : MonoBehaviour
     match_manager match_manager;
 
     // Public Global Variables 
-    public int civNumber;                                   // Number of the civilization
-    bool canPlace = false;                                  // Can building be placed
-    public List<Tile> showPreview = new List<Tile>();       // List of tiles with building previews
-    public List<Tile> listCommandPostTiles = new List<Tile>();  // List of tiles with Command Posts
-    public List<Tile> previews = new List<Tile>();
-    public List<GameObject> commandPost = new List<GameObject>();
-    public Tile currentTile = null;                         // The tile this character is currently on.
-    public Tile playerTile = null;                          // The tile the champion is currently on.
+    public int civNumber;                                         // Number of the civilization
+    bool canPlace = false;                                        // Can building be placed
+    public List<Tile> showPreview = new List<Tile>();             // List of tiles with building previews
+    public List<Tile> listCommandPostTiles = new List<Tile>();    // List of tiles with Command Posts
+    public List<Tile> previews = new List<Tile>();                // Liat of preview made on tiles
+    public List<GameObject> commandPost = new List<GameObject>(); // List of command post 
+    public Tile currentTile = null;                               // The tile this character is currently on.
+    public Tile playerTile = null;                                // The tile the champion is currently on.
 
     [SerializeField]
     private building_type activeBuildingType; // Make varibale public and attach it to building_type
@@ -63,12 +63,12 @@ public class building_manager : MonoBehaviour
             {
                 Vector3 tilePosition = tile.transform.position;
                 Building newBuilding = null; // Building that was just placed
-                GameObject addScript; 
+                GameObject addScript;        // using this variable to add missing scripts
 
                 set_current_tile(tile);
                 can_place();
 
-               playerTile = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile;
+                playerTile = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile;
 
                 // Choose prefab depeding on which civ user choose
                 if (civNumber == 0)
@@ -241,17 +241,13 @@ public class building_manager : MonoBehaviour
 
     public void can_place()
     {
-      //  if (activeBuildingType.unitType == 0)
-      //  {
-            foreach (Tile preview in showPreview)
+        foreach (Tile preview in showPreview)
+        {
+            if (currentTile == preview)
             {
-                if (currentTile == preview)
-                {
-                    canPlace = true;
-                }
+                canPlace = true;
             }
-     //   }
-
+        }
     }
 
     public void set_current_tile(Tile tile)

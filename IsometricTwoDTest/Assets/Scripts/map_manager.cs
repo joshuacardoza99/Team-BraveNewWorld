@@ -12,7 +12,10 @@ public class map_manager : MonoBehaviour
 
     // Public Global Variables //
     public int mapWidth = 10;              // The number of tiles across the width and height of the map is.
+    public int cloudCover = 20;
     public GameObject water;                      // The water GroundType's GameObject.
+    public GameObject sand;
+    public GameObject cloud;
     public GameObject vikingLand;                 // The viking GroundType's GameObject.
     public GameObject greekLand;                  // The greek GroundType's GameObject.
     public GameObject asianLand;                  // The asian GroundType's GameObject.
@@ -20,6 +23,9 @@ public class map_manager : MonoBehaviour
     public string currentCharacter = null;    // Character on current selected tile
     public map_item[,] map;                        // The games current map as a 2-dimintional array of map_items.
     public GroundTypes types;                       // Holds all of the materials for each ground item.
+    public int treeAmount = 10;                 // The number of ground items that one will have a tree on.
+    public tree_type typesOfTrees;
+
 
     // This class contains all of the details the map needs for each ground item.
     public class map_item
@@ -28,13 +34,15 @@ public class map_manager : MonoBehaviour
         public int xVirtualPosition; // The x position on the virtual grid.
         public int yVirtualPosition; // The y posiiton on the virtual grid.
         public GameObject ground;       // The GameObject for the gorund.
+        public bool hasTree;         // Determines if this map item has a tree on it.
 
         // Contructor for map_item class.
-        public map_item(int groundType, int xVirtualPosition, int yVirtualPosition)
+        public map_item(int groundType, int xVirtualPosition, int yVirtualPosition, bool hasTree)
         {
             this.groundType = groundType;
             this.xVirtualPosition = xVirtualPosition;
             this.yVirtualPosition = yVirtualPosition;
+            this.hasTree = hasTree;
         }
     }
 
@@ -65,10 +73,39 @@ public class map_manager : MonoBehaviour
             ground = vikingLand;
         }
 
-        groundItem.ground = Instantiate(ground, new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(new Vector3(30, 0, -45)));
-        groundItem.ground.name = "map";
-        groundItem.ground.GetComponent<Tile>().set_civilization(groundItem.groundType);
-        groundItem.ground.GetComponent<Tile>().set_grid(groundItem.xVirtualPosition, groundItem.yVirtualPosition);
+        if (groundItem.groundType >= -1)
+        {
+            groundItem.ground = Instantiate(ground, new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(new Vector3(30, 0, -45)));//new Vector3(210, 0, 135)
+            groundItem.ground.name = "map";
+            groundItem.ground.GetComponent<Tile>().set_civilization(groundItem.groundType);
+            groundItem.ground.GetComponent<Tile>().set_grid(groundItem.xVirtualPosition, groundItem.yVirtualPosition);
+
+            if (groundItem.hasTree && groundItem.groundType >= 0)
+            {
+                groundItem.ground.GetComponent<Tile>().add_tree(Random.Range(0, typesOfTrees.get_trees_of_civilization(groundItem.groundType).Count));
+            }
+            else if (groundItem.groundType == -1)
+            {
+                Vector3 sandPosition = new Vector3(xPosition, yPosition, zPosition);
+                sandPosition.z += 10;
+
+                Instantiate(sand, sandPosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+            }
+
+            Vector3 cloudPosition = new Vector3(xPosition, yPosition, zPosition);
+            cloudPosition.x -= 0.1f;
+            cloudPosition.y += 0.45f;
+            cloudPosition.z -= 20;
+
+            //Instantiate(cloud, cloudPosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+        }
+        else if (groundItem.groundType == -2)
+        {
+            Vector3 cloudPosition = new Vector3(xPosition, yPosition, zPosition);
+            cloudPosition.z -= 20;
+
+            //Instantiate(cloud, cloudPosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+        }
     }
 
     // Checks the surrounding grounds for being the same type as the given one.
@@ -160,7 +197,7 @@ public class map_manager : MonoBehaviour
         {
             for (int localHeight = 0; localHeight < width; localHeight++)
             {
-                map[localWidth, localHeight] = new map_item(water, localWidth, localHeight);
+                map[localWidth, localHeight] = new map_item(water, localWidth, localHeight, Random.Range(1, treeAmount) == ((int)(treeAmount / 2)));
             }
         }
 
@@ -199,14 +236,64 @@ public class map_manager : MonoBehaviour
         }
     }
 
+    //Builds the outlining clouds
+    public void generate_cloud_map()
+    {
+        int referencePossition = cloudCover / 2;                                                                            // Reference point for the map placement.                    
+        float endOfMap = (0 - ((vikingLand.GetComponent<Renderer>().bounds.size.y / 1.65f) * mapWidth));
+        float ySparatedDistance = (vikingLand.GetComponent<Renderer>().bounds.size.y / 1.65f);                       // Separation distance on the y-axis.
+        float xSparatedDistance = ySparatedDistance * 2.3f;                                                     // Separation distance on the x-axis.
+        float xCoordinate = cloudCover / 2;                                                           // X-Coordinate for the next square.
+        float yCoordinate = (cloudCover / 2);                                                           // Y-Coordinate for the next square.      
+        float zCoordinate = referencePossition;                                                           // Z-Coordinate for the next square.
+        float rowWidthIncreaser = 1f;                                                                           // The distance to increae the row width by.
+        int mapDiagonal = (int)Mathf.Ceil(Mathf.Sqrt((mapWidth * mapWidth) + (mapWidth + mapWidth)));
+        int[] rowCompletionStatus = new int[cloudCover];
+
+        for (int level = 0; level < (mapDiagonal * 2); level++)
+        {
+            int newRowStarted = 0;
+
+            for (int index = 0; index < rowCompletionStatus.Length; index++)
+            {
+                if (rowCompletionStatus[index] == 0 && newRowStarted == 0)
+                {
+                        create_ground(xCoordinate, yCoordinate, zCoordinate, new map_item(-2, 0, 0, false));
+
+                    xCoordinate -= xSparatedDistance;
+                    rowCompletionStatus[index]++;
+                    newRowStarted++;
+                }
+                else if (rowCompletionStatus[index] != 0 && rowCompletionStatus[index] < cloudCover)
+                {
+                        create_ground(xCoordinate, yCoordinate, zCoordinate, new map_item(-2, 0, 0, false));
+
+                    xCoordinate -= xSparatedDistance;
+                    rowCompletionStatus[index]++;
+                }
+            }
+
+            if (level >= (cloudCover - 1))
+            {
+                rowWidthIncreaser = (cloudCover - (level + 1.5f)) * 2;
+            }
+
+            yCoordinate -= ySparatedDistance;
+            xCoordinate = referencePossition + (xSparatedDistance * ((level + rowWidthIncreaser) * 0.5f));
+            zCoordinate -= 1;
+        }
+            
+    }
+
     // Loads a map for the game from a seed.
     // Parameter = [int seed]
     public void load_map(string[] parameters)
     {
-        generate_map(mapWidth, mapWidth, new int[4] { -1, 0, 1, 2 }, 80, int.Parse(parameters[0])); // Stores the square paderian for the map.
-
+        generate_map(mapWidth, mapWidth, new int[4] { -1, 0, 1, 2 }, 90, int.Parse(parameters[0])); // Stores the square paderian for the map.
+        //generate_cloud_map();
+        
         int referencePossition = 0;                                                                            // Reference point for the map placement.                    
-        float ySparatedDistance = (water.GetComponent<Renderer>().bounds.size.y / 1.65f);                       // Separation distance on the y-axis.
+        float ySparatedDistance = (vikingLand.GetComponent<Renderer>().bounds.size.y / 1.65f);                       // Separation distance on the y-axis.
         float xSparatedDistance = ySparatedDistance * 2.3f;                                                     // Separation distance on the x-axis.
         float xCoordinate = referencePossition;                                                           // X-Coordinate for the next square.
         float yCoordinate = referencePossition;                                                           // Y-Coordinate for the next square.      
