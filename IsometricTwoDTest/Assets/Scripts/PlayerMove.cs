@@ -56,6 +56,12 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+    /*private void Update()
+    {
+        if(currentTile.is_current())
+            Tile.handle_selection(currentTile, this.gameObject);
+    }*/
+
     // This runs when the character is enabled.
     void OnEnable()
     {
@@ -209,7 +215,7 @@ public class PlayerMove : MonoBehaviour
 
     public void load_stats()
     {
-        health          = unit.health;             
+        health          = unit.health;          // This line is causing an " Object reference not set to an instance of an object" error.   
         damage          = unit.attackDamage;                  
         attackRange     = unit.attackRange;
         moveRange       = unit.moveRange;

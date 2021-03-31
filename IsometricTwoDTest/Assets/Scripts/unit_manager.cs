@@ -73,7 +73,7 @@ public class unit_manager : MonoBehaviour
             if (match_manager.get_local_player().food >= activeUnitType.food)
             {
                 import_manager.run_function_all("network_manager", "subtract_player_resources", new string[3] { activeUnitType.food.ToString(), "0", match_manager.get_local_player().civilization.ToString()});
-                import_manager.run_function_all("unit_manager", "add_unit", new string[4] { tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), unitToCreate.gameObject.name, match_manager.get_local_player().civilization.ToString() });
+                import_manager.run_function_all("unit_manager", "add_unit", new string[5] { tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), unitToCreate.gameObject.name, match_manager.get_local_player().civilization.ToString(), ((int) activeUnitType.unitType).ToString() });
             }
 
             activeUnitType = null;
@@ -82,17 +82,16 @@ public class unit_manager : MonoBehaviour
     }
 
     // Update is called once per frame
-    // Parameter = [int tileXPosition, int tileYPosition, string prefabName, int civilization]
+    // Parameter = [int tileXPosition, int tileYPosition, string prefabName, int civilization, int unitType]
     void add_unit(string[] parameter)
     {
         Tile tile = map_manager.map[int.Parse(parameter[0]), int.Parse(parameter[1])].ground.GetComponent<Tile>();
 
         GameObject unit = (GameObject)Resources.Load("Units/" + parameter[2]);
-        unit = unit_maker.place_object(unit, tile);
+        unit = unit_maker.place_object(unit, int.Parse(parameter[4]), tile);
 
         if (unit != null)
         {
-            unit.AddComponent<PlayerMove>();
             unit.tag = "unit";
             unit.name = parameter[3] + "_" + unit.name + "_" + counter++;
             unit.GetComponent<PlayerMove>().set_civilization(int.Parse(parameter[3]));

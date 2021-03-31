@@ -51,17 +51,17 @@ public class unit_maker : MonoBehaviour
         // Civilization 0 is Asian civilization.
         if (civilization == 0)
         {
-            champion = place_object(asianChampion, tile);
+            champion = place_object(asianChampion, 0, tile);
         }
         // Civilization 1 is Greek civilization.
         else if (civilization == 1)
         {
-            champion = place_object(greekChampion, tile);
+            champion = place_object(greekChampion, 0, tile);
         }
         // Civilization 2 is Viking civilization.
         else if (civilization == 2)
         {
-            champion = place_object(vikingChampion, tile);
+            champion = place_object(vikingChampion, 0, tile);
         }
 
         if (match_manager.get_local_player().civilization == civilization)
@@ -79,7 +79,7 @@ public class unit_maker : MonoBehaviour
     }
 
     // Places a copy of the given GameObject on the given tile.
-    public GameObject place_object(GameObject item, Tile tile)
+    public GameObject place_object(GameObject item, int unitType, Tile tile)
     {
         Vector3 tilePosition = tile.transform.position;                  // The actual position to of the selected tile.
         tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
@@ -89,8 +89,14 @@ public class unit_maker : MonoBehaviour
         GameObject itemCopy = Instantiate(item, tilePosition, Quaternion.Euler(new Vector3(0, 0, 0)));
         face_forward(itemCopy);
 
-        itemCopy.AddComponent<PlayerMove>();
+        if (itemCopy.GetComponent<PlayerMove>() == null)
+        {
+            itemCopy.AddComponent<PlayerMove>();
+            itemCopy.GetComponent<PlayerMove>().unit = match_manager.unitTypeList[unitType];
+        }
+        
         itemCopy.GetComponent<PlayerMove>().set_grid(tile.get_grid()[0], tile.get_grid()[1]);
+        
 
         return itemCopy;
     }

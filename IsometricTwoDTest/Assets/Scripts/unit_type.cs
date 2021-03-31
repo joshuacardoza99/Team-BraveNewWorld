@@ -49,11 +49,32 @@ public class unit_type : ScriptableObject
         Debug.Log(attackCooldown);
         Debug.Log(movementCooldown);
     }
+
+    public Transform get_unit_of_civilization(int civilization)
+    {
+        Transform selectedBuilding = null;
+
+        if (civilization == 0)
+        {
+            selectedBuilding = asian;
+        }
+        else if (civilization == 1)
+        {
+            selectedBuilding = greek;
+        }
+        else if (civilization == 2)
+        {
+            selectedBuilding = viking;
+        }
+
+        return selectedBuilding;
+    }
 }
 
 
 public enum AttackType
 {
+    champion,
     range,
     meele,
     tank

@@ -14,11 +14,11 @@ public class destroy_on_animation_event : MonoBehaviour
 
        if (lifeTime <= 0)
        {
-           destroy_parent();
+           destroy_resource_parent();
        }
     }
     // Start is called before the first frame update
-    public void destroy_parent()
+    public void destroy_resource_parent()
     {
         GameObject parent = gameObject.transform.parent.gameObject;
         Destroy(parent);

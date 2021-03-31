@@ -67,6 +67,8 @@ public class match_manager : MonoBehaviour
     private Player vikingPlayer;
     private int    localPlayer;
     private List<ai_thought_process> aiList = new List<ai_thought_process>();
+    public List<building_type> buildingTypeList; // List of SO, connects any building type being scripted
+    public List<unit_type> unitTypeList; // List of SO, connects any unit type being scripted
 
     // Private Global Variables //
     private int numberOfPlayers = 1000; // The number of current players in the game.

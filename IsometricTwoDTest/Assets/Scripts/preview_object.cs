@@ -41,6 +41,7 @@ public class preview_object : MonoBehaviour
 
         GameObject buildingPrefab = (GameObject) Resources.Load("Buildings/" + parameter[0]);
         GameObject building = Instantiate(buildingPrefab, tilePosition, buildingPrefab.transform.rotation);
+        Debug.Log("In preview_object " + building);
         tile.set_building(building);
     }
 

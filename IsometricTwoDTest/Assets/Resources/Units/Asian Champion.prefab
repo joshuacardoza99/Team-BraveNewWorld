@@ -526,8 +526,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3991519020496169387}
   - component: {fileID: 3779477172167222494}
-  - component: {fileID: 5596694663676317850}
   - component: {fileID: 3405852011452029001}
+  - component: {fileID: 6590834026816382923}
   m_Layer: 0
   m_Name: Asian Champion
   m_TagString: Untagged
@@ -565,30 +565,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &5596694663676317850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4336801283161977617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fdfb57c639781a438bc2f6fd21e1554, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 10
-  damage: 2
-  attackRange: 4
-  moveRange: 2
-  cooldown: 3
-  nextAttack: 0
-  isAttacking: 0
-  civilization: 0
-  unit: {fileID: 11400000, guid: 170360ce56294104898532840e7bdc9f, type: 2}
-  actualTargetTile: {fileID: 0}
-  currentTile: {fileID: 0}
-  anim: {fileID: 0}
 --- !u!95 &3405852011452029001
 Animator:
   serializedVersion: 3
@@ -608,6 +584,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6590834026816382923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4336801283161977617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fdfb57c639781a438bc2f6fd21e1554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+  damage: 2
+  attackRange: 1
+  moveRange: 2
+  attackCooldown: 0
+  moveCooldown: 0
+  nextAttack: 0
+  isAttacking: 0
+  civilization: 0
+  unit: {fileID: 11400000, guid: 908ac721b737e034d853340d94a5f0c9, type: 2}
+  actualTargetTile: {fileID: 0}
+  currentTile: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!1 &4810465989402173353
 GameObject:
   m_ObjectHideFlags: 0
