@@ -91,10 +91,10 @@ public class unit_maker : MonoBehaviour
 
         if (itemCopy.GetComponent<PlayerMove>() == null)
         {
-            itemCopy.AddComponent<PlayerMove>();
+            itemCopy.AddComponent<PlayerMove>();           
             itemCopy.GetComponent<PlayerMove>().unit = match_manager.unitTypeList[unitType];
         }
-        
+
         itemCopy.GetComponent<PlayerMove>().set_grid(tile.get_grid()[0], tile.get_grid()[1]);
         
 

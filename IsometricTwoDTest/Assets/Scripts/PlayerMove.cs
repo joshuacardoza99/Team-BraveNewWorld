@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : MonoBehaviour 
 {
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
@@ -26,6 +27,11 @@ public class PlayerMove : MonoBehaviour
     public bool isAttacking = false;               // Determines if this player is currently attaching.
     public int civilization = 0;                   // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     private int[] grid = new int[2] { 0, 0 }; // Stores the position of the Tile in the virtual grid. [x position, y position]
+
+    // used to print stats on screen
+    public Text printStats;
+  //  public GameObject canvas;
+    //public GameObject panel;
 
     // Reference to SO
     public unit_type unit;
@@ -49,11 +55,15 @@ public class PlayerMove : MonoBehaviour
         unit_maker = GameObject.Find("unit_manager").GetComponent<unit_maker>();
         cooldown = GameObject.Find("Cooldown").GetComponent<cooldown>();
 
-        anim = this.GetComponent<Animator>();
+        anim = this.GetComponent<Animator>();        
 
+        // Print Stats unto the screen
+        //canvas = GameObject.Find("Canvas").gameObject;
+        //panel = canvas.transform.GetChild(8).gameObject;
+
+        // Load and print the stats into the game
         load_stats();
         unit.print_attributes();
-
     }
 
     /*private void Update()
@@ -221,6 +231,27 @@ public class PlayerMove : MonoBehaviour
         moveRange       = unit.moveRange;
         attackCooldown  = unit.attackCooldown;
         moveCooldown    = unit.movementCooldown;
+
+        //panel.GetComponent<UnityEngine.UI.Text>().text = "Name: " + name.ToString(); //+ "\nHealth: " + health.ToString() + "\nDamage: " + damage.ToString() + "\nAttack Range:" + attackRange.ToString() + "\nMovement Range:" + moveRange.ToString() + "\nAttack Cooldown: " + attackCooldown.ToString() + "\nMovement Cooldown: " + moveCooldown.ToString();
+       // set_text_stats();
     }
 
+  /*  public void OnMouseOver()
+    {
+        //set_text_stats();
+        panel.SetActive(true);
+    }
+
+    public void OnMouseExit()
+    {
+        printStats = null;
+        panel.SetActive(false);
+    }
+
+    public void set_text_stats()
+    {
+        printStats = panel.transform.GetChild(1).GetComponent<Text>();
+        printStats.text = "Name: " + name + "\nHealth: " + health + "\nDamage: " + damage + "\nAttack Range:" + attackRange + "\nMovement Range:" + moveRange + "\nAttack Cooldown: " + attackCooldown + "\nMovement Cooldown: " + moveCooldown;
+       // printStats.fontSize = 290;
+    }*/
 }

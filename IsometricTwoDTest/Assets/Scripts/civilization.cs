@@ -29,22 +29,21 @@ public class civilization : MonoBehaviour
     void Start()
     {
         civ_resources_display = GameObject.Find("civManager").GetComponent<civ_resources_display>();
+<<<<<<< Updated upstream
         Building = GameObject.Find("civManager").GetComponent<Building>();
         match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
+=======
+        Building              = GameObject.Find("civManager").GetComponent<Building>();
+        match_manager         = GameObject.Find("network_manager").GetComponent<match_manager>();
+        import_manager        = GameObject.Find("network_manager").GetComponent<import_manager>();
+>>>>>>> Stashed changes
     }
 
     public void Update()
     {
-
-        if (timeRemanining > 0)
+        if (match_manager.game_status())
         {
-            timeRemanining -= Time.deltaTime;
-        }
-        else
-        {
-            timeRemanining = 10;
-
             match_manager.for_each_player((player) =>
             {
                 update_resources(player.civilization);
@@ -57,31 +56,43 @@ public class civilization : MonoBehaviour
     {
         match_manager.choose_player(civilization).buildings.ForEach((Building building) =>
         {
-            building_type.FindAll(buildingType => buildingType.type == building.gameObject.tag).ForEach((buildingType) =>
-            {
-                match_manager.choose_player(civilization).gold += buildingType.goldAmount;
-                match_manager.choose_player(civilization).food += buildingType.foodAmount;
-
-                if (match_manager.get_local_player().civilization == civilization)
+            //building_type.FindAll(buildingType => buildingType.type == building.gameObject.tag).ForEach((buildingType) =>
+           // {
+                if (((int)building.building_type.unitType) != 0)
                 {
-                    resource_pop_up(building, buildingType);
-                    civ_resources_display.update_resources();
+                    if (building.status == false)
+                    {
+                        match_manager.choose_player(civilization).gold += building.building_type.goldAmount;
+                        match_manager.choose_player(civilization).food += building.building_type.foodAmount;
+
+                        if (match_manager.get_local_player().civilization == civilization)
+                        {
+                            resource_pop_up(building);
+                            civ_resources_display.update_resources();
+                        }
+                        building.status = true;
+                    }
                 }
-            });
+           // });
         });
     }
 
     // The gold and food pop ups
-    public void resource_pop_up(Building building, building_type type)
+    public void resource_pop_up(Building building)
     {
-        if (type.goldAmount > 0)
+        if (building.building_type.goldAmount > 0)
         {
             Vector3 tilePosition = building.currentTile.transform.position;                        // Get the tile position of the mine
             GameObject goldInstance = Instantiate(goldPopUp, tilePosition, Quaternion.identity);   // Instantiate the prefab
             goldInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(goldToDisplay); // Display the string
         }
+<<<<<<< Updated upstream
 
         if (type.foodAmount > 0)
+=======
+        
+        if (building.building_type.foodAmount > 0)
+>>>>>>> Stashed changes
         {
             Vector3 tilePosition = building.currentTile.transform.position;                        // Get the tile position of the mine
             GameObject goldInstance = Instantiate(goldPopUp, tilePosition, Quaternion.identity);   // Instantiate the prefab

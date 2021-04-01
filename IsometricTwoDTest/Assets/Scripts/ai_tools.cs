@@ -95,18 +95,23 @@ namespace AI
                         building.tag = "Mine";
                     }
                 }
-            }
 
-            if (building != null)
-            {
-                if (building.GetComponent<Building>() == null)
+                if (building != null)
                 {
-                    building.AddComponent<Building>();
+                    if (building.GetComponent<Building>() == null)
+                    {
+                        building.AddComponent<Building>();
+                    }
+
+                    building.AddComponent<BoxCollider>();
+                    building.GetComponent<Building>().building_type = match_manager.buildingTypeList[((int)type.unitType)];
+                    building.GetComponent<Building>().set_current_tile(tile);
+                    type.print_message();
                 }
 
-                building.GetComponent<Building>().set_current_tile(tile);
-                type.print_message();
             }
+
+            
         }
 
         // Builds new units for the AI.

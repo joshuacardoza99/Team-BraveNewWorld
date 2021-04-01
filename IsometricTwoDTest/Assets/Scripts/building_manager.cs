@@ -11,6 +11,7 @@ public class building_manager : MonoBehaviour
     preview_object preview_object;
     menu_manager menu_manager;
     match_manager match_manager;
+    Building Building;
 
     // Public Global Variables 
     public int civNumber;                                         // Number of the civilization
@@ -63,18 +64,32 @@ public class building_manager : MonoBehaviour
             {
                 Vector3 tilePosition = tile.transform.position;
                 Building newBuilding = null; // Building that was just placed
+<<<<<<< Updated upstream
                 GameObject addScript;        // using this variable to add missing scripts
+=======
+                GameObject addScript;
+>>>>>>> Stashed changes
 
                 set_current_tile(tile);
                 can_place();
 
                 playerTile = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile;
+<<<<<<< Updated upstream
+=======
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
 
                 // Choose prefab depeding on which civ user choose
                 if (civNumber == 0)
                 {
                     if (!tile.is_in_city()
-                        && (activeBuildingType.unitType == 0)                        
+                        && (activeBuildingType.unitType == 0)
                         && canPlace
                         && !tile.has_building())
                     {
@@ -91,11 +106,6 @@ public class building_manager : MonoBehaviour
                         //newBuilding = preview_object.place(activeBuildingType.asian, tile);
                         addScript = preview_object.place(activeBuildingType.asian, tile); // clean this up later
                         newBuilding = addScript.AddComponent<Building>();
-
-                        if (newBuilding.name == "farm(Clone)")
-                            newBuilding.tag = "Farm";
-                        else if (newBuilding.name == "mine(Clone)")
-                            newBuilding.tag = "Mine";
 
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
@@ -114,7 +124,7 @@ public class building_manager : MonoBehaviour
                         && !tile.has_building())
                     {
                         addScript = preview_object.place(activeBuildingType.greek, tile);
-                                      addScript.AddComponent<City>();
+                        addScript.AddComponent<City>();
                         newBuilding = addScript.AddComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
@@ -128,10 +138,6 @@ public class building_manager : MonoBehaviour
                         addScript = preview_object.place(activeBuildingType.greek, tile); // clean this up later
                         newBuilding = addScript.AddComponent<Building>();
 
-                        if (newBuilding.name == "farm(Clone)")
-                            newBuilding.tag = "Farm";
-                        else if (newBuilding.name == "mine(Clone)")
-                            newBuilding.tag = "Mine";
 
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
@@ -163,11 +169,6 @@ public class building_manager : MonoBehaviour
                         addScript = preview_object.place(activeBuildingType.viking, tile); // clean this up later
                         newBuilding = addScript.AddComponent<Building>();
 
-                        if (newBuilding.name == "farm(Clone)")
-                            newBuilding.tag = "Farm";
-                        else if (newBuilding.name == "mine(Clone)")
-                            newBuilding.tag = "Mine";
-
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
                     }
@@ -176,12 +177,14 @@ public class building_manager : MonoBehaviour
                         Debug.Log("Building cannot be placed here, destroying previews");
                         preview_object.destroy_previews();
                     }
-                }      
-                
-               if (newBuilding != null)
+                }
+
+                if (newBuilding != null)
                 {
                     import_manager.run_function_all("network_manager", "subtract_player_resources", new string[3] { "0", activeBuildingType.buildCost.ToString(), civNumber.ToString() });
                     match_manager.choose_player(civNumber).buildings.Add(newBuilding);
+                    newBuilding.building_type = match_manager.buildingTypeList[((int)activeBuildingType.unitType)];
+                    newBuilding.gameObject.AddComponent<BoxCollider>();
                 }
             }
             else
@@ -204,13 +207,13 @@ public class building_manager : MonoBehaviour
     public void place_previews(Transform aPrefab)
     {
         preview_object preview;
-       // showPreview      = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile.get_walkable_tiles(1);
+        // showPreview      = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile.get_walkable_tiles(1);
 
         if (activeBuildingType.unitType == 0)
         {
             foreach (Tile tile in GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile.get_walkable_tiles(1))
             {
-                if (!tile.has_building() 
+                if (!tile.has_building()
                     && !tile.is_in_city())
                 {
                     Vector3 tilePosition = tile.transform.position;
@@ -222,25 +225,31 @@ public class building_manager : MonoBehaviour
         }
         else
         {
-            foreach (GameObject commandPost in GameObject.FindGameObjectsWithTag("commandPost"))
+            foreach (Building commandPost in match_manager.choose_player(civNumber).buildings)
             {
-                foreach (Tile post in commandPost.GetComponent<Building>().currentTile.get_walkable_tiles(1))
-                {
-                    if (!post.has_building())
+                if(((int)commandPost.building_type.unitType) == 0)
+                    foreach (Tile post in commandPost.GetComponent<Building>().currentTile.get_walkable_tiles(1))
                     {
-                        Vector3 tilePosition = post.transform.position;
-                        preview = preview_object.create_preview(aPrefab, tilePosition);
-                        preview.tag = "previewBuilding";
-                       // canPlace = true;
-                        showPreview.Add(post);
+                        if (!post.has_building())
+                        {
+                            Vector3 tilePosition = post.transform.position;
+                            preview = preview_object.create_preview(aPrefab, tilePosition);
+                            preview.tag = "previewBuilding";
+                            // canPlace = true;
+                            showPreview.Add(post);
+                        }
                     }
-                }
             }
         }
     }
 
     public void can_place()
     {
+<<<<<<< Updated upstream
+=======
+        //  if (activeBuildingType.unitType == 0)
+        //  {
+>>>>>>> Stashed changes
         foreach (Tile preview in showPreview)
         {
             if (currentTile == preview)
@@ -248,6 +257,11 @@ public class building_manager : MonoBehaviour
                 canPlace = true;
             }
         }
+<<<<<<< Updated upstream
+=======
+        //   }
+
+>>>>>>> Stashed changes
     }
 
     public void set_current_tile(Tile tile)
@@ -255,4 +269,3 @@ public class building_manager : MonoBehaviour
         currentTile = tile;
     }
 }
-

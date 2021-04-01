@@ -112,4 +112,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3e1105115f88a4d95390892098c578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  printStats: {fileID: 0}
+  canvas: {fileID: 0}
+  panel: {fileID: 0}
+  foodAmount: 0
+  goldAmount: 0
+  buildCost: 0
+  building: {fileID: 0}
   currentTile: {fileID: 0}
