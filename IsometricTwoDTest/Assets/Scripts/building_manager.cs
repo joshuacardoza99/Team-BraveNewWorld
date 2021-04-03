@@ -64,7 +64,9 @@ public class building_manager : MonoBehaviour
             {
                 Vector3 tilePosition = tile.transform.position;
                 Building newBuilding = null; // Building that was just placed
+
                 GameObject addScript;        // using this variable to add missing scripts
+
                 set_current_tile(tile);
                 can_place();
 
@@ -78,7 +80,7 @@ public class building_manager : MonoBehaviour
                         && canPlace
                         && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.asian, tile).GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.asian, tile, (int) activeBuildingType.unitType).GetComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
@@ -89,8 +91,10 @@ public class building_manager : MonoBehaviour
                              && !tile.has_building())
                     {
                         //newBuilding = preview_object.place(activeBuildingType.asian, tile);
-                        addScript = preview_object.place(activeBuildingType.asian, tile); // clean this up later
-                        newBuilding = addScript.AddComponent<Building>();
+                        addScript = preview_object.place(activeBuildingType.asian, tile, (int)activeBuildingType.unitType); // clean this up later
+
+                        if (newBuilding.gameObject.GetComponent<Building>() == null)
+                            newBuilding = addScript.AddComponent<Building>();
 
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
@@ -108,9 +112,10 @@ public class building_manager : MonoBehaviour
                         && canPlace
                         && !tile.has_building())
                     {
-                        addScript = preview_object.place(activeBuildingType.greek, tile);
-                        addScript.AddComponent<City>();
-                        newBuilding = addScript.AddComponent<Building>();
+                        addScript = preview_object.place(activeBuildingType.greek, tile, (int)activeBuildingType.unitType);
+                                      addScript.AddComponent<City>();
+                        if(newBuilding.gameObject.GetComponent<Building>() == null)
+                            newBuilding = addScript.AddComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
@@ -120,7 +125,7 @@ public class building_manager : MonoBehaviour
                              && !tile.has_building())
                     {
                         //newBuilding = preview_object.place(activeBuildingType.greek, tile).GetComponent<Building>();
-                        addScript = preview_object.place(activeBuildingType.greek, tile); // clean this up later
+                        addScript = preview_object.place(activeBuildingType.greek, tile, (int)activeBuildingType.unitType); // clean this up later
                         newBuilding = addScript.AddComponent<Building>();
 
 
@@ -140,7 +145,7 @@ public class building_manager : MonoBehaviour
                         && canPlace
                         && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.viking, tile).GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.viking, tile, (int)activeBuildingType.unitType).GetComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
@@ -151,8 +156,10 @@ public class building_manager : MonoBehaviour
                     {
                         //newBuilding = preview_object.place(activeBuildingType.viking, tile).GetComponent<Building>();
 
-                        addScript = preview_object.place(activeBuildingType.viking, tile); // clean this up later
-                        newBuilding = addScript.AddComponent<Building>();
+                        addScript = preview_object.place(activeBuildingType.viking, tile, (int)activeBuildingType.unitType); // clean this up later
+
+                        if (newBuilding.gameObject.GetComponent<Building>() == null)
+                            newBuilding = addScript.AddComponent<Building>();
 
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();

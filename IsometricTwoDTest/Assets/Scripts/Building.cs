@@ -32,6 +32,7 @@ public class Building : MonoBehaviour
 
     // Variables      //
     public Tile currentTile = null; // The tile this character is currently on.
+    private  BuildingType type; // the type of building this is (0 - CP, 1 - farm, 2 - mine)
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +69,12 @@ public class Building : MonoBehaviour
     {
         currentTile = tile; // set this buildings tile to the given tile
         tile.set_building(this.gameObject); // set the tiles building to this
+        //Debug.Log("new building type %d", (string)type);
+    }
+
+    public void set_type(BuildingType newType)
+    {
+        type = newType;
     }
 
 /*  public void OnMouseOver()

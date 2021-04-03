@@ -27,11 +27,11 @@ public class City : MonoBehaviour
     void set_city_limits(int range)
     {
         in_city = currentTile.get_adjacenct_tiles(range);
-        map_manager.run_on_map_item(new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_in_city" });
+        map_manager.run_on_map_item(new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_in_city" }); // set this tile to in city
 
         foreach(Tile tile in in_city)
         {
-            map_manager.run_on_map_item(new string[3] { tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), "set_in_city" });
+            map_manager.run_on_map_item(new string[3] { tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), "set_in_city" }); // set all surrounding tiles to in city
         }
     }
 }

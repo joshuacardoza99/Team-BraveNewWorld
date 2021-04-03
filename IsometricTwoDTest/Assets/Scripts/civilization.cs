@@ -29,9 +29,9 @@ public class civilization : MonoBehaviour
     void Start()
     {
         civ_resources_display = GameObject.Find("civManager").GetComponent<civ_resources_display>();
-        Building              = GameObject.Find("civManager").GetComponent<Building>();
-        match_manager         = GameObject.Find("network_manager").GetComponent<match_manager>();
-        import_manager        = GameObject.Find("network_manager").GetComponent<import_manager>();
+        Building = GameObject.Find("civManager").GetComponent<Building>();
+        match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
+        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
     }
 
     public void Update()

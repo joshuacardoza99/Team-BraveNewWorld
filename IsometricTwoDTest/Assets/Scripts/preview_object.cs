@@ -21,7 +21,7 @@ public class preview_object : MonoBehaviour
         match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
     }
 
-    public GameObject place(Transform prefab, Tile tile)
+    public GameObject place(Transform prefab, Tile tile, int type)
     {
         import_manager.run_function_all("preview_object", "build_building", new string[4] { prefab.name, tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), match_manager.get_local_player().civilization.ToString()});
         GameObject building = tile.get_buidling();
@@ -52,7 +52,7 @@ public class preview_object : MonoBehaviour
         {
             building.AddComponent<Building>();
         }
-
+        building.GetComponent<Building>().set_type((BuildingType) int.Parse(parameter[3])); // sending the building its type
         match_manager.choose_player(int.Parse(parameter[3])).buildings.Add(building.GetComponent<Building>());
     }
 
