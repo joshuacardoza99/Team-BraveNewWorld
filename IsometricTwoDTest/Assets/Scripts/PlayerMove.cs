@@ -14,18 +14,18 @@ public class PlayerMove : MonoBehaviour
     map_manager    map_manager;     // Importing the map_manager class.
     unit_maker     unit_maker;      // Importing the unit_maker class.
     Tile Tile;
-    cooldown cooldown;
+    cooldown cooldowns;
 
     // Unit attribiutes //
-    public int health;                  // The current health of this character.
-    public int damage;                   // The amount of damage this character gives in an attach.
-    public int attackRange;                   // The range this character can attach from.
-    public int moveRange;                   // The range this character can move to.
+    public int health;                             // The current health of this character.
+    public int damage;                             // The amount of damage this character gives in an attach.
+    public int attackRange;                        // The range this character can attach from.
+    public int moveRange;                          // The range this character can move to.
     public float attackCooldown;                   // The seconds this player needs to wait between actions.
     public float moveCooldown;
     public float nextAttack = 0;                   // Does not appear to be used.
     public bool isAttacking = false;               // Determines if this player is currently attaching.
-    public int civilization = 0;                   // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
+    public int civilization = 0;              // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     private int[] grid = new int[2] { 0, 0 }; // Stores the position of the Tile in the virtual grid. [x position, y position]
 
     // used to print stats on screen
@@ -53,7 +53,7 @@ public class PlayerMove : MonoBehaviour
         match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
         unit_maker = GameObject.Find("unit_manager").GetComponent<unit_maker>();
-        cooldown = GameObject.Find("Cooldown").GetComponent<cooldown>();
+        cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
 
         anim = this.GetComponent<Animator>();        
 
@@ -62,7 +62,6 @@ public class PlayerMove : MonoBehaviour
         //panel = canvas.transform.GetChild(8).gameObject;
 
         // Load and print the stats into the game
-        load_stats();
         unit.print_attributes();
     }
 
@@ -76,6 +75,7 @@ public class PlayerMove : MonoBehaviour
     void OnEnable()
     {
         Tile.OnSelected += handle_move;
+        Tile.OnSelected += attack;
     }
 
 
@@ -83,6 +83,7 @@ public class PlayerMove : MonoBehaviour
     void OnDisable()
     {
         Tile.OnSelected -= handle_move;
+        Tile.OnSelected -= attack;
     }
 
     // Updates the players health.
@@ -91,6 +92,38 @@ public class PlayerMove : MonoBehaviour
         health -= healthToRemove;
     }
 
+    // Attacks the character on selected tile.
+    public void attack(Tile tile, GameObject character)
+    {
+        if (tile == currentTile && currentTile.is_attackable()) // and in range, and not a friendly civ
+        {
+            if (cooldowns == null)
+            {
+                cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
+            }
+
+            PlayerMove defendingUnit = this;
+            PlayerMove attackingUnit = currentTile.get_attackable().GetComponent<PlayerMove>();
+
+            if (Time.time > cooldowns.nextAttack)
+            {
+                // check if this characters civ is the same as the character clicking on it
+                if (defendingUnit.get_civilization() != match_manager.get_local_player().civilization)
+                {
+
+                    // attach attack animation here
+                    import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, attackingUnit.damage.ToString() });
+                    Debug.Log("Health equals " + defendingUnit.health);
+                    cooldowns.initiate_attack_cooldown(attackingUnit.attackCooldown);
+                    if (defendingUnit.health <= 0)
+                    {
+                        Debug.Log("YOUR SOLDIER HAS FALLEN !!");
+                        import_manager.run_function_all(character.name, "suicide", new string[0] { });
+                    }
+                }
+            }
+        }
+    }
     // Handles running the move on the current players computer and over the network.
     public void handle_move(Tile moveToTile, GameObject ususedCharacter)
     {
@@ -172,8 +205,6 @@ public class PlayerMove : MonoBehaviour
                 anim.SetBool("isWalking", false);
         }
         catch { }
-
-        Debug.Log(this.gameObject.name);
     }
 
     // Sets the civilization this character is apart of.

@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class destroy_on_animation_event : MonoBehaviour
 {
-<<<<<<< Updated upstream
     public float lifeTime = 1f; // 1 second life time for the animation 
 
-=======
-    public float lifeTime = 1f;
->>>>>>> Stashed changes
     void Update()
     {
         if (lifeTime > 0)

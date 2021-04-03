@@ -64,26 +64,11 @@ public class building_manager : MonoBehaviour
             {
                 Vector3 tilePosition = tile.transform.position;
                 Building newBuilding = null; // Building that was just placed
-<<<<<<< Updated upstream
                 GameObject addScript;        // using this variable to add missing scripts
-=======
-                GameObject addScript;
->>>>>>> Stashed changes
-
                 set_current_tile(tile);
                 can_place();
 
                 playerTile = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile;
-<<<<<<< Updated upstream
-=======
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 
                 // Choose prefab depeding on which civ user choose
                 if (civNumber == 0)
@@ -245,11 +230,6 @@ public class building_manager : MonoBehaviour
 
     public void can_place()
     {
-<<<<<<< Updated upstream
-=======
-        //  if (activeBuildingType.unitType == 0)
-        //  {
->>>>>>> Stashed changes
         foreach (Tile preview in showPreview)
         {
             if (currentTile == preview)
@@ -257,11 +237,6 @@ public class building_manager : MonoBehaviour
                 canPlace = true;
             }
         }
-<<<<<<< Updated upstream
-=======
-        //   }
-
->>>>>>> Stashed changes
     }
 
     public void set_current_tile(Tile tile)

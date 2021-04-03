@@ -29,15 +29,9 @@ public class civilization : MonoBehaviour
     void Start()
     {
         civ_resources_display = GameObject.Find("civManager").GetComponent<civ_resources_display>();
-<<<<<<< Updated upstream
-        Building = GameObject.Find("civManager").GetComponent<Building>();
-        match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
-        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
-=======
         Building              = GameObject.Find("civManager").GetComponent<Building>();
         match_manager         = GameObject.Find("network_manager").GetComponent<match_manager>();
         import_manager        = GameObject.Find("network_manager").GetComponent<import_manager>();
->>>>>>> Stashed changes
     }
 
     public void Update()
@@ -86,13 +80,8 @@ public class civilization : MonoBehaviour
             GameObject goldInstance = Instantiate(goldPopUp, tilePosition, Quaternion.identity);   // Instantiate the prefab
             goldInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(goldToDisplay); // Display the string
         }
-<<<<<<< Updated upstream
-
-        if (type.foodAmount > 0)
-=======
         
         if (building.building_type.foodAmount > 0)
->>>>>>> Stashed changes
         {
             Vector3 tilePosition = building.currentTile.transform.position;                        // Get the tile position of the mine
             GameObject goldInstance = Instantiate(goldPopUp, tilePosition, Quaternion.identity);   // Instantiate the prefab
