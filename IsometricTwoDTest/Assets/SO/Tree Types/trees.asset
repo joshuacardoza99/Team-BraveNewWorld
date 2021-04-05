@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71936c658eb215f45963b340e75e12b9, type: 3}
+  m_Name: trees
+  m_EditorClassIdentifier: 
+  asian:
+  - {fileID: 710957047843543318, guid: 1efa13d68fcb29c4db144de953c84c49, type: 3}
+  - {fileID: 5369184595978724536, guid: a3e15f3963961f146b41df031d3b9687, type: 3}
+  - {fileID: 6292654394883579947, guid: 8cfa066006689414ca9334a8a1eeef1a, type: 3}
+  - {fileID: 4890236848778892897, guid: 702f9a3d141200043ae6c9ad21c372e1, type: 3}
+  viking:
+  - {fileID: 3099552622177876787, guid: 761f32a37609ee24587884f997fc0c17, type: 3}
+  - {fileID: 303712102430587340, guid: 8609150c06acf5442b6f65b73c7951e0, type: 3}
+  - {fileID: 1035639960849898979, guid: f2a1b14b455f03441982ee7c752e261f, type: 3}
+  - {fileID: 4843676365960776723, guid: 1e3062f34c9e6724994b3911465d8970, type: 3}
+  greek:
+  - {fileID: 8492619222895845284, guid: 948908cd83e8fd1409a3c4dd9d9fd9cc, type: 3}
+  - {fileID: 3374206889130237980, guid: ad13bc3eabdd7c04381eecd1abed5321, type: 3}
+  - {fileID: 6835649159700238653, guid: 401182f2d2ddd1c478c304d7749f82b2, type: 3}
+  - {fileID: 4890236848778892897, guid: 702f9a3d141200043ae6c9ad21c372e1, type: 3}

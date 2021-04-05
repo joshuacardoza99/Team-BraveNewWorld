@@ -11,16 +11,17 @@ public class building_manager : MonoBehaviour
     preview_object preview_object;
     menu_manager menu_manager;
     match_manager match_manager;
+    Building Building;
 
     // Public Global Variables 
-    public int civNumber;                                   // Number of the civilization
-    bool canPlace = false;                                  // Can building be placed
-    public List<Tile> showPreview = new List<Tile>();       // List of tiles with building previews
-    public List<Tile> listCommandPostTiles = new List<Tile>();  // List of tiles with Command Posts
-    public List<Tile> previews = new List<Tile>();
-    public List<GameObject> commandPost = new List<GameObject>();
-    public Tile currentTile = null;                         // The tile this character is currently on.
-    public Tile playerTile = null;                          // The tile the champion is currently on.
+    public int civNumber;                                         // Number of the civilization
+    bool canPlace = false;                                        // Can building be placed
+    public List<Tile> showPreview = new List<Tile>();             // List of tiles with building previews
+    public List<Tile> listCommandPostTiles = new List<Tile>();    // List of tiles with Command Posts
+    public List<Tile> previews = new List<Tile>();                // Liat of preview made on tiles
+    public List<GameObject> commandPost = new List<GameObject>(); // List of command post 
+    public Tile currentTile = null;                               // The tile this character is currently on.
+    public Tile playerTile = null;                                // The tile the champion is currently on.
 
     [SerializeField]
     private building_type activeBuildingType; // Make varibale public and attach it to building_type
@@ -63,22 +64,23 @@ public class building_manager : MonoBehaviour
             {
                 Vector3 tilePosition = tile.transform.position;
                 Building newBuilding = null; // Building that was just placed
-                GameObject addScript; 
+
+                GameObject addScript;        // using this variable to add missing scripts
 
                 set_current_tile(tile);
                 can_place();
 
-               playerTile = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile;
+                playerTile = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile;
 
                 // Choose prefab depeding on which civ user choose
                 if (civNumber == 0)
                 {
                     if (!tile.is_in_city()
-                        && (activeBuildingType.unitType == 0)                        
+                        && (activeBuildingType.unitType == 0)
                         && canPlace
                         && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.asian, tile).GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.asian, tile, (int) activeBuildingType.unitType).GetComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
@@ -89,13 +91,10 @@ public class building_manager : MonoBehaviour
                              && !tile.has_building())
                     {
                         //newBuilding = preview_object.place(activeBuildingType.asian, tile);
-                        addScript = preview_object.place(activeBuildingType.asian, tile); // clean this up later
-                        newBuilding = addScript.AddComponent<Building>();
+                        addScript = preview_object.place(activeBuildingType.asian, tile, (int)activeBuildingType.unitType); // clean this up later
 
-                        if (newBuilding.name == "farm(Clone)")
-                            newBuilding.tag = "Farm";
-                        else if (newBuilding.name == "mine(Clone)")
-                            newBuilding.tag = "Mine";
+                        if (newBuilding.gameObject.GetComponent<Building>() == null)
+                            newBuilding = addScript.AddComponent<Building>();
 
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
@@ -113,9 +112,10 @@ public class building_manager : MonoBehaviour
                         && canPlace
                         && !tile.has_building())
                     {
-                        addScript = preview_object.place(activeBuildingType.greek, tile);
+                        addScript = preview_object.place(activeBuildingType.greek, tile, (int)activeBuildingType.unitType);
                                       addScript.AddComponent<City>();
-                        newBuilding = addScript.AddComponent<Building>();
+                        if(newBuilding.gameObject.GetComponent<Building>() == null)
+                            newBuilding = addScript.AddComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
@@ -125,13 +125,9 @@ public class building_manager : MonoBehaviour
                              && !tile.has_building())
                     {
                         //newBuilding = preview_object.place(activeBuildingType.greek, tile).GetComponent<Building>();
-                        addScript = preview_object.place(activeBuildingType.greek, tile); // clean this up later
+                        addScript = preview_object.place(activeBuildingType.greek, tile, (int)activeBuildingType.unitType); // clean this up later
                         newBuilding = addScript.AddComponent<Building>();
 
-                        if (newBuilding.name == "farm(Clone)")
-                            newBuilding.tag = "Farm";
-                        else if (newBuilding.name == "mine(Clone)")
-                            newBuilding.tag = "Mine";
 
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
@@ -149,7 +145,7 @@ public class building_manager : MonoBehaviour
                         && canPlace
                         && !tile.has_building())
                     {
-                        newBuilding = preview_object.place(activeBuildingType.viking, tile).GetComponent<Building>();
+                        newBuilding = preview_object.place(activeBuildingType.viking, tile, (int)activeBuildingType.unitType).GetComponent<Building>();
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
@@ -160,13 +156,10 @@ public class building_manager : MonoBehaviour
                     {
                         //newBuilding = preview_object.place(activeBuildingType.viking, tile).GetComponent<Building>();
 
-                        addScript = preview_object.place(activeBuildingType.viking, tile); // clean this up later
-                        newBuilding = addScript.AddComponent<Building>();
+                        addScript = preview_object.place(activeBuildingType.viking, tile, (int)activeBuildingType.unitType); // clean this up later
 
-                        if (newBuilding.name == "farm(Clone)")
-                            newBuilding.tag = "Farm";
-                        else if (newBuilding.name == "mine(Clone)")
-                            newBuilding.tag = "Mine";
+                        if (newBuilding.gameObject.GetComponent<Building>() == null)
+                            newBuilding = addScript.AddComponent<Building>();
 
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
@@ -176,12 +169,14 @@ public class building_manager : MonoBehaviour
                         Debug.Log("Building cannot be placed here, destroying previews");
                         preview_object.destroy_previews();
                     }
-                }      
-                
-               if (newBuilding != null)
+                }
+
+                if (newBuilding != null)
                 {
                     import_manager.run_function_all("network_manager", "subtract_player_resources", new string[3] { "0", activeBuildingType.buildCost.ToString(), civNumber.ToString() });
                     match_manager.choose_player(civNumber).buildings.Add(newBuilding);
+                    newBuilding.building_type = match_manager.buildingTypeList[((int)activeBuildingType.unitType)];
+                    newBuilding.gameObject.AddComponent<BoxCollider>();
                 }
             }
             else
@@ -204,13 +199,13 @@ public class building_manager : MonoBehaviour
     public void place_previews(Transform aPrefab)
     {
         preview_object preview;
-       // showPreview      = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile.get_walkable_tiles(1);
+        // showPreview      = GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile.get_walkable_tiles(1);
 
         if (activeBuildingType.unitType == 0)
         {
             foreach (Tile tile in GameObject.FindWithTag("Player").GetComponent<PlayerMove>().currentTile.get_walkable_tiles(1))
             {
-                if (!tile.has_building() 
+                if (!tile.has_building()
                     && !tile.is_in_city())
                 {
                     Vector3 tilePosition = tile.transform.position;
@@ -222,36 +217,33 @@ public class building_manager : MonoBehaviour
         }
         else
         {
-            foreach (GameObject commandPost in GameObject.FindGameObjectsWithTag("commandPost"))
+            foreach (Building commandPost in match_manager.choose_player(civNumber).buildings)
             {
-                foreach (Tile post in commandPost.GetComponent<Building>().currentTile.get_walkable_tiles(1))
-                {
-                    if (!post.has_building())
+                if(((int)commandPost.building_type.unitType) == 0)
+                    foreach (Tile post in commandPost.GetComponent<Building>().currentTile.get_walkable_tiles(1))
                     {
-                        Vector3 tilePosition = post.transform.position;
-                        preview = preview_object.create_preview(aPrefab, tilePosition);
-                        preview.tag = "previewBuilding";
-                       // canPlace = true;
-                        showPreview.Add(post);
+                        if (!post.has_building())
+                        {
+                            Vector3 tilePosition = post.transform.position;
+                            preview = preview_object.create_preview(aPrefab, tilePosition);
+                            preview.tag = "previewBuilding";
+                            // canPlace = true;
+                            showPreview.Add(post);
+                        }
                     }
-                }
             }
         }
     }
 
     public void can_place()
     {
-      //  if (activeBuildingType.unitType == 0)
-      //  {
-            foreach (Tile preview in showPreview)
+        foreach (Tile preview in showPreview)
+        {
+            if (currentTile == preview)
             {
-                if (currentTile == preview)
-                {
-                    canPlace = true;
-                }
+                canPlace = true;
             }
-     //   }
-
+        }
     }
 
     public void set_current_tile(Tile tile)
@@ -259,4 +251,3 @@ public class building_manager : MonoBehaviour
         currentTile = tile;
     }
 }
-

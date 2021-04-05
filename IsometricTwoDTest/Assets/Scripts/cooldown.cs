@@ -6,8 +6,7 @@ public class cooldown : MonoBehaviour
 {
     public float nextAttack = 0;
     public float nextMove = 0;
-    public float nextResurceCollect = 0;
-    public float coolDown = 3;     // The amount of seconds a character must wait before attacking again.
+    public float nextResourceCollect = 0;
 
     public void initiate_attack_cooldown(float cooldown)
     {
@@ -18,12 +17,12 @@ public class cooldown : MonoBehaviour
     public void initiate_move_cooldown(float cooldown)
     {
         Debug.Log("IN COOLDOWN");
-        nextMove = Time.time + coolDown;
+        nextMove = Time.time + cooldown;
     }
 
     public void initiate_resource_cooldown(float cooldown)
     {
         Debug.Log("IN COOLDOWN");
-        nextResurceCollect = Time.time + coolDown;
+        nextResourceCollect = Time.time + cooldown;
     }
 }

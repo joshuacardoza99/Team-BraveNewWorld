@@ -25,4 +25,4 @@ MonoBehaviour:
   goldAmount: 0
   buildCost: 150
   type: Farm
-  resourceCooldown: 10
+  resourceCooldown: 5

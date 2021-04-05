@@ -10,10 +10,10 @@ public class ai_thought_process : MonoBehaviour
     match_manager match_manager;
     map_manager map_manager;
 
-    [SerializeField] private int      civilization = -1;
-    [SerializeField] private bool running = false;
-    ai_tools tools = new ai_tools();
-    ai_action_generator actionMaker = new ai_action_generator();
+    [SerializeField] private int      civilization = -1;         // Civilization of this AI.
+    [SerializeField] private bool     running = false;           // Determines if the AI is running.
+    ai_tools tools = new ai_tools();                             // Imports the ai_tool script.
+    ai_action_generator actionMaker = new ai_action_generator(); // Imports the ai_action_generator.
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +35,7 @@ public class ai_thought_process : MonoBehaviour
     IEnumerator move()
     {
         running = false;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(10);
 
         PlayerMove champion = match_manager.choose_player(civilization).champion;
         List<Action> availableMoves = actionMaker.find_player_actions(civilization);
@@ -58,11 +58,13 @@ public class ai_thought_process : MonoBehaviour
     {
         if (civilization != -1)
         {
+            // Ensures the match_manager pagackage is imported befor the function starts.
             if (match_manager == null)
             {
                 match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
             }
 
+            // Ensures the map_manager pagackage is imported befor the function starts.
             if (map_manager == null)
             {
                 map_manager = GameObject.Find("Map").GetComponent<map_manager>();

@@ -25,4 +25,4 @@ MonoBehaviour:
   goldAmount: 10
   buildCost: 250
   type: Mine
-  resourceCooldown: 10
+  resourceCooldown: 5

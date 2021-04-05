@@ -22,9 +22,6 @@ public class building_type : ScriptableObject
     public Transform previewGreek;            // Greek civ prefabs
 
     [Space(5)]                                // 5 pixels of spacing here.
-    public bool isConquered = false;          // Ability for building to spawn units
-
-    [Space(5)]                                // 5 pixels of spacing here.
     public BuildingType unitType = new BuildingType();
                                               // Adds drop down list for attack type
 
@@ -32,8 +29,8 @@ public class building_type : ScriptableObject
     [Header("Building Attributes")]           // Shows text in inspector
     public int   foodAmount;                  // Amount of food this building generates.
     public int   goldAmount;                  // Amount of gold this building generates.
-    public int   buildCost;
-    public string type = "not a building";
+    public int   buildCost;                   // Amount of gold it costs to build
+    public string type = "not a building";    // String with the type of building
 
     public float resourceCooldown;            // Cooldown on resource
 
@@ -47,6 +44,7 @@ public class building_type : ScriptableObject
         Debug.Log("\nResource Cooldown: " + resourceCooldown + "\nResource Amount: Food = " + foodAmount + " Gold = " + goldAmount);
     }
 
+    // Return the correct transform for each civilization
     public Transform get_building_of_civilization(int civilization)
     {
         Transform selectedBuilding = null;
@@ -70,7 +68,7 @@ public class building_type : ScriptableObject
 
 public enum BuildingType
 {
-    commandPost,
-    farm,
-    mine
+    commandPost, // 0
+    farm,        // 1
+    mine         // 2
 }

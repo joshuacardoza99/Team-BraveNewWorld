@@ -62,9 +62,9 @@ public class match_manager : MonoBehaviour
     private string type;                              // Type of game the match consist of.
     private int map;                               // Holds the seed for the map design for the game's map.
     public string championName = "  ";
-    private Player asianPlayer;
-    private Player greekPlayer;
-    private Player vikingPlayer;
+    [SerializeField] private Player asianPlayer;
+    [SerializeField] private Player greekPlayer;
+    [SerializeField] private Player vikingPlayer;
     private int    localPlayer;
     private List<ai_thought_process> aiList = new List<ai_thought_process>();
     public List<building_type> buildingTypeList; // List of SO, connects any building type being scripted
@@ -73,6 +73,7 @@ public class match_manager : MonoBehaviour
     // Private Global Variables //
     private int numberOfPlayers = 1000; // The number of current players in the game.
     List<bool> isReady;                 // List of players ready to play.
+    private bool isPlaying = false;
 
     // Start is called before the first frame update
     void Start()
@@ -393,6 +394,8 @@ public class match_manager : MonoBehaviour
         import_manager.run_function_all("network_manager", "add_player", new string[1] { get_local_player().civilization.ToString() });
         import_manager.run_function_all("unit_manager", "add_champion", new string[2] { get_local_player().civilization.ToString(), UnityEngine.Random.Range(1000, 2000).ToString() });
         import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] { });
+
+        isPlaying = true;
     }
 
     // Leave the match
@@ -409,5 +412,10 @@ public class match_manager : MonoBehaviour
         import_manager.run_function("Map", "remove_map", new string[0] { });
         import_manager.run_function("unit_manager", "remove_all_units", new string[0] { });
         import_manager.run_function("network_manager", "reset", new string[0] { });
+    }
+
+    public bool game_status()
+    {
+        return isPlaying;
     }
 }

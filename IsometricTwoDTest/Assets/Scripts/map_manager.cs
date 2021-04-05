@@ -12,7 +12,10 @@ public class map_manager : MonoBehaviour
 
     // Public Global Variables //
     public int mapWidth = 10;              // The number of tiles across the width and height of the map is.
+    public int cloudCover = 20;
     public GameObject water;                      // The water GroundType's GameObject.
+    public GameObject sand;
+    public GameObject cloud;
     public GameObject vikingLand;                 // The viking GroundType's GameObject.
     public GameObject greekLand;                  // The greek GroundType's GameObject.
     public GameObject asianLand;                  // The asian GroundType's GameObject.
@@ -20,6 +23,9 @@ public class map_manager : MonoBehaviour
     public string currentCharacter = null;    // Character on current selected tile
     public map_item[,] map;                        // The games current map as a 2-dimintional array of map_items.
     public GroundTypes types;                       // Holds all of the materials for each ground item.
+    public int treeAmount = 10;                 // The number of ground items that one will have a tree on.
+    public tree_type typesOfTrees;
+
 
     // This class contains all of the details the map needs for each ground item.
     public class map_item
@@ -28,13 +34,15 @@ public class map_manager : MonoBehaviour
         public int xVirtualPosition; // The x position on the virtual grid.
         public int yVirtualPosition; // The y posiiton on the virtual grid.
         public GameObject ground;       // The GameObject for the gorund.
+        public bool hasTree;         // Determines if this map item has a tree on it.
 
         // Contructor for map_item class.
-        public map_item(int groundType, int xVirtualPosition, int yVirtualPosition)
+        public map_item(int groundType, int xVirtualPosition, int yVirtualPosition, bool hasTree)
         {
             this.groundType = groundType;
             this.xVirtualPosition = xVirtualPosition;
             this.yVirtualPosition = yVirtualPosition;
+            this.hasTree = hasTree;
         }
     }
 
@@ -65,10 +73,37 @@ public class map_manager : MonoBehaviour
             ground = vikingLand;
         }
 
-        groundItem.ground = Instantiate(ground, new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(new Vector3(30, 0, -45)));
-        groundItem.ground.name = "map";
-        groundItem.ground.GetComponent<Tile>().set_civilization(groundItem.groundType);
-        groundItem.ground.GetComponent<Tile>().set_grid(groundItem.xVirtualPosition, groundItem.yVirtualPosition);
+        if (groundItem.groundType >= -1)
+        {
+            groundItem.ground = Instantiate(ground, new Vector3(xPosition, yPosition, zPosition), Quaternion.Euler(new Vector3(30, 0, -45)));//new Vector3(210, 0, 135)
+            groundItem.ground.name = "map";
+            groundItem.ground.GetComponent<Tile>().set_civilization(groundItem.groundType);
+            groundItem.ground.GetComponent<Tile>().set_grid(groundItem.xVirtualPosition, groundItem.yVirtualPosition);
+
+            if (groundItem.hasTree && groundItem.groundType >= 0)
+            {
+                groundItem.ground.GetComponent<Tile>().add_tree(Random.Range(0, typesOfTrees.get_trees_of_civilization(groundItem.groundType).Count));
+            }
+            else if (groundItem.groundType == -1)
+            {
+                Vector3 sandPosition = new Vector3(xPosition, yPosition, zPosition);
+                sandPosition.z += 10;
+
+                Instantiate(sand, sandPosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+            }
+
+            Vector3 cloudPosition = new Vector3(xPosition, yPosition, zPosition);
+            cloudPosition.z -= 20;
+
+            groundItem.ground.GetComponent<Tile>().set_cloud(Instantiate(cloud, cloudPosition, Quaternion.Euler(new Vector3(30, 0, -45))));
+        }
+        else if (groundItem.groundType == -2)
+        {
+            Vector3 cloudPosition = new Vector3(xPosition, yPosition, zPosition);
+            cloudPosition.z -= 20;
+
+            Instantiate(cloud, cloudPosition, Quaternion.Euler(new Vector3(30, 0, -45)));
+        }
     }
 
     // Checks the surrounding grounds for being the same type as the given one.
@@ -143,37 +178,39 @@ public class map_manager : MonoBehaviour
     // where the first prefab in grounditems is the water prefab and the string is the name of the prefab in the prefab folder
     private void generate_map(int width, int height, int[] groundItems, int landPercentage, int seed)
     {
+        Debug.Log("Generating a map");
         int water = groundItems[0];                           // Holds the water water "civ" name.
         List<int> preLand = new List<int>(groundItems);               // This is a placeholder for the land until the first item gets removed.
         preLand.RemoveAt(0);
         int[] land = preLand.ToArray();                        // Holds all the ground items given.
-        int numberOfGroundItems = width * height;                           // Total number of ground items for all civs and for water.
+        int numberOfGroundItems = cloudCover * cloudCover;                           // Total number of ground items for all civs and for water.
         int numberOfLandItems = (int)(((float)numberOfGroundItems) *     // Total number of ground items for all civs.
                                            ((float)landPercentage / 100f));
         int numberOfWaterItems = numberOfGroundItems - numberOfLandItems;  // Total number of ground items for the water.
-
-        map = new map_item[width, height];  // Holds the finished map.
+        int mapStartingVirtualPosition = (cloudCover / 2) - (mapWidth / 2);
+        int mapEndingVirtualPosition = mapStartingVirtualPosition + mapWidth;
+        map = new map_item[cloudCover, cloudCover];  // Holds the finished map.
 
         Random.InitState(seed);
 
-        for (int localWidth = 0; localWidth < width; localWidth++)
+        for (int localWidth = mapStartingVirtualPosition - 2; localWidth < mapEndingVirtualPosition + 2; localWidth++)
         {
-            for (int localHeight = 0; localHeight < width; localHeight++)
+            for (int localHeight = mapStartingVirtualPosition - 2; localHeight < mapEndingVirtualPosition + 2; localHeight++)
             {
-                map[localWidth, localHeight] = new map_item(water, localWidth, localHeight);
+                map[localWidth, localHeight] = new map_item(water, localWidth, localHeight, Random.Range(1, treeAmount) == ((int)(treeAmount / 2)));
             }
         }
 
         foreach (int type in land)
         {
-            int localWidth = Random.Range(1, (width - 2));
-            int localHeight = Random.Range(1, (width - 2));
+            int localWidth = Random.Range(mapStartingVirtualPosition, (mapEndingVirtualPosition - 2));
+            int localHeight = Random.Range(mapStartingVirtualPosition, (mapEndingVirtualPosition - 2));
 
             while ((map[localWidth, localHeight].groundType != water) &&
                    (map[localWidth + 1, localHeight].groundType != water))
             {
-                localWidth = Random.Range(1, (width - 2));
-                localHeight = Random.Range(1, (width - 2));
+                localWidth = Random.Range(mapStartingVirtualPosition + 1, (mapEndingVirtualPosition - 2));
+                localHeight = Random.Range(mapStartingVirtualPosition + 1, (mapEndingVirtualPosition - 2));
             }
 
             map[localWidth, localHeight].groundType = type;
@@ -181,9 +218,9 @@ public class map_manager : MonoBehaviour
 
             for (int numberOfLandForThisType = (numberOfLandItems / land.Length) - 2; numberOfLandForThisType > 0; numberOfLandForThisType--)
             {
-                for (int localXCoordinate = 0; localXCoordinate < width; localXCoordinate++)
+                for (int localXCoordinate = mapStartingVirtualPosition; localXCoordinate < mapEndingVirtualPosition; localXCoordinate++)
                 {
-                    for (int localYCoordinate = 0; localYCoordinate < width; localYCoordinate++)
+                    for (int localYCoordinate = mapStartingVirtualPosition; localYCoordinate < mapEndingVirtualPosition; localYCoordinate++)
                     {
                         if ((near_ground_type(type, localXCoordinate, localYCoordinate) >= Random.Range(2, 4)) &&
                             (not_near_ground_type(land, type, localXCoordinate, localYCoordinate) >= Random.Range(0, 4)) &&
@@ -197,23 +234,36 @@ public class map_manager : MonoBehaviour
                 }
             }
         }
+
+        for (int xVirtualPosition = 0; xVirtualPosition < cloudCover; xVirtualPosition++)
+        {
+            for (int yVirtualPosition = 0; yVirtualPosition < cloudCover; yVirtualPosition++)
+            {
+                if (map[xVirtualPosition, yVirtualPosition] == null)
+                {
+                   // Debug.LogError("map position " + xVirtualPosition + " by " + yVirtualPosition + "is null");
+                   map[xVirtualPosition, yVirtualPosition] = new map_item(-2, 0, 0, false);
+                }
+            }
+        }
     }
 
     // Loads a map for the game from a seed.
     // Parameter = [int seed]
     public void load_map(string[] parameters)
     {
-        generate_map(mapWidth, mapWidth, new int[4] { -1, 0, 1, 2 }, 80, int.Parse(parameters[0])); // Stores the square paderian for the map.
-
+        generate_map(cloudCover, cloudCover, new int[4] { -1, 0, 1, 2 }, 90, int.Parse(parameters[0])); // Stores the square paderian for the map.
+        //generate_cloud_map();
+        
         int referencePossition = 0;                                                                            // Reference point for the map placement.                    
-        float ySparatedDistance = (water.GetComponent<Renderer>().bounds.size.y / 1.65f);                       // Separation distance on the y-axis.
+        float ySparatedDistance = (vikingLand.GetComponent<Renderer>().bounds.size.y / 1.65f);                       // Separation distance on the y-axis.
         float xSparatedDistance = ySparatedDistance * 2.3f;                                                     // Separation distance on the x-axis.
         float xCoordinate = referencePossition;                                                           // X-Coordinate for the next square.
         float yCoordinate = referencePossition;                                                           // Y-Coordinate for the next square.      
         float zCoordinate = referencePossition;                                                           // Z-Coordinate for the next square.
         float rowWidthIncreaser = 1f;                                                                           // The distance to increae the row width by.
-        int mapDiagonal = (int) Mathf.Ceil(Mathf.Sqrt((mapWidth * mapWidth) + (mapWidth + mapWidth)));
-        int[] rowCompletionStatus = new int[mapWidth];
+        int mapDiagonal = (int) Mathf.Ceil(Mathf.Sqrt((cloudCover * cloudCover) + (cloudCover + cloudCover)));
+        int[] rowCompletionStatus = new int[cloudCover];
 
         for (int level = 0; level < (mapDiagonal * 2); level++)
         {
@@ -229,7 +279,7 @@ public class map_manager : MonoBehaviour
                     rowCompletionStatus[index]++;
                     newRowStarted++;
                 }
-                else if (rowCompletionStatus[index] != 0 && rowCompletionStatus[index] < mapWidth)
+                else if (rowCompletionStatus[index] != 0 && rowCompletionStatus[index] < cloudCover)
                 {
                     create_ground(xCoordinate, yCoordinate, zCoordinate, map[index, rowCompletionStatus[index]]);
 
@@ -238,9 +288,9 @@ public class map_manager : MonoBehaviour
                 }
             }
 
-            if (level >= (mapWidth - 1))
+            if (level >= (cloudCover - 1))
             {
-                rowWidthIncreaser = (mapWidth - (level + 1.5f)) * 2;
+                rowWidthIncreaser = (cloudCover - (level + 1.5f)) * 2;
             }
 
             yCoordinate -= ySparatedDistance;
@@ -289,5 +339,24 @@ public class map_manager : MonoBehaviour
         parameterList.RemoveAt(0);
 
         map[xVirtualPosition, yVirtualPosition].ground.SendMessage(functionName, parameterList.ToArray());
+    }
+
+    // Gets a list of map_items that make up the border of the map.
+    public List<map_item> get_map_border()
+    {
+        List<map_item> mapBorder = new List<map_item>(); // List of map_items on the border of the map.
+
+        foreach (map_item item in map)
+        {
+            if (item.xVirtualPosition == (mapWidth - 1) ||
+                item.xVirtualPosition == 0              ||
+                item.yVirtualPosition == (mapWidth - 1) ||
+                item.yVirtualPosition == 0)
+            {
+                mapBorder.Add(item);
+            }
+        }
+
+        return mapBorder;
     }
 }
