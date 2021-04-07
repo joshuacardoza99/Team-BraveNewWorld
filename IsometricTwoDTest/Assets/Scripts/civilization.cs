@@ -10,16 +10,9 @@ public class civilization : MonoBehaviour
     match_manager match_manager;
     import_manager import_manager;
 
-    public GameObject goldPopUp;                              // Pop up for the Gold
-    public string goldToDisplay;                          // string of gold amount that has been put into the users resources
-    public List<building_type> building_type;                          // Array of building types
-    public GameObject[] numberOfFarms;                          // Number of farms the user owns
-    public GameObject[] numberOfMines;                          // Number of mines the user owns
-    private int amountFood;                             // The amount of food the user owns
-    private int amountGold;                             // The amount of gold the user owns
-    public float timeRemanining = 10;                    // The amount of time it takes to refresh resources
-    public Tile currentTile = null;                     // The tile this character is currently on.
-    private List<int> playersNeededUpdated = new List<int>(); // List of players needing to be updated
+    public GameObject goldPopUp;        // Pop up for the Gold
+    public string goldToDisplay;        // string of gold amount that has been put into the users resources
+    public Tile currentTile = null;     // The tile this character is currently on.
 
     // External Classes
     civ_resources_display civ_resources_display;  // Import_Manager Class that facilitates cross class, player, and server function calls.
@@ -50,24 +43,21 @@ public class civilization : MonoBehaviour
     {
         match_manager.choose_player(civilization).buildings.ForEach((Building building) =>
         {
-            //building_type.FindAll(buildingType => buildingType.type == building.gameObject.tag).ForEach((buildingType) =>
-           // {
-                if (((int)building.building_type.unitType) != 0)
+            if (((int)building.building_type.unitType) != 0)
+            {
+                if (building.status == false)
                 {
-                    if (building.status == false)
-                    {
-                        match_manager.choose_player(civilization).gold += building.building_type.goldAmount;
-                        match_manager.choose_player(civilization).food += building.building_type.foodAmount;
+                    match_manager.choose_player(civilization).gold += building.building_type.goldAmount;
+                    match_manager.choose_player(civilization).food += building.building_type.foodAmount;
 
-                        if (match_manager.get_local_player().civilization == civilization)
-                        {
-                            resource_pop_up(building);
-                            civ_resources_display.update_resources();
-                        }
-                        building.status = true;
+                    if (match_manager.get_local_player().civilization == civilization)
+                    {
+                        resource_pop_up(building);
+                        civ_resources_display.update_resources();
                     }
+                    building.status = true;
                 }
-           // });
+            }
         });
     }
 
