@@ -7,7 +7,7 @@ using TMPro;
 public class civilization : MonoBehaviour
 {
     // External Classes
-    match_manager match_manager;
+    match_manager  match_manager;
     import_manager import_manager;
 
     public GameObject goldPopUp;        // Pop up for the Gold
