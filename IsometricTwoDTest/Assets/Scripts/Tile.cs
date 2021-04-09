@@ -250,6 +250,7 @@ public class Tile : MonoBehaviour
         occupied = true;
         currentCharacter = GameObject.Find(parameter[0]);
         currentCharacter.GetComponent<PlayerMove>().set_current_tile(this);
+        Debug.Log("TESTING WOW IT GOT TO SET_OCCUPIED");
 
         if (match_manager.get_local_player().civilization == get_current_character().GetComponent<PlayerMove>().get_civilization())
         {
