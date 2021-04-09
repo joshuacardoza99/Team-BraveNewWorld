@@ -205,6 +205,10 @@ public class PlayerMove : MonoBehaviour
                 anim.SetBool("isWalking", false);
         }
         catch { }
+
+        // if the current tile has a enemy city on it, begin the takeover process
+        if ((currentTile.get_buidling() != null) && (currentTile.get_buidling().GetComponent<City>() != null)) // check if its a city
+            currentTile.get_buidling().GetComponent<City>().check_for_enemy(); // send the thread to the afformentioned city
     }
 
     // Sets the civilization this character is apart of.
