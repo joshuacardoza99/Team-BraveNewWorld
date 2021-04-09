@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class cooldown : MonoBehaviour
 {
-    public float nextAttack = 0;
-    public float nextMove = 0;
-    public float nextResourceCollect = 0;
+    public float nextAttack = 0;          // Cooldown amount till the next attack
+    public float nextMove = 0;            // Cooldown amount till the next move 
+    public float nextResourceCollect = 0; // Cooldown amount till the next replenishing of resources
 
     public void initiate_attack_cooldown(float cooldown)
     {
