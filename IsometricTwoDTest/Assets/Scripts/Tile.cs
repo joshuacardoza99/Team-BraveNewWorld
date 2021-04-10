@@ -250,13 +250,16 @@ public class Tile : MonoBehaviour
         occupied = true;
         currentCharacter = GameObject.Find(parameter[0]);
         currentCharacter.GetComponent<PlayerMove>().set_current_tile(this);
-        Debug.Log("TESTING WOW IT GOT TO SET_OCCUPIED");
 
         if (match_manager.get_local_player().civilization == get_current_character().GetComponent<PlayerMove>().get_civilization())
         {
             this.GetComponent<Renderer>().material = map_manager.types.occupied;
             remove_all_clouds();
         }
+
+        // if the tile has a enemy city on it, begin the takeover process
+        if ((get_buidling() != null) && (get_buidling().GetComponent<City>() != null)) // check if its a city
+            get_buidling().GetComponent<City>().check_for_enemy(); // send the thread to the afformentioned city
     }
 
     // Sets this tile into unoccupied mode.

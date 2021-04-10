@@ -14,6 +14,7 @@ public class ai_thought_process : MonoBehaviour
     [SerializeField] private bool     running = false;           // Determines if the AI is running.
     ai_tools tools = new ai_tools();                             // Imports the ai_tool script.
     ai_action_generator actionMaker = new ai_action_generator(); // Imports the ai_action_generator.
+    ai_memory           memory      = new ai_memory();           // Imports the ai_memory script.
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,7 @@ public class ai_thought_process : MonoBehaviour
     IEnumerator move()
     {
         running = false;
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(7);
 
         PlayerMove champion = match_manager.choose_player(civilization).champion;
         List<Action> availableMoves = actionMaker.find_player_actions(civilization);

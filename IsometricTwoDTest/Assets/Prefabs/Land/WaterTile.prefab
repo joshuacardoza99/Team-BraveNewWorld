@@ -62,6 +62,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: fd8f505468700c44a90cc394fea90c29, type: 2}
+  - {fileID: 2100000, guid: fd8f505468700c44a90cc394fea90c29, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,12 +102,13 @@ MonoBehaviour:
   inCity: 0
   isCurrentlySelectedTile: 0
   selectable: {fileID: 0}
-  attackable: 0
+  attackable: {fileID: 0}
   currentCharacter: {fileID: 0}
   currentBuilding: {fileID: 0}
   civilization: 0
   grid: 
   decoration: {fileID: 0}
+  cloud: {fileID: 0}
 --- !u!65 &6051239000168518094
 BoxCollider:
   m_ObjectHideFlags: 0

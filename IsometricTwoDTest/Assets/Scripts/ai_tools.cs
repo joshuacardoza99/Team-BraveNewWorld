@@ -28,8 +28,18 @@ namespace AI
                 import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
             }
 
+            if (match_manager == null)
+            {
+                match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
+            }
+
             import_manager.run_function_all("network_manager", "add_player", new string[1] { civilization.ToString() });
             import_manager.run_function_all("unit_manager", "add_champion", new string[2] { civilization.ToString(), Random.Range(1000, 2000).ToString() });
+            
+            if (match_manager.get_type() == "network")
+            {
+                import_manager.run_function_all("network_manager", "vote_ready", new string[0] { });
+            }
         }
 
         // Moves the units for the AI.
