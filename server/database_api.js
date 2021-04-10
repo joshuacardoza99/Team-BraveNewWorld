@@ -23,8 +23,8 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    connection.connect((error) => 
    {
       console.log("Connected");
-   })
-​
+   });
+
    // Insert data into the database
    var insert_data = function(tableName = "", tableData = [""])
    {
@@ -39,16 +39,17 @@ exports.database_api = function(serverName = "", username = "", password = "", d
             }
          });
    }
+
    // Select data from a certain table
    var select_data = function(tableName = "", receiver = (result) =>{})
    {
       var sql = "SELECT * FROM " + tableName + ";";
-​
+
          connection.query(sql, (error, result) =>
          {
             if (error)
             {
-               console.log("Insert Failed with the following error:" + error);
+               console.log("Select Failed with the following error: " + error);
             }
             else
             {
@@ -83,7 +84,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
       let map     = parameters[1]
       insert_data("matchs",  [matchID, map]);
    }
-​
+
    // Receive the matchs and select the match
    this.get_matchs = function(receiver)
    {
@@ -118,13 +119,13 @@ exports.database_api = function(serverName = "", username = "", password = "", d
       let inGameFlag   =       parameters[4]
       insert_data("player",  [ipAddress, championName, civilization, matchID, inGameFlag]);
    }
-​
+
    // Receive the player and select the player game object and receiver function
    this.get_player = function(receiver)
    {
       select_data("player", receiver);
    }
-​
+
    // Add the characters with the following parameters
    this.add_characters = function(parameters)
    {
@@ -135,7 +136,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
       let playerID      =       parameters[4]
       insert_data("characters",  [characterID, champion, characterType, tileName, playerID]);
    }
-​
+
    // Receive the character and select the character
    this.get_characters = function(receiver)
    {
@@ -163,5 +164,22 @@ exports.database_api = function(serverName = "", username = "", password = "", d
                console.log("Update Failed with the following error:" + error);
             }
          });
+   }
+
+   this.get_movements = function(decisionNumber = 0, receiver = (result) => {})
+   {
+      var sql = "SELECT * FROM AI;";
+
+      connection.query(sql, (error, result) =>
+      {
+         if (error)
+         {
+            console.log("Select Failed with the following error: " + error);
+         }
+         else
+         {
+            receiver(result);
+         }
+      });
    }
 }

@@ -62,6 +62,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e55dc1d3b45d4ae45a1c12e85e213cb6, type: 2}
+  - {fileID: 2100000, guid: e55dc1d3b45d4ae45a1c12e85e213cb6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,12 +110,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkable: 1
-  target: 0
-  adjacencyList: []
-  currentchar: {fileID: 0}
-  visited: 0
-  parent: {fileID: 0}
-  distance: 0
-  f: 0
-  g: 0
-  h: 0
+  occupied: 0
+  hasBuilding: 0
+  inCity: 0
+  isCurrentlySelectedTile: 0
+  selectable: {fileID: 0}
+  attackable: {fileID: 0}
+  currentCharacter: {fileID: 0}
+  currentBuilding: {fileID: 0}
+  civilization: 0
+  grid: 
+  decoration: {fileID: 0}
+  cloud: {fileID: 0}
