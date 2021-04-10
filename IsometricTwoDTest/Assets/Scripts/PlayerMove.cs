@@ -112,7 +112,10 @@ public class PlayerMove : MonoBehaviour
                 {
 
                     // attach attack animation here
+                    attackingUnit.GetComponent<Animator>().Play("CharacterArmature|Punch");
+                    //attackingUnit.anim.Play("CharacterArmature|Punch");
                     import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, attackingUnit.damage.ToString() });
+                    defendingUnit.anim.Play("CharacterArmature|RecieveHit");
                     Debug.Log("Health equals " + defendingUnit.health);
                     cooldowns.initiate_attack_cooldown(attackingUnit.attackCooldown);
                     if (defendingUnit.health <= 0)
