@@ -19,15 +19,15 @@ public class civ_description : MonoBehaviour
     {
         if (selectedCiv == 0)
         {
-            descriptionText.text = "Selected Civilization: Asian";
+            descriptionText.text = "Asian";
         }
         else if (selectedCiv == 1)
         {
-            descriptionText.text = "Selected Civilization: Greek";
+            descriptionText.text = "Greek";
         }
         else
         {
-            descriptionText.text = "Selected Civilization: Viking";
+            descriptionText.text = "Viking";
         }
     }
 }

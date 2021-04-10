@@ -127,6 +127,13 @@ public class building_manager : MonoBehaviour
         showPreview.Clear();
         activeBuildingType = null;
         canPlace = false;
+
+        // after a building is placed, attach it to its city (by updating all the cities building lists)
+        foreach (GameObject icity in GameObject.FindGameObjectsWithTag("commandPost"))
+        {
+            City city = icity.GetComponent<City>();
+            import_manager.run_function_all(city.name, "get_buildings", new string[0]);
+        }
     }
 
     //  Set active building to which ever the user selected
