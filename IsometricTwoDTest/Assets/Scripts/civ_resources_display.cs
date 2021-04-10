@@ -8,13 +8,13 @@ public class civ_resources_display : MonoBehaviour
     public Text resourcesText;
 
     // External Classes
-    civilization civilization;  // Import_Manager Class that facilitates cross class, player, and server function calls.
+    civilization  civilization;  // Import_Manager Class that facilitates cross class, player, and server function calls.
     match_manager match_manager;
 
     // Start is called before the first frame update
     void Start()
     {
-        civilization = GameObject.Find("civManager").GetComponent<civilization>(); // Connects to the import_manager.
+        civilization  = GameObject.Find("civManager").GetComponent<civilization>(); // Connects to the import_manager.
         match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
     }
 
@@ -26,6 +26,6 @@ public class civ_resources_display : MonoBehaviour
             match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
         }
 
-        resourcesText.text = "FOOD: " + match_manager.get_local_player().food + "\nGOLD: " + match_manager.get_local_player().gold;
+        resourcesText.text = " " + match_manager.get_local_player().food + "\n\n " + match_manager.get_local_player().gold;
     }
 }

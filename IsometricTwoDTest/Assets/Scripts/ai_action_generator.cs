@@ -5,6 +5,15 @@ using UnityEngine;
 
 namespace AI
 {
+    public enum ActionType
+    {
+        movement,
+        build,
+        recruit,
+        attack,
+        capture
+    }
+
     public class ai_action_generator
     {
         // External Classes //

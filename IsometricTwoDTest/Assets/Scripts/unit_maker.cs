@@ -73,7 +73,10 @@ public class unit_maker : MonoBehaviour
         champion.GetComponent<PlayerMove>().set_civilization(civilization);
         import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tileGrid[0].ToString(), tileGrid[1].ToString(), "set_occupied", champion.name });
 
-        focus_camera_on(champion);
+        if (match_manager.get_local_player().civilization == int.Parse(parameters[0]))
+        {
+            focus_camera_on(champion);
+        }
 
         match_manager.update_player_champion(new string[2] { civilization.ToString(), champion.name});
     }

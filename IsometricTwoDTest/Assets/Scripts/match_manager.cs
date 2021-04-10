@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using System.Text.RegularExpressions;
 using AI;
@@ -69,6 +70,7 @@ public class match_manager : MonoBehaviour
     private List<ai_thought_process> aiList = new List<ai_thought_process>();
     public List<building_type> buildingTypeList; // List of SO, connects any building type being scripted
     public List<unit_type> unitTypeList; // List of SO, connects any unit type being scripted
+    public GameObject cloudBackground; 
 
     // Private Global Variables //
     private int numberOfPlayers = 1000; // The number of current players in the game.
@@ -97,8 +99,7 @@ public class match_manager : MonoBehaviour
     }
 
     // Gets the type of game the match is managing.
-    // Parameters = []
-    public string get_type(string[] parameters)
+    public string get_type()
     {
         return this.type;
     }
@@ -222,10 +223,9 @@ public class match_manager : MonoBehaviour
     // Controls the conditions for the player leaving the game.
     public void check_end_conditions()
     {
-        if (get_local_player().units.Count > 0 && get_local_player().champion == null)
+        if (get_local_player().units.Count <= 0 && get_local_player().champion == null)
         {
-            leave_match();
-            change_scene.buttonChangeScene("Main");
+            SceneManager.LoadScene("Main");
         }
     }
 
@@ -324,6 +324,7 @@ public class match_manager : MonoBehaviour
         }
 
         import_manager.run_function("Map", "load_map", new string[1] { this.map.ToString() });
+        import_manager.run_function_all("network_manager", "add_player", new string[1] { get_local_player().civilization.ToString() });
         import_manager.run_function_all("network_manager", "vote_ready", new string[0] { });
     }
 
@@ -361,6 +362,21 @@ public class match_manager : MonoBehaviour
             {
                 import_manager.run_function_all("network_manager", "start_playing", new string[0] { });
             }
+            else if ((isReady.Count != this.numberOfPlayers) && this.type == "network")
+            {
+                StartCoroutine(handles_no_one_joining());
+            }
+        }
+    }
+
+    IEnumerator handles_no_one_joining()
+    {
+        yield return new WaitForSeconds(30);
+
+        if (isReady.Count < this.numberOfPlayers)
+        {
+            add_all_ai();
+            start_ai();
         }
     }
 
@@ -391,8 +407,12 @@ public class match_manager : MonoBehaviour
         }
 
         civ_resources_display.update_resources();
-        import_manager.run_function_all("network_manager", "add_player", new string[1] { get_local_player().civilization.ToString() });
+        
         import_manager.run_function_all("unit_manager", "add_champion", new string[2] { get_local_player().civilization.ToString(), UnityEngine.Random.Range(1000, 2000).ToString() });
+
+        Instantiate(cloudBackground, new Vector3(-5.58f, -16.78f, 0), Quaternion.Euler(new Vector3(0, 0, -5.1f)));
+        Instantiate(cloudBackground, new Vector3(-13.6f, -107.2f, 0), Quaternion.Euler(new Vector3(0, 0, -5.1f)));
+
         import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] { });
 
         isPlaying = true;
