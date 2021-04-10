@@ -13,6 +13,7 @@ public class City : MonoBehaviour
     public  Tile           currentTile       = null;                 // The tile this character is currently on.
     public  List<Tile>     in_city           = new List<Tile>();     // A list of tiles that are within city borders
     public  List<Building> buildings_in_city = new List<Building>(); // list of buildings connected to city 
+    public  bool           Testing           = false;                // temp variable for testing the conquest system
 
     // Start is called before the first frame update
     void Start()
@@ -64,5 +65,6 @@ public class City : MonoBehaviour
             Debug.Log("frendly unit on command post");
             // else if block is just for testing.
         }
+        Testing = true;
     }
 }
