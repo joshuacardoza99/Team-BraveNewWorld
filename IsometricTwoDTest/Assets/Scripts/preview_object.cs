@@ -23,7 +23,7 @@ public class preview_object : MonoBehaviour
 
     public GameObject place(Transform prefab, Tile tile, int type)
     {
-        import_manager.run_function_all("preview_object", "build_building", new string[4] { prefab.name, tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), match_manager.get_local_player().civilization.ToString()});
+        import_manager.run_function_all("preview_object", "build_building", new string[5] { prefab.name, tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), type.ToString(), match_manager.get_local_player().civilization.ToString()});
         GameObject building = tile.get_buidling();
 
         destroy_previews();
@@ -32,7 +32,7 @@ public class preview_object : MonoBehaviour
     }
 
     // Builds the building over the network or just locally depending on the current game type.
-    // Parameter = [string prefabName, int xPosition, yPosition, int civilization]
+    // Parameter = [string prefabName, int xPosition, yPosition, int buildingType, int civilization]
     public void build_building(string[] parameter)
     {
         Tile tile = map_manager.map[int.Parse(parameter[1]), int.Parse(parameter[2])].ground.GetComponent<Tile>();
@@ -53,6 +53,10 @@ public class preview_object : MonoBehaviour
             building.AddComponent<Building>();
         }
         building.GetComponent<Building>().set_type((BuildingType) int.Parse(parameter[3])); // sending the building its type
+        building.GetComponent<Building>().set_civilization(int.Parse(parameter[4]));
+        building.GetComponent<Building>().building_type = match_manager.buildingTypeList[int.Parse(parameter[3])];
+        building.GetComponent<Building>().load_stats();
+        building.GetComponent<Building>().set_current_tile(map_manager.map[int.Parse(parameter[1]), int.Parse(parameter[2])].ground.GetComponent<Tile>());
         match_manager.choose_player(int.Parse(parameter[3])).buildings.Add(building.GetComponent<Building>());
     }
 

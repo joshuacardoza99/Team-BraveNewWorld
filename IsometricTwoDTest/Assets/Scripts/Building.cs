@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using AI;
 
 // This script should be attached to all city buildings, and facilitates building functions and whatnot
 public class Building : MonoBehaviour
@@ -10,8 +11,9 @@ public class Building : MonoBehaviour
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
     map_manager map_manager;     // Importing the map_manager class.
     cooldown cooldown;
-    civilization civilization;
     match_manager match_manager;
+    preview_object preview_object;
+    ai_tools tools = new ai_tools();
 
     // used to print stats on screen
     public Text printStats;
@@ -23,7 +25,7 @@ public class Building : MonoBehaviour
     public int goldAmount;              
     public int buildCost;
     public float resourceCooldown;
-
+    [SerializeField]  private int civilization; // The civilization that owns this building.
     public bool status = true;
     public float timeRemanining;                    // The amount of time it takes to refresh resources
 
@@ -38,7 +40,7 @@ public class Building : MonoBehaviour
     void Start()
     {
         match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
-
+        preview_object = GameObject.Find("preview_object").GetComponent<preview_object>();
         Debug.Log("A building has been placed!");
 
         // Print Stats unto the screen
@@ -75,6 +77,31 @@ public class Building : MonoBehaviour
     public void set_type(BuildingType newType)
     {
         type = newType;
+    }
+
+    // Sets what civilizaiton owns this building.
+    public void set_civilization(int newCivilization)
+    {
+        civilization = newCivilization;
+    }
+
+    // Gets the civilization that owns this building.
+    public int get_civilization()
+    {
+        return civilization;
+    }
+
+    // Changes the buildings ownership.
+    // Parameters = [int civilization]
+    public void change_civilization_ownership(string[] parameters)
+    {
+        currentTile.remove_building();
+        Destroy(gameObject);
+
+        match_manager.choose_player(get_civilization()).buildings = match_manager.choose_player(get_civilization()).buildings.FindAll(building => building != this);
+
+        preview_object.build_building(new string[5] { building_type.get_building_of_civilization(int.Parse(parameters[0])).name, currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), ((int) building_type.unitType).ToString(), parameters[0] });// Parameter = [string prefabName, int xPosition, yPosition, int buildingType, int civilization]
+        tools.build_building(currentTile, building_type, int.Parse(parameters[0]));
     }
 
 /*  public void OnMouseOver()
