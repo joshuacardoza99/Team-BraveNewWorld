@@ -350,6 +350,13 @@ public class Tile : MonoBehaviour
         hasBuilding = true;
     }
 
+    // Removes the current building.
+    public void remove_building()
+    {
+        currentBuilding = null;
+        hasBuilding = false;
+    }
+
     // Get the building object on this tile
     public GameObject get_buidling()
     {

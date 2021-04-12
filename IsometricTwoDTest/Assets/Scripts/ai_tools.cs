@@ -82,7 +82,7 @@ namespace AI
             {
                 if (type.unitType == 0 && !tile.is_in_city())
                 {
-                    import_manager.run_function_all("preview_object", "build_building", new string[4] { type.get_building_of_civilization(civilization).name, tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), civilization.ToString() });
+                    import_manager.run_function_all("preview_object", "build_building", new string[5] { type.get_building_of_civilization(civilization).name, tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), ((int) type.unitType).ToString(), civilization.ToString() });
                     building     = tile.get_buidling();
                     building.tag = "commandPost";
 
@@ -93,7 +93,7 @@ namespace AI
                 }
                 else if (type.unitType != 0 && tile.is_in_city())
                 {
-                    import_manager.run_function_all("preview_object", "build_building", new string[4] { type.get_building_of_civilization(civilization).name, tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), civilization.ToString() });
+                    import_manager.run_function_all("preview_object", "build_building", new string[5] { type.get_building_of_civilization(civilization).name, tile.get_grid()[0].ToString(), tile.get_grid()[1].ToString(), ((int)type.unitType).ToString(), civilization.ToString() });
                     building = tile.get_buidling();
 
                     if (building.name == "farm(Clone)")

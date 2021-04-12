@@ -26,6 +26,6 @@ public class civ_resources_display : MonoBehaviour
             match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
         }
 
-        resourcesText.text = " " + match_manager.get_local_player().food + "\n\n " + match_manager.get_local_player().gold;
+        resourcesText.text = " " + match_manager.get_local_player().gold + "\n\n " + match_manager.get_local_player().food;
     }
 }

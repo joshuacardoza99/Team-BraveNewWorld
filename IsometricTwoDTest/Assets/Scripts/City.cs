@@ -10,10 +10,11 @@ public class City : MonoBehaviour
     map_manager map_manager;
 
     // Variables      //
-    public  Tile           currentTile       = null;                 // The tile this character is currently on.
+    public  Tile           currentTile       = null;                 // The tile this city is currently managed from.
     public  List<Tile>     in_city           = new List<Tile>();     // A list of tiles that are within city borders
     public  List<Building> buildings_in_city = new List<Building>(); // list of buildings connected to city 
     public  bool           Testing           = false;                // temp variable for testing the conquest system
+    private int            occupiedBy        = -1;
 
     // Start is called before the first frame update
     void Start()
@@ -49,18 +50,41 @@ public class City : MonoBehaviour
         }
     }   
 
+    // Removes the city.
+    public void change_city_ownership(int civilization)
+    {
+        buildings_in_city.ForEach((Building building) =>
+        {
+            building.change_civilization_ownership(new string[1] { civilization.ToString() });
+        });
+
+        gameObject.GetComponent<Building>().change_civilization_ownership(new string[1] { civilization.ToString() });
+    }
+
+    IEnumerator conquer(int civilization)
+    {
+        yield return new WaitForSeconds(5);
+
+        if (currentTile.get_current_character() != null &&
+            currentTile.get_current_character().GetComponent<PlayerMove>().civilization == civilization)
+        {
+            change_city_ownership(civilization);
+        }
+    }
 
     // Check if the current character on this tile is an enemy
     public void check_for_enemy()
     {
         PlayerMove character = currentTile.get_current_character().GetComponent<PlayerMove>();
-
-        if ((character != null) && (character.civilization != currentTile.get_civilization()))
+        
+        if ((character != null) && (character.civilization != gameObject.GetComponent<Building>().get_civilization()))
         {
+            occupiedBy = character.civilization;
+            StartCoroutine(conquer(character.civilization));
             Debug.Log("Enemy on a command post!");
             // add code to transfer city ownership here
         }
-        else if ((character != null) && (character.civilization == currentTile.get_civilization()))
+        else if ((character != null) && (character.civilization == gameObject.GetComponent<Building>().get_civilization()))
         {
             Debug.Log("frendly unit on command post");
             // else if block is just for testing.

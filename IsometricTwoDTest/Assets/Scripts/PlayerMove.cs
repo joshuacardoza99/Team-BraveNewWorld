@@ -24,7 +24,10 @@ public class PlayerMove : MonoBehaviour
     public float attackCooldown;                   // The seconds this player needs to wait between actions.
     public float moveCooldown;
     public float nextAttack = 0;                   // Does not appear to be used.
+    public float timeRemanining;
     public bool isAttacking = false;               // Determines if this player is currently attaching.
+    public bool startMoveCD = false;
+    public bool canMove = true;
     public int civilization = 0;              // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     private int[] grid = new int[2] { 0, 0 }; // Stores the position of the Tile in the virtual grid. [x position, y position]
 
@@ -65,11 +68,20 @@ public class PlayerMove : MonoBehaviour
         unit.print_attributes();
     }
 
-    /*private void Update()
+    void Update()
     {
-        if(currentTile.is_current())
-            Tile.handle_selection(currentTile, this.gameObject);
-    }*/
+        if (startMoveCD)
+            if (timeRemanining > 0)
+            {
+                timeRemanining -= Time.deltaTime;
+            }
+            else
+            {
+                timeRemanining = moveCooldown;
+                canMove = true;
+                startMoveCD = false;
+            }
+    }
 
     // This runs when the character is enabled.
     void OnEnable()
@@ -102,17 +114,19 @@ public class PlayerMove : MonoBehaviour
                 cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
             }
 
-            PlayerMove defendingUnit = this;
-            PlayerMove attackingUnit = currentTile.get_attackable().GetComponent<PlayerMove>();
+            PlayerMove defendingUnit = currentTile.get_attackable().GetComponent<PlayerMove>();
+            PlayerMove attackingUnit = this;
 
             if (Time.time > cooldowns.nextAttack)
             {
                 // check if this characters civ is the same as the character clicking on it
                 if (defendingUnit.get_civilization() != match_manager.get_local_player().civilization)
                 {
-
                     // attach attack animation here
+                    attackingUnit.GetComponent<Animator>().Play("CharacterArmature|Punch");
+                    //attackingUnit.anim.Play("CharacterArmature|Punch");
                     import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, attackingUnit.damage.ToString() });
+                    defendingUnit.anim.Play("CharacterArmature|RecieveHit");
                     Debug.Log("Health equals " + defendingUnit.health);
                     cooldowns.initiate_attack_cooldown(attackingUnit.attackCooldown);
                     if (defendingUnit.health <= 0)
@@ -127,15 +141,22 @@ public class PlayerMove : MonoBehaviour
     // Handles running the move on the current players computer and over the network.
     public void handle_move(Tile moveToTile, GameObject ususedCharacter)
     {
-        if (!moveToTile.is_occupied() && moveToTile.is_selectable() && (match_manager.get_local_player().civilization == get_civilization()) && (moveToTile.get_selectable() == this.gameObject))
+        if (canMove)
         {
+            if (!moveToTile.is_occupied() && moveToTile.is_selectable() && (match_manager.get_local_player().civilization == get_civilization()) && (moveToTile.get_selectable() == this.gameObject))
+            {
+                currentTile.RunOnUnselected(currentTile, this.gameObject);
+
+                import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
+
+                import_manager.run_function_all(this.gameObject.name, "move", new string[2] { moveToTile.get_grid()[0].ToString(), moveToTile.get_grid()[1].ToString() });
+
+                import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied", this.name });
+            }
+        }
+        else
+        { 
             currentTile.RunOnUnselected(currentTile, this.gameObject);
-
-            import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
-
-            import_manager.run_function_all(this.gameObject.name, "move", new string[2] { moveToTile.get_grid()[0].ToString(), moveToTile.get_grid()[1].ToString() });
-
-            import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_occupied", this.name });
         }
     }
 
@@ -205,6 +226,17 @@ public class PlayerMove : MonoBehaviour
                 anim.SetBool("isWalking", false);
         }
         catch { }
+
+
+        // if the current tile has a enemy city on it, begin the takeover process
+        if ((currentTile.get_buidling() != null) && (currentTile.get_buidling().GetComponent<City>() != null)) // check if its a city
+            currentTile.get_buidling().GetComponent<City>().check_for_enemy(); // send the thread to the afformentioned city
+
+        startMoveCD = true;
+        Debug.Log(startMoveCD.ToString());
+        canMove = false;
+        Debug.Log(canMove.ToString());
+
     }
 
     // Sets the civilization this character is apart of.
@@ -262,9 +294,10 @@ public class PlayerMove : MonoBehaviour
         moveRange       = unit.moveRange;
         attackCooldown  = unit.attackCooldown;
         moveCooldown    = unit.movementCooldown;
+        timeRemanining  = unit.movementCooldown;
 
         //panel.GetComponent<UnityEngine.UI.Text>().text = "Name: " + name.ToString(); //+ "\nHealth: " + health.ToString() + "\nDamage: " + damage.ToString() + "\nAttack Range:" + attackRange.ToString() + "\nMovement Range:" + moveRange.ToString() + "\nAttack Cooldown: " + attackCooldown.ToString() + "\nMovement Cooldown: " + moveCooldown.ToString();
-       // set_text_stats();
+        // set_text_stats();
     }
 
   /*  public void OnMouseOver()
