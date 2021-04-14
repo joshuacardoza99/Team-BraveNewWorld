@@ -127,7 +127,7 @@ namespace AI
 
             match_manager.choose_player(civilization).buildings.ForEach((Building building) =>
             {
-                if (building.gameObject.tag == "commandPost")
+                if (building != null && building.gameObject.tag == "commandPost")
                 {
                     tilesToBuildOn.Add(building.currentTile);
 

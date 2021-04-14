@@ -227,11 +227,6 @@ public class PlayerMove : MonoBehaviour
         }
         catch { }
 
-
-        // if the current tile has a enemy city on it, begin the takeover process
-        if ((currentTile.get_buidling() != null) && (currentTile.get_buidling().GetComponent<City>() != null)) // check if its a city
-            currentTile.get_buidling().GetComponent<City>().check_for_enemy(); // send the thread to the afformentioned city
-
         startMoveCD = true;
         Debug.Log(startMoveCD.ToString());
         canMove = false;

@@ -342,6 +342,11 @@ public class Tile : MonoBehaviour
         inCity = true;
     }
 
+    // Removes the city.
+    public void remove_city()
+    {
+        inCity = false;
+    }
 
     // Recieve a building gameobject and set it to the current building
     public void set_building(GameObject newBuilding)

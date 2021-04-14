@@ -93,15 +93,13 @@ public class Building : MonoBehaviour
 
     // Changes the buildings ownership.
     // Parameters = [int civilization]
-    public void change_civilization_ownership(string[] parameters)
+    public void destroy_building(string[] parameters)
     {
         currentTile.remove_building();
+        currentTile.remove_city();
         Destroy(gameObject);
 
         match_manager.choose_player(get_civilization()).buildings = match_manager.choose_player(get_civilization()).buildings.FindAll(building => building != this);
-
-        preview_object.build_building(new string[5] { building_type.get_building_of_civilization(int.Parse(parameters[0])).name, currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), ((int) building_type.unitType).ToString(), parameters[0] });// Parameter = [string prefabName, int xPosition, yPosition, int buildingType, int civilization]
-        tools.build_building(currentTile, building_type, int.Parse(parameters[0]));
     }
 
 /*  public void OnMouseOver()
