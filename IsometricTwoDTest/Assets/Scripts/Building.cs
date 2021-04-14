@@ -66,6 +66,11 @@ public class Building : MonoBehaviour
         }
     }
 
+    // send clicks to the tile
+    private void OnMouseDown()
+    {
+        currentTile.OnMouseDown();
+    }
 
     public void set_current_tile(Tile tile)
     {
