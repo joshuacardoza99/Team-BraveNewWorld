@@ -8,6 +8,7 @@ public class City : MonoBehaviour
 {
     // External Classes//
     map_manager map_manager;
+    match_manager match_manager;
 
     // Variables      //
     public  Tile           currentTile       = null;                 // The tile this city is currently managed from.
@@ -20,6 +21,7 @@ public class City : MonoBehaviour
     void Start()
     {
         map_manager = GameObject.Find("Map").GetComponent<map_manager>(); // Connects to the map_manager.
+        match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
 
         currentTile = this.GetComponent<Building>().currentTile;
         Debug.Log("A City has been placed!");

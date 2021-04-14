@@ -17,8 +17,8 @@ public class Building : MonoBehaviour
 
     // used to print stats on screen
     public Text printStats;
-  //  public GameObject canvas;
-    //public GameObject panel;
+    public GameObject canvas;
+    public GameObject panel;
 
     // Building stats
     public int foodAmount;                 
@@ -44,8 +44,8 @@ public class Building : MonoBehaviour
         Debug.Log("A building has been placed!");
 
         // Print Stats unto the screen
-      //  canvas = GameObject.Find("Canvas").gameObject;
-        //panel = canvas.transform.GetChild(7).gameObject;
+        canvas = GameObject.Find("Canvas").gameObject;
+        panel = canvas.transform.GetChild(8).gameObject;
 
         // Load and print the stats into the game
         load_stats();
@@ -104,9 +104,9 @@ public class Building : MonoBehaviour
         tools.build_building(currentTile, building_type, int.Parse(parameters[0]));
     }
 
-/*  public void OnMouseOver()
+    public void OnMouseOver()
     {
-        //set_text_stats();
+        set_text_stats();
         panel.SetActive(true);
     }
 
@@ -114,7 +114,7 @@ public class Building : MonoBehaviour
     {
         printStats = null;
         panel.SetActive(false);
-    }*/
+    }
 
     public void load_stats()
     {
@@ -123,15 +123,15 @@ public class Building : MonoBehaviour
         buildCost  = building_type.buildCost;
         resourceCooldown = building_type.resourceCooldown;
 
-       // set_text_stats();
+        //set_text_stats();
     }
 
 
- /*   public void set_text_stats()
+    public void set_text_stats()
     {
         printStats = panel.transform.GetChild(1).GetComponent<Text>();
-        printStats.text = "Name: " + name + "\nFood: " + foodAmount + "\nGold: " + goldAmount + "\nResource Cooldown:" + resourceCooldown + "\nBuild Cost:" + buildCost;
-    }*/
+        printStats.text = "\nFood: " + foodAmount + "\nGold: " + goldAmount + "\nCooldown:" + resourceCooldown + "\nCost:" + buildCost;
+    }
 
 
 }

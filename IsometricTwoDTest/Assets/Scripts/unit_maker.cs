@@ -98,6 +98,11 @@ public class unit_maker : MonoBehaviour
             itemCopy.GetComponent<PlayerMove>().unit = match_manager.unitTypeList[unitType];
         }
 
+        if (itemCopy.GetComponent<CapsuleCollider>() == null)
+        {
+            itemCopy.AddComponent<CapsuleCollider>();
+        }
+
         itemCopy.GetComponent<PlayerMove>().set_grid(tile.get_grid()[0], tile.get_grid()[1]);
         itemCopy.GetComponent<PlayerMove>().load_stats();
 
