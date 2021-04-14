@@ -1,14 +1,32 @@
 fileFormatVersion: 2
-guid: 2b96e1219d0069d4d899667e9cb1e51c
+guid: 3852567c4e599c24a82142ba425b41ac
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
+      74: 2667949614841947897
+    second: Walk
+  - first:
+      74: 2353680664591731088
+    second: Punch
+  - first:
+      74: 5522812681064789136
+    second: Run
+  - first:
+      74: -1139297566167469525
+    second: RecieveHit
+  - first:
+      74: 4787742288682755051
+    second: PickUp
+  - first:
+      74: -4247997853878827643
+    second: SitDown
+  - first:
+      74: -6076556136478701286
+    second: SwordSlash
+  - first:
       74: 1132547922023742953
     second: CharacterArmature|Defeat
-  - first:
-      74: 9061338213343248790
-    second: CharacterArmature|Idle
   - first:
       74: 7022811679865794533
     second: CharacterArmature|PickUp
