@@ -1,11 +1,14 @@
 fileFormatVersion: 2
-guid: 00ef9ebed21acfd47a1adc170bb98cdc
+guid: bb7f025a54f2b0c479a1b5b18769d884
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
       74: 1132547922023742953
     second: CharacterArmature|Defeat
+  - first:
+      74: 9061338213343248790
+    second: CharacterArmature|Idle
   - first:
       74: 7022811679865794533
     second: CharacterArmature|PickUp
@@ -24,9 +27,6 @@ ModelImporter:
   - first:
       74: -2488620027461464802
     second: CharacterArmature|StandUp
-  - first:
-      74: 2321273963174291681
-    second: CharacterArmature|SwordSlash
   - first:
       74: 5008348457023331957
     second: CharacterArmature|Victory
@@ -67,7 +67,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.75
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -118,7 +118,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0075
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

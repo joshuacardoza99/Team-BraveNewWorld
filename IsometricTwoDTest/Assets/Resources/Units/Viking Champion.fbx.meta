@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 27d53fa8ce979814e96e1256e72b75c7
+guid: 9a6103de7deb52843a96c6682520ce66
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
-      74: -6076556136478701286
-    second: SwordSlash
-  - first:
       74: 1132547922023742953
     second: CharacterArmature|Defeat
+  - first:
+      74: 9061338213343248790
+    second: CharacterArmature|Idle
   - first:
       74: 7022811679865794533
     second: CharacterArmature|PickUp

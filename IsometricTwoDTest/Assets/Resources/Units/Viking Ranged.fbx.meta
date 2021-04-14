@@ -1,50 +1,41 @@
 fileFormatVersion: 2
-guid: 39a00b694c3a22445a4a1d244c2137ae
+guid: fdb92cbdfbbe3334f83e175a693e4018
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
-      74: 2895968046501435634
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|Defeat|CharacterArmatur
+      74: 1132547922023742953
+    second: CharacterArmature|Defeat
   - first:
-      74: 1081155114905879034
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|Defeat|CharacterArmatur.001
+      74: 9061338213343248790
+    second: CharacterArmature|Idle
   - first:
-      74: 2348068432743017548
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|Defeat|CharacterArmature|De
+      74: 7022811679865794533
+    second: CharacterArmature|PickUp
   - first:
-      74: 6137961328318379928
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|Idle|CharacterArmature|Idle
+      74: -4592842328519117816
+    second: CharacterArmature|Punch
   - first:
-      74: -4725303881398075667
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|PickUp|CharacterArmature|Pi
+      74: -4856542728082765067
+    second: CharacterArmature|RecieveHit
   - first:
-      74: 4978251390092090839
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|Punch|CharacterArmature|Pun
+      74: -5307234019925579384
+    second: CharacterArmature|Shoot_OneHanded
   - first:
-      74: -7492760370506605617
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|RecieveHit|CharacterArmatur
+      74: 228616033308382003
+    second: CharacterArmature|SitDown
   - first:
-      74: -2474417182433354830
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|Shoot_OneHanded|CharacterAr
+      74: -2488620027461464802
+    second: CharacterArmature|StandUp
   - first:
-      74: 6835169298692751268
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|SitDown|CharacterArmature|S
+      74: 5008348457023331957
+    second: CharacterArmature|Victory
   - first:
-      74: -3007737382109300794
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|StandUp|CharacterArmature|S
+      74: -5599002979973759676
+    second: CharacterArmature|Walk
   - first:
-      74: 7769207683816696730
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|Victory|CharacterArmature|V
-  - first:
-      74: -5169341678767660388
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|Walk_Carry|CharacterArmatur
-  - first:
-      74: 3601682846318439625
-    second: CharacterArmature.001|CharacterArmature|CharacterArmature|Walk|CharacterArmature|Walk
-  - first:
-      74: -8355793974812770734
-    second: CharacterArmature.002|CharacterArmature|CharacterArmature|Defeat|CharacterArmatur.001
+      74: -2469224417514991532
+    second: CharacterArmature|Walk_Carry
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -76,7 +67,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.75
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -127,7 +118,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.0075
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
