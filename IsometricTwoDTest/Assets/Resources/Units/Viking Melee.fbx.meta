@@ -1,41 +1,41 @@
 fileFormatVersion: 2
-guid: 11da611522dbe94468e4e7cc6c825dce
+guid: e7fede07a5804bc47851fe0b59ed5a84
 ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
-      74: 1132547922023742953
-    second: CharacterArmature|Defeat
+      74: -2589895700168644705
+    second: CharacterArmature|CharacterArmature|CharacterArmature|Defeat|CharacterArmature|De
   - first:
-      74: 9061338213343248790
-    second: CharacterArmature|Idle
+      74: 4154259410033017136
+    second: CharacterArmature|CharacterArmature|CharacterArmature|Idle|CharacterArmature|Idle
   - first:
-      74: 7022811679865794533
-    second: CharacterArmature|PickUp
+      74: -1434523748603915443
+    second: CharacterArmature|CharacterArmature|CharacterArmature|PickUp|CharacterArmature|Pi
   - first:
-      74: -4592842328519117816
-    second: CharacterArmature|Punch
+      74: -4781203043145333101
+    second: CharacterArmature|CharacterArmature|CharacterArmature|Punch|CharacterArmature|Pun
   - first:
-      74: -4856542728082765067
-    second: CharacterArmature|RecieveHit
+      74: -4620748616426731337
+    second: CharacterArmature|CharacterArmature|CharacterArmature|RecieveHit|CharacterArmatur
   - first:
-      74: -5307234019925579384
-    second: CharacterArmature|Shoot_OneHanded
+      74: -209682734176052503
+    second: CharacterArmature|CharacterArmature|CharacterArmature|Shoot_OneHanded|CharacterAr
   - first:
-      74: 228616033308382003
-    second: CharacterArmature|SitDown
+      74: -486503046617024624
+    second: CharacterArmature|CharacterArmature|CharacterArmature|SitDown|CharacterArmature|S
   - first:
-      74: -2488620027461464802
-    second: CharacterArmature|StandUp
+      74: 8512479781004451308
+    second: CharacterArmature|CharacterArmature|CharacterArmature|StandUp|CharacterArmature|S
   - first:
-      74: 5008348457023331957
-    second: CharacterArmature|Victory
+      74: 8870919508807665828
+    second: CharacterArmature|CharacterArmature|CharacterArmature|Victory|CharacterArmature|V
   - first:
-      74: -5599002979973759676
-    second: CharacterArmature|Walk
+      74: -183485410379746655
+    second: CharacterArmature|CharacterArmature|CharacterArmature|Walk_Carry|CharacterArmatur
   - first:
-      74: -2469224417514991532
-    second: CharacterArmature|Walk_Carry
+      74: 6892692633997202992
+    second: CharacterArmature|CharacterArmature|CharacterArmature|Walk|CharacterArmature|Walk
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -67,7 +67,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.75
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -118,7 +118,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.0075
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

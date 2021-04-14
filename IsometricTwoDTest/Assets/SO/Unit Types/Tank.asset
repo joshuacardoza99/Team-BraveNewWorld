@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Tank
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 6751f216af704174a951653dcfdd18ba, type: 3}
-  asian: {fileID: 4621492678046977175, guid: 70d53fb988231f146b26db2080952cba, type: 3}
-  viking: {fileID: 7963607904911265380, guid: cf88e477ada742243a49a89513d5960d, type: 3}
-  greek: {fileID: 1951941066997183547, guid: 4df1eb7fcbb56f44ba7dec38fb06d9fb, type: 3}
+  asian: {fileID: 1561254594073492276, guid: 0fce7b77312ab9340a4c16fddae03083, type: 3}
+  viking: {fileID: 1187881854244211675, guid: 1a429bdace45099469f8a41d70b67f32, type: 3}
+  greek: {fileID: 576275314272515689, guid: e4f2dbe764752b44f9c9b19831ffb0b5, type: 3}
   unitType: 3
   health: 100
   attackRange: 4
