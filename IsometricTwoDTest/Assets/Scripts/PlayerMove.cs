@@ -33,8 +33,8 @@ public class PlayerMove : MonoBehaviour
 
     // used to print stats on screen
     public Text printStats;
-  //  public GameObject canvas;
-    //public GameObject panel;
+    public GameObject canvas;
+    public GameObject panel;
 
     // Reference to SO
     public unit_type unit;
@@ -61,8 +61,8 @@ public class PlayerMove : MonoBehaviour
 
         anim = this.GetComponent<Animator>();        
         // Print Stats unto the screen
-        //canvas = GameObject.Find("Canvas").gameObject;
-        //panel = canvas.transform.GetChild(8).gameObject;
+        canvas = GameObject.Find("Canvas").gameObject;
+        panel = canvas.transform.GetChild(8).gameObject;
 
         // Load and print the stats into the game
         unit.print_attributes();
@@ -228,15 +228,11 @@ public class PlayerMove : MonoBehaviour
         }
         catch { }
 
-
-        // if the current tile has a enemy city on it, begin the takeover process
-        if ((currentTile.get_buidling() != null) && (currentTile.get_buidling().GetComponent<City>() != null)) // check if its a city
-            currentTile.get_buidling().GetComponent<City>().check_for_enemy(); // send the thread to the afformentioned city
-
         startMoveCD = true;
         Debug.Log(startMoveCD.ToString());
         canMove = false;
         Debug.Log(canMove.ToString());
+       // currentTile.GetComponent<Renderer>().material =
 
     }
 
@@ -300,9 +296,10 @@ public class PlayerMove : MonoBehaviour
         //panel.GetComponent<UnityEngine.UI.Text>().text = "Name: " + name.ToString(); //+ "\nHealth: " + health.ToString() + "\nDamage: " + damage.ToString() + "\nAttack Range:" + attackRange.ToString() + "\nMovement Range:" + moveRange.ToString() + "\nAttack Cooldown: " + attackCooldown.ToString() + "\nMovement Cooldown: " + moveCooldown.ToString();
         // set_text_stats();
     }
-  /*  public void OnMouseOver()
+
+    public void OnMouseOver()
     {
-        //set_text_stats();
+        set_text_stats();
         panel.SetActive(true);
     }
 
@@ -315,7 +312,9 @@ public class PlayerMove : MonoBehaviour
     public void set_text_stats()
     {
         printStats = panel.transform.GetChild(1).GetComponent<Text>();
-        printStats.text = "Name: " + name + "\nHealth: " + health + "\nDamage: " + damage + "\nAttack Range:" + attackRange + "\nMovement Range:" + moveRange + "\nAttack Cooldown: " + attackCooldown + "\nMovement Cooldown: " + moveCooldown;
-       // printStats.fontSize = 290;
-    }*/
+        printStats.text = "\nHealth: " + health + "\nDamage: " + damage + "\nAttack Range:  " + attackRange + "\nMovement Range:  " + moveRange + "\nAttack Cooldown:  " + attackCooldown + "\nMove Cooldown:  " + moveCooldown;
+            
+        if(timeRemanining != moveCooldown)
+            printStats.text = printStats.text + "\nNext Move:  " + (int)timeRemanining;
+    }
 }

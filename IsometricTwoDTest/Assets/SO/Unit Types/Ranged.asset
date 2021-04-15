@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Ranged
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 0485fc01f4ea3f649a2997262df7059e, type: 3}
-  asian: {fileID: 3480862566136248020, guid: a112f9a7f775e184a8ab17fe3b1e7e75, type: 3}
-  viking: {fileID: 3439820194571976798, guid: c09edde1a994af343bc32a3450dcf3e2, type: 3}
-  greek: {fileID: 5836595746069545413, guid: cdddc313cc9c2ec4d9c71541b393510e, type: 3}
+  asian: {fileID: 2807941572977902622, guid: 9d024cf19eea8c44d9417248f046ea1d, type: 3}
+  viking: {fileID: 1847794377543927229, guid: fe8a65ec3cb47ec49947a24d55e98c75, type: 3}
+  greek: {fileID: 1113969282426872196, guid: 7b5a0944d90520c4dba513461b3b79c8, type: 3}
   unitType: 1
   health: 50
   attackRange: 6

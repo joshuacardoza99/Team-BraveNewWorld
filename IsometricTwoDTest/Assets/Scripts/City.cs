@@ -8,6 +8,11 @@ public class City : MonoBehaviour
 {
     // External Classes//
     map_manager map_manager;
+    match_manager match_manager;
+
+	
+    civilization civilization;
+    civ_resources_display civ_resources_display;  // Import_Manager Class that facilitates cross class, player, and server function calls.
 
     // Variables      //
     public  Tile           currentTile       = null;                 // The tile this city is currently managed from.
@@ -19,7 +24,10 @@ public class City : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        map_manager = GameObject.Find("Map").GetComponent<map_manager>(); // Connects to the map_manager.
+        map_manager = GameObject.Find("Map").GetComponent<map_manager>(); // Connects to the map_manager. 
+        match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
+        civilization = GameObject.Find("civManager").GetComponent<civilization>(); // Connects to the import_manager.
+        civ_resources_display = GameObject.Find("civManager").GetComponent<civ_resources_display>();
 
         currentTile = this.GetComponent<Building>().currentTile;
         Debug.Log("A City has been placed!");
@@ -51,24 +59,33 @@ public class City : MonoBehaviour
     }   
 
     // Removes the city.
-    public void change_city_ownership(int civilization)
+    public void destroy_city(int civNumber)
     {
+        int reward = gameObject.GetComponent<Building>().buildCost;
+            gameObject.GetComponent<Building>().destroy_building(new string[1] { civNumber.ToString() });
+       
+        in_city.ForEach((Tile tile) =>
+        {
+            tile.remove_city();
+        });
         buildings_in_city.ForEach((Building building) =>
         {
-            building.change_civilization_ownership(new string[1] { civilization.ToString() });
+            reward += building.buildCost;
+            building.destroy_building(new string[1] { civNumber.ToString() });
         });
 
-        gameObject.GetComponent<Building>().change_civilization_ownership(new string[1] { civilization.ToString() });
+        match_manager.choose_player(civNumber).gold += reward;
+        civ_resources_display.update_resources();
     }
 
     IEnumerator conquer(int civilization)
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
 
         if (currentTile.get_current_character() != null &&
             currentTile.get_current_character().GetComponent<PlayerMove>().civilization == civilization)
         {
-            change_city_ownership(civilization);
+            destroy_city(civilization);
         }
     }
 

@@ -15,6 +15,7 @@ public class match_manager : MonoBehaviour
     change_scene change_scene;
     ai_tools tools = new ai_tools();
     civ_resources_display civ_resources_display;
+    menu_manager menu_manager;
 
     // Private Custom Classes //
 
@@ -83,6 +84,7 @@ public class match_manager : MonoBehaviour
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
         change_scene = GameObject.Find("Canvas").GetComponentInChildren<change_scene>();
         civ_resources_display = GameObject.Find("civManager").GetComponent<civ_resources_display>();
+        menu_manager = GameObject.Find("MenuManager").GetComponent<menu_manager>();
     }
 
     // Parameter = [int matchId]
@@ -149,6 +151,27 @@ public class match_manager : MonoBehaviour
         }
 
         return chosenPlayer;
+    }
+
+    // Is last player.
+    public bool is_last_player()
+    {
+        int numberOfCurrentPlayers = 0;
+
+        if (asianPlayer != null)
+        {
+            numberOfCurrentPlayers++;
+        }
+        else if (greekPlayer != null)
+        {
+            numberOfCurrentPlayers++;
+        }
+        else if (vikingPlayer != null)
+        {
+            numberOfCurrentPlayers++;
+        }
+
+        return numberOfCurrentPlayers == 1;
     }
 
     // Adds the player's data to the current match.
@@ -223,9 +246,14 @@ public class match_manager : MonoBehaviour
     // Controls the conditions for the player leaving the game.
     public void check_end_conditions()
     {
-        if (get_local_player().units.Count <= 0 && get_local_player().champion == null)
+        if (get_local_player().champion == null)
         {
-            SceneManager.LoadScene("Main");
+            menu_manager.end_screen("Lose");
+            //SceneManager.LoadScene("Main");
+        }
+        else if (is_last_player())
+        {
+            menu_manager.end_screen("Win");
         }
     }
 
