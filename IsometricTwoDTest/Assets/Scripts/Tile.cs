@@ -50,6 +50,10 @@ public class Tile : MonoBehaviour
         cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
         menu_manager = GameObject.Find("MenuManager").GetComponent<menu_manager>();
     }
+    void Update()
+    {
+        
+    }
 
     // This runs when the character is enabled.
     void OnEnable()
@@ -540,5 +544,10 @@ public class Tile : MonoBehaviour
         {
             tile.remove_cloud();
         }
+    }
+    public void play_attack(GameObject character)
+    {
+        PlayerMove animateChar = this.get_current_character().GetComponent<PlayerMove>();
+        animateChar.attackAnim.Play("CharacterArmature|Punch");
     }
 }

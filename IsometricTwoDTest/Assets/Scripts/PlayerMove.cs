@@ -45,7 +45,8 @@ public class PlayerMove : MonoBehaviour
     public Tile currentTile = null; // The tile this character is currently on.
 
     // Animation Controller
-    public Animator anim; // Some kind of controler for the animations.
+    public Animator anim, attackAnim; // Some kind of controler for the animations.
+
 
     // Use this for initialization.
     void Start()
@@ -59,7 +60,6 @@ public class PlayerMove : MonoBehaviour
         cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
 
         anim = this.GetComponent<Animator>();        
-
         // Print Stats unto the screen
         //canvas = GameObject.Find("Canvas").gameObject;
         //panel = canvas.transform.GetChild(8).gameObject;
@@ -114,8 +114,9 @@ public class PlayerMove : MonoBehaviour
                 cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
             }
 
-            PlayerMove defendingUnit = currentTile.get_attackable().GetComponent<PlayerMove>();
-            PlayerMove attackingUnit = this;
+            PlayerMove attackingUnit = currentTile.get_attackable().GetComponent<PlayerMove>();
+            PlayerMove defendingUnit = this;
+            attackAnim = attackingUnit.GetComponent<Animator>();
 
             if (Time.time > cooldowns.nextAttack)
             {
@@ -123,9 +124,9 @@ public class PlayerMove : MonoBehaviour
                 if (defendingUnit.get_civilization() != match_manager.get_local_player().civilization)
                 {
                     // attach attack animation here
-                    attackingUnit.GetComponent<Animator>().Play("CharacterArmature|Punch");
-                    //attackingUnit.anim.Play("CharacterArmature|Punch");
+                 
                     import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, attackingUnit.damage.ToString() });
+                    attackingUnit.attackAnim.Play("CharacterArmature|RecieveHit");
                     defendingUnit.anim.Play("CharacterArmature|RecieveHit");
                     Debug.Log("Health equals " + defendingUnit.health);
                     cooldowns.initiate_attack_cooldown(attackingUnit.attackCooldown);
@@ -299,7 +300,6 @@ public class PlayerMove : MonoBehaviour
         //panel.GetComponent<UnityEngine.UI.Text>().text = "Name: " + name.ToString(); //+ "\nHealth: " + health.ToString() + "\nDamage: " + damage.ToString() + "\nAttack Range:" + attackRange.ToString() + "\nMovement Range:" + moveRange.ToString() + "\nAttack Cooldown: " + attackCooldown.ToString() + "\nMovement Cooldown: " + moveCooldown.ToString();
         // set_text_stats();
     }
-
   /*  public void OnMouseOver()
     {
         //set_text_stats();
