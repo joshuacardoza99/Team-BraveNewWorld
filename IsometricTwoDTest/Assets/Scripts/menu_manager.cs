@@ -10,6 +10,9 @@ public class menu_manager : MonoBehaviour
     public GameObject currentGroup; // Current menu scene being displayed
 
 
+    private int nextCharacterToDisplay = 0;
+    private int secondsWaitPanelHasBeenShowingFor = 0;
+
     void Awake()
     {
         //TrilleonAutomation.AutomationMaster.Initialize();
@@ -34,6 +37,27 @@ public class menu_manager : MonoBehaviour
             }
         }
     }
+
+    // Starts the wait panel.
+    public void update_wait_panel()
+    {
+
+    }
+
+    IEnumerator show_next_character()
+    {
+        yield return new WaitForSeconds(10);
+
+        
+    }
+
+    IEnumerator count_the_seconds()
+    {
+        yield return new WaitForSeconds(1);
+
+        
+    }
+
 
     // Removes the wait panel blocking the game.
     // Parameter = []
