@@ -14,19 +14,8 @@ public class unit_maker : MonoBehaviour
 
     // Public Global Variables //
     public GameObject asianChampion;
-    public GameObject asianMelee;
-    public GameObject asianRanged;
-    public GameObject asianTank;
-
     public GameObject greekChampion;
-    public GameObject greekMelee;
-    public GameObject greekRanged;
-    public GameObject greekTank;
-
     public GameObject vikingChampion;
-    public GameObject vikingMelee;
-    public GameObject vikingRanged;
-    public GameObject vikingTank;
 
     // Start is called before the first frame update
     void Start()

@@ -68,14 +68,14 @@ public class civilization : MonoBehaviour
         {
             Vector3 tilePosition = building.currentTile.transform.position;                        // Get the tile position of the mine
             GameObject goldInstance = Instantiate(goldPopUp, tilePosition, Quaternion.identity);   // Instantiate the prefab
-            goldInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(goldToDisplay); // Display the string
+            goldInstance.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+ " + building.building_type.goldAmount.ToString(); // Display the string
         }
         
         if (building.building_type.foodAmount > 0)
         {
             Vector3 tilePosition = building.currentTile.transform.position;                        // Get the tile position of the mine
             GameObject goldInstance = Instantiate(goldPopUp, tilePosition, Quaternion.identity);   // Instantiate the prefab
-            goldInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(goldToDisplay); // Display the string
+            goldInstance.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+ " + building.building_type.foodAmount.ToString(); // Display the string
         }
     }
 }

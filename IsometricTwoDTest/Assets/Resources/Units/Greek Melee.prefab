@@ -495,6 +495,8 @@ MonoBehaviour:
   canMove: 1
   civilization: 0
   printStats: {fileID: 0}
+  canvas: {fileID: 0}
+  panel: {fileID: 0}
   unit: {fileID: 11400000, guid: 170360ce56294104898532840e7bdc9f, type: 2}
   actualTargetTile: {fileID: 0}
   currentTile: {fileID: 0}
@@ -509,10 +511,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.72788143
+  m_Height: 3.056302
   m_Direction: 1
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Center: {x: -0.027790427, y: 1.328151, z: 0}
 --- !u!1 &2889319732804441789
 GameObject:
   m_ObjectHideFlags: 0

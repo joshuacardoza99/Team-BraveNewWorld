@@ -1044,6 +1044,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 9c9809298e26a264886840adee22b087, type: 3}
+    - target: {fileID: 5313258152758558797, guid: 24a3a132c19477d41ba80d52ca889a6f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.93257266
+      objectReference: {fileID: 0}
+    - target: {fileID: 5313258152758558797, guid: 24a3a132c19477d41ba80d52ca889a6f, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5313258152758558797, guid: 24a3a132c19477d41ba80d52ca889a6f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.3339622
+      objectReference: {fileID: 0}
     - target: {fileID: 5577750902376373393, guid: 24a3a132c19477d41ba80d52ca889a6f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -4416,6 +4428,18 @@ PrefabInstance:
       propertyPath: vikingCommandPost
       value: 
       objectReference: {fileID: 4500974196272881540, guid: c43602e2d105c32459a04c95ae53a63e, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: asianChampion
+      value: 
+      objectReference: {fileID: 1571201741918631659, guid: 5d812bb70f86d2442a70c2e1ab288a52, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: greekChampion
+      value: 
+      objectReference: {fileID: 6545210362956541831, guid: ce44f444501f4674f92f55571f946d63, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: vikingChampion
+      value: 
+      objectReference: {fileID: 8348064386475154523, guid: 5f0e2494603a905499d1870b97ae6955, type: 3}
     - target: {fileID: 8328366925452020881, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
       propertyPath: m_Name
       value: unit_manager
