@@ -134,7 +134,7 @@ public class PlayerMove : MonoBehaviour
 
                     defendingUnit.anim.Play("CharacterArmature|RecieveHit");
                     Debug.Log("Health equals " + defendingUnit.health);
-                    cooldowns.initiate_attack_cooldown(attackingUnit.attackCooldown);
+                    initiate_attack_cooldown(attackingUnit.attackCooldown);
                     if (defendingUnit.health <= 0)
                     {
                         // attach attack animation here
