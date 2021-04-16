@@ -161,7 +161,7 @@ public class building_manager : MonoBehaviour
         }
         else
         {
-            foreach (Building commandPost in match_manager.choose_player(civNumber).buildings)
+            foreach (Building commandPost in match_manager.get_local_player().buildings)
             {
                 if(((int)commandPost.building_type.unitType) == 0)
                     foreach (Tile post in commandPost.GetComponent<Building>().currentTile.get_walkable_tiles(1))

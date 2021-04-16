@@ -17,8 +17,8 @@ public class Building : MonoBehaviour
 
     // used to print stats on screen
     public Text printStats;
-  //  public GameObject canvas;
-    //public GameObject panel;
+    public GameObject canvas;
+    public GameObject panel;
 
     // Building stats
     public int foodAmount;                 
@@ -44,8 +44,8 @@ public class Building : MonoBehaviour
         Debug.Log("A building has been placed!");
 
         // Print Stats unto the screen
-      //  canvas = GameObject.Find("Canvas").gameObject;
-        //panel = canvas.transform.GetChild(7).gameObject;
+        canvas = GameObject.Find("Canvas").gameObject;
+        panel = canvas.transform.GetChild(8).gameObject;
 
         // Load and print the stats into the game
         load_stats();
@@ -66,6 +66,11 @@ public class Building : MonoBehaviour
         }
     }
 
+    // send clicks to the tile
+    private void OnMouseDown()
+    {
+        currentTile.OnMouseDown();
+    }
 
     public void set_current_tile(Tile tile)
     {
@@ -93,20 +98,18 @@ public class Building : MonoBehaviour
 
     // Changes the buildings ownership.
     // Parameters = [int civilization]
-    public void change_civilization_ownership(string[] parameters)
+    public void destroy_building(string[] parameters)
     {
         currentTile.remove_building();
+        currentTile.remove_city();
         Destroy(gameObject);
 
         match_manager.choose_player(get_civilization()).buildings = match_manager.choose_player(get_civilization()).buildings.FindAll(building => building != this);
-
-        preview_object.build_building(new string[5] { building_type.get_building_of_civilization(int.Parse(parameters[0])).name, currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), ((int) building_type.unitType).ToString(), parameters[0] });// Parameter = [string prefabName, int xPosition, yPosition, int buildingType, int civilization]
-        tools.build_building(currentTile, building_type, int.Parse(parameters[0]));
     }
 
-/*  public void OnMouseOver()
+    public void OnMouseOver()
     {
-        //set_text_stats();
+        set_text_stats();
         panel.SetActive(true);
     }
 
@@ -114,7 +117,7 @@ public class Building : MonoBehaviour
     {
         printStats = null;
         panel.SetActive(false);
-    }*/
+    }
 
     public void load_stats()
     {
@@ -123,15 +126,15 @@ public class Building : MonoBehaviour
         buildCost  = building_type.buildCost;
         resourceCooldown = building_type.resourceCooldown;
 
-       // set_text_stats();
+        //set_text_stats();
     }
 
 
- /*   public void set_text_stats()
+    public void set_text_stats()
     {
         printStats = panel.transform.GetChild(1).GetComponent<Text>();
-        printStats.text = "Name: " + name + "\nFood: " + foodAmount + "\nGold: " + goldAmount + "\nResource Cooldown:" + resourceCooldown + "\nBuild Cost:" + buildCost;
-    }*/
+        printStats.text = "\nFood: " + foodAmount + "\nGold: " + goldAmount + "\nCooldown:" + resourceCooldown + "\nCost:" + buildCost;
+    }
 
 
 }

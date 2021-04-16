@@ -13,12 +13,11 @@ public class hover_popup : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerEnter(PointerEventData pointerEventData)
     {
         //Output to console the GameObject's name and the following message
-        if (pointerEventData.pointerCurrentRaycast.gameObject != null
-            && pointerEventData.pointerCurrentRaycast.gameObject.name != "Background")
+        if (pointerEventData.pointerCurrentRaycast.gameObject.name == "Button")
         {
-            Debug.Log("Mouse Over: " + pointerEventData.pointerCurrentRaycast.gameObject.name);
+            Debug.Log("Mouse Enters: " + pointerEventData.pointerCurrentRaycast.gameObject.name);
             currentHover = pointerEventData.pointerCurrentRaycast.gameObject;
-         //   build();
+         
         }
     }
 
@@ -28,7 +27,7 @@ public class hover_popup : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         //Output the following message with the GameObject's name
         if (currentHover != null)
         {
-            Debug.Log("Mouse Over: " + currentHover);
+            Debug.Log("Mouse Exit: " + currentHover);
             currentHover = null;            
         }
     }

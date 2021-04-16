@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class menu_manager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class menu_manager : MonoBehaviour
 
     public GameObject currentGroup; // Current menu scene being displayed
 
+
+    private int nextCharacterToDisplay = 0;
+    private int secondsWaitPanelHasBeenShowingFor = 0;
 
     void Awake()
     {
@@ -33,6 +37,27 @@ public class menu_manager : MonoBehaviour
             }
         }
     }
+
+    // Starts the wait panel.
+    public void update_wait_panel()
+    {
+
+    }
+
+    IEnumerator show_next_character()
+    {
+        yield return new WaitForSeconds(10);
+
+        
+    }
+
+    IEnumerator count_the_seconds()
+    {
+        yield return new WaitForSeconds(1);
+
+        
+    }
+
 
     // Removes the wait panel blocking the game.
     // Parameter = []
@@ -62,6 +87,19 @@ public class menu_manager : MonoBehaviour
     {
         ChangeGroup(groups[2]);
     }
+    
+    // Display the end Screen
+    // Parameter = [] win/lose condition
+    public void end_screen(string condition)
+    {
+        if (condition == "Win" || condition == "win")
+            groups[7].GetComponent<Text>().text = "Congragulations , you have conguered the map! \n " + "You " + condition;
+        else
+            groups[7].GetComponent<Text>().text = "Your Civilaztion has fallen, better luck next time! \n " + "You " + condition;
+
+        ChangeGroup(groups[7]);
+    }
+
 
     public void quit_game()
     {

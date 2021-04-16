@@ -29,7 +29,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private bool walkable = true;  // Determines if this tile can be walked on.
     [SerializeField] private bool occupied = false; // Determines if there is a character currently on this tile
     [SerializeField] private bool hasBuilding = false; // Determines if there is a building currently on this tile
-    [SerializeField] private bool inCity = false; // Determines if this tile is in the borders of a city
+    [SerializeField] private bool inCity = false;                   // Determines if this tile is in the borders of a city
     [SerializeField] private bool isCurrentlySelectedTile = false; // Tells when this tile is selected by the player.
     [SerializeField] private GameObject selectable = null; // Determines if the player can click on click on this tile.
     [SerializeField] private GameObject attackable = null; // Determines if another player can attach this tile.
@@ -49,6 +49,10 @@ public class Tile : MonoBehaviour
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
         cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
         menu_manager = GameObject.Find("MenuManager").GetComponent<menu_manager>();
+    }
+    void Update()
+    {
+        
     }
 
     // This runs when the character is enabled.
@@ -342,6 +346,11 @@ public class Tile : MonoBehaviour
         inCity = true;
     }
 
+    // Removes the city.
+    public void remove_city()
+    {
+        inCity = false;
+    }
 
     // Recieve a building gameobject and set it to the current building
     public void set_building(GameObject newBuilding)
@@ -540,5 +549,10 @@ public class Tile : MonoBehaviour
         {
             tile.remove_cloud();
         }
+    }
+    public void play_attack(GameObject character)
+    {
+        PlayerMove animateChar = this.get_current_character().GetComponent<PlayerMove>();
+        animateChar.attackAnim.Play("CharacterArmature|Punch");
     }
 }

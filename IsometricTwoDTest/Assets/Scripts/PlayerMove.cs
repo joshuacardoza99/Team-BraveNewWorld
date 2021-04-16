@@ -33,8 +33,8 @@ public class PlayerMove : MonoBehaviour
 
     // used to print stats on screen
     public Text printStats;
-  //  public GameObject canvas;
-    //public GameObject panel;
+    public GameObject canvas;
+    public GameObject panel;
 
     // Reference to SO
     public unit_type unit;
@@ -45,7 +45,8 @@ public class PlayerMove : MonoBehaviour
     public Tile currentTile = null; // The tile this character is currently on.
 
     // Animation Controller
-    public Animator anim; // Some kind of controler for the animations.
+    public Animator anim, attackAnim; // Some kind of controler for the animations.
+
 
     // Use this for initialization.
     void Start()
@@ -58,12 +59,11 @@ public class PlayerMove : MonoBehaviour
         unit_maker = GameObject.Find("unit_manager").GetComponent<unit_maker>();
         cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
 
-        anim = this.GetComponent<Animator>();        
-
+        //anim = this.GetComponent<Animator>();        
         // Print Stats unto the screen
-        //canvas = GameObject.Find("Canvas").gameObject;
-        //panel = canvas.transform.GetChild(8).gameObject;
-
+        canvas = GameObject.Find("Canvas").gameObject;
+        panel = canvas.transform.GetChild(8).gameObject;
+        anim = this.GetComponent<Animator>();
         // Load and print the stats into the game
         unit.print_attributes();
     }
@@ -107,36 +107,38 @@ public class PlayerMove : MonoBehaviour
     // Attacks the character on selected tile.
     public void attack(Tile tile, GameObject character)
     {
-        if (tile == currentTile && currentTile.is_attackable()) // and in range, and not a friendly civ
-        {
-            if (cooldowns == null)
+ 
+            if (currentTile.is_attackable()) // and in range, and not a friendly civ
             {
-                cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
-            }
-
-            PlayerMove defendingUnit = currentTile.get_attackable().GetComponent<PlayerMove>();
-            PlayerMove attackingUnit = this;
-
-            if (Time.time > cooldowns.nextAttack)
-            {
-                // check if this characters civ is the same as the character clicking on it
-                if (defendingUnit.get_civilization() != match_manager.get_local_player().civilization)
+                if (cooldowns == null)
                 {
-                    // attach attack animation here
-                    attackingUnit.GetComponent<Animator>().Play("CharacterArmature|Punch");
-                    //attackingUnit.anim.Play("CharacterArmature|Punch");
-                    import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, attackingUnit.damage.ToString() });
-                    defendingUnit.anim.Play("CharacterArmature|RecieveHit");
-                    Debug.Log("Health equals " + defendingUnit.health);
-                    cooldowns.initiate_attack_cooldown(attackingUnit.attackCooldown);
-                    if (defendingUnit.health <= 0)
+                    cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
+                }
+
+                PlayerMove attackingUnit = currentTile.get_attackable().GetComponent<PlayerMove>();
+                PlayerMove defendingUnit = this;
+                attackAnim = attackingUnit.GetComponent<Animator>();
+
+                if (Time.time > cooldowns.nextAttack)
+                {
+                    // check if this characters civ is the same as the character clicking on it
+                    if (defendingUnit.get_civilization() != match_manager.get_local_player().civilization)
                     {
-                        Debug.Log("YOUR SOLDIER HAS FALLEN !!");
-                        import_manager.run_function_all(character.name, "suicide", new string[0] { });
+                        // attach attack animation here
+
+                        import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, attackingUnit.damage.ToString() });
+                        // attackingUnit.attackAnim.Play("CharacterArmature|RecieveHit");
+                        defendingUnit.anim.Play("CharacterArmature|RecieveHit");
+                        Debug.Log("Health equals " + defendingUnit.health);
+                        cooldowns.initiate_attack_cooldown(attackingUnit.attackCooldown);
+                        if (defendingUnit.health <= 0)
+                        {
+                            Debug.Log("YOUR SOLDIER HAS FALLEN !!");
+                            import_manager.run_function_all(character.name, "suicide", new string[0] { });
+                        }
                     }
                 }
             }
-        }
     }
     // Handles running the move on the current players computer and over the network.
     public void handle_move(Tile moveToTile, GameObject ususedCharacter)
@@ -299,10 +301,9 @@ public class PlayerMove : MonoBehaviour
         //panel.GetComponent<UnityEngine.UI.Text>().text = "Name: " + name.ToString(); //+ "\nHealth: " + health.ToString() + "\nDamage: " + damage.ToString() + "\nAttack Range:" + attackRange.ToString() + "\nMovement Range:" + moveRange.ToString() + "\nAttack Cooldown: " + attackCooldown.ToString() + "\nMovement Cooldown: " + moveCooldown.ToString();
         // set_text_stats();
     }
-
-  /*  public void OnMouseOver()
+    public void OnMouseOver()
     {
-        //set_text_stats();
+        set_text_stats();
         panel.SetActive(true);
     }
 
@@ -315,7 +316,9 @@ public class PlayerMove : MonoBehaviour
     public void set_text_stats()
     {
         printStats = panel.transform.GetChild(1).GetComponent<Text>();
-        printStats.text = "Name: " + name + "\nHealth: " + health + "\nDamage: " + damage + "\nAttack Range:" + attackRange + "\nMovement Range:" + moveRange + "\nAttack Cooldown: " + attackCooldown + "\nMovement Cooldown: " + moveCooldown;
-       // printStats.fontSize = 290;
-    }*/
+        printStats.text = "\nHealth: " + health + "\nDamage: " + damage + "\nAttack Range:  " + attackRange + "\nMovement Range:  " + moveRange + "\nAttack Cooldown:  " + attackCooldown + "\nMove Cooldown:  " + moveCooldown;
+
+        if (timeRemanining != moveCooldown)
+            printStats.text = printStats.text + "\nNext Move:  " + (int)timeRemanining;
+    }
 }
