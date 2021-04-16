@@ -227,7 +227,7 @@ Animator:
   m_GameObject: {fileID: 449967471682739275}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4297248909cae644e9df1542aa056f1c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0f2c3d682bec0254986f96bcdc70c2d8, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -267,6 +267,7 @@ MonoBehaviour:
   actualTargetTile: {fileID: 0}
   currentTile: {fileID: 0}
   anim: {fileID: 0}
+  attackAnim: {fileID: 0}
 --- !u!136 &-6263475982619001536
 CapsuleCollider:
   m_ObjectHideFlags: 0

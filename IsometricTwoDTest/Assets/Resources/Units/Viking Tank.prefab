@@ -523,7 +523,7 @@ Animator:
   m_GameObject: {fileID: 1961287865810522465}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ca8e49a3f7d8ca54f84816aabf926afb, type: 2}
+  m_Controller: {fileID: 9100000, guid: b3fe98995020e444891ca210c91fa629, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -557,10 +557,13 @@ MonoBehaviour:
   canMove: 1
   civilization: 0
   printStats: {fileID: 0}
+  canvas: {fileID: 0}
+  panel: {fileID: 0}
   unit: {fileID: 11400000, guid: d56c77add73bae54488244d9854f3d0c, type: 2}
   actualTargetTile: {fileID: 0}
   currentTile: {fileID: 0}
   anim: {fileID: 0}
+  attackAnim: {fileID: 0}
 --- !u!136 &1189554227593335460
 CapsuleCollider:
   m_ObjectHideFlags: 0

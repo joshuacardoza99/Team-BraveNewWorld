@@ -59,11 +59,11 @@ public class PlayerMove : MonoBehaviour
         unit_maker = GameObject.Find("unit_manager").GetComponent<unit_maker>();
         cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
 
-        anim = this.GetComponent<Animator>();        
+        //anim = this.GetComponent<Animator>();        
         // Print Stats unto the screen
         canvas = GameObject.Find("Canvas").gameObject;
         panel = canvas.transform.GetChild(8).gameObject;
-
+        anim = this.GetComponent<Animator>();
         // Load and print the stats into the game
         unit.print_attributes();
     }
@@ -107,37 +107,38 @@ public class PlayerMove : MonoBehaviour
     // Attacks the character on selected tile.
     public void attack(Tile tile, GameObject character)
     {
-        if (tile == currentTile && currentTile.is_attackable()) // and in range, and not a friendly civ
-        {
-            if (cooldowns == null)
+ 
+            if (currentTile.is_attackable()) // and in range, and not a friendly civ
             {
-                cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
-            }
-
-            PlayerMove attackingUnit = currentTile.get_attackable().GetComponent<PlayerMove>();
-            PlayerMove defendingUnit = this;
-            attackAnim = attackingUnit.GetComponent<Animator>();
-
-            if (Time.time > cooldowns.nextAttack)
-            {
-                // check if this characters civ is the same as the character clicking on it
-                if (defendingUnit.get_civilization() != match_manager.get_local_player().civilization)
+                if (cooldowns == null)
                 {
-                    // attach attack animation here
-                 
-                    import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, attackingUnit.damage.ToString() });
-                    attackingUnit.attackAnim.Play("CharacterArmature|RecieveHit");
-                    defendingUnit.anim.Play("CharacterArmature|RecieveHit");
-                    Debug.Log("Health equals " + defendingUnit.health);
-                    cooldowns.initiate_attack_cooldown(attackingUnit.attackCooldown);
-                    if (defendingUnit.health <= 0)
+                    cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
+                }
+
+                PlayerMove attackingUnit = currentTile.get_attackable().GetComponent<PlayerMove>();
+                PlayerMove defendingUnit = this;
+                attackAnim = attackingUnit.GetComponent<Animator>();
+
+                if (Time.time > cooldowns.nextAttack)
+                {
+                    // check if this characters civ is the same as the character clicking on it
+                    if (defendingUnit.get_civilization() != match_manager.get_local_player().civilization)
                     {
-                        Debug.Log("YOUR SOLDIER HAS FALLEN !!");
-                        import_manager.run_function_all(character.name, "suicide", new string[0] { });
+                        // attach attack animation here
+
+                        import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, attackingUnit.damage.ToString() });
+                        // attackingUnit.attackAnim.Play("CharacterArmature|RecieveHit");
+                        defendingUnit.anim.Play("CharacterArmature|RecieveHit");
+                        Debug.Log("Health equals " + defendingUnit.health);
+                        cooldowns.initiate_attack_cooldown(attackingUnit.attackCooldown);
+                        if (defendingUnit.health <= 0)
+                        {
+                            Debug.Log("YOUR SOLDIER HAS FALLEN !!");
+                            import_manager.run_function_all(character.name, "suicide", new string[0] { });
+                        }
                     }
                 }
             }
-        }
     }
     // Handles running the move on the current players computer and over the network.
     public void handle_move(Tile moveToTile, GameObject ususedCharacter)
@@ -228,11 +229,15 @@ public class PlayerMove : MonoBehaviour
         }
         catch { }
 
+
+        // if the current tile has a enemy city on it, begin the takeover process
+        if ((currentTile.get_buidling() != null) && (currentTile.get_buidling().GetComponent<City>() != null)) // check if its a city
+            currentTile.get_buidling().GetComponent<City>().check_for_enemy(); // send the thread to the afformentioned city
+
         startMoveCD = true;
         Debug.Log(startMoveCD.ToString());
         canMove = false;
         Debug.Log(canMove.ToString());
-       // currentTile.GetComponent<Renderer>().material =
 
     }
 
@@ -296,7 +301,6 @@ public class PlayerMove : MonoBehaviour
         //panel.GetComponent<UnityEngine.UI.Text>().text = "Name: " + name.ToString(); //+ "\nHealth: " + health.ToString() + "\nDamage: " + damage.ToString() + "\nAttack Range:" + attackRange.ToString() + "\nMovement Range:" + moveRange.ToString() + "\nAttack Cooldown: " + attackCooldown.ToString() + "\nMovement Cooldown: " + moveCooldown.ToString();
         // set_text_stats();
     }
-
     public void OnMouseOver()
     {
         set_text_stats();
@@ -313,8 +317,8 @@ public class PlayerMove : MonoBehaviour
     {
         printStats = panel.transform.GetChild(1).GetComponent<Text>();
         printStats.text = "\nHealth: " + health + "\nDamage: " + damage + "\nAttack Range:  " + attackRange + "\nMovement Range:  " + moveRange + "\nAttack Cooldown:  " + attackCooldown + "\nMove Cooldown:  " + moveCooldown;
-            
-        if(timeRemanining != moveCooldown)
+
+        if (timeRemanining != moveCooldown)
             printStats.text = printStats.text + "\nNext Move:  " + (int)timeRemanining;
     }
 }

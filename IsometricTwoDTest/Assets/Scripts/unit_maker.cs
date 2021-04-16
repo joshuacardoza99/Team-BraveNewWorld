@@ -83,15 +83,24 @@ public class unit_maker : MonoBehaviour
 
         if (itemCopy.GetComponent<PlayerMove>() == null)
         {
-            itemCopy.AddComponent<PlayerMove>();           
+            itemCopy.AddComponent<PlayerMove>();
+            //itemCopy.AddComponent<Animator>();
+            //itemCopy.GetComponent<Animator>().runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load("Assets/Resources/Units/Asian Champion Animator.controller", typeof(RuntimeAnimatorController));
             itemCopy.GetComponent<PlayerMove>().unit = match_manager.unitTypeList[unitType];
+            itemCopy.GetComponent<PlayerMove>().anim = this.GetComponent<Animator>();
         }
 
         if (itemCopy.GetComponent<CapsuleCollider>() == null)
         {
             itemCopy.AddComponent<CapsuleCollider>();
         }
-
+       /* if (itemCopy.GetComponent<Animator>() == null)
+        {
+            Animator animate = itemCopy.AddComponent<Animator>();
+            animate.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/Resources/Units/Asian Champion Animator");
+        }
+       */
+        //itemCopy.GetComponent<Animator>().runtimeAnimatorController = Resources.Load("Assets/Resources/Units/Asian Champion Animator.controller") as RuntimeAnimatorController;
         itemCopy.GetComponent<PlayerMove>().set_grid(tile.get_grid()[0], tile.get_grid()[1]);
         itemCopy.GetComponent<PlayerMove>().load_stats();
 
