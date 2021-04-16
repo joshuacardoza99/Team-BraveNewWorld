@@ -17,9 +17,6 @@ public class building_manager : MonoBehaviour
     public int civNumber;                                         // Number of the civilization
     bool canPlace = false;                                        // Can building be placed
     public List<Tile> showPreview = new List<Tile>();             // List of tiles with building previews
-    public List<Tile> listCommandPostTiles = new List<Tile>();    // List of tiles with Command Posts
-    public List<Tile> previews = new List<Tile>();                // Liat of preview made on tiles
-    public List<GameObject> commandPost = new List<GameObject>(); // List of command post 
     public Tile currentTile = null;                               // The tile this character is currently on.
     public Tile playerTile = null;                                // The tile the champion is currently on.
 
