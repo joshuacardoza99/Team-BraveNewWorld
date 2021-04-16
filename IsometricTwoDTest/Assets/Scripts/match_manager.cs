@@ -60,7 +60,7 @@ public class match_manager : MonoBehaviour
 
     // Private Global Variables //
     private int matchId;                           // Id for the current match.
-    private bool isHost;                            // Determines if the player's computer is hosting the match.
+    public bool isHost;                            // Determines if the player's computer is hosting the match.
     private string type;                              // Type of game the match consist of.
     private int map;                               // Holds the seed for the map design for the game's map.
     public string championName = "  ";
@@ -71,7 +71,6 @@ public class match_manager : MonoBehaviour
     private List<ai_thought_process> aiList = new List<ai_thought_process>();
     public List<building_type> buildingTypeList; // List of SO, connects any building type being scripted
     public List<unit_type> unitTypeList; // List of SO, connects any unit type being scripted
-    public GameObject cloudBackground; 
 
     // Private Global Variables //
     private int numberOfPlayers = 1000; // The number of current players in the game.
@@ -399,7 +398,7 @@ public class match_manager : MonoBehaviour
 
     IEnumerator handles_no_one_joining()
     {
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(menu_manager.secondsTillStart);
 
         if (isReady.Count < this.numberOfPlayers)
         {
@@ -414,12 +413,10 @@ public class match_manager : MonoBehaviour
         if (this.type == "network")
         {
             import_manager.run_function_all("server_functions", "add_player", new string[2] { this.championName, get_local_player().civilization.ToString() });
-            GameObject.Find("Main Camera").GetComponent<pan_zoom>().enabled = true;
         }
         else if (this.type == "local")
         {
             setup_match(new string[3] { "0", "true", "1000" });
-            GameObject.Find("Main Camera").GetComponent<pan_zoom>().enabled = true;
         }
 
     }
@@ -437,10 +434,6 @@ public class match_manager : MonoBehaviour
         civ_resources_display.update_resources();
         
         import_manager.run_function_all("unit_manager", "add_champion", new string[2] { get_local_player().civilization.ToString(), UnityEngine.Random.Range(1000, 2000).ToString() });
-
-        Instantiate(cloudBackground, new Vector3(-5.58f, -16.78f, 0), Quaternion.Euler(new Vector3(0, 0, -5.1f)));
-        Instantiate(cloudBackground, new Vector3(-13.6f, -107.2f, 0), Quaternion.Euler(new Vector3(0, 0, -5.1f)));
-
         import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] { });
 
         isPlaying = true;

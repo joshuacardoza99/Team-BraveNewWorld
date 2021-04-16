@@ -36,7 +36,7 @@ public class ai_thought_process : MonoBehaviour
     IEnumerator move()
     {
         running = false;
-        yield return new WaitForSeconds(7);
+        yield return new WaitForSeconds(3);
 
         PlayerMove champion = match_manager.choose_player(civilization).champion;
         List<Action> availableMoves = actionMaker.find_player_actions(civilization);

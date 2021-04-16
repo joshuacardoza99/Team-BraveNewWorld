@@ -20,3 +20,4 @@ MonoBehaviour:
   selected: {fileID: 2100000, guid: e6da6da3ef176104ebf7ccf808e790e7, type: 2}
   attackable: {fileID: 2100000, guid: 132720e2851d37d4db2a520f01c34756, type: 2}
   occupied: {fileID: 2100000, guid: 2fb7d5e53bf82ad4897263b4a5a283ff, type: 2}
+  recruit: {fileID: 2100000, guid: aea0170b61cb11948bf62db1bffb1739, type: 2}

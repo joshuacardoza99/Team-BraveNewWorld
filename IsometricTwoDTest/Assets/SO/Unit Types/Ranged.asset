@@ -16,6 +16,7 @@ MonoBehaviour:
   asian: {fileID: 2807941572977902622, guid: 9d024cf19eea8c44d9417248f046ea1d, type: 3}
   viking: {fileID: 1847794377543927229, guid: fe8a65ec3cb47ec49947a24d55e98c75, type: 3}
   greek: {fileID: 1113969282426872196, guid: 7b5a0944d90520c4dba513461b3b79c8, type: 3}
+  attackPopup: {fileID: 5083643197424513445, guid: 345ca308d8c44174eadd2541cc3313b2, type: 3}
   unitType: 1
   health: 50
   attackRange: 6

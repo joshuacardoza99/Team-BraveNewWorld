@@ -16,6 +16,7 @@ public class unit_manager : MonoBehaviour
     // Public Global Variables //
     public int civNumber;
     public int counter = 0;
+    public List<Tile> previewUnits = new List<Tile>();                // Liat of preview made on tiles
 
     [SerializeField]
     private unit_type activeUnitType; // Make varibale public and attach it to unit_type
@@ -49,6 +50,9 @@ public class unit_manager : MonoBehaviour
     // Handles the add units on selected action.
     void handle_add_unit(Tile tile, GameObject unusedCharacter)
     {
+       // preview_units();
+
+
         // Check conditions for spawining a command post
         if (!EventSystem.current.IsPointerOverGameObject()
             && activeUnitType != null
@@ -70,6 +74,8 @@ public class unit_manager : MonoBehaviour
                     break;
             }
 
+            
+
             if (match_manager.get_local_player().food >= activeUnitType.food)
             {
                 import_manager.run_function_all("network_manager", "subtract_player_resources", new string[3] { activeUnitType.food.ToString(), "0", match_manager.get_local_player().civilization.ToString()});
@@ -78,7 +84,11 @@ public class unit_manager : MonoBehaviour
 
             activeUnitType = null;
             menu_manager.close_menus();
+            empty_preview_list();
         }
+        else
+            empty_preview_list();
+
     }
 
     // Update is called once per frame
@@ -106,4 +116,35 @@ public class unit_manager : MonoBehaviour
     {
         activeUnitType = unit_Type;
     }
+
+    //  Set active building to which ever the user selected
+    public void remove_active_unit_type()
+    {
+        activeUnitType = null;
+    }
+
+    public void preview_units()
+    {
+        foreach (Building commandPost in match_manager.get_local_player().buildings)
+        {
+            if (((int)commandPost.building_type.unitType) == 0)
+                foreach (Tile preview in commandPost.GetComponent<Building>().currentTile.get_walkable_tiles(1))
+                {
+                    if (!preview.is_occupied())
+                    {
+                        previewUnits.Add(preview);
+                        preview.GetComponent<Renderer>().material = map_manager.types.recruit;
+                    }
+                }
+        }
+    }
+
+    public void empty_preview_list()
+    {
+        foreach (Tile clear in previewUnits)
+            clear.GetComponent<Renderer>().material = map_manager.types.get_material(match_manager.get_local_player().civilization);
+        previewUnits.Clear();
+    }
+
+
 }
