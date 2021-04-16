@@ -36,6 +36,9 @@ public class PlayerMove : MonoBehaviour
     public GameObject canvas;
     public GameObject panel;
 
+    //public Transform attackPopUp; 
+    //public string textToDisplay; 
+
     // Reference to SO
     public unit_type unit;
 
@@ -123,6 +126,21 @@ public class PlayerMove : MonoBehaviour
                 {
                     // check if this characters civ is the same as the character clicking on it
                     if (defendingUnit.get_civilization() != match_manager.get_local_player().civilization)
+                    // attach attack animation here
+                    attackingUnit.GetComponent<Animator>().Play("CharacterArmature|Punch");
+                    //attackingUnit.anim.Play("CharacterArmature|Punch");
+                    import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, attackingUnit.damage.ToString() });
+                    
+                    // Attack pop up
+                    //Vector3 tilePosition = currentTile.transform.position;
+                    //Transform attackInstance = Instantiate(attackPopUp, tilePosition, Quaternion.identity);
+                    //attackInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(textToDisplay);
+                    //attackInstance.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+ " + attackingUnit.damage.ToString();
+
+                    defendingUnit.anim.Play("CharacterArmature|RecieveHit");
+                    Debug.Log("Health equals " + defendingUnit.health);
+                    cooldowns.initiate_attack_cooldown(attackingUnit.attackCooldown);
+                    if (defendingUnit.health <= 0)
                     {
                         // attach attack animation here
 
@@ -297,6 +315,7 @@ public class PlayerMove : MonoBehaviour
         attackCooldown  = unit.attackCooldown;
         moveCooldown    = unit.movementCooldown;
         timeRemanining  = unit.movementCooldown;
+        //attackPopUp     = unit.get_attack_holder();
 
         //panel.GetComponent<UnityEngine.UI.Text>().text = "Name: " + name.ToString(); //+ "\nHealth: " + health.ToString() + "\nDamage: " + damage.ToString() + "\nAttack Range:" + attackRange.ToString() + "\nMovement Range:" + moveRange.ToString() + "\nAttack Cooldown: " + attackCooldown.ToString() + "\nMovement Cooldown: " + moveCooldown.ToString();
         // set_text_stats();
