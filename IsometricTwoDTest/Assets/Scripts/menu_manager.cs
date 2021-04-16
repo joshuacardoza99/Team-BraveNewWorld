@@ -66,21 +66,6 @@ public class menu_manager : MonoBehaviour
         ChangeGroup(GameObject.Find("Canvas").transform.GetChild(3).gameObject);
     }
 
-    // Open or close the unit menu
-    public void open_unit_menu()//Tile tile, GameObject Character)
-    {
-        if (currentGroup == groups[6])
-        {
-            ChangeGroup(groups[2]);
-            Debug.Log("Close Unit Menu");
-        }
-        else
-        {
-            ChangeGroup(groups[6]);
-            Debug.Log("Open Unit Menu");
-        }
-    }
-
     // Removes the wait panel blocking the game.
     // Parameter = []
     public void close_menus()
@@ -93,11 +78,11 @@ public class menu_manager : MonoBehaviour
     public void end_screen(string condition)
     {
         if (condition == "Win" || condition == "win")
-            groups[7].GetComponent<Text>().text = "Congragulations , you have conguered the map! \n " + "You " + condition;
+            groups[6].GetComponent<Text>().text = "Congragulations , you have conguered the map! \n " + "You " + condition;
         else
-            groups[7].GetComponent<Text>().text = "Your Civilaztion has fallen, better luck next time! \n " + "You " + condition;
+            groups[6].GetComponent<Text>().text = "Your Civilaztion has fallen, better luck next time! \n " + "You " + condition;
 
-        ChangeGroup(groups[7]);
+        ChangeGroup(groups[6]);
     }
 
 
