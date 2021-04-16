@@ -108,18 +108,13 @@ public class PlayerMove : MonoBehaviour
     public void attack(Tile tile, GameObject character)
     {
  
-            if (currentTile.is_attackable()) // and in range, and not a friendly civ
+            if (tile == currentTile && currentTile.is_attackable()) // and in range, and not a friendly civ
             {
-                if (cooldowns == null)
-                {
-                    cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
-                }
 
                 PlayerMove attackingUnit = currentTile.get_attackable().GetComponent<PlayerMove>();
                 PlayerMove defendingUnit = this;
-                attackAnim = attackingUnit.GetComponent<Animator>();
 
-                if (Time.time > cooldowns.nextAttack)
+                if (Time.time > nextAttack)
                 {
                     // check if this characters civ is the same as the character clicking on it
                     if (defendingUnit.get_civilization() != match_manager.get_local_player().civilization)
@@ -127,10 +122,11 @@ public class PlayerMove : MonoBehaviour
                         // attach attack animation here
 
                         import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, attackingUnit.damage.ToString() });
-                        // attackingUnit.attackAnim.Play("CharacterArmature|RecieveHit");
+                        Debug.Log("unit attacking is" +  attackingUnit.gameObject.name);
+                        //attackingUnit.anim.Play("CharacterArmature|RecieveHit");
                         defendingUnit.anim.Play("CharacterArmature|RecieveHit");
                         Debug.Log("Health equals " + defendingUnit.health);
-                        cooldowns.initiate_attack_cooldown(attackingUnit.attackCooldown);
+                        initiate_attack_cooldown(attackCooldown);
                         if (defendingUnit.health <= 0)
                         {
                             Debug.Log("YOUR SOLDIER HAS FALLEN !!");
@@ -320,5 +316,10 @@ public class PlayerMove : MonoBehaviour
 
         if (timeRemanining != moveCooldown)
             printStats.text = printStats.text + "\nNext Move:  " + (int)timeRemanining;
+    }
+    public void initiate_attack_cooldown(float cooldown)
+    {
+        Debug.Log("IN COOLDOWN");
+        nextAttack = Time.time + cooldown;
     }
 }

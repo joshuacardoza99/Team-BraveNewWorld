@@ -16,6 +16,7 @@ public class unit_maker : MonoBehaviour
     public GameObject asianChampion;
     public GameObject greekChampion;
     public GameObject vikingChampion;
+    public RuntimeAnimatorController controller;
 
     // Start is called before the first frame update
     void Start()
@@ -94,12 +95,11 @@ public class unit_maker : MonoBehaviour
         {
             itemCopy.AddComponent<CapsuleCollider>();
         }
-       /* if (itemCopy.GetComponent<Animator>() == null)
+       if (itemCopy.GetComponent<Animator>() == null)
         {
-            Animator animate = itemCopy.AddComponent<Animator>();
-            animate.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/Resources/Units/Asian Champion Animator");
+            itemCopy.AddComponent<Animator>();
+            itemCopy.GetComponent<Animator>().runtimeAnimatorController = controller;// Resources.Load<RuntimeAnimatorController>("Assets/Resources/Units/Asian Champion Animator");
         }
-       */
         //itemCopy.GetComponent<Animator>().runtimeAnimatorController = Resources.Load("Assets/Resources/Units/Asian Champion Animator.controller") as RuntimeAnimatorController;
         itemCopy.GetComponent<PlayerMove>().set_grid(tile.get_grid()[0], tile.get_grid()[1]);
         itemCopy.GetComponent<PlayerMove>().load_stats();

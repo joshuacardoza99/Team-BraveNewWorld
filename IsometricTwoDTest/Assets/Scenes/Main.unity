@@ -4556,6 +4556,10 @@ PrefabInstance:
       propertyPath: vikingChampion
       value: 
       objectReference: {fileID: 8348064386475154523, guid: 5f0e2494603a905499d1870b97ae6955, type: 3}
+    - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 9100000, guid: af3abb246fd3f624e86b85e1134507d1, type: 2}
     - target: {fileID: 8328366925452020881, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
       propertyPath: m_Name
       value: unit_manager
