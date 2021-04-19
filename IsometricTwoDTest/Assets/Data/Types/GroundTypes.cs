@@ -14,6 +14,7 @@ public class GroundTypes : ScriptableObject
     public Material selected;
     public Material attackable;
     public Material occupied;
+    public Material recruit;
 
     public Material get_material(int civilization)
     {

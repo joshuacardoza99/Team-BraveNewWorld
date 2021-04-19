@@ -133,7 +133,7 @@ public class unit_manager : MonoBehaviour
                     if (!preview.is_occupied())
                     {
                         previewUnits.Add(preview);
-                        preview.GetComponent<Renderer>().material = map_manager.types.attackable;
+                        preview.GetComponent<Renderer>().material = map_manager.types.recruit;
                     }
                 }
         }

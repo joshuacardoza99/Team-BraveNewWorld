@@ -14,6 +14,7 @@ public class unit_type : ScriptableObject
     public Transform asian;                   // Asian civ prefabs
     public Transform viking;                  // Viking civ prefabs
     public Transform greek;                   // Greek civ prefabs
+    //public Transform attackPopup;             // Attack pop up
 
     [Space(5)]                                // 5 pixels of spacing here.
     public AttackType unitType = new AttackType(); // Adds drop down list for attack type
@@ -24,6 +25,7 @@ public class unit_type : ScriptableObject
     public int attackRange;                   // Unit attack range
     public int moveRange;
     public int attackDamage;                  // Unit attack damage
+    
 
     [Space(5)]                                // 5 pixels of spacing here.
     [Header("Unit Cooldowns")]                // Shows text in inspector
@@ -69,6 +71,11 @@ public class unit_type : ScriptableObject
 
         return selectedBuilding;
     }
+
+    //public Transform get_attack_holder()
+    //{
+      //  return attackPopup;
+    //}
 }
 
 

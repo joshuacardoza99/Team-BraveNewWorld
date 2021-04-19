@@ -4,9 +4,10 @@
     "\\IsometricTwoDTest",
     "\\IsometricTwoDTest\\Assets",
     "\\IsometricTwoDTest\\Assets\\Data",
+    "\\IsometricTwoDTest\\Assets\\Data\\Types",
     "\\IsometricTwoDTest\\Assets\\Scripts",
     "\\IsometricTwoDTest\\Assets\\SO"
   ],
-  "SelectedNode": "\\IsometricTwoDTest\\UserSettings",
+  "SelectedNode": "\\IsometricTwoDTest\\Assets\\Scripts\\unit_manager.cs",
   "PreviewInSolutionExplorer": false
 }
