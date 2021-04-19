@@ -9,34 +9,25 @@ public class civ_description : MonoBehaviour
     public Text getText;
     public InputField inputText;
     public int selectedCiv;
-    public string selectedCivString;
 
     void Start()
     {
         getText = GetComponent<Text>();
-    }
-    
-    public void show_text()
-    {   
-        getText.text = inputText.text;
     }
 
     void Update()
     {
         if (selectedCiv == 0)
         {
-            descriptionText.text = "Selected Civilization: Asian";
-            selectedCivString    = "Asian";
+            descriptionText.text = "Asian";
         }
         else if (selectedCiv == 1)
         {
-            descriptionText.text = "Selected Civilization: Greek";
-            selectedCivString    = "Greek";
+            descriptionText.text = "Greek";
         }
         else
         {
-            descriptionText.text = "Selected Civilization: Viking";
-            selectedCivString    = "Viking";
+            descriptionText.text = "Viking";
         }
     }
 }

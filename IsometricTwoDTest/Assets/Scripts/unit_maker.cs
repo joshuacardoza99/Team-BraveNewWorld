@@ -7,307 +7,185 @@ public class unit_maker : MonoBehaviour
 {
     // External Classes//
     import_manager import_manager;  // Import_Manager Class that facilitates cross class, player, and server function calls.
+    Tile Tile;            // Importing the Tile class.
+    PlayerMove PlayerMove;      // Importing the PlayerMove class.
+    map_manager map_manager;     // Importing the map_manager class.
+    match_manager match_manager;
 
     // Public Global Variables //
-    public GameObject asianBarracks;
     public GameObject asianChampion;
-    public GameObject asianCommandPost;
-    public GameObject asianDefenseTower;
-    public GameObject asianMelee;
-    public GameObject asianRanged;
-    public GameObject asianTank;
-    public GameObject farm;
-    public GameObject greekBarracks;
     public GameObject greekChampion;
-    public GameObject greekCommandPost;
-    public GameObject greekDefenseTower;
-    public GameObject greekMelee;
-    public GameObject greekRanged;
-    public GameObject greekTank;
-    public GameObject mine;
-    public GameObject vikingBarracks;
     public GameObject vikingChampion;
-    public GameObject vikingCommandPost;
-    public GameObject vikingDefenseTower;
-    public GameObject vikingMelee;
-    public GameObject vikingRanged;
-    public GameObject vikingTank;
-    public int civNumber;
-
-    // Private Global Variables //
-    private string championName = "champion";
-    private int    randomTile   = 0;
-
-    private 
+    public RuntimeAnimatorController controller;
 
     // Start is called before the first frame update
     void Start()
     {
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
+        map_manager = GameObject.Find("Map").GetComponent<map_manager>();
+        match_manager = GameObject.Find("network_manager").GetComponent<match_manager>(); // Connects to the import_manager.
     }
 
-    // Private Functions //
-
-    // tiles = and array of tile names.
-    private void finalize_champion(string[] tiles)
-    {
-        Debug.Log("Tile Index: " + this.randomTile + " / " + tiles.Length);
-        GameObject tile = GameObject.Find(tiles[(int)(this.randomTile / tiles.Length)]);
-        Vector3 tilePosition = tile.transform.position;
-        tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
-
-        if (tile.name.Split('_')[0] == "asian")
-        {
-            asianChampion.name = championName;
-            Instantiate(asianChampion, tilePosition, Quaternion.identity);
-            //import_manager.run_function("asianChampion", "set_current_tile", new string[1] { tile.name });
-
-        }
-        else if (tile.name.Split('_')[0] == "viking")
-        {
-            vikingChampion.name = championName;
-            Instantiate(vikingChampion, tilePosition, Quaternion.identity);
-        }
-        else if (tile.name.Split('_')[0] == "greek")
-        {
-            greekChampion.name = championName;
-            Instantiate(greekChampion, tilePosition, Quaternion.identity);
-        }
-
-        Vector3 cameraPosition = GameObject.Find("Main Camera").transform.position;
-        cameraPosition.y = tilePosition.y;
-        cameraPosition.x = tilePosition.x;
-
-        GameObject.Find("Main Camera").transform.position = cameraPosition;
-    }
-
-    // Public Functions //
-
-    // On click functions to call the instantiate functions
-    public void mine_button()
-    {
-        int mine_number = 0;
-        Vector3 tilePosition;
-        tilePosition = new Vector3(0.0f, 1.0f, 0.0f);
-        Debug.Log("Mine Button pushed");
-        /*string[] buildingType = new string[] { "mine", " ", mine_number.ToString() };
-        mine_number++;
-        add_building(buildingType);*/
-        Instantiate(mine, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-    }
-
-    public void command_post_button()
-    {
-        int command_post_number = 0;
-        Vector3 tilePosition;
-        tilePosition = new Vector3(0.0f, 1.0f, 0.0f);
-        Debug.Log("Command Post Button pushed");
-        /*string[] buildingType = new string[] { "mine", " ", mine_number.ToString() };
-        mine_number++;
-        add_building(buildingType);*/
-
-        if (civNumber == 1)
-            Instantiate(greekCommandPost, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-        else if (civNumber == 2)
-            Instantiate(vikingCommandPost, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-        else
-            Instantiate(asianCommandPost, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-    }
-
-    public void farm_button()
-    {
-        int farm_number = 0;
-        Vector3 tilePosition;
-        tilePosition = new Vector3(0.0f, 1.0f, 0.0f);
-        Debug.Log("Farm Button pushed");
-        /*string[] buildingType = new string[] { "mine", " ", mine_number.ToString() };
-        mine_number++;
-        add_building(buildingType);*/
-        Instantiate(farm, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-    }
-
-    public void barracks_button()
-    {
-        int barracks_number = 0;
-        Vector3 tilePosition;
-        tilePosition = new Vector3(0.0f, 1.0f, 0.0f);
-        Debug.Log("Barracks Button pushed");
-        /*string[] buildingType = new string[] { "mine", " ", mine_number.ToString() };
-        mine_number++;
-        add_building(buildingType);*/
-        if (civNumber == 1)
-            Instantiate(greekBarracks, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-        else if (civNumber == 2)
-            Instantiate(vikingBarracks, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-        else
-            Instantiate(asianBarracks, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-
-    }
-
-    // Parameters = [string civilization, string championName, int randomTile]
+    // Adds the champion of the given civilization to a random tile.
+    // Parameters = [string civilization, int randomTile]
     public void add_champion(string[] parameters)
     {
-        this.randomTile = int.Parse(parameters[2]);
-        championName = parameters[0] + "_" + parameters[1];
-        import_manager.run_function("Map", "get_land", new string[3] { parameters[0], "unit_manager", "finalize_champion" });
+        int randomTile = int.Parse(parameters[1]);                                      // Holds the random number that allows for the selection of the same random tile across the network.
+        Debug.Log("Random Range is " + randomTile);
+        int civilization = int.Parse(parameters[0]);                                      // The civilization of the champion needing created.
+        GameObject champion = null;                                                          // The champion GameObject.
+        List<GameObject> tiles = map_manager.get_land(civilization);                            // The list of tiles that a random tile to place the champion on is chosen from.
+        Tile tile = (tiles[(int)(randomTile / tiles.Count)]).GetComponent<Tile>(); // The randomly selected tile to add the champion to.
+        int[] tileGrid = tile.GetComponent<Tile>().get_grid();                          // The grid position of the selected tile.
+
+        // Civilization 0 is Asian civilization.
+        if (civilization == 0)
+        {
+            champion = place_object(asianChampion, 0, tile);
+        }
+        // Civilization 1 is Greek civilization.
+        else if (civilization == 1)
+        {
+            champion = place_object(greekChampion, 0, tile);
+        }
+        // Civilization 2 is Viking civilization.
+        else if (civilization == 2)
+        {
+            champion = place_object(vikingChampion, 0, tile);
+        }
+
+        if (match_manager.get_local_player().civilization == civilization)
+        {
+            champion.tag = "Player";
+        }
+        
+        champion.name = parameters[0] + "_";
+        champion.GetComponent<PlayerMove>().set_civilization(civilization);
+        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tileGrid[0].ToString(), tileGrid[1].ToString(), "set_occupied", champion.name });
+
+        if (match_manager.get_local_player().civilization == int.Parse(parameters[0]))
+        {
+            focus_camera_on(champion);
+        }
+
+        match_manager.update_player_champion(new string[2] { civilization.ToString(), champion.name});
     }
 
-    // Parameters = [string civilization, string unitType, string unitNumber]
-    public void add_unit(string[] parameters)
+    // Places a copy of the given GameObject on the given tile.
+    public GameObject place_object(GameObject item, int unitType, Tile tile)
     {
-        //    public string get_current(string[] parameters)
-        // for tile coordinates, also figure out scaling for buildings
-        GameObject tile = GameObject.Find(parameters[0]);
-        Vector3 tilePosition = tile.transform.position;
-        tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y;
+        Vector3 tilePosition = tile.transform.position;                  // The actual position to of the selected tile.
+        tilePosition.z -= tile.GetComponent<Renderer>().bounds.size.z;
+        tilePosition.x -= 0.0f;
+        tilePosition.y += 0.2f;
 
-        if (parameters[0] == "asian")
+        GameObject itemCopy = Instantiate(item, tilePosition, Quaternion.Euler(new Vector3(0, 0, 0)));
+        face_forward(itemCopy);
+
+        if (itemCopy.GetComponent<PlayerMove>() == null)
         {
-            if (parameters[1] == "Melee")
-            {
-                asianMelee.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(asianMelee, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "Ranged")
-            {
-                asianRanged.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(asianRanged, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "Tank")
-            {
-                asianTank.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(asianTank, tilePosition, Quaternion.identity);
-            }
+            itemCopy.AddComponent<PlayerMove>();
+            //itemCopy.AddComponent<Animator>();
+            //itemCopy.GetComponent<Animator>().runtimeAnimatorController = (RuntimeAnimatorController)Resources.Load("Assets/Resources/Units/Asian Champion Animator.controller", typeof(RuntimeAnimatorController));
+            itemCopy.GetComponent<PlayerMove>().unit = match_manager.unitTypeList[unitType];
+            itemCopy.GetComponent<PlayerMove>().anim = this.GetComponent<Animator>();
         }
-        else if (parameters[0] == "greek")
+
+        if (itemCopy.GetComponent<CapsuleCollider>() == null)
         {
-            if (parameters[1] == "Melee")
-            {
-                greekMelee.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(greekMelee, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "Ranged")
-            {
-                greekRanged.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(greekRanged, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "Tank")
-            {
-                greekTank.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(greekTank, tilePosition, Quaternion.identity);
-            }
+            itemCopy.AddComponent<CapsuleCollider>();
         }
-        else if (parameters[0] == "viking")
+       if (itemCopy.GetComponent<Animator>() == null)
         {
-            if (parameters[1] == "Melee")
-            {
-                vikingMelee.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(vikingMelee, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "Ranged")
-            {
-                vikingRanged.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(vikingRanged, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "Tank")
-            {
-                vikingTank.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(vikingTank, tilePosition, Quaternion.identity);
-            }
+            itemCopy.AddComponent<Animator>();
+            itemCopy.GetComponent<Animator>().runtimeAnimatorController = controller;// Resources.Load<RuntimeAnimatorController>("Assets/Resources/Units/Asian Champion Animator");
         }
+        //itemCopy.GetComponent<Animator>().runtimeAnimatorController = Resources.Load("Assets/Resources/Units/Asian Champion Animator.controller") as RuntimeAnimatorController;
+        itemCopy.GetComponent<PlayerMove>().set_grid(tile.get_grid()[0], tile.get_grid()[1]);
+        itemCopy.GetComponent<PlayerMove>().load_stats();
+
+        return itemCopy;
     }
 
-    // Parameters = [string civilization, string buildingType, string unitNumber]
-    // Adds buildings to the map
-    public void add_building(string[] parameters)
+    // Removes the given game object from the scene.
+    public void remove_object(GameObject item)
     {
-        //    public string get_current(string[] parameters)
-        // for tile coordinates, also figure out scaling for buildings
-        GameObject tile = GameObject.Find(parameters[0]);
-        Vector3 tilePosition = tile.transform.position;
-        tilePosition.y += tile.GetComponent<Renderer>().bounds.size.y;
+        Destroy(item);
+    }
 
+    // Rotates the given gameobject to face forwards towards the screen.
+    public void face_forward(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(60, 180, 0));
+    }
 
-        if (parameters[0] == "asian")
-        {
-            if (parameters[1] == "Barracks")
-            {
-                asianBarracks.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(asianBarracks, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "CommandPost")
-            {
-                asianCommandPost.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(asianCommandPost, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "DefenseTower")
-            {
-                asianDefenseTower.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(asianDefenseTower, tilePosition, Quaternion.identity);
-            }
-        }
-        else if (parameters[0] == "greek")
-        {
-            if (parameters[1] == "Barracks")
-            {
-                greekBarracks.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(greekBarracks, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "CommandPost")
-            {
-                greekCommandPost.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(greekCommandPost, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "DefenseTower")
-            {
-                greekDefenseTower.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(greekDefenseTower, tilePosition, Quaternion.identity);
-            }
-        }
-        else if (parameters[0] == "viking")
-        {
-            if (parameters[1] == "Barracks")
-            {
-                vikingBarracks.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(vikingBarracks, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "CommandPost")
-            {
-                vikingCommandPost.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(vikingCommandPost, tilePosition, Quaternion.identity);
-            }
-            else if (parameters[1] == "DefenseTower")
-            {
-                vikingDefenseTower.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-                Instantiate(vikingDefenseTower, tilePosition, Quaternion.identity);
-            }
-        }
-        else if (parameters[0] == "farm")
-        {
-            farm.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-            Instantiate(farm, tilePosition, Quaternion.identity);
-        }
-        else if (parameters[0] == "mine")
-        {
-            mine.name = parameters[0] + "_" + parameters[1] + "_" + parameters[2];
-            Instantiate(mine, tilePosition, Quaternion.Euler(new Vector3(30, 0, -45)));
-            Debug.Log("Mine");
-        }
+    // Rotates the given gameobject to face forwards towards the screen off to the left.
+    public void face_left_forward(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(150, 70, 225));
+    }
+
+    // Rotates the given gameobject to face forwards towards the screen off to the left.
+    public void face_right_forward(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(150, -60, 130));
+    }
+
+    // Rotates the given gameobject to face backwards away from the screen.
+    public void face_backward(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(-60, 0, 0));
+    }
+
+    // Rotates the given gameobject to face forwards towards the screen off to the left.
+    public void face_left_backward(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(-30, -45, 30));
+    }
+
+    // Rotates the given gameobject to face forwards towards the screen off to the left.
+    public void face_right_backward(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(-30, 45, -30));
+    }
+
+    // Rotates the given gameobject to face right towards the right edge of the screen.
+    public void face_right(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(0, 90, -60));
+    }
+
+    // Rotates the given gameobject to face left towards the left edge of the screen.
+    public void face_left(GameObject item)
+    {
+        item.transform.rotation = Quaternion.Euler(new Vector3(0, -90, 60));
+    }
+
+    // Centers the given object in the camera view.
+    public void focus_camera_on(GameObject item)
+    {
+        GameObject camera = GameObject.Find("Main Camera"); // Holds the GameObjcet for the scene's camera.
+        Vector3 cameraPosition = camera.transform.position;
+
+        cameraPosition.y = item.transform.position.y;
+        cameraPosition.x = item.transform.position.x;
+
+        camera.transform.position = cameraPosition;
     }
 
     // Removes the all units on the map.
     // Parameters = []
-    public void remove_all_units (string[] parameters)
+    public void remove_all_units(string[] parameters)
     {
-        object[] sceneGameObjects = GameObject.FindSceneObjectsOfType(typeof (GameObject));
-        Debug.Log("Removing the units");
+        object[] sceneGameObjects = GameObject.FindSceneObjectsOfType(typeof(GameObject)); // List of all GameObjects the scene.
+
         foreach (GameObject sceneObject in sceneGameObjects)
         {
             if (Regex.IsMatch(sceneObject.name.ToLower(), "asian_*", RegexOptions.IgnoreCase) ||
                 Regex.IsMatch(sceneObject.name.ToLower(), "greek_*", RegexOptions.IgnoreCase) ||
                 Regex.IsMatch(sceneObject.name.ToLower(), "viking_*", RegexOptions.IgnoreCase))
             {
-                Destroy(sceneObject);
+                remove_object(sceneObject);
             }
         }
     }

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 3909690650225517432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.9, y: 1.9, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -109,15 +109,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkable: 0
-  current: 0
   occupied: 0
-  target: 0
-  selectable: 0
-  currentchar: {fileID: 0}
-  adjacencyList: []
-  visited: 0
-  parent: {fileID: 0}
-  distance: 0
-  f: 0
-  g: 0
-  h: 0
+  hasBuilding: 0
+  inCity: 0
+  isCurrentlySelectedTile: 0
+  selectable: {fileID: 0}
+  attackable: 0
+  currentCharacter: {fileID: 0}
+  currentBuilding: {fileID: 0}
+  civilization: 0
+  grid: 

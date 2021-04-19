@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Tile
+  - Mine
+  - Farm
+  - previewBuilding
+  - commandPost
+  - unit
   layers:
   - Default
   - TransparentFX

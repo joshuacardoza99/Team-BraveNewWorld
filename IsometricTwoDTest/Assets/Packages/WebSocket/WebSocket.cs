@@ -203,7 +203,7 @@ namespace NativeWebSocket
 
   /// <summary>
   /// WebSocket class bound to JSLIB.
-  /// </summary>
+  /// //
   public class WebSocket : IWebSocket {
 
     /* WebSocket JSLIB functions */
@@ -634,7 +634,7 @@ namespace NativeWebSocket
 
     /// <summary>
     /// Class providing static access methods to work with JSLIB WebSocket or WebSocketSharp interface
-    /// </summary>
+    /// //
     public static class WebSocketFactory
     {
 
@@ -687,7 +687,7 @@ namespace NativeWebSocket
     /// <summary>
     /// Called when instance is destroyed (by destructor)
     /// Method removes instance from map and free it in JSLIB implementation
-    /// </summary>
+    /// //
     /// <param name="instanceId">Instance identifier.</param>
     public static void HandleInstanceDestroy (int instanceId) {
 
@@ -749,7 +749,7 @@ namespace NativeWebSocket
 
         /// <summary>
         /// Create WebSocket client instance
-        /// </summary>
+        /// //
         /// <returns>The WebSocket instance.</returns>
         /// <param name="url">WebSocket valid URL.</param>
         public static WebSocket CreateInstance(string url)

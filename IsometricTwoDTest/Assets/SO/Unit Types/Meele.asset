@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f5e829aac125644afc840d4882860f, type: 3}
+  m_Name: Meele
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 9dfe021dbdf4f5941815623e95ccc50e, type: 3}
+  asian: {fileID: 8958087341557664147, guid: 350977ebf16694949b9ba0116748c8cc, type: 3}
+  viking: {fileID: 969764465007462129, guid: 3dfdb689bc4b20f4b8eb50ae872853b9, type: 3}
+  greek: {fileID: 3455171537847918938, guid: 378e84a1fc3418648bd0f7b0b4d7d1a8, type: 3}
+  attackPopup: {fileID: 5083643197424513445, guid: 345ca308d8c44174eadd2541cc3313b2, type: 3}
+  unitType: 2
+  health: 75
+  attackRange: 4
+  moveRange: 2
+  attackDamage: 40
+  attackCooldown: 3
+  movementCooldown: 3
+  food: 100

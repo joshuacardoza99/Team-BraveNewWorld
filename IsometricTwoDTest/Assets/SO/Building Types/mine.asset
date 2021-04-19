@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609c0da8d4167184bad12b13e612d074, type: 3}
+  m_Name: mine
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 9c9809298e26a264886840adee22b087, type: 3}
+  asian: {fileID: 4658616661287914432, guid: 40106da533a6f45469aeb461401aec26, type: 3}
+  viking: {fileID: 4658616661287914432, guid: 40106da533a6f45469aeb461401aec26, type: 3}
+  greek: {fileID: 4658616661287914432, guid: 40106da533a6f45469aeb461401aec26, type: 3}
+  previewAsian: {fileID: 6001181614200676741, guid: c13c24bddc3585e4ba09a66111b0ad90, type: 3}
+  previewViking: {fileID: 6001181614200676741, guid: c13c24bddc3585e4ba09a66111b0ad90, type: 3}
+  previewGreek: {fileID: 6001181614200676741, guid: c13c24bddc3585e4ba09a66111b0ad90, type: 3}
+  isConquered: 0
+  unitType: 2
+  foodAmount: 0
+  goldAmount: 10
+  buildCost: 250
+  type: Mine
+  resourceCooldown: 5

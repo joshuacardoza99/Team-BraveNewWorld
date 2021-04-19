@@ -6,14 +6,18 @@ let match      = require("../server/match").match;     // Match Class that holds
 let web_socket = require("ws");                        // WS Class that allows to start connections with the players.
 var Express = require("express");
 var App     = Express();
+let database_api = require("../server/database_api").database_api; // Database_Api Class that enables communication to the database.
+    database_api = new database_api("team-bravenewworld.csp1omydlp3q.us-east-2.rds.amazonaws.com", "root", "unitybackend", "team-bravenewworld");
 
 // Global variables.
+App.use("/game", Express.static(__dirname + "/WebBuild/"));
+let webServer = App.listen(80);
 let socketOptions = {      "host": '0.0.0.0',//"172.31.7.174",             // Holds the options for the WebSocket server.
 	                       "port": 5678,
 	                       "path": "/",
 	                 "maxPayload": 10e7
 	                }
-let server        = new web_socket.Server(socketOptions); // Holds the WebSocket server.
+let server        = new web_socket.Server({"server": webServer}); // Holds the WebSocket server.
 let matches       = [];                                   // All matches on this server.
 let matchNumber   = 0;                                    // Next match id.
 let players       = [];                                   // All the players connected to this server.
@@ -103,8 +107,11 @@ let message_handler = function(message, playerSocket)
 }
 
 // Starts the HTTP server to listen for request.
-App.use("/game", Express.static(__dirname + "/WebBuild/"));
-App.listen(80);
+
+database_api.get_movements(1, (result) =>
+{
+	console.log(result);
+});
 
 // Starts the match server listing for connections.
 server.on("connection", (playerSocket) =>

@@ -3,8 +3,11 @@
     "",
     "\\IsometricTwoDTest",
     "\\IsometricTwoDTest\\Assets",
-    "\\IsometricTwoDTest\\Assets\\Scripts"
+    "\\IsometricTwoDTest\\Assets\\Data",
+    "\\IsometricTwoDTest\\Assets\\Data\\Types",
+    "\\IsometricTwoDTest\\Assets\\Scripts",
+    "\\IsometricTwoDTest\\Assets\\SO"
   ],
-  "SelectedNode": "\\IsometricTwoDTest\\Assets\\Scripts\\PlayerMove.cs",
+  "SelectedNode": "\\IsometricTwoDTest\\Assets\\Scripts\\unit_manager.cs",
   "PreviewInSolutionExplorer": false
 }

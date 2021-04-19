@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f5e829aac125644afc840d4882860f, type: 3}
+  m_Name: Tank
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 6751f216af704174a951653dcfdd18ba, type: 3}
+  asian: {fileID: 1561254594073492276, guid: 0fce7b77312ab9340a4c16fddae03083, type: 3}
+  viking: {fileID: 1187881854244211675, guid: 1a429bdace45099469f8a41d70b67f32, type: 3}
+  greek: {fileID: 576275314272515689, guid: e4f2dbe764752b44f9c9b19831ffb0b5, type: 3}
+  attackPopup: {fileID: 5083643197424513445, guid: 345ca308d8c44174eadd2541cc3313b2, type: 3}
+  unitType: 3
+  health: 100
+  attackRange: 4
+  moveRange: 2
+  attackDamage: 25
+  attackCooldown: 3
+  movementCooldown: 3
+  food: 100
