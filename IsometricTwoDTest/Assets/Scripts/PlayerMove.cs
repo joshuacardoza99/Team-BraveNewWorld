@@ -119,11 +119,12 @@ public class PlayerMove : MonoBehaviour
 
                 if (Time.time > nextAttack)
                 {
-                    // check if this characters civ is the same as the character clicking on it
-                    if (defendingUnit.get_civilization() != match_manager.get_local_player().civilization)
+                // check if this characters civ is the same as the character clicking on it
+                if (defendingUnit.get_civilization() != match_manager.get_local_player().civilization)
                     // attach attack animation here
-                    attackingUnit.GetComponent<Animator>().Play("CharacterArmature|Punch");
+                    //attackingUnit.GetComponent<Animator>().Play("CharacterArmature|Punch");
                     //attackingUnit.anim.Play("CharacterArmature|Punch");
+                    Debug.Log("object in attacking unit is " + attackingUnit);
                     import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, attackingUnit.damage.ToString() });
                     
                     // Attack pop up
@@ -132,7 +133,7 @@ public class PlayerMove : MonoBehaviour
                     //attackInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(textToDisplay);
                     //attackInstance.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+ " + attackingUnit.damage.ToString();
 
-                    defendingUnit.anim.Play("CharacterArmature|RecieveHit");
+                    defendingUnit.anim.Play("CharacterArmature|Punch");
                     Debug.Log("Health equals " + defendingUnit.health);
                     initiate_attack_cooldown(attackingUnit.attackCooldown);
                     if (defendingUnit.health <= 0)
