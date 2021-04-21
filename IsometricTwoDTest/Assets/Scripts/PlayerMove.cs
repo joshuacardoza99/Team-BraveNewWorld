@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     unit_maker     unit_maker;      // Importing the unit_maker class.
     Tile Tile;
     cooldown cooldowns;
+    attack attacking;
 
     // Unit attribiutes //
     public int health;                             // The current health of this character.
@@ -61,6 +62,7 @@ public class PlayerMove : MonoBehaviour
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
         unit_maker = GameObject.Find("unit_manager").GetComponent<unit_maker>();
         cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
+        attacking = GameObject.Find("civManager").GetComponent<attack>();
 
         //anim = this.GetComponent<Animator>();        
         // Print Stats unto the screen
@@ -110,8 +112,16 @@ public class PlayerMove : MonoBehaviour
     // Attacks the character on selected tile.
     public void attack(Tile tile, GameObject character)
     {
- 
-            if (tile == currentTile && currentTile.is_attackable()) // and in range, and not a friendly civ
+      //  if (Time.time > nextAttack)
+        //{
+            if (tile.is_attackable())
+            {
+                tile.get_current_character().GetComponent<PlayerMove>().health -= damage;
+            }
+       // }
+
+
+           /* if (tile == currentTile && currentTile.is_attackable()) // and in range, and not a friendly civ
             {
 
                 PlayerMove attackingUnit = currentTile.get_attackable().GetComponent<PlayerMove>();
@@ -132,16 +142,19 @@ public class PlayerMove : MonoBehaviour
                     //attackInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(textToDisplay);
                     //attackInstance.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+ " + attackingUnit.damage.ToString();
 
+                    // Attack animation
                     defendingUnit.anim.Play("CharacterArmature|RecieveHit");
                     Debug.Log("Health equals " + defendingUnit.health);
+
+                    // attack cooldown
                     initiate_attack_cooldown(attackingUnit.attackCooldown);
+
                     if (defendingUnit.health <= 0)
                     {
                         // attach attack animation here
 
                         import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { defendingUnit.get_civilization().ToString(), defendingUnit.gameObject.name, attackingUnit.damage.ToString() });
                         Debug.Log("unit attacking is" +  attackingUnit.gameObject.name);
-                        //attackingUnit.anim.Play("CharacterArmature|RecieveHit");
                         defendingUnit.anim.Play("CharacterArmature|RecieveHit");
                         Debug.Log("Health equals " + defendingUnit.health);
                         initiate_attack_cooldown(attackCooldown);
@@ -152,8 +165,9 @@ public class PlayerMove : MonoBehaviour
                         }
                     }
                 }
-            }
+            }*/
     }
+
     // Handles running the move on the current players computer and over the network.
     public void handle_move(Tile moveToTile, GameObject ususedCharacter)
     {
@@ -253,6 +267,8 @@ public class PlayerMove : MonoBehaviour
         canMove = false;
         Debug.Log(canMove.ToString());
 
+        attacking.reset_attack_range();
+        attacking.reset_tiles();
     }
 
     // Sets the civilization this character is apart of.
@@ -313,8 +329,6 @@ public class PlayerMove : MonoBehaviour
         timeRemanining  = unit.movementCooldown;
         //attackPopUp     = unit.get_attack_holder();
 
-        //panel.GetComponent<UnityEngine.UI.Text>().text = "Name: " + name.ToString(); //+ "\nHealth: " + health.ToString() + "\nDamage: " + damage.ToString() + "\nAttack Range:" + attackRange.ToString() + "\nMovement Range:" + moveRange.ToString() + "\nAttack Cooldown: " + attackCooldown.ToString() + "\nMovement Cooldown: " + moveCooldown.ToString();
-        // set_text_stats();
     }
     public void OnMouseOver()
     {
