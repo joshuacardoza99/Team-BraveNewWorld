@@ -34,9 +34,11 @@ public class attack : MonoBehaviour
                 temp = hit.transform.gameObject;
                 if (match_manager.get_local_player().civilization == temp.GetComponent<PlayerMove>().civilization)
                     ally = temp;
+                else
+                    enemy = temp;
             }
-            else
-                ally = null;
+            if (ally.GetComponent<PlayerMove>().canAttack)
+                attacking();
         }
         temp = null;
 
@@ -83,5 +85,27 @@ public class attack : MonoBehaviour
     public void reset_attack_range()
     {
         attackable.Clear();
+    }
+
+    public void attacking()
+    {
+        if (enemylist.Contains(enemy.GetComponent<PlayerMove>().currentTile))
+        {
+            /// attatch attack animation 
+            ally.GetComponent<PlayerMove>().anim.Play("CharacterArmature|Punch");
+            enemy.GetComponent<PlayerMove>().health -= ally.GetComponent<PlayerMove>().damage;
+            enemy.GetComponent<PlayerMove>().anim.Play("CharacterArmature|RecieveHit");
+            // attatch damage animations 
+            ally.GetComponent<PlayerMove>().startAttackCD = true;
+            ally.GetComponent<PlayerMove>().canAttack = false;
+
+            reset_units();
+        }
+    }
+
+    public void reset_units()
+    {
+        ally = null;
+        enemy = null;
     }
 }

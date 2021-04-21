@@ -26,9 +26,12 @@ public class PlayerMove : MonoBehaviour
     public float moveCooldown;
     public float nextAttack = 0;                   // Does not appear to be used.
     public float timeRemanining;
+    public float attackRemanining;
     public bool isAttacking = false;               // Determines if this player is currently attaching.
     public bool startMoveCD = false;
+    public bool startAttackCD = false;
     public bool canMove = true;
+    public bool canAttack = true;
     public int civilization = 0;              // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
     private int[] grid = new int[2] { 0, 0 }; // Stores the position of the Tile in the virtual grid. [x position, y position]
 
@@ -86,13 +89,27 @@ public class PlayerMove : MonoBehaviour
                 canMove = true;
                 startMoveCD = false;
             }
+        
+        if (startAttackCD)
+            if (attackRemanining > 0)
+            {
+                attackRemanining -= Time.deltaTime;
+            }
+            else
+            {
+                attackRemanining = attackCooldown;
+                canAttack = true;
+                startAttackCD = false;
+            }
+
+        kill_unit();
     }
 
     // This runs when the character is enabled.
     void OnEnable()
     {
         Tile.OnSelected += handle_move;
-        Tile.OnSelected += attack;
+       // Tile.OnSelected += attack;
     }
 
 
@@ -100,7 +117,7 @@ public class PlayerMove : MonoBehaviour
     void OnDisable()
     {
         Tile.OnSelected -= handle_move;
-        Tile.OnSelected -= attack;
+        //Tile.OnSelected -= attack;
     }
 
     // Updates the players health.
@@ -110,15 +127,18 @@ public class PlayerMove : MonoBehaviour
     }
 
     // Attacks the character on selected tile.
-    public void attack(Tile tile, GameObject character)
+  /*  public void attack()
     {
-      //  if (Time.time > nextAttack)
-        //{
+        if (canAttack)
+        {
             if (tile.is_attackable())
             {
-                tile.get_current_character().GetComponent<PlayerMove>().health -= damage;
+                tile.get_current_character().GetComponent<PlayerMove>().health -= attacking.ally.GetComponent<PlayerMove>().damage; 
+                Debug.Log("Damage is " + attacking.ally.GetComponent<PlayerMove>().damage);
+                startAttackCD = true;
+                canAttack = false;
             }
-       // }
+        }
 
 
            /* if (tile == currentTile && currentTile.is_attackable()) // and in range, and not a friendly civ
@@ -165,8 +185,8 @@ public class PlayerMove : MonoBehaviour
                         }
                     }
                 }
-            }*/
-    }
+            }
+    }*/
 
     // Handles running the move on the current players computer and over the network.
     public void handle_move(Tile moveToTile, GameObject ususedCharacter)
@@ -269,6 +289,7 @@ public class PlayerMove : MonoBehaviour
 
         attacking.reset_attack_range();
         attacking.reset_tiles();
+        attacking.reset_units();
     }
 
     // Sets the civilization this character is apart of.
@@ -320,13 +341,14 @@ public class PlayerMove : MonoBehaviour
 
     public void load_stats()
     {
-        health          = unit.health;          // This line is causing an " Object reference not set to an instance of an object" error.   
-        damage          = unit.attackDamage;                  
-        attackRange     = unit.attackRange;
-        moveRange       = unit.moveRange;
-        attackCooldown  = unit.attackCooldown;
-        moveCooldown    = unit.movementCooldown;
-        timeRemanining  = unit.movementCooldown;
+        health           = unit.health;          // This line is causing an " Object reference not set to an instance of an object" error.   
+        damage           = unit.attackDamage;                  
+        attackRange      = unit.attackRange;
+        moveRange        = unit.moveRange;
+        attackCooldown   = unit.attackCooldown;
+        attackRemanining = unit.attackCooldown;
+        moveCooldown     = unit.movementCooldown;
+        timeRemanining   = unit.movementCooldown;
         //attackPopUp     = unit.get_attack_holder();
 
     }
@@ -354,5 +376,11 @@ public class PlayerMove : MonoBehaviour
     {
         Debug.Log("IN COOLDOWN");
         nextAttack = Time.time + cooldown;
+    }
+
+    public void kill_unit()
+    {
+        if (health <= 0)
+            Destroy(this.gameObject);
     }
 }
