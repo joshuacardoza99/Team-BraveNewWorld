@@ -3310,6 +3310,7 @@ MonoBehaviour:
   ally: {fileID: 0}
   enemy: {fileID: 0}
   temp: {fileID: 0}
+  attackPopUp: {fileID: 5083643197424513444, guid: 345ca308d8c44174eadd2541cc3313b2, type: 3}
   enemylist: []
   attackable: []
 --- !u!1001 &1801559174

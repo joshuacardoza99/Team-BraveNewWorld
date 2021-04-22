@@ -329,7 +329,7 @@ public class PlayerMove : MonoBehaviour
         currentTile.OnMouseDown();
     }
 
-    // Remove the unit from the game.
+ /*   // Remove the unit from the game.
     // Parameter = []
     public void suicide(string[] parameter)
     {
@@ -337,7 +337,7 @@ public class PlayerMove : MonoBehaviour
         //import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
         currentTile.set_unoccupied(new string[0] { });
         match_manager.remove_player_unit(new string[2] { get_civilization().ToString(), this.gameObject.name });
-    }
+    }*/
 
     public void load_stats()
     {
@@ -381,6 +381,10 @@ public class PlayerMove : MonoBehaviour
     public void kill_unit()
     {
         if (health <= 0)
+        {
+            //currentTile.set_unoccupied();
             Destroy(this.gameObject);
+            match_manager.remove_player_unit(new string[2] { get_civilization().ToString(), this.gameObject.name });
+        }
     }
 }
