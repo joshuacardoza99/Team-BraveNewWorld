@@ -62,7 +62,7 @@ exports.match = function(id = 0)
 	// Removes a player from the match.
 	this.remove_player = function(currentPlayer = null)
 	{
-		players = players.filter(player => (player.ip != currentPlayer.ip);
+		players = players.filter(player => (player.ip != currentPlayer.ip));
 
 		if (currentPlayer.host)
 		{
