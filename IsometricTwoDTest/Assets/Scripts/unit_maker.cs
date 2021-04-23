@@ -181,9 +181,9 @@ public class unit_maker : MonoBehaviour
 
         foreach (GameObject sceneObject in sceneGameObjects)
         {
-            if (Regex.IsMatch(sceneObject.name.ToLower(), "asian_*", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(sceneObject.name.ToLower(), "greek_*", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(sceneObject.name.ToLower(), "viking_*", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(sceneObject.name, "0_*", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(sceneObject.name, "1_*", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(sceneObject.name, "2_*", RegexOptions.IgnoreCase))
             {
                 remove_object(sceneObject);
             }

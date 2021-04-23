@@ -244,6 +244,28 @@ public class match_manager : MonoBehaviour
         choose_player(int.Parse(parameters[0])).get_unit(parameters[1]).update_health(int.Parse(parameters[2]));
     }
 
+    // Play pop up animations
+    // Parameters = [int civilization, string (unit/champion)Name, string damageToRemove]
+    public void update_popUp(string[] parameters)
+    {
+        choose_player(int.Parse(parameters[0])).get_unit(parameters[1]).play_damage_popup(parameters[2]);
+    }
+    
+    // Play punch animations
+    // Parameters = [int civilization, string (unit/champion)Name, int removeHealthAmount]
+    public void update_punch_anim(string[] parameters)
+    {
+        choose_player(int.Parse(parameters[0])).get_unit(parameters[1]).play_punch();
+    }
+
+    // Play receive hit animations
+    // Parameters = [int civilization, string (unit/champion)Name, int removeHealthAmount]
+    public void update_receive_hit_anim(string[] parameters)
+    {
+        choose_player(int.Parse(parameters[0])).get_unit(parameters[1]).play_recieve_hit();
+    }
+
+
     // Controls the conditions for the player leaving the game.
     public void check_end_conditions()
     {

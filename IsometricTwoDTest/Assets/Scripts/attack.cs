@@ -41,6 +41,14 @@ public class attack : MonoBehaviour
                 else
                     enemy = temp;
             }
+            else if ((hit.transform.GetComponent<Tile>() != null) && hit.transform.name == "map")
+            {
+                temp = hit.transform.GetComponent<Tile>().get_current_character();
+                if (match_manager.get_local_player().civilization == temp.GetComponent<PlayerMove>().civilization)
+                    ally = temp;
+                else
+                    enemy = temp;
+            }
 
             if ((enemy != null) && (ally != null) && (ally.GetComponent<PlayerMove>().canAttack))
                 attacking();
@@ -97,17 +105,13 @@ public class attack : MonoBehaviour
        // if (enemylist.Contains(enemy.GetComponent<PlayerMove>().currentTile))
         if (enemy.GetComponent<PlayerMove>().currentTile.is_attackable())
         {
-            /// attatch attack animation 
-            ally.GetComponent<PlayerMove>().anim.Play("CharacterArmature|Punch");
-            //enemy.GetComponent<PlayerMove>().health -= ally.GetComponent<PlayerMove>().damage;
+            /// attatch attack animation && remove health
+            import_manager.run_function_all("network_manager", "update_punch_anim", new string[2] { ally.GetComponent<PlayerMove>().get_civilization().ToString(), ally.gameObject.name });
             import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { enemy.GetComponent<PlayerMove>().get_civilization().ToString(), enemy.gameObject.name, ally.GetComponent<PlayerMove>().damage.ToString() });
-            enemy.GetComponent<PlayerMove>().anim.Play("CharacterArmature|RecieveHit");
+            import_manager.run_function_all("network_manager", "update_receive_hit_anim", new string[2] { enemy.GetComponent<PlayerMove>().get_civilization().ToString(), enemy.gameObject.name });
 
             // Attack pop up
-            Vector3 tilePosition = enemy.transform.position;
-            GameObject attackInstance = Instantiate(attackPopUp, tilePosition, Quaternion.identity);
-            attackInstance.transform.GetChild(0).GetComponent<TextMeshPro>().text = "- " + ally.GetComponent<PlayerMove>().damage.ToString();
-
+            import_manager.run_function_all("network_manager", "update_popUp", new string[3] { enemy.GetComponent<PlayerMove>().get_civilization().ToString(), enemy.gameObject.name, ally.GetComponent<PlayerMove>().damage.ToString() });
 
             // attatch damage animations 
             ally.GetComponent<PlayerMove>().startAttackCD = true;
