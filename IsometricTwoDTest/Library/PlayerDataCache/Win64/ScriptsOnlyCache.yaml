@@ -4,9 +4,9 @@ ScriptsOnlyBuild:
     - Building
     - City
     - GroundTypes
-    - PlayerMove
     - Tile
     - ai_thought_process
+    - attack
     - building_manager
     - building_select
     - building_type
@@ -117,31 +117,33 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11826}
     - Class: 114
-      Script: {instanceID: 11856}
+      Script: {instanceID: 11854}
     - Class: 114
-      Script: {instanceID: 12002}
+      Script: {instanceID: 12000}
     - Class: 114
-      Script: {instanceID: 12020}
+      Script: {instanceID: 12018}
     - Class: 114
-      Script: {instanceID: 12202}
+      Script: {instanceID: 12200}
     - Class: 114
-      Script: {instanceID: 12326}
+      Script: {instanceID: 12324}
     - Class: 114
-      Script: {instanceID: 12432}
+      Script: {instanceID: 12430}
     - Class: 114
-      Script: {instanceID: 12552}
+      Script: {instanceID: 12550}
     - Class: 114
-      Script: {instanceID: 12666}
+      Script: {instanceID: 12664}
     - Class: 114
-      Script: {instanceID: 12812}
+      Script: {instanceID: 12810}
     - Class: 114
-      Script: {instanceID: 12928}
+      Script: {instanceID: 12926}
     - Class: 114
-      Script: {instanceID: 12944}
+      Script: {instanceID: 12942}
     - Class: 114
-      Script: {instanceID: 12978}
+      Script: {instanceID: 12976}
     - Class: 114
-      Script: {instanceID: 13004}
+      Script: {instanceID: 13002}
+    - Class: 114
+      Script: {instanceID: 13048}
     - Class: 114
       Script: {instanceID: 13068}
     - Class: 114
@@ -187,8 +189,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 14572}
     - Class: 114
-      Script: {instanceID: 14606}
-    - Class: 114
       Script: {instanceID: 14664}
     - Class: 114
       Script: {instanceID: 14748}
@@ -209,12 +209,10 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15288}
     - Class: 114
-      Script: {instanceID: 28692}
+      Script: {instanceID: 27934}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
-      Script: {instanceID: 0}
-    - Class: 136
       Script: {instanceID: 0}
     - Class: 137
       Script: {instanceID: 0}
@@ -341,7 +339,7 @@ ScriptsOnlyBuild:
     className: Scrollbar
   - hash:
       serializedVersion: 2
-      Hash: 7986b755bda8d09bde2d54b88f943910
+      Hash: cae03816352994f345ba29a74a33281e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tile
@@ -549,6 +547,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Selectable
+  - hash:
+      serializedVersion: 2
+      Hash: 79e1c67913a8be828adb9646c6048953
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: attack
   - hash:
       serializedVersion: 2
       Hash: 60621dd0064cbb13ae95bea4a45554c8
@@ -779,7 +783,7 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
-      Hash: dbb688c99caa6ec5f3b5b3e69608768e
+      Hash: 42171adeb78f30054b140345aab802ac
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMove
