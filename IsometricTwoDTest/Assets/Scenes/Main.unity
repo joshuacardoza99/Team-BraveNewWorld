@@ -380,6 +380,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295934544}
   m_CullTransparentMesh: 0
+--- !u!1 &329770591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8703361372331186246, guid: 4437780c32811584499da5714ff658a0, type: 3}
+  m_PrefabInstance: {fileID: 908235824}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &340029991 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bf700c1b68b39984fa0337f5ba7c63bd, type: 3}
@@ -2855,6 +2860,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855fe275a8fb5c940961307d3f79df29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastDatabaseResponse:
+  - 
+  - 
+  - 
 --- !u!114 &1379151760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4796,15 +4805,15 @@ PrefabInstance:
     - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
       propertyPath: asianChampion
       value: 
-      objectReference: {fileID: 1571201741918631659, guid: 5d812bb70f86d2442a70c2e1ab288a52, type: 3}
+      objectReference: {fileID: 919132149155446097, guid: 3852567c4e599c24a82142ba425b41ac, type: 3}
     - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
       propertyPath: greekChampion
       value: 
-      objectReference: {fileID: 6545210362956541831, guid: ce44f444501f4674f92f55571f946d63, type: 3}
+      objectReference: {fileID: 919132149155446097, guid: 947501ef492720e49880512773779c35, type: 3}
     - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
       propertyPath: vikingChampion
       value: 
-      objectReference: {fileID: 8348064386475154523, guid: 5f0e2494603a905499d1870b97ae6955, type: 3}
+      objectReference: {fileID: 919132149155446097, guid: 27d53fa8ce979814e96e1256e72b75c7, type: 3}
     - target: {fileID: 4475268923984904374, guid: 774f60836ceed914aa80a5b35e0ebfae, type: 3}
       propertyPath: controller
       value: 
@@ -5010,6 +5019,10 @@ PrefabInstance:
       propertyPath: cloudBackground
       value: 
       objectReference: {fileID: 7175205140775278261, guid: 88ff0358a8be7cc44ad0a6df3fcae4dd, type: 3}
+    - target: {fileID: 2075246829140748330, guid: 18cda81c93dbea146bc7154de9fc1bd0, type: 3}
+      propertyPath: tillGameStart
+      value: 
+      objectReference: {fileID: 329770591}
     - target: {fileID: 2075246829140748331, guid: 18cda81c93dbea146bc7154de9fc1bd0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 409.8605

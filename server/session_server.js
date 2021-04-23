@@ -108,11 +108,6 @@ let message_handler = function(message, playerSocket)
 
 // Starts the HTTP server to listen for request.
 
-database_api.get_movements(1, (result) =>
-{
-	console.log(result);
-});
-
 // Starts the match server listing for connections.
 server.on("connection", (playerSocket) =>
 {

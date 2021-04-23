@@ -21,6 +21,8 @@ public class menu_manager : MonoBehaviour
     public int[] civilizationsVisible = new int[3] {-1, -1, -1};
     private bool isLocalCiv = true;
     public int secondsTillStart = 20;
+    public GameObject tillGameStart;
+    private bool haveLobby = true;
 
     void Awake()
     {
@@ -96,25 +98,28 @@ public class menu_manager : MonoBehaviour
     // Parameter = [int civilization]
     public void show_character_in_lobby(string[] parameter)
     {
-        int civilization = int.Parse(parameter[0]);
-
-        civilizationsVisible[civilization] = civilization;
-
-        if (match_manager.isHost || isLocalCiv)
+        if (haveLobby)
         {
-            isLocalCiv = false;
-            StartCoroutine(show_next_character());
-        }
+            int civilization = int.Parse(parameter[0]);
 
-        Vector3 position = GameObject.Find(civilizationName[civilization] + " Sprite").transform.position;
-        position.z = -190;
+            civilizationsVisible[civilization] = civilization;
 
-        GameObject.Find(civilizationName[civilization] + " Sprite").transform.position = position;
-        GameObject.Find(civilizationName[civilization] + " Text").GetComponent<Text>().text = "   Ready";
+            if (match_manager.isHost || isLocalCiv)
+            {
+                isLocalCiv = false;
+                StartCoroutine(show_next_character());
+            }
 
-        if (civilization != match_manager.get_local_player().civilization)
-        {
-            import_manager.run_function_all("MenuManager", "show_character_in_lobby", new string[1] { match_manager.get_local_player().civilization.ToString() });
+            Vector3 position = GameObject.Find(civilizationName[civilization] + " Sprite").transform.position;
+            position.z = -190;
+
+            GameObject.Find(civilizationName[civilization] + " Sprite").transform.position = position;
+            GameObject.Find(civilizationName[civilization] + " Text").GetComponent<Text>().text = "   Ready";
+
+            if (civilization != match_manager.get_local_player().civilization)
+            {
+                import_manager.run_function_all("MenuManager", "show_character_in_lobby", new string[1] { match_manager.get_local_player().civilization.ToString() });
+            }
         }
     }
 
@@ -125,7 +130,11 @@ public class menu_manager : MonoBehaviour
         {
             secondsTillStart--;
 
-            GameObject.Find("Time till start").GetComponent<Text>().text = "Game starting in " + secondsTillStart + " seconds";
+            if (tillGameStart.GetComponent<Text>() != null)
+            {
+                tillGameStart.GetComponent<Text>().text = "Game starting in " + secondsTillStart + " seconds";
+            }
+
             StartCoroutine(count_the_seconds());
         }
     }
@@ -143,6 +152,7 @@ public class menu_manager : MonoBehaviour
     // Parameter = []
     public void removeWaitPanel(string[] parameter)
     {
+        haveLobby = false;
         ChangeGroup(GameObject.Find("Canvas").transform.GetChild(3).gameObject);
         GameObject.Find("Main Camera").GetComponent<pan_zoom>().enabled = true;
     }
@@ -173,12 +183,16 @@ public class menu_manager : MonoBehaviour
     // Parameter = [] win/lose condition
     public void end_screen(string condition)
     {
-        if (condition == "Win" || condition == "win")
-            groups[7].GetComponent<Text>().text = "Congragulations , you have conguered the map! \n " + "You " + condition;
-        else
-            groups[7].GetComponent<Text>().text = "Your Civilaztion has fallen, better luck next time! \n " + "You " + condition;
+        Destroy(GameObject.Find("statPopup"));
 
         ChangeGroup(groups[7]);
+
+        if (condition == "Win" || condition == "win")
+          groups[7].transform.GetChild(1).GetComponent<Text>().text = "Congragulations , you have conguered the map! \n " + "You " + condition;
+        else
+          groups[7].transform.GetChild(1).GetComponent<Text>().text = "Your Civilaztion has fallen, better luck next time! \n " + "You " + condition;
+
+
     }
 
 

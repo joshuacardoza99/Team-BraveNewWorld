@@ -155,22 +155,24 @@ public class match_manager : MonoBehaviour
     // Is last player.
     public bool is_last_player()
     {
-        int numberOfCurrentPlayers = 0;
+        int numberOfActivePlayers = 0;
 
-        if (asianPlayer != null)
+        if (asianPlayer.champion != null)
         {
-            numberOfCurrentPlayers++;
-        }
-        else if (greekPlayer != null)
-        {
-            numberOfCurrentPlayers++;
-        }
-        else if (vikingPlayer != null)
-        {
-            numberOfCurrentPlayers++;
+            numberOfActivePlayers++;
         }
 
-        return numberOfCurrentPlayers == 1;
+        if (greekPlayer.champion != null)
+        {
+            numberOfActivePlayers++;
+        }
+
+        if (vikingPlayer.champion != null)
+        {
+            numberOfActivePlayers++;
+        }
+
+        return numberOfActivePlayers <= 1;
     }
 
     // Adds the player's data to the current match.
@@ -247,8 +249,7 @@ public class match_manager : MonoBehaviour
     {
         if (get_local_player().champion == null)
         {
-            menu_manager.end_screen("Lose");
-            //SceneManager.LoadScene("Main");
+           menu_manager.end_screen("Lose");
         }
         else if (is_last_player())
         {

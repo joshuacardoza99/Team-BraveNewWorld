@@ -166,9 +166,12 @@ exports.database_api = function(serverName = "", username = "", password = "", d
          });
    }
 
+   // Gets of list of actions and relating info for decision making.
    this.get_movements = function(decisionNumber = 0, receiver = (result) => {})
    {
-      var sql = "SELECT * FROM AI;";
+      var sql = "SELECT decisionNumber, numberOfMoves, numberOfBuilds, numberOfAttacks, numberOfRecruits, numberOfCaptures, actions, weight " +
+                "  FROM AI"                                                                                                                   +
+                " WHERE decisionNumber = " + decisionNumber +";";
 
       connection.query(sql, (error, result) =>
       {
@@ -179,6 +182,69 @@ exports.database_api = function(serverName = "", username = "", password = "", d
          else
          {
             receiver(result);
+         }
+      });
+   }
+
+   // Stores a decision and relating info for future use.
+   this.record_movements = function(decisionNumber = 0, numberOfMoves = 0, numberOfBuilds = 0, numberOfAttacks = 0, numberOfRecruits = 0,
+                                    numberOfCaptures = 0, actions = 0, weight = 0)
+   {
+      var sql = "INSERT INTO AI (decisionNumber, numberOfMoves, numberOfBuilds, numberOfAttacks, numberOfRecruits, numberOfCaptures, actions, weight)" +
+                "  VALUES (" + decisionNumber + "," + numberOfMoves + "," + numberOfBuilds + "," + numberOfAttacks + "," + numberOfRecruits + "," + 
+                numberOfCaptures + "," + actions + "," + weight + ");";
+
+      connection.query(sql, (error) =>
+      {
+         if (error)
+         {
+            console.log("Insert Failed with the following error: " + error);
+         }
+      });
+   }
+
+   // Increase the weight of a successful decision.
+   this.promote_movements = function(decisionNumber = 0, numberOfMoves = 0, numberOfBuilds = 0, numberOfAttacks = 0, numberOfRecruits = 0,
+                                     numberOfCaptures = 0, actions = 0, weight = 0)
+   {
+      var sql = "UPDATE AI " +
+                "   SET weight = " + (++weight)
+                " WHERE decisionNumber   = " + decisionNumber + "," +
+                "       numberOfMoves    = " + numberOfMoves  + "," +
+                "       numberOfBuilds   = " + numberOfBuilds + "," +
+                "       numberOfAttacks  = " + numberOfAttacks + "," +
+                "       numberOfRecruits = " + numberOfRecruits + "," +
+                "       numberOfCaptures = " + numberOfCaptures + "," +
+                "       actions          = " + actions          + ";";
+
+      connection.query(sql, (error) =>
+      {
+         if (error)
+         {
+            console.log("Update Failed with the following error: " + error);
+         }
+      });
+   }
+
+   // Decreases the weight of a failed decision.
+   this.demote_movements = function(decisionNumber = 0, numberOfMoves = 0, numberOfBuilds = 0, numberOfAttacks = 0, numberOfRecruits = 0,
+                                     numberOfCaptures = 0, actions = 0, weight = 0)
+   {
+      var sql = "UPDATE AI " +
+                "   SET weight = " + (--weight)
+                " WHERE decisionNumber   = " + decisionNumber + "," +
+                "       numberOfMoves    = " + numberOfMoves  + "," +
+                "       numberOfBuilds   = " + numberOfBuilds + "," +
+                "       numberOfAttacks  = " + numberOfAttacks + "," +
+                "       numberOfRecruits = " + numberOfRecruits + "," +
+                "       numberOfCaptures = " + numberOfCaptures + "," +
+                "       actions          = " + actions          + ";";
+
+      connection.query(sql, (error) =>
+      {
+         if (error)
+         {
+            console.log("Update Failed with the following error: " + error);
          }
       });
    }
