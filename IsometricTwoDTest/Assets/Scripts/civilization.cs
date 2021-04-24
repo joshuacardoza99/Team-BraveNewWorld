@@ -35,7 +35,6 @@ public class civilization : MonoBehaviour
             {
                 if (player != null)
                 {
-                    Debug.LogError("This civilization is available " + player.civilization + " civilizaiton");
                     update_resources(player.civilization);
                 }
             });

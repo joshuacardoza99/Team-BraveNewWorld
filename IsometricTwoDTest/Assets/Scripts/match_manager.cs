@@ -317,7 +317,7 @@ public class match_manager : MonoBehaviour
     {
         if (get_local_player().champion == null)
         {
-           //import_manager.run_function_all("network_manager", "destroy_civilization", new string[1] { get_local_player().civilization.ToString() });
+           import_manager.run_function_all("network_manager", "destroy_civilization", new string[1] { get_local_player().civilization.ToString() });
            menu_manager.end_screen("Lose");
         }
         else if (is_last_player())
