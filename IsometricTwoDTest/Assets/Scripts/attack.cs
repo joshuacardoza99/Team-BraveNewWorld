@@ -33,25 +33,28 @@ public class attack : MonoBehaviour
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit) && (hit.transform.GetComponent<PlayerMove>() != null))
+            if (Physics.Raycast(ray, out hit))
             {
-                temp = hit.transform.gameObject;
-                if (match_manager.get_local_player().civilization == temp.GetComponent<PlayerMove>().civilization)
-                    ally = temp;
-                else
-                    enemy = temp;
-            }
-            else if ((hit.transform.GetComponent<Tile>() != null) && hit.transform.name == "map")
-            {
-                temp = hit.transform.GetComponent<Tile>().get_current_character();
-                if (match_manager.get_local_player().civilization == temp.GetComponent<PlayerMove>().civilization)
-                    ally = temp;
-                else
-                    enemy = temp;
-            }
+                if ((hit.transform.GetComponent<PlayerMove>() != null))
+                {
+                    temp = hit.transform.gameObject;
+                    if (match_manager.get_local_player().civilization == temp.GetComponent<PlayerMove>().civilization)
+                        ally = temp;
+                    else
+                        enemy = temp;
+                }
+                else if ((hit.transform.GetComponent<Tile>() != null) && (hit.transform.GetComponent<Tile>().get_current_character() != null) && hit.transform.name == "map")
+                {
+                    temp = hit.transform.GetComponent<Tile>().get_current_character();
+                    if (match_manager.get_local_player().civilization == temp.GetComponent<PlayerMove>().civilization)
+                        ally = temp;
+                    else
+                        enemy = temp;
+                }
 
-            if ((enemy != null) && (ally != null) && (ally.GetComponent<PlayerMove>().canAttack))
-                attacking();
+                if ((enemy != null) && (ally != null) && (ally.GetComponent<PlayerMove>().canAttack))
+                    attacking();
+            }
         }
         temp = null;
 
