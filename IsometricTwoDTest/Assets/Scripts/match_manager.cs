@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 using System.Text.RegularExpressions;
 using AI;
+using AI;
 
 // This class facilitates connected to and interacting with a match.
 public class match_manager : MonoBehaviour
@@ -34,7 +35,7 @@ public class match_manager : MonoBehaviour
         {
             PlayerMove unit;
 
-            if (champion.gameObject.name == name)
+            if (champion != null && champion.gameObject.name == name)
             {
                 unit = champion;
             }
@@ -181,8 +182,19 @@ public class match_manager : MonoBehaviour
     {
         Player player = choose_player(int.Parse(parameters[0]));
 
-        Destroy(player.champion.gameObject);
-        player.champion = null;
+        aiList.ForEach((ai_thought_process ai) =>
+        {
+            if (ai.get_civilization() == player.civilization)
+            {
+                ai.stop();
+            }
+        });
+
+        if (player.champion != null)
+        {
+            Destroy(player.champion.gameObject);
+            player.champion = null;
+        }
 
         player.units.ForEach((PlayerMove unit) =>
         {
@@ -248,7 +260,8 @@ public class match_manager : MonoBehaviour
     public void remove_player_unit(string[] parameters)
     {
         Player chosenPlayer = choose_player(int.Parse(parameters[0]));
-        string unitName     = parameters[1];
+        string unitName = parameters[1];
+        PlayerMove unit = chosenPlayer.get_unit(unitName);
 
         if (chosenPlayer.champion != null && chosenPlayer.champion.gameObject.name == unitName)
         {
@@ -256,8 +269,11 @@ public class match_manager : MonoBehaviour
         }
         else
         {
-            chosenPlayer.units = chosenPlayer.units.FindAll(unit => unit.gameObject.name != unitName);
+            chosenPlayer.units.Remove(unit);
         }
+
+        
+        Destroy(unit.gameObject);
 
         check_end_conditions();
     }
@@ -296,7 +312,7 @@ public class match_manager : MonoBehaviour
     {
         if (get_local_player().champion == null)
         {
-           import_manager.run_function_all("network_manager", "destroy_civilization", new string[1] { get_local_player().civilization.ToString() });
+           //import_manager.run_function_all("network_manager", "destroy_civilization", new string[1] { get_local_player().civilization.ToString() });
            menu_manager.end_screen("Lose");
         }
         else if (is_last_player())

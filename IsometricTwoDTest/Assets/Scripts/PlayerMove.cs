@@ -101,12 +101,6 @@ public class PlayerMove : MonoBehaviour
                 canAttack = true;
                 startAttackCD = false;
             }
-
-
-
-
-
-        kill_unit();
     }
 
     // This runs when the character is enabled.
@@ -128,6 +122,8 @@ public class PlayerMove : MonoBehaviour
     public void update_health(int healthToRemove)
     {
         health -= healthToRemove;
+
+        kill_unit();
     }
 
     // Handles running the move on the current players computer and over the network.
@@ -335,8 +331,7 @@ public class PlayerMove : MonoBehaviour
         if (health <= 0)
         {
             import_manager.run_function_all("Map", "run_on_map_item", new string[3] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "set_unoccupied" });
-            Destroy(this.gameObject);
-            match_manager.remove_player_unit(new string[2] { get_civilization().ToString(), this.gameObject.name });
+            import_manager.run_function_all("network_manager", "remove_player_unit", new string[2] { civilization.ToString(), gameObject.name });
         }
     }
 }

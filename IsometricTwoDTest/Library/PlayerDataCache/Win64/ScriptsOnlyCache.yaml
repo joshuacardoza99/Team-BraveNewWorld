@@ -218,7 +218,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15288}
     - Class: 114
-      Script: {instanceID: 32754}
+      Script: {instanceID: 28270}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -618,7 +618,7 @@ ScriptsOnlyBuild:
     className: ai_thought_process
   - hash:
       serializedVersion: 2
-      Hash: 6448b44c681ac71a6c19dcbb608f7e31
+      Hash: 1c7af6554ac7f80711146580fb4d3262
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: menu_manager

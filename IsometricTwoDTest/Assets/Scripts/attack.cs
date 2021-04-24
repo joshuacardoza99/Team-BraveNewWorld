@@ -84,7 +84,7 @@ public class attack : MonoBehaviour
 
     public void reset_tiles()
     {
-        foreach (Tile reset in enemylist)
+        foreach (Tile reset in enemylist.ToList())
         {
             if (!attackable.Contains(reset))
             {
@@ -105,13 +105,13 @@ public class attack : MonoBehaviour
        // if (enemylist.Contains(enemy.GetComponent<PlayerMove>().currentTile))
         if (enemy.GetComponent<PlayerMove>().currentTile.is_attackable())
         {
-            /// attatch attack animation && remove health
-            import_manager.run_function_all("network_manager", "update_punch_anim", new string[2] { ally.GetComponent<PlayerMove>().get_civilization().ToString(), ally.gameObject.name });
-            import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { enemy.GetComponent<PlayerMove>().get_civilization().ToString(), enemy.gameObject.name, ally.GetComponent<PlayerMove>().damage.ToString() });
-            import_manager.run_function_all("network_manager", "update_receive_hit_anim", new string[2] { enemy.GetComponent<PlayerMove>().get_civilization().ToString(), enemy.gameObject.name });
-
             // Attack pop up
             import_manager.run_function_all("network_manager", "update_popUp", new string[3] { enemy.GetComponent<PlayerMove>().get_civilization().ToString(), enemy.gameObject.name, ally.GetComponent<PlayerMove>().damage.ToString() });
+
+            /// attatch attack animation && remove health
+            import_manager.run_function_all("network_manager", "update_receive_hit_anim", new string[2] { enemy.GetComponent<PlayerMove>().get_civilization().ToString(), enemy.gameObject.name });
+            import_manager.run_function_all("network_manager", "update_punch_anim", new string[2] { ally.GetComponent<PlayerMove>().get_civilization().ToString(), ally.gameObject.name });
+            import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { enemy.GetComponent<PlayerMove>().get_civilization().ToString(), enemy.gameObject.name, ally.GetComponent<PlayerMove>().damage.ToString() });
 
             // attatch damage animations 
             ally.GetComponent<PlayerMove>().startAttackCD = true;
