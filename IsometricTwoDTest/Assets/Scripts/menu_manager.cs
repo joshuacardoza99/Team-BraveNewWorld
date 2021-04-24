@@ -23,6 +23,8 @@ public class menu_manager : MonoBehaviour
     public int secondsTillStart = 20;
     public GameObject tillGameStart;
     private bool haveLobby = true;
+    public Image endScreenWinImage;
+    public Image endScreenLoseImage;
 
     void Awake()
     {
@@ -188,10 +190,15 @@ public class menu_manager : MonoBehaviour
         ChangeGroup(groups[7]);
 
         if (condition == "Win" || condition == "win")
-          groups[7].transform.GetChild(1).GetComponent<Text>().text = "Congragulations , you have conguered the map! \n " + "You " + condition;
+        {
+            groups[7].transform.GetChild(1).GetComponent<Text>().text = "Congragulations , you have conguered the map! \n " + "You " + condition;
+            endScreenWinImage.enabled = true;
+        }
         else
-          groups[7].transform.GetChild(1).GetComponent<Text>().text = "Your Civilaztion has fallen, better luck next time! \n " + "You " + condition;
-
+        {
+            groups[7].transform.GetChild(1).GetComponent<Text>().text = "Your Civilaztion has fallen, better luck next time! \n " + "You " + condition;
+            endScreenLoseImage.enabled = true;
+        }
 
     }
 

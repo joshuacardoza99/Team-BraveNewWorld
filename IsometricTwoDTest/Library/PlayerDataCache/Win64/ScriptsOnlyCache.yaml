@@ -68,7 +68,10 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Mask
     - UnityEngine.UI.Outline
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Shadow
     - UnityEngine.UI.Text
     - UnityEngine.UI.VerticalLayoutGroup
@@ -115,6 +118,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11822}
     - Class: 114
+      Script: {instanceID: 11824}
+    - Class: 114
       Script: {instanceID: 11826}
     - Class: 114
       Script: {instanceID: 11854}
@@ -122,6 +127,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12000}
     - Class: 114
       Script: {instanceID: 12018}
+    - Class: 114
+      Script: {instanceID: 12170}
     - Class: 114
       Script: {instanceID: 12200}
     - Class: 114
@@ -132,6 +139,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 12550}
     - Class: 114
       Script: {instanceID: 12664}
+    - Class: 114
+      Script: {instanceID: 12758}
     - Class: 114
       Script: {instanceID: 12810}
     - Class: 114
@@ -209,7 +218,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 15288}
     - Class: 114
-      Script: {instanceID: 27934}
+      Script: {instanceID: 32754}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
