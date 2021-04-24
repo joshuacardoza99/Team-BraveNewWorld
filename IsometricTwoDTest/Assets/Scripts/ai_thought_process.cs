@@ -58,6 +58,12 @@ public class ai_thought_process : MonoBehaviour
         }
     }
 
+    // Gets the AI's civilization
+    public int get_civilization()
+    {
+        return civilization;
+    }
+
     // Sets the AI's mind in motion.
     public void start_ai()
     {
@@ -82,6 +88,12 @@ public class ai_thought_process : MonoBehaviour
         {
             Debug.LogError("Cannot start an AI without a civilization.");
         }
+    }
+
+    // Stops the ai from running.
+    public void stop()
+    {
+        running = false;
     }
 
     // Gets a list of valid decisions
