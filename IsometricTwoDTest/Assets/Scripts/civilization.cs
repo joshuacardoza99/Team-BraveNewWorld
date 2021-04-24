@@ -33,7 +33,11 @@ public class civilization : MonoBehaviour
         {
             match_manager.for_each_player((player) =>
             {
-                update_resources(player.civilization);
+                if (player != null)
+                {
+                    Debug.LogError("This civilization is available " + player.civilization + " civilizaiton");
+                    update_resources(player.civilization);
+                }
             });
         }
     }
