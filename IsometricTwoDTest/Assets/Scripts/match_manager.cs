@@ -237,8 +237,7 @@ public class match_manager : MonoBehaviour
     // Parameter = [int civilizaiton, string championName]
     public void update_player_champion (int civilization, GameObject champion)
     {
-        //choose_player(civilization).champion = champion.GetComponent<PlayerMove>();
-        get_local_player().champion = champion.GetComponent<PlayerMove>();
+        choose_player(civilization).champion = champion.GetComponent<PlayerMove>();
     }
 
     // Subtract a player's resources over the network
@@ -424,6 +423,28 @@ public class match_manager : MonoBehaviour
         import_manager.run_function_all("network_manager", "vote_ready", new string[0] { });
     }
 
+    // Sets up the match class data for the current game.
+    // parameters = [int id, bool host, int map]
+    public void resume_match(string[] parameters)
+    {
+        this.matchId = int.Parse(parameters[0]);
+        this.isHost = bool.Parse(parameters[1]);
+        this.map = int.Parse(parameters[2]);
+
+        //GameObject.Find("Main Camera").GetComponent<pan_zoom>().enabled = true;
+        import_manager.run_function("Map", "load_map", new string[1] { this.map.ToString() });
+        import_manager.run_function_all("unit_manager", "add_champion", new string[2] { get_local_player().civilization.ToString(), UnityEngine.Random.Range(1000, 2000).ToString() });
+        import_manager.run_function("MenuManager", "removeWaitPanel", new string[0] { });
+        //import_manager.run_function_all("server_function", "get_characters", new string[2]{"network_manager", "load_characters"});
+    }
+
+    // Loads the characters for resuming the match.
+    // Parameters = [json characters]
+    /* public void load_characters (string[] parameters)
+     {
+          var message = JsonUtility.FromJson<update_message>(System.Text.Encoding.UTF8.GetString(bytes));
+
+     }*/
 
     // Registers a player as being ready to play.
     public void vote_ready(string[] parameters)
