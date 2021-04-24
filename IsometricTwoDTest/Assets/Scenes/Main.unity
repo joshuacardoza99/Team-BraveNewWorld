@@ -625,10 +625,10 @@ MonoBehaviour:
   cam: {fileID: 0}
   ignoreUI: 1
   useBounds: 1
-  boundMinX: -80
-  boundMaxX: 80
-  boundMinY: -115
-  boundMaxY: 10
+  boundMinX: -65
+  boundMaxX: 65
+  boundMinY: -110
+  boundMaxY: 5
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
