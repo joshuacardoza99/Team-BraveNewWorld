@@ -64,6 +64,13 @@ exports.match = function(id = 0)
 	{
 		players = players.filter(player => (player.ip != currentPlayer.ip));
 
+		broadcast(JSON.stringify(
+		{
+			gameObject: "network_manager",
+			  function: "destroy_civilization",
+			parameters: [currentPlayer.civilization.toString()]
+		}), currentPlayer.socket)
+
 		if (currentPlayer.host)
 		{
 			players[0].host = true;

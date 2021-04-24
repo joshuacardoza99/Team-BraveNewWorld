@@ -175,6 +175,31 @@ public class match_manager : MonoBehaviour
         return numberOfActivePlayers <= 1;
     }
 
+    // Destroy every thing a civilization has.
+    // Parameters = [int civilization]
+    public void destroy_civilization (string[] parameters)
+    {
+        Player player = choose_player(int.Parse(parameters[0]));
+
+        Destroy(player.champion.gameObject);
+        player.champion = null;
+
+        player.units.ForEach((PlayerMove unit) =>
+        {
+            Destroy(unit.gameObject);
+        });
+        player.units = new List<PlayerMove>();
+
+        player.buildings.ForEach((Building building) =>
+        {
+            Destroy(building.gameObject);
+        });
+        player.buildings = new List<Building>();
+
+        player.food = 0;
+        player.gold = 0;
+    }
+
     // Adds the player's data to the current match.
     // Paramater = [int civilization]
     public void add_player(string[] parameter)
@@ -271,6 +296,7 @@ public class match_manager : MonoBehaviour
     {
         if (get_local_player().champion == null)
         {
+           import_manager.run_function_all("network_manager", "destroy_civilization", new string[1] { get_local_player().civilization.ToString() });
            menu_manager.end_screen("Lose");
         }
         else if (is_last_player())
