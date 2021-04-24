@@ -235,9 +235,9 @@ public class match_manager : MonoBehaviour
 
     // Update a player's champion.
     // Parameter = [int civilizaiton, string championName]
-    public void update_player_champion (string[] parameters)
+    public void update_player_champion (int civilization, GameObject champion)
     {
-        choose_player(int.Parse(parameters[0])).champion = GameObject.Find(parameters[1]).GetComponent<PlayerMove>();
+        choose_player(civilization).champion = champion.GetComponent<PlayerMove>();
     }
 
     // Subtract a player's resources over the network
@@ -303,7 +303,10 @@ public class match_manager : MonoBehaviour
     // Parameters = [int civilization, string (unit/champion)Name, int removeHealthAmount]
     public void update_receive_hit_anim(string[] parameters)
     {
-        choose_player(int.Parse(parameters[0])).get_unit(parameters[1]).play_recieve_hit();
+        PlayerMove unit = choose_player(int.Parse(parameters[0])).get_unit(parameters[1]);
+        Debug.LogError(unit.name);
+        unit.play_recieve_hit();
+        //choose_player(int.Parse(parameters[0])).get_unit(parameters[1]).play_recieve_hit();
     }
 
 

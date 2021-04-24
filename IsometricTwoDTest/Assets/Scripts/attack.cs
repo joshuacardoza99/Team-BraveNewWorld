@@ -103,7 +103,7 @@ public class attack : MonoBehaviour
     public void attacking()
     {
        // if (enemylist.Contains(enemy.GetComponent<PlayerMove>().currentTile))
-        if (enemy.GetComponent<PlayerMove>().currentTile.is_attackable())
+        if (enemy.GetComponent<PlayerMove>().currentTile.is_attackable()) //&& enemy != null)
         {
             // Attack pop up
             import_manager.run_function_all("network_manager", "update_popUp", new string[3] { enemy.GetComponent<PlayerMove>().get_civilization().ToString(), enemy.gameObject.name, ally.GetComponent<PlayerMove>().damage.ToString() });
