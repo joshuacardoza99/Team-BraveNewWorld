@@ -33,7 +33,7 @@ public class match_manager : MonoBehaviour
         // Finds the unit/champion from the name.
         public PlayerMove get_unit (string name)
         {
-            PlayerMove unit;
+            PlayerMove unit = null;
 
             if (champion != null && champion.gameObject.name == name)
             {
@@ -68,7 +68,10 @@ public class match_manager : MonoBehaviour
     [SerializeField] private Player asianPlayer;
     [SerializeField] private Player greekPlayer;
     [SerializeField] private Player vikingPlayer;
-    private int    localPlayer;
+    private bool asianIsTaken = false;
+    private bool greekIsTaken = false;
+    private bool vikingIsTaken = false;
+    public int    localPlayer;
     private List<ai_thought_process> aiList = new List<ai_thought_process>();
     public List<building_type> buildingTypeList; // List of SO, connects any building type being scripted
     public List<unit_type> unitTypeList; // List of SO, connects any unit type being scripted
@@ -231,6 +234,8 @@ public class match_manager : MonoBehaviour
                 vikingPlayer = new Player(civilization);
                 break;
         }
+
+        Debug.Log("Player added " + choose_player(civilization).civilization);
     }
 
     // Update a player's champion.
@@ -303,10 +308,7 @@ public class match_manager : MonoBehaviour
     // Parameters = [int civilization, string (unit/champion)Name, int removeHealthAmount]
     public void update_receive_hit_anim(string[] parameters)
     {
-        PlayerMove unit = choose_player(int.Parse(parameters[0])).get_unit(parameters[1]);
-        Debug.LogError(unit.name);
-        unit.play_recieve_hit();
-        //choose_player(int.Parse(parameters[0])).get_unit(parameters[1]).play_recieve_hit();
+        choose_player(int.Parse(parameters[0])).get_unit(parameters[1]).play_recieve_hit();
     }
 
 
@@ -315,7 +317,7 @@ public class match_manager : MonoBehaviour
     {
         if (get_local_player().champion == null)
         {
-           //import_manager.run_function_all("network_manager", "destroy_civilization", new string[1] { get_local_player().civilization.ToString() });
+           import_manager.run_function_all("network_manager", "destroy_civilization", new string[1] { get_local_player().civilization.ToString() });
            menu_manager.end_screen("Lose");
         }
         else if (is_last_player())
@@ -365,17 +367,17 @@ public class match_manager : MonoBehaviour
     // Adds all the needed AI's to the current match.
     public void add_all_ai()
     {
-        if (asianPlayer == null)
+        if (!asianIsTaken)
         {
             add_ai(0);
         }
 
-        if (greekPlayer == null)
+        if (!greekIsTaken)
         {
             add_ai(1);
         }
 
-        if (vikingPlayer == null)
+        if (!vikingIsTaken)
         {
             add_ai(2);
         }
@@ -419,8 +421,7 @@ public class match_manager : MonoBehaviour
         }
 
         import_manager.run_function("Map", "load_map", new string[1] { this.map.ToString() });
-        import_manager.run_function_all("network_manager", "add_player", new string[1] { get_local_player().civilization.ToString() });
-        import_manager.run_function_all("network_manager", "vote_ready", new string[0] { });
+        import_manager.run_function_all("network_manager", "vote_ready", new string[1] { localPlayer.ToString() });
     }
 
     // Sets up the match class data for the current game.
@@ -447,10 +448,26 @@ public class match_manager : MonoBehaviour
      }*/
 
     // Registers a player as being ready to play.
+    // Parameters = [int civilization]
     public void vote_ready(string[] parameters)
     {
         if (this.isHost)
         {
+            int civilization = int.Parse(parameters[0]);
+
+            if (civilization == 0)
+            {
+                asianIsTaken = true;
+            }
+            else if (civilization == 1)
+            {
+                greekIsTaken = true;
+            }
+            else if (civilization == 2)
+            {
+                vikingIsTaken = true;
+            }
+
             isReady.Add(true);
 
             if ((isReady.Count == this.numberOfPlayers) || this.type != "network")
@@ -480,7 +497,7 @@ public class match_manager : MonoBehaviour
     {
         if (this.type == "network")
         {
-            import_manager.run_function_all("server_functions", "add_player", new string[2] { this.championName, get_local_player().civilization.ToString() });
+            import_manager.run_function_all("server_functions", "add_player", new string[2] { this.championName, localPlayer.ToString() });
         }
         else if (this.type == "local")
         {
@@ -498,6 +515,8 @@ public class match_manager : MonoBehaviour
             add_all_ai();
             start_ai();
         }
+
+        import_manager.run_function_all("network_manager", "add_player", new string[1] { localPlayer.ToString() });
 
         civ_resources_display.update_resources();
         

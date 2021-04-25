@@ -64,7 +64,7 @@ public class menu_manager : MonoBehaviour
             import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
         }
 
-        import_manager.run_function_all("MenuManager", "show_character_in_lobby", new string[1] { match_manager.get_local_player().civilization.ToString() });
+        import_manager.run_function_all("MenuManager", "show_character_in_lobby", new string[1] { match_manager.localPlayer.ToString() });
     }
 
     IEnumerator show_next_character()
@@ -118,9 +118,9 @@ public class menu_manager : MonoBehaviour
             GameObject.Find(civilizationName[civilization] + " Sprite").transform.position = position;
             GameObject.Find(civilizationName[civilization] + " Text").GetComponent<Text>().text = "   Ready";
 
-            if (civilization != match_manager.get_local_player().civilization)
+            if (civilization != match_manager.localPlayer)
             {
-                import_manager.run_function_all("MenuManager", "show_character_in_lobby", new string[1] { match_manager.get_local_player().civilization.ToString() });
+                import_manager.run_function_all("MenuManager", "show_character_in_lobby", new string[1] { match_manager.localPlayer.ToString() });
             }
         }
     }

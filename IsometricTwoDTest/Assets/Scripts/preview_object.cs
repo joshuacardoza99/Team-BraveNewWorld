@@ -52,11 +52,19 @@ public class preview_object : MonoBehaviour
         {
             building.AddComponent<Building>();
         }
+
+        if (((BuildingType) int.Parse(parameter[3])) == BuildingType.commandPost &&
+            building.GetComponent<City>() == null)
+        {
+            building.AddComponent<City>();
+        }
+
         building.GetComponent<Building>().set_type((BuildingType) int.Parse(parameter[3])); // sending the building its type
         building.GetComponent<Building>().set_civilization(int.Parse(parameter[4]));
         building.GetComponent<Building>().building_type = match_manager.buildingTypeList[int.Parse(parameter[3])];
         building.GetComponent<Building>().load_stats();
         building.GetComponent<Building>().set_current_tile(map_manager.map[int.Parse(parameter[1]), int.Parse(parameter[2])].ground.GetComponent<Tile>());
+
         match_manager.choose_player(int.Parse(parameter[4])).buildings.Add(building.GetComponent<Building>());
     }
 

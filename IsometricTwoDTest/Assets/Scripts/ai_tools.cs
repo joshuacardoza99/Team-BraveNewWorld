@@ -38,7 +38,7 @@ namespace AI
             
             if (match_manager.get_type() == "network")
             {
-                import_manager.run_function_all("network_manager", "vote_ready", new string[0] { });
+                import_manager.run_function_all("network_manager", "vote_ready", new string[1] { civilization.ToString() });
             }
         }
 

@@ -153,11 +153,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1238359907}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -761.72, y: 452}
+  m_AnchoredPosition: {x: 738.14, y: -166}
   m_SizeDelta: {x: 184.55743, y: 184.55743}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &96309611
@@ -3143,6 +3143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHost: 0
   championName: '  '
+  localPlayer: 0
   buildingTypeList:
   - {fileID: 11400000, guid: 57c33a5f3ed89df4a84d1d4039ba4c01, type: 2}
   - {fileID: 11400000, guid: 7a0c2510b46c124429a08bb9dd8f2dff, type: 2}
@@ -3656,12 +3657,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1238359907}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -763.5, y: 961.1}
-  m_SizeDelta: {x: 180.96127, y: 180.96127}
+  m_AnchoredPosition: {x: 746.6, y: 960}
+  m_SizeDelta: {x: 167.6362, y: 167.6362}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1762490564
 MonoBehaviour:
@@ -4409,6 +4410,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: Play
       objectReference: {fileID: 0}
+    - target: {fileID: 4251005604430575601, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251005604430575601, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_Colors.m_NormalColor.r
+      value: 0.41960788
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251005604430575601, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.32156864
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251005604430575601, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.26666668
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251005604430575601, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251005604430575601, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251005604430575601, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1447093569}
+    - target: {fileID: 4251005604430575601, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: character_selection, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251005604430575601, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PreviousCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 4251005604430575601, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4256706843617308899, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -570
+      objectReference: {fileID: 0}
     - target: {fileID: 4645324947673410228, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_FontData.m_FontSize
       value: 50
@@ -4453,6 +4498,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 4910647534635118629, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1a788036e270aba4a842321886692a20, type: 3}
     - target: {fileID: 5078598726790586629, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
@@ -4661,6 +4710,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 5100340471898985117, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5100340471898985118, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -4861,6 +4914,10 @@ PrefabInstance:
       propertyPath: descriptionText
       value: 
       objectReference: {fileID: 967303544}
+    - target: {fileID: 5457547708273822854, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
+      propertyPath: m_Name
+      value: Previous
+      objectReference: {fileID: 0}
     - target: {fileID: 6000500864468385086, guid: 52010a6f8aab6bc47a960dcc0174ca0e, type: 3}
       propertyPath: descriptionText
       value: 
@@ -5365,7 +5422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 547017201225404941, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 3135.002
+      value: 2675.2153
       objectReference: {fileID: 0}
     - target: {fileID: 547017201225404941, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -5377,7 +5434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 547017201225404941, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1567.501
+      value: -1337.6
       objectReference: {fileID: 0}
     - target: {fileID: 1971615972298478000, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5413,7 +5470,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2503983959352068048, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2831994544116329729, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5426,28 +5483,28 @@ PrefabInstance:
         the other players champions are destroyed, you win!\r\n\nTo protect your
         champion, you\u2019ll need an army! But before we can have an army, we need
         cities to produce resources for them. \r\n\nTo build cities and buildings,
-        click the build button in the bottom left,  and places you can put it will
-        show an outline of the building. Click on an outline to place the building!\r\n\nFarms
-        produce food, which can be used to make troops, and mines generate gold,
-        which is used to make more cities and buildings. Keep an eye on your resources
-        in the top left, and make sure you don\u2019t run out!\r\n\r\nWith a few
-        cities built, we\u2019re ready to raise an army!\r\n\nTroops can be built
-        next to any of your cities. To build a troop, click on the units button [graphic]
-        next to the build button; you\u2019ll see 3 buttons, corresponding to the
-        3 troop types (Melee, ranged, and tank.) click on one of the buttons and
-        then click a highlighted tile to place the unit.\r\n\nMaybe add a slide to
-        expound upon the differences between units\r\n\nTo view information about
-        a given unit, hover your mouse over it to reveal the information panel.\r\n\nTo
-        move a unit, click on the unit then click on one of the highlighted tiles
-        next to it. After a unit moves, they must wait before moving again. You can
-        see how long they must wait in their stats menu.\r\n\r\nNow that we have
-        the basics down, lets go find an enemy to destroy!\r\nOnce you encounter
-        an enemy, they will become highlighted once your unit is in range to attack
-        them. Click on a highlighted enemy to attack. Once a unit\u2019s health is
-        0, they will be destroyed and disappear from the map.\r\n\nTo destroy enemy
-        cities and weaken their empire, place a unit on their city center, after
-        the unit stands there long enough, the entire city will be destroyed.\r\nNow
-        build your empire, and lead your civilization to victory!\r\n"
+        click the Build button\nin the bottom left. Tiles where you can build will\nshow
+        an outline of the building. Click on an outline to place the building on
+        that tile!\r\n\nFarms produce food, which can be used to make troops, and
+        mines generate gold, which is used to make more cities and buildings. Keep
+        an eye on your resources in the top left, and make sure you don\u2019t run
+        out!\r\n\r\nWith a few cities built, we\u2019re ready to raise an army!\r\n\nTroops
+        can be built next to any of your cities. To build a troop, click on the Units
+        button next to the Build button; you\u2019ll see 3 buttons, corresponding
+        to the 3 troop types. (Melee/Sword, Ranged/Arrow, and Tank/Shield)\nClick
+        on the button of the unit you would like\nto create and then click a highlighted
+        tile to\nplace the unit on that tile.\r\n\nTo view information about a given
+        unit, hover your mouse over it to reveal the information panel.\r\n\nTo move
+        a unit, click on the unit then click on one of the highlighted tiles next
+        to it. After a unit moves, they must wait before moving again. You can see
+        how long they must wait in their stats menu.\r\n\r\nNow that we have the
+        basics down, lets go find an enemy to destroy!\r\nOnce you encounter an enemy,
+        they will become highlighted once your unit is in range to attack them. Click
+        on a highlighted enemy to attack. Once a unit\u2019s health is 0, they will
+        be destroyed and disappear from the map.\r\n\nTo destroy enemy cities and
+        weaken their empire, place a unit on their city center, after the unit stands
+        there long enough, the entire city will be destroyed and you will receive
+        gold.\r\nNow build your empire, and lead your civilization to victory!\r\n"
       objectReference: {fileID: 0}
     - target: {fileID: 2851508825891122575, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_FontData.m_Font
@@ -5463,7 +5520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2851508825891122575, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_FontData.m_Alignment
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2851508825891122575, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_Color.r
@@ -5481,21 +5538,25 @@ PrefabInstance:
       propertyPath: m_Horizontal
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3263278424469651872, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
+      propertyPath: m_ScrollSensitivity
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3535234412816631566, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3607972559795611854, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3607972559795611854, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3607972559795611854, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -17
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3879008899230147271, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_Sprite
@@ -5507,27 +5568,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3879008899230147271, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 0.4784314
       objectReference: {fileID: 0}
     - target: {fileID: 3879008899230147271, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 0.28235295
       objectReference: {fileID: 0}
     - target: {fileID: 3879008899230147271, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.1137255
       objectReference: {fileID: 0}
     - target: {fileID: 3921712805019506477, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.780276
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3921712805019506477, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3921712805019506477, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3921712805019506477, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5735,15 +5796,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6497298193833270034, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_Color.r
-      value: 0.2392157
+      value: 0.23137257
       objectReference: {fileID: 0}
     - target: {fileID: 6497298193833270034, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_Color.g
-      value: 0.09019608
+      value: 0.08235294
       objectReference: {fileID: 0}
     - target: {fileID: 6497298193833270034, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_Color.b
-      value: 0.0627451
+      value: 0.050980397
       objectReference: {fileID: 0}
     - target: {fileID: 6497298193833270034, guid: d58850b7c34acc944b11293bc0ea40c8, type: 3}
       propertyPath: m_Color.a

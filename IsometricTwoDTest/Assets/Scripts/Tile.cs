@@ -18,6 +18,7 @@ public class Tile : MonoBehaviour
     map_manager map_manager;     // This imports the map_manager class to help with interactions with othe tiles.
     cooldown cooldowns;
     menu_manager menu_manager;
+    civ_resources_display civ_resources_display;
 
     // Events
     public delegate void TileSelected(Tile selectedTile, GameObject occupyingCharacter);   // Template function for the TileSelected Event.
@@ -49,6 +50,7 @@ public class Tile : MonoBehaviour
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
         cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
         menu_manager = GameObject.Find("MenuManager").GetComponent<menu_manager>();
+        civ_resources_display = GameObject.Find("civManager").GetComponent<civ_resources_display>();
     }
     void Update()
     {
@@ -546,5 +548,30 @@ public class Tile : MonoBehaviour
     {
         PlayerMove animateChar = this.get_current_character().GetComponent<PlayerMove>();
         animateChar.attackAnim.Play("CharacterArmature|Punch");
+    }
+
+    // Removes the city.
+    // Parameters = [int civilization]
+    public void destroy_city(string[] parameters)
+    {
+        int civilization = int.Parse(parameters[0]);
+
+        int reward = currentBuilding.GetComponent<Building>().buildCost;
+        
+        currentBuilding.GetComponent<City>().in_city.ForEach((Tile tile) =>
+        {
+            tile.remove_city();
+        });
+
+        currentBuilding.GetComponent<City>().buildings_in_city.ForEach((Building building) =>
+        {
+            reward += building.buildCost;
+            building.destroy_building(new string[1] { civilization.ToString() });
+        });
+
+        currentBuilding.GetComponent<Building>().destroy_building(new string[1] { civilization.ToString() });
+
+        match_manager.choose_player(civilization).gold += reward;
+        civ_resources_display.update_resources();
     }
 }

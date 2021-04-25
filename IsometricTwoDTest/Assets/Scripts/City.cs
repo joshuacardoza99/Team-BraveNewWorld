@@ -7,6 +7,7 @@ using UnityEngine;
 public class City : MonoBehaviour
 {
     // External Classes//
+    import_manager import_manager;
     map_manager map_manager;
     match_manager match_manager;
 
@@ -28,6 +29,7 @@ public class City : MonoBehaviour
         match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
         civilization = GameObject.Find("civManager").GetComponent<civilization>(); // Connects to the import_manager.
         civ_resources_display = GameObject.Find("civManager").GetComponent<civ_resources_display>();
+        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
 
         currentTile = this.GetComponent<Building>().currentTile;
         Debug.Log("A City has been placed!");
@@ -58,26 +60,6 @@ public class City : MonoBehaviour
         }
     }   
 
-    // Removes the city.
-    public void destroy_city(int civNumber)
-    {
-        int reward = gameObject.GetComponent<Building>().buildCost;
-            gameObject.GetComponent<Building>().destroy_building(new string[1] { civNumber.ToString() });
-       
-        in_city.ForEach((Tile tile) =>
-        {
-            tile.remove_city();
-        });
-        buildings_in_city.ForEach((Building building) =>
-        {
-            reward += building.buildCost;
-            building.destroy_building(new string[1] { civNumber.ToString() });
-        });
-
-        match_manager.choose_player(civNumber).gold += reward;
-        civ_resources_display.update_resources();
-    }
-
     IEnumerator conquer(int civilization)
     {
         yield return new WaitForSeconds(10);
@@ -85,7 +67,8 @@ public class City : MonoBehaviour
         if (currentTile.get_current_character() != null &&
             currentTile.get_current_character().GetComponent<PlayerMove>().civilization == civilization)
         {
-            destroy_city(civilization);
+            import_manager.run_function_all("Map", "run_on_map_item", new string[4] { currentTile.get_grid()[0].ToString(), currentTile.get_grid()[1].ToString(), "destroy_city", civilization.ToString() });
+            //destroy_city(civilization);
         }
     }
 

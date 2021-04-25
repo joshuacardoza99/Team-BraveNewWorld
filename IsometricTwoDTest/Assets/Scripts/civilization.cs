@@ -33,7 +33,10 @@ public class civilization : MonoBehaviour
         {
             match_manager.for_each_player((player) =>
             {
-                update_resources(player.civilization);
+                if (player != null)
+                {
+                    update_resources(player.civilization);
+                }
             });
         }
     }

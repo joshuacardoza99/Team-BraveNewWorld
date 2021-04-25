@@ -53,7 +53,7 @@ public class unit_maker : MonoBehaviour
             champion = place_object(vikingChampion, 0, tile);
         }
 
-        if (match_manager.get_local_player().civilization == civilization)
+        if (match_manager.get_local_player() != null && match_manager.get_local_player().civilization == civilization)
         {
             champion.tag = "Player";
         }

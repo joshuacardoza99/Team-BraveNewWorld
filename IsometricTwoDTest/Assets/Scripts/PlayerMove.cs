@@ -302,6 +302,7 @@ public class PlayerMove : MonoBehaviour
         if (attackRemanining != attackCooldown)
             printStats.text = printStats.text + "\nNext Attack:  " + (int)attackRemanining;
     }
+
     public void initiate_attack_cooldown(float cooldown)
     {
         Debug.Log("IN COOLDOWN");
