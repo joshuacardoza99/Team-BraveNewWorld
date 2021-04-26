@@ -102,9 +102,10 @@ public class Building : MonoBehaviour
     {
         currentTile.remove_building();
         currentTile.remove_city();
-        Destroy(gameObject);
 
-        match_manager.choose_player(get_civilization()).buildings = match_manager.choose_player(get_civilization()).buildings.FindAll(building => building != this);
+        match_manager.choose_player(get_civilization()).buildings.Remove(this);
+
+        Destroy(gameObject);
     }
 
     public void OnMouseOver()

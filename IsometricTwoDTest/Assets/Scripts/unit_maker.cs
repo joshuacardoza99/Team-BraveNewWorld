@@ -31,7 +31,6 @@ public class unit_maker : MonoBehaviour
     public void add_champion(string[] parameters)
     {
         int randomTile = int.Parse(parameters[1]);                                      // Holds the random number that allows for the selection of the same random tile across the network.
-        Debug.Log("Random Range is " + randomTile);
         int civilization = int.Parse(parameters[0]);                                      // The civilization of the champion needing created.
         GameObject champion = null;                                                          // The champion GameObject.
         List<GameObject> tiles = map_manager.get_land(civilization);                            // The list of tiles that a random tile to place the champion on is chosen from.
@@ -54,21 +53,21 @@ public class unit_maker : MonoBehaviour
             champion = place_object(vikingChampion, 0, tile);
         }
 
-        if (match_manager.get_local_player().civilization == civilization)
+        if (match_manager.get_local_player() != null && match_manager.get_local_player().civilization == civilization)
         {
             champion.tag = "Player";
         }
         
         champion.name = parameters[0] + "_";
         champion.GetComponent<PlayerMove>().set_civilization(civilization);
-        import_manager.run_function_all("Map", "run_on_map_item", new string[4] { tileGrid[0].ToString(), tileGrid[1].ToString(), "set_occupied", champion.name });
+        tile.set_occupied(new string[1] { champion.name });
 
         if (match_manager.get_local_player().civilization == int.Parse(parameters[0]))
         {
             focus_camera_on(champion);
         }
 
-        match_manager.update_player_champion(new string[2] { civilization.ToString(), champion.name});
+        match_manager.update_player_champion(civilization, champion);
     }
 
     // Places a copy of the given GameObject on the given tile.
@@ -181,9 +180,9 @@ public class unit_maker : MonoBehaviour
 
         foreach (GameObject sceneObject in sceneGameObjects)
         {
-            if (Regex.IsMatch(sceneObject.name.ToLower(), "asian_*", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(sceneObject.name.ToLower(), "greek_*", RegexOptions.IgnoreCase) ||
-                Regex.IsMatch(sceneObject.name.ToLower(), "viking_*", RegexOptions.IgnoreCase))
+            if (Regex.IsMatch(sceneObject.name, "0_*", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(sceneObject.name, "1_*", RegexOptions.IgnoreCase) ||
+                Regex.IsMatch(sceneObject.name, "2_*", RegexOptions.IgnoreCase))
             {
                 remove_object(sceneObject);
             }

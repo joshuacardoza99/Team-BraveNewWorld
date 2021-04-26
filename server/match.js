@@ -2,8 +2,8 @@
 exports.match = function(id = 0)
 {
 	// External Class.
-	//let database_api = require("../server/database_api").database_api; // Database_Api Class that enables communication to the database.
-	//    database_api = new database_api();
+	let database_api = require("../server/database_api").database_api; // Database_Api Class that enables communication to the database.
+        database_api = new database_api("team-bravenewworld.csp1omydlp3q.us-east-2.rds.amazonaws.com", "root", "unitybackend", "team-bravenewworld");
 	    
 	// Global Variables.
 	let players = [];           // All players in this match.
@@ -62,7 +62,14 @@ exports.match = function(id = 0)
 	// Removes a player from the match.
 	this.remove_player = function(currentPlayer = null)
 	{
-		players = players.filter(player => ((player.name != currentPlayer.name) && (player.ip == currentPlayer.ip)));
+		players = players.filter(player => (player.ip != currentPlayer.ip));
+
+		broadcast(JSON.stringify(
+		{
+			gameObject: "network_manager",
+			  function: "destroy_civilization",
+			parameters: [currentPlayer.civilization.toString()]
+		}), currentPlayer.socket)
 
 		if (currentPlayer.host)
 		{
@@ -139,22 +146,7 @@ exports.match = function(id = 0)
 	{
 		if (message.gameObject == "server_functions")
 		{
-			// Did not work in the past
-			/*if (message.function == "get_player")
-			{
-				database_api.get_player((data) =>
-				{
-					let response = {   // JSON message to send to a player.
-										gameObject: message.parameters[0],
-										  function: message.parameters[1],
-										parameters: data
-									};
-
-					playerSocket.send(JSON.stringify(response));
-				})
-			}
-			// Sets the map seed for the match.
-			else */
+			
 			if (message.function == "set_match_map")
 			{
 				mapSeed = parseInt(message.parameters[0]);
@@ -162,38 +154,38 @@ exports.match = function(id = 0)
 				//Updates the maps seed value in the database;
 				//database_api.update_map([this.matchId.toString(), message.parameters[0]]);
 			}
-			// Updates the characters position on the map.
-			/*else if (message.function == "update_character_position")
+			else if (message.function = "get_movements")
 			{
-				let player = get_player(playerSocket);
-
-				//database_api.update_map([player.ip, player.name, message.parameters[0], message.parameters[1]]);
-			}
-			// Get a list of all of the characters.
-			else if (message.function == "get_characters")
-			{
-				/*database_api.get_characters((characters) =>
+				database_api.get_movements(message.parameters[3], (result) =>
 				{
-					characters = JSON.parse(characters);
-					let data = "";
-
-					characters.forEach((character) =>
-					{
-						data += 
-					})
-					let response = {   // JSON message to send to a player.
-										gameObject: message.parameters[0],
-										  function: message.parameters[1],
-										parameters: characters
-									};
-
-					playerSocket.send(JSON.stringify(response));
-				})*/
-			/*}
-			else
+					playerSocket.send(JSON.stringify({
+						gameObject: message.parameters[0],
+						  function: message.parameters[1],
+						parameters: [message.parameters[2], JSON.stringify(result)]
+					}))
+				});
+			}
+			else if (message.function = "record_movements")
 			{
-				//database_api[message.function](message.parameters);
-			}*/
+				decision = JSON.parse(message.parameters[0]);
+
+				database_api.record_movements(decision.decisionNumber, decision.numberOfMoves, decision.numberOfBuilds, decision.numberOfAttacks,
+					                          decision.numberOfRecruits, decision.numberOfCaptures, decision.actions, decision.weight);
+			}
+			else if (message.function = "promote_movements")
+			{
+				decision = JSON.parse(message.parameters[0]);
+
+				database_api.promote_movements(decision.decisionNumber, decision.numberOfMoves, decision.numberOfBuilds, decision.numberOfAttacks,
+					                          decision.numberOfRecruits, decision.numberOfCaptures, decision.actions, decision.weight);
+			}
+			else if (message.function = "demote_movements")
+			{
+				decision = JSON.parse(message.parameters[0]);
+
+				database_api.demote_movements(decision.decisionNumber, decision.numberOfMoves, decision.numberOfBuilds, decision.numberOfAttacks,
+					                          decision.numberOfRecruits, decision.numberOfCaptures, decision.actions, decision.weight);
+			}
 		}
 		else
 		{

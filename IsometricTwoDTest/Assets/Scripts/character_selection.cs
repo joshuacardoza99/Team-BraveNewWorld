@@ -52,6 +52,6 @@ public class character_selection : MonoBehaviour
     // Gives the Civilization
     public void get_civilization ()
     {
-        import_manager.run_function("network_manager", "set_local_player", new string[1] { description.selectedCiv.ToString() });
+        import_manager.run_function("network_manager", "set_local_player", new string[1] { selectedCharacter.ToString() });
     }
 }

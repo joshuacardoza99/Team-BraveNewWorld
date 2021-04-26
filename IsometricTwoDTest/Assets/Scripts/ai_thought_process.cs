@@ -16,6 +16,10 @@ public class ai_thought_process : MonoBehaviour
     ai_action_generator actionMaker = new ai_action_generator(); // Imports the ai_action_generator.
     ai_memory           memory      = new ai_memory();           // Imports the ai_memory script.
 
+
+    // Private Variables //
+    private int decisionCount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +40,7 @@ public class ai_thought_process : MonoBehaviour
     IEnumerator move()
     {
         running = false;
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
 
         PlayerMove champion = match_manager.choose_player(civilization).champion;
         List<Action> availableMoves = actionMaker.find_player_actions(civilization);
@@ -52,6 +56,12 @@ public class ai_thought_process : MonoBehaviour
         {
             civilization = newCivilization;
         }
+    }
+
+    // Gets the AI's civilization
+    public int get_civilization()
+    {
+        return civilization;
     }
 
     // Sets the AI's mind in motion.
@@ -78,6 +88,25 @@ public class ai_thought_process : MonoBehaviour
         {
             Debug.LogError("Cannot start an AI without a civilization.");
         }
+    }
+
+    // Stops the ai from running.
+    public void stop()
+    {
+        running = false;
+    }
+
+    // Gets a list of valid decisions
+    public List<Action> nextActions()
+    {
+       List<ai_memory.decision> allAvailableDecisions = memory.recall(decisionCount, civilization);
+
+       if (allAvailableDecisions.Count > 0)
+       {
+
+       }
+
+        return new List<Action>();
     }
 
 }

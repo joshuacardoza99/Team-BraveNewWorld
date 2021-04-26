@@ -18,6 +18,7 @@ public class Tile : MonoBehaviour
     map_manager map_manager;     // This imports the map_manager class to help with interactions with othe tiles.
     cooldown cooldowns;
     menu_manager menu_manager;
+    civ_resources_display civ_resources_display;
 
     // Events
     public delegate void TileSelected(Tile selectedTile, GameObject occupyingCharacter);   // Template function for the TileSelected Event.
@@ -32,7 +33,7 @@ public class Tile : MonoBehaviour
     [SerializeField] private bool inCity = false;                   // Determines if this tile is in the borders of a city
     [SerializeField] private bool isCurrentlySelectedTile = false; // Tells when this tile is selected by the player.
     [SerializeField] private GameObject selectable = null; // Determines if the player can click on click on this tile.
-    [SerializeField] private GameObject attackable = null; // Determines if another player can attach this tile.
+    [SerializeField] private bool attackable; // Determines if another player can attach this tile.
     [SerializeField] private GameObject currentCharacter = null;  // the character currently occupying this tile.
     [SerializeField] private GameObject currentBuilding = null;  // the building occupying this tile
     [SerializeField] private int civilization;                    // The number associated with the civ that owns this land. -1 = water, 0 = asian, 1 = greek, 2 = viking
@@ -49,6 +50,7 @@ public class Tile : MonoBehaviour
         map_manager = GameObject.Find("Map").GetComponent<map_manager>();
         cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
         menu_manager = GameObject.Find("MenuManager").GetComponent<menu_manager>();
+        civ_resources_display = GameObject.Find("civManager").GetComponent<civ_resources_display>();
     }
     void Update()
     {
@@ -61,9 +63,9 @@ public class Tile : MonoBehaviour
         Tile.OnSelected += handle_selection;
         Tile.OnSelected += select;
         // Tile.OnSelected   += attack;
-        Tile.OnSelected += select_attackable;
+      //  Tile.OnSelected += select_attackable;
         Tile.OnUnselected += unselect;
-        Tile.OnUnselected += unselect_attackable;
+      //  Tile.OnUnselected += unselect_attackable;
     }
 
 
@@ -73,9 +75,9 @@ public class Tile : MonoBehaviour
         Tile.OnSelected -= handle_selection;
         Tile.OnSelected -= select;
         // Tile.OnSelected   -= attack;
-        Tile.OnSelected -= select_attackable;
+      //  Tile.OnSelected -= select_attackable;
         Tile.OnUnselected -= unselect;
-        Tile.OnUnselected -= unselect_attackable;
+       // Tile.OnUnselected -= unselect_attackable;
     }
 
     // Listens for a mouse click and translates to an OnSelected event.
@@ -378,7 +380,7 @@ public class Tile : MonoBehaviour
         return hasBuilding;
     }
 
-    // Sets the nearby tiles to be attackable.
+  /*  // Sets the nearby tiles to be attackable.
     public void select_attackable(Tile tile, GameObject character)
     {
         if (tile == this && character != null && tile.is_occupied())
@@ -407,32 +409,24 @@ public class Tile : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     // Sets his tile to be attackable .
-    public void set_attackable(GameObject attacker)
+    public void set_attackable()
     {
-        attackable = attacker;
-        this.GetComponent<Renderer>().material = map_manager.types.attackable;
-    }
-
-    // Gets the attacking unit's GameObject
-    public GameObject get_attackable()
-    {
-        return attackable;
+        attackable = true; ;
     }
 
     // Sets this tile to not be attackable.
     public void set_unattackable()
     {
-        attackable = null;
-        this.GetComponent<Renderer>().material = map_manager.types.get_material(civilization);
+        attackable = false;
     }
 
     // Determines if this tile is attackable.
     public bool is_attackable()
     {
-        return attackable != null;
+        return attackable;
     }
 
     // Gets the current character for this tile.
@@ -554,5 +548,30 @@ public class Tile : MonoBehaviour
     {
         PlayerMove animateChar = this.get_current_character().GetComponent<PlayerMove>();
         animateChar.attackAnim.Play("CharacterArmature|Punch");
+    }
+
+    // Removes the city.
+    // Parameters = [int civilization]
+    public void destroy_city(string[] parameters)
+    {
+        int civilization = int.Parse(parameters[0]);
+
+        int reward = currentBuilding.GetComponent<Building>().buildCost;
+        
+        currentBuilding.GetComponent<City>().in_city.ForEach((Tile tile) =>
+        {
+            tile.remove_city();
+        });
+
+        currentBuilding.GetComponent<City>().buildings_in_city.ForEach((Building building) =>
+        {
+            reward += building.buildCost;
+            building.destroy_building(new string[1] { civilization.ToString() });
+        });
+
+        currentBuilding.GetComponent<Building>().destroy_building(new string[1] { civilization.ToString() });
+
+        match_manager.choose_player(civilization).gold += reward;
+        civ_resources_display.update_resources();
     }
 }

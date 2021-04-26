@@ -48,6 +48,8 @@ public class pan_zoom : MonoBehaviour
     public float boundMaxX = 40;
     public float boundMinY = -80;
     public float boundMaxY = 40;
+    public float maxZoomIn = 5.0f;
+    public float maxZoomOut = 30.0f;
 
     Vector2 touch0StartPosition;
     Vector2 touch0LastPosition;
@@ -65,6 +67,7 @@ public class pan_zoom : MonoBehaviour
 
     void Start()
     {
+        //maxZoom = cam.orthographicSize;
         canUseMouse = Application.platform != RuntimePlatform.Android && Application.platform != RuntimePlatform.IPhonePlayer && Input.mousePresent;
         if (SystemInfo.deviceType == DeviceType.Handheld)
         {
@@ -291,8 +294,9 @@ public class pan_zoom : MonoBehaviour
     {
         if (controlCamera && useBounds && cam != null && cam.orthographic)
         {
-            cam.orthographicSize = Mathf.Min(cam.orthographicSize, ((boundMaxY - boundMinY) / 2) - 0.001f);
+            cam.orthographicSize = Mathf.Min(cam.orthographicSize, ((boundMaxY - boundMinY) / 2) + 4.0f);
             cam.orthographicSize = Mathf.Min(cam.orthographicSize, (Screen.height * (boundMaxX - boundMinX) / (2 * Screen.width)) - 0.001f);
+            cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, maxZoomIn, maxZoomOut);
 
             Vector2 margin = cam.ScreenToWorldPoint((Vector2.up * Screen.height / 2) + (Vector2.right * Screen.width / 2)) - cam.ScreenToWorldPoint(Vector2.zero);
 
