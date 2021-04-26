@@ -324,6 +324,21 @@ public class match_manager : MonoBehaviour
         {
             menu_manager.end_screen("Win");
         }
+        else if (this.type == "local")
+        {
+            if (asianPlayer.champion == null)
+            {
+                import_manager.run_function_all("network_manager", "destroy_civilization", new string[1] { "0" });
+            }
+            else if (greekPlayer.champion == null)
+            {
+                import_manager.run_function_all("network_manager", "destroy_civilization", new string[1] { "1" });
+            }
+            else if (vikingPlayer.champion == null)
+            {
+                import_manager.run_function_all("network_manager", "destroy_civilization", new string[1] { "2" });
+            }
+        }
     }
 
     // Runs the given function with each player being passed in.

@@ -146,9 +146,23 @@ namespace AI
             }
         }
 
-        public void attack_unit(Tile tile, int damage, int civilization)
+        // Attacks ememy given the enemy and the attacking unit.
+        public void attack_unit(PlayerMove enemy, PlayerMove ally)
         {
+            if (enemy.currentTile.is_attackable())
+            {
+                // Attack pop up
+                import_manager.run_function_all("network_manager", "update_popUp", new string[3] { enemy.get_civilization().ToString(), enemy.gameObject.name, ally.damage.ToString() });
 
+                /// attatch attack animation && remove health
+                import_manager.run_function_all("network_manager", "update_receive_hit_anim", new string[2] { enemy.get_civilization().ToString(), enemy.gameObject.name });
+                import_manager.run_function_all("network_manager", "update_punch_anim", new string[2] { ally.get_civilization().ToString(), ally.gameObject.name });
+                import_manager.run_function_all("network_manager", "update_unit_health", new string[3] { enemy.get_civilization().ToString(), enemy.gameObject.name, ally.damage.ToString() });
+
+                // attatch damage animations 
+                ally.startAttackCD = true;
+                ally.canAttack = false;
+            }
         }
     }
 }
