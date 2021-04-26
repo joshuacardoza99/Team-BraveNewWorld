@@ -4,20 +4,11 @@ ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
-      74: -2589895700168644705
-    second: CharacterArmature|CharacterArmature|CharacterArmature|Defeat|CharacterArmature|De
-  - first:
       74: 4154259410033017136
     second: CharacterArmature|CharacterArmature|CharacterArmature|Idle|CharacterArmature|Idle
   - first:
       74: -1434523748603915443
     second: CharacterArmature|CharacterArmature|CharacterArmature|PickUp|CharacterArmature|Pi
-  - first:
-      74: -4781203043145333101
-    second: CharacterArmature|CharacterArmature|CharacterArmature|Punch|CharacterArmature|Pun
-  - first:
-      74: -4620748616426731337
-    second: CharacterArmature|CharacterArmature|CharacterArmature|RecieveHit|CharacterArmatur
   - first:
       74: -209682734176052503
     second: CharacterArmature|CharacterArmature|CharacterArmature|Shoot_OneHanded|CharacterAr
@@ -36,6 +27,18 @@ ModelImporter:
   - first:
       74: 6892692633997202992
     second: CharacterArmature|CharacterArmature|CharacterArmature|Walk|CharacterArmature|Walk
+  - first:
+      74: -8667611280882711020
+    second: CharacterArmature|CharacterArmature|Defeat
+  - first:
+      74: 4128955588521137613
+    second: CharacterArmature|CharacterArmature|Defeat.001
+  - first:
+      74: -4592842328519117816
+    second: CharacterArmature|Punch
+  - first:
+      74: -4856542728082765067
+    second: CharacterArmature|RecieveHit
   externalObjects: {}
   materials:
     materialImportMode: 1

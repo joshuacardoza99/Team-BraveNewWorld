@@ -4,9 +4,9 @@ ScriptsOnlyBuild:
     - Building
     - City
     - GroundTypes
-    - PlayerMove
     - Tile
     - ai_thought_process
+    - attack
     - building_manager
     - building_select
     - building_type
@@ -68,7 +68,10 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Mask
     - UnityEngine.UI.Outline
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
     - UnityEngine.UI.Shadow
     - UnityEngine.UI.Text
     - UnityEngine.UI.VerticalLayoutGroup
@@ -115,106 +118,110 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11822}
     - Class: 114
+      Script: {instanceID: 11824}
+    - Class: 114
       Script: {instanceID: 11826}
     - Class: 114
-      Script: {instanceID: 11854}
+      Script: {instanceID: 11858}
     - Class: 114
-      Script: {instanceID: 12000}
+      Script: {instanceID: 12004}
     - Class: 114
-      Script: {instanceID: 12018}
+      Script: {instanceID: 12022}
     - Class: 114
-      Script: {instanceID: 12200}
+      Script: {instanceID: 12174}
     - Class: 114
-      Script: {instanceID: 12324}
+      Script: {instanceID: 12204}
     - Class: 114
-      Script: {instanceID: 12430}
+      Script: {instanceID: 12328}
     - Class: 114
-      Script: {instanceID: 12550}
+      Script: {instanceID: 12434}
     - Class: 114
-      Script: {instanceID: 12664}
+      Script: {instanceID: 12554}
     - Class: 114
-      Script: {instanceID: 12810}
+      Script: {instanceID: 12668}
     - Class: 114
-      Script: {instanceID: 12926}
+      Script: {instanceID: 12762}
     - Class: 114
-      Script: {instanceID: 12942}
+      Script: {instanceID: 12814}
     - Class: 114
-      Script: {instanceID: 12976}
+      Script: {instanceID: 12930}
     - Class: 114
-      Script: {instanceID: 13002}
+      Script: {instanceID: 12946}
     - Class: 114
-      Script: {instanceID: 13066}
+      Script: {instanceID: 12980}
     - Class: 114
-      Script: {instanceID: 13074}
+      Script: {instanceID: 13006}
     - Class: 114
-      Script: {instanceID: 13134}
+      Script: {instanceID: 13052}
     - Class: 114
-      Script: {instanceID: 13234}
+      Script: {instanceID: 13072}
     - Class: 114
-      Script: {instanceID: 13338}
+      Script: {instanceID: 13080}
     - Class: 114
-      Script: {instanceID: 13542}
+      Script: {instanceID: 13140}
     - Class: 114
-      Script: {instanceID: 13582}
+      Script: {instanceID: 13240}
     - Class: 114
-      Script: {instanceID: 13586}
+      Script: {instanceID: 13344}
     - Class: 114
-      Script: {instanceID: 13716}
+      Script: {instanceID: 13548}
     - Class: 114
-      Script: {instanceID: 13746}
+      Script: {instanceID: 13588}
     - Class: 114
-      Script: {instanceID: 13868}
+      Script: {instanceID: 13592}
     - Class: 114
-      Script: {instanceID: 13900}
+      Script: {instanceID: 13722}
     - Class: 114
-      Script: {instanceID: 14110}
+      Script: {instanceID: 13752}
     - Class: 114
-      Script: {instanceID: 14114}
+      Script: {instanceID: 13874}
     - Class: 114
-      Script: {instanceID: 14134}
+      Script: {instanceID: 13906}
     - Class: 114
-      Script: {instanceID: 14172}
+      Script: {instanceID: 14116}
     - Class: 114
-      Script: {instanceID: 14406}
+      Script: {instanceID: 14120}
     - Class: 114
-      Script: {instanceID: 14458}
+      Script: {instanceID: 14140}
     - Class: 114
-      Script: {instanceID: 14460}
+      Script: {instanceID: 14178}
     - Class: 114
-      Script: {instanceID: 14526}
+      Script: {instanceID: 14412}
     - Class: 114
-      Script: {instanceID: 14554}
+      Script: {instanceID: 14464}
     - Class: 114
-      Script: {instanceID: 14570}
+      Script: {instanceID: 14466}
     - Class: 114
-      Script: {instanceID: 14604}
+      Script: {instanceID: 14532}
     - Class: 114
-      Script: {instanceID: 14662}
+      Script: {instanceID: 14560}
     - Class: 114
-      Script: {instanceID: 14746}
+      Script: {instanceID: 14576}
     - Class: 114
-      Script: {instanceID: 14762}
+      Script: {instanceID: 14668}
     - Class: 114
-      Script: {instanceID: 14874}
+      Script: {instanceID: 14752}
     - Class: 114
-      Script: {instanceID: 14876}
+      Script: {instanceID: 14768}
     - Class: 114
-      Script: {instanceID: 14938}
+      Script: {instanceID: 14880}
     - Class: 114
-      Script: {instanceID: 15046}
+      Script: {instanceID: 14882}
     - Class: 114
-      Script: {instanceID: 15116}
+      Script: {instanceID: 14944}
     - Class: 114
-      Script: {instanceID: 15226}
+      Script: {instanceID: 15052}
     - Class: 114
-      Script: {instanceID: 15286}
+      Script: {instanceID: 15122}
     - Class: 114
-      Script: {instanceID: 32002}
+      Script: {instanceID: 15232}
+    - Class: 114
+      Script: {instanceID: 15292}
+    - Class: 114
+      Script: {instanceID: 35180}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
-      Script: {instanceID: 0}
-    - Class: 136
       Script: {instanceID: 0}
     - Class: 137
       Script: {instanceID: 0}
@@ -305,7 +312,7 @@ ScriptsOnlyBuild:
     className: pan_zoom
   - hash:
       serializedVersion: 2
-      Hash: 0c7292c4acca577979132b79ac0ebb1f
+      Hash: 63c1fe573dfcbc26e251218eb172ec9b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GroundTypes
@@ -341,7 +348,7 @@ ScriptsOnlyBuild:
     className: Scrollbar
   - hash:
       serializedVersion: 2
-      Hash: 7986b755bda8d09bde2d54b88f943910
+      Hash: cae03816352994f345ba29a74a33281e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Tile
@@ -437,7 +444,7 @@ ScriptsOnlyBuild:
     className: AspectRatioFitter
   - hash:
       serializedVersion: 2
-      Hash: 33cec888641e1fbbbc97e375066c24f2
+      Hash: 1e5acfe7b46bfb2bcd97f8a2ac154df7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: unit_manager
@@ -473,7 +480,7 @@ ScriptsOnlyBuild:
     className: PixelPerfectCamera
   - hash:
       serializedVersion: 2
-      Hash: 95e99754ba250d573ac851ca79d0a7a7
+      Hash: 3afe5e1033ab5e368495295e2007d741
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: unit_maker
@@ -497,7 +504,7 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
-      Hash: ccb992604097608b8d7cea4e5c7002d3
+      Hash: a23479d1dafbd353f1dd6e0aad1c9603
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: cooldown
@@ -551,13 +558,19 @@ ScriptsOnlyBuild:
     className: Selectable
   - hash:
       serializedVersion: 2
+      Hash: 79e1c67913a8be828adb9646c6048953
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: attack
+  - hash:
+      serializedVersion: 2
       Hash: 60621dd0064cbb13ae95bea4a45554c8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: tree_type
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: b4b75ac177d1b7fa1c8eaf141bcf790c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: import_manager
@@ -575,7 +588,7 @@ ScriptsOnlyBuild:
     className: civ_resources_display
   - hash:
       serializedVersion: 2
-      Hash: c3b94467ba728a8a25ce1b76f0dfb98d
+      Hash: 645e09e35367a47da8d8b73fc7e836a1
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: building_manager
@@ -605,13 +618,13 @@ ScriptsOnlyBuild:
     className: ai_thought_process
   - hash:
       serializedVersion: 2
-      Hash: bb3a2cac61e251c651f36b35ebc3eb91
+      Hash: 1c7af6554ac7f80711146580fb4d3262
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: menu_manager
   - hash:
       serializedVersion: 2
-      Hash: 4bbabb3505b82633fda3128d58abd7ad
+      Hash: 9c8eb9182a678db941182eddd6753ab4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: match_manager
@@ -779,7 +792,7 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
-      Hash: dbb688c99caa6ec5f3b5b3e69608768e
+      Hash: 42171adeb78f30054b140345aab802ac
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerMove
