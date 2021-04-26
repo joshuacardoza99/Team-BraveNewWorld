@@ -158,14 +158,60 @@ namespace AI
             return newUnitsList;
         }
 
+        // Finds all possible attacks all the units of the given civilization can execute.
+        public List<Action> find_unit_attacks(int civilization)
+        {
+            // Ensures the match_manager pagackage is imported befor the function starts.
+            if (match_manager == null)
+            {
+                match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
+            }
+
+            // Ensures the map_manager pagackage is imported befor the function starts.
+            if (map_manager == null)
+            {
+                map_manager = GameObject.Find("Map").GetComponent<map_manager>();
+            }
+
+            List<PlayerMove> units = new List<PlayerMove>(); // List of units that can attack.
+            List<Action> attacks = new List<Action>();         // List of attack actions.
+
+            units.Add(match_manager.choose_player(civilization).champion); // Adds champion to avaiable units to attack.
+
+            // Adds all units an AI player has to the avaible units to attack.
+            match_manager.choose_player(civilization).units.ForEach((PlayerMove unit) =>
+            {
+                units.Add(unit);
+            });
+
+            units.ForEach((PlayerMove unit) =>
+            {
+                List<Tile> useableTiles = map_manager.map[unit.get_grid()[0], unit.get_grid()[1]].ground.GetComponent<Tile>().get_walkable_tiles(unit.attackRange);
+
+                useableTiles.ForEach((Tile tile) =>
+                {
+                    if (tile.get_current_character() != null && tile.get_current_character().GetComponent<PlayerMove>().get_civilization() != civilization)
+                    {
+                        attacks.Add(() =>
+                        {
+                            tools.attack_unit(tile.get_current_character().GetComponent<PlayerMove>(), unit);
+                        });
+                    }
+                });
+            });
+
+            return attacks;
+        }
+
         // Finds all possible moves a player of the given civilization can make.
         public List<Action> find_player_actions(int civilization)
         {
             List<Action> playerActionList = new List<Action>(); // List of all possible actions the given civilization can make.
 
-            playerActionList.AddRange(find_unit_moves(civilization));
-            playerActionList.AddRange(find_new_builds(civilization));
-            playerActionList.AddRange(find_new_units(civilization));
+            playerActionList.AddRange(find_unit_attacks(civilization));
+            //playerActionList.AddRange(find_unit_moves  (civilization));
+            //playerActionList.AddRange(find_new_builds  (civilization));
+            //playerActionList.AddRange(find_new_units   (civilization));
 
             return playerActionList;
         }

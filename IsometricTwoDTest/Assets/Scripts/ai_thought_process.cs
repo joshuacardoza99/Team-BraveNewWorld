@@ -44,7 +44,12 @@ public class ai_thought_process : MonoBehaviour
 
         PlayerMove champion = match_manager.choose_player(civilization).champion;
         List<Action> availableMoves = actionMaker.find_player_actions(civilization);
-        availableMoves[UnityEngine.Random.Range(0, availableMoves.Count)]();
+
+        if (availableMoves.Count > 0)
+        {
+            availableMoves[UnityEngine.Random.Range(0, availableMoves.Count)]();
+        }
+
         running = true;
        // tools.move_unit(map_manager.map[champion.get_grid()[0] + 1, champion.get_grid()[1] + 1].ground.GetComponent<Tile>(), champion, civilization);
     }
