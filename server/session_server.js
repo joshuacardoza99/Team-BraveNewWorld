@@ -112,7 +112,7 @@ let message_handler = function(message, playerSocket)
 server.on("connection", (playerSocket) =>
 {
 	let currentPlayer = playerSocket; // Socket connected to the current player.
-
+	console.log("A player connected");
 	try
 	{
 	    players.push(currentPlayer);
