@@ -9,6 +9,7 @@ public class ai_thought_process : MonoBehaviour
     // External Classes //
     match_manager match_manager;
     map_manager map_manager;
+    import_manager import_manager;
 
     [SerializeField] private int      civilization = -1;         // Civilization of this AI.
     [SerializeField] private bool     running = false;           // Determines if the AI is running.
@@ -33,25 +34,70 @@ public class ai_thought_process : MonoBehaviour
         if (running)
         {
 
-            StartCoroutine(move());
+            StartCoroutine(think());
         }
     }
 
-    IEnumerator move()
+    IEnumerator think()
     {
         running = false;
+
+        List<Action> attackActions = actionMaker.get_actions(ActionType.attack, civilization);
+        List<Action> captureActions = actionMaker.get_actions(ActionType.capture, civilization);
+        List<Action> buildActions = actionMaker.get_actions(ActionType.build, civilization);
+        List<Action> recruitActions = actionMaker.get_actions(ActionType.recruit, civilization);
+        List<Action> movementActions = actionMaker.get_actions(ActionType.movement, civilization);
+        int totalDecisionCount = attackActions.Count + captureActions.Count + buildActions.Count + recruitActions.Count + movementActions.Count;
+        decision nextDecision = new decision(totalDecisionCount, movementActions.Count, buildActions.Count, attackActions.Count,
+                                             recruitActions.Count, captureActions.Count, 0, 0);
+        List<decision> resonableDecisions = new List<decision>();
+        int highestWeight = 0;
+
+        List<decision> recalledDecisions =  recall(decisionCount, civilization);
+
         yield return new WaitForSeconds(5);
 
-        PlayerMove champion = match_manager.choose_player(civilization).champion;
+        if (recalledDecisions.Count > 0)
+        {
+            recalledDecisions.ForEach((decision thought) =>
+            {
+                if ((isClose(thought.numberOfMoves, nextDecision.numberOfMoves) && thought.action == ((int)ActionType.movement)) ||
+                    (isClose(thought.numberOfBuilds, nextDecision.numberOfBuilds) && thought.action == ((int)ActionType.build)) ||
+                    (isClose(thought.numberOfAttacks, nextDecision.numberOfAttacks) && thought.action == ((int)ActionType.attack)) ||
+                    (isClose(thought.numberOfRecruits, nextDecision.numberOfRecruits) && thought.action == ((int)ActionType.recruit)) ||
+                    (isClose(thought.numberOfCaptures, nextDecision.numberOfCaptures) && thought.action == ((int)ActionType.capture)))
+                {
+                    if (thought.weight > highestWeight)
+                    {
+                        highestWeight = thought.weight;
+                    }
+
+                    if (isClose(thought.weight, highestWeight))
+                    {
+                        resonableDecisions.Add(thought);
+                    }
+                }
+            });
+        }
+
         List<Action> availableMoves = actionMaker.find_player_actions(civilization);
+
+        /*if (resonableDecisions.Count > 0)
+        {
+            nextDecision.action = resonableDecisions[UnityEngine.Random.Range(0, resonableDecisions.Count)].action;
+           
+            availableMoves = actionMaker.get_actions((ActionType) nextDecision.action, civilization);
+        }
+
+        memory.record(nextDecision);*/
 
         if (availableMoves.Count > 0)
         {
             availableMoves[UnityEngine.Random.Range(0, availableMoves.Count)]();
         }
 
+        decisionCount++;
         running = true;
-       // tools.move_unit(map_manager.map[champion.get_grid()[0] + 1, champion.get_grid()[1] + 1].ground.GetComponent<Tile>(), champion, civilization);
     }
 
     // Sets the AI's civilization if it has not already been set.
@@ -104,7 +150,7 @@ public class ai_thought_process : MonoBehaviour
     // Gets a list of valid decisions
     public List<Action> nextActions()
     {
-       List<ai_memory.decision> allAvailableDecisions = memory.recall(decisionCount, civilization);
+       List<decision> allAvailableDecisions = recall(decisionCount, civilization);
 
        if (allAvailableDecisions.Count > 0)
        {
@@ -113,5 +159,77 @@ public class ai_thought_process : MonoBehaviour
 
         return new List<Action>();
     }
+
+    // Determines if something is close or not.
+    public bool isClose(int x, int y)
+    {
+        int rangeWithin2OfX = (x + 2) - (x - 2);
+        int rangeWithin2OfY = (y + 2) - (y - 2);
+        int rangeWithin10PercentOfX = (x + (x / 10)) - (x - (x / 10));
+        int rangeWithin10PercentOfY = (y + (y / 10)) - (y - (y / 10));
+        int xRange = 0;
+        int yRange = 0;
+
+        if (rangeWithin2OfX >= rangeWithin10PercentOfX)
+        {
+            xRange = 2;
+        }
+        else
+        {
+            xRange = (x / 10);
+        }
+
+        if (rangeWithin2OfY >= rangeWithin10PercentOfY)
+        {
+            yRange = 2;
+        }
+        else
+        {
+            yRange = (y / 10);
+        }
+
+        return ((((x + xRange) <= (y + yRange)) || (y + yRange) <= (x + xRange)) ||
+                (((x - xRange) >= (y - yRange)) || (y - yRange) >= (x - xRange)));
+    }
+
+    // Recalls the best action types to take.
+    public List<decision> recall(int decisionNumber, int civilizaiton)
+    {
+        memory.recall(decisionNumber, civilizaiton);
+
+        StartCoroutine(read_data());
+
+        if (memory.nextDecisions != null && memory.nextDecisions.Count > 0)
+        {
+            return memory.nextDecisions;
+        }
+        else
+        {
+            return new List<decision>();
+        }
+    }
+
+    // Reads the data from the database off of the import_manager.
+    IEnumerator read_data()
+    {
+        if (import_manager == null)
+        {
+            import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
+        }
+
+        yield return new WaitForSeconds(5);
+
+        if (civilization >= 0)
+        {
+            memory.nextDecisions = JsonUtility.FromJson<List<decision>>(import_manager.lastDatabaseResponse[civilization]);
+        }
+        else
+        {
+            memory.nextDecisions = new List<decision>();
+        }
+
+        memory.recalling = false;
+    }
+
 
 }

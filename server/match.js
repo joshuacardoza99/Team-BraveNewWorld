@@ -18,45 +18,30 @@ exports.match = function(id = 0)
 	// Add a new player to the match.
 	this.add_player = function(player = null)
 	{
-		if (player.isAbsent)
+		
+		if (players.length == 0)
 		{
-			//database_api.change_player_absent([player.ip, player.name, "false"]);
+			player.host = true;
 
 			player.socket.send(JSON.stringify(
 			{
 				gameObject: "network_manager",
-				  function: "resume_match",
-				parameters: [matchId.toString(), "false", mapSeed.toString()]
+				  function: "set_numberOfPlayers",
+				parameters: [maxNumberOfPlayers]
 			}));
-
-			players.push(player);
 		}
-		else
+		
+		player.socket.send(JSON.stringify(
 		{
-			if (players.length == 0)
-			{
-				player.host = true;
+			gameObject: "network_manager",
+			  function: "setup_match",
+			parameters: [matchId.toString(), players.length == 0 ? "true" : "false", mapSeed.toString()]
+		}));
 
-				player.socket.send(JSON.stringify(
-				{
-					gameObject: "network_manager",
-					  function: "set_numberOfPlayers",
-					parameters: [maxNumberOfPlayers]
-				}));
-			}
-			
-			player.socket.send(JSON.stringify(
-			{
-				gameObject: "network_manager",
-				  function: "setup_match",
-				parameters: [matchId.toString(), players.length == 0 ? "true" : "false", mapSeed.toString()]
-			}));
+		// Push player data to the database here
+		//database_api.add_player([player.ip, player.name, player.civilization, player.match, "true"]);
 
-			// Push player data to the database here
-			//database_api.add_player([player.ip, player.name, player.civilization, player.match, "true"]);
-
-			players.push(player);
-		}
+		players.push(player);
 	}
 
 	// Removes a player from the match.

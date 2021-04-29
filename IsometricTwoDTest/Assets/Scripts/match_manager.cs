@@ -138,7 +138,6 @@ public class match_manager : MonoBehaviour
     public Player choose_player (int civilization)
     {
         Player chosenPlayer = null;
-        //Debug.Log("Choosing the player from " + civilization);
 
         switch (civilization)
         {
@@ -220,7 +219,6 @@ public class match_manager : MonoBehaviour
     public void add_player(string[] parameter)
     {
         int civilization = int.Parse(parameter[0]);
-        Debug.Log("Adding Player " + civilization);
 
         switch (civilization)
         {
@@ -235,7 +233,6 @@ public class match_manager : MonoBehaviour
                 break;
         }
 
-        Debug.Log("Player added " + choose_player(civilization).civilization);
     }
 
     // Update a player's champion.

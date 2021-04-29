@@ -190,7 +190,7 @@ namespace AI
 
                 useableTiles.ForEach((Tile tile) =>
                 {
-                    if (tile.get_current_character() != null && tile.get_current_character().GetComponent<PlayerMove>().get_civilization() != civilization)
+                    if (tile.is_occupied() && tile.get_current_character().GetComponent<PlayerMove>().get_civilization() != civilization)
                     {
                         attacks.Add(() =>
                         {
@@ -209,11 +209,38 @@ namespace AI
             List<Action> playerActionList = new List<Action>(); // List of all possible actions the given civilization can make.
 
             playerActionList.AddRange(find_unit_attacks(civilization));
-            //playerActionList.AddRange(find_unit_moves  (civilization));
-            //playerActionList.AddRange(find_new_builds  (civilization));
-            //playerActionList.AddRange(find_new_units   (civilization));
+            playerActionList.AddRange(find_unit_moves  (civilization));
+            playerActionList.AddRange(find_new_builds  (civilization));
+            playerActionList.AddRange(find_new_units   (civilization));
 
             return playerActionList;
+        }
+       
+        // Gets the all available actions of a given type
+        public List<Action> get_actions(ActionType type, int civilization)
+        {
+            List<Action> actions =  new List<Action>();
+
+            switch (type)
+            {
+                case ActionType.movement:
+                    actions = find_unit_moves(civilization);
+                    break;
+                case ActionType.build:
+                    actions = find_new_builds(civilization);
+                    break;
+                case ActionType.recruit:
+                    actions = find_new_units(civilization);
+                    break;
+                case ActionType.attack:
+                    actions = find_unit_attacks(civilization);
+                    break;
+                case ActionType.capture:
+                    break;
+
+            }
+
+            return actions;
         }
     }
 }
