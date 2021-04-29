@@ -79,7 +79,11 @@ let find_match  = function (player)
 	if (matchFound == null)
 	{
 		matchFound = new match(matchNumber++);
+		console.log("Creating a new match");
+		console.log(matchFound);
+		console.log(matches);
 		matches.push(matchFound);
+		console.log(matches);
 	}
 
 	return matchFound;
@@ -129,6 +133,8 @@ server.on("connection", (playerSocket) =>
 		{
 			try
 			{
+				console.log("Got a message");
+				console.log(message);
 				message_handler(JSON.parse(message), currentPlayer);
 			}
 			catch (error)
