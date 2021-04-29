@@ -165,10 +165,12 @@ public class menu_manager : MonoBehaviour
         if (currentGroup == groups[6])
         {
             ChangeGroup(groups[2]);
+            Debug.Log("Close Unit Menu");
         }
         else
         {
             ChangeGroup(groups[6]);
+            Debug.Log("Open Unit Menu");
         }
     }
 

@@ -12,11 +12,13 @@ public class cooldown : MonoBehaviour
 
     public void initiate_move_cooldown(float cooldown)
     {
+        Debug.Log("IN COOLDOWN");
         nextMove = Time.time + cooldown;
     }
 
     public void initiate_resource_cooldown(float cooldown)
     {
+        Debug.Log("IN COOLDOWN");
         nextResourceCollect = Time.time + cooldown;
     }
 }

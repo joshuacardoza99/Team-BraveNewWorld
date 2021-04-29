@@ -41,6 +41,7 @@ public class Building : MonoBehaviour
     {
         match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
         preview_object = GameObject.Find("preview_object").GetComponent<preview_object>();
+        Debug.Log("A building has been placed!");
 
         // Print Stats unto the screen
         canvas = GameObject.Find("Canvas").gameObject;
@@ -75,6 +76,7 @@ public class Building : MonoBehaviour
     {
         currentTile = tile; // set this buildings tile to the given tile
         tile.set_building(this.gameObject); // set the tiles building to this
+        //Debug.Log("new building type %d", (string)type);
     }
 
     public void set_type(BuildingType newType)

@@ -90,6 +90,8 @@ public class Tile : MonoBehaviour
                 OnSelected(this, currentCharacter);
             }
         }
+        else
+            Debug.Log("Click on the UI");
     }
 
     // Returns a List of Tiles with all tiles in the given range away from this tile.
@@ -182,6 +184,7 @@ public class Tile : MonoBehaviour
     {
         if (tile == this && tile.is_occupied() && character != null && (match_manager.get_local_player().civilization == tile.get_current_character().GetComponent<PlayerMove>().get_civilization()))
         {
+            //Debug.Log("Selecting all the tiles around this one.");
             tile.set_selectable(character);
 
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
@@ -202,6 +205,7 @@ public class Tile : MonoBehaviour
         if (tile == this && character != null)
         {
             //selectedNearBy = false;
+            Debug.Log("Unselecting all the tiles around this one.");
             tile.set_unselectable(new string[0] { });
 
             foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().moveRange))
@@ -375,6 +379,37 @@ public class Tile : MonoBehaviour
     {
         return hasBuilding;
     }
+
+  /*  // Sets the nearby tiles to be attackable.
+    public void select_attackable(Tile tile, GameObject character)
+    {
+        if (tile == this && character != null && tile.is_occupied())
+        {
+            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().attackRange))
+            {
+                if (nearByTile.is_occupied() && (nearByTile.get_current_character().GetComponent<PlayerMove>().get_civilization() != match_manager.get_local_player().civilization))
+                {
+                    nearByTile.set_attackable(currentCharacter);
+                }
+            }
+        }
+    }
+
+    // Unsets the nearby tiles from being attackable.
+    public void unselect_attackable(Tile tile, GameObject character)
+    {
+        if (tile == this && tile.is_occupied())
+        {
+            Debug.Log("Setting unattackable");
+            foreach (Tile nearByTile in get_walkable_tiles(character.GetComponent<PlayerMove>().attackRange))
+            {
+                if (nearByTile.is_attackable())
+                {
+                    nearByTile.set_unattackable();
+                }
+            }
+        }
+    }*/
 
     // Sets his tile to be attackable .
     public void set_attackable()

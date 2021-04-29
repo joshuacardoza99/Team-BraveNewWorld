@@ -178,6 +178,7 @@ public class map_manager : MonoBehaviour
     // where the first prefab in grounditems is the water prefab and the string is the name of the prefab in the prefab folder
     private void generate_map(int width, int height, int[] groundItems, int landPercentage, int seed)
     {
+        Debug.Log("Generating a map");
         int water = groundItems[0];                           // Holds the water water "civ" name.
         List<int> preLand = new List<int>(groundItems);               // This is a placeholder for the land until the first item gets removed.
         preLand.RemoveAt(0);
@@ -240,6 +241,7 @@ public class map_manager : MonoBehaviour
             {
                 if (map[xVirtualPosition, yVirtualPosition] == null)
                 {
+                   // Debug.LogError("map position " + xVirtualPosition + " by " + yVirtualPosition + "is null");
                    map[xVirtualPosition, yVirtualPosition] = new map_item(-2, 0, 0, false);
                 }
             }

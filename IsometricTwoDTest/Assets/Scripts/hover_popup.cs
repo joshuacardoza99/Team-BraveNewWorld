@@ -15,6 +15,7 @@ public class hover_popup : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         //Output to console the GameObject's name and the following message
         if (pointerEventData.pointerCurrentRaycast.gameObject.name == "Button")
         {
+            Debug.Log("Mouse Enters: " + pointerEventData.pointerCurrentRaycast.gameObject.name);
             currentHover = pointerEventData.pointerCurrentRaycast.gameObject;
          
         }
@@ -26,6 +27,7 @@ public class hover_popup : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         //Output the following message with the GameObject's name
         if (currentHover != null)
         {
+            Debug.Log("Mouse Exit: " + currentHover);
             currentHover = null;            
         }
     }
