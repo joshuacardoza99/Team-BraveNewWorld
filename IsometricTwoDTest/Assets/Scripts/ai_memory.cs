@@ -82,7 +82,7 @@ namespace AI
                     import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
                 }
 
-                import_manager.run_database_function("server_functions", "get_movements", new string[1] { decisionNumber.ToString() }, civilizaiton);
+                import_manager.run_database_function("get_movements", new string[1] { decisionNumber.ToString() }, civilizaiton);
 
                 currentCivilization = civilizaiton;
 
