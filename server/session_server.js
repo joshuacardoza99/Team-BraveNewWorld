@@ -37,6 +37,7 @@ let find_player_match = function(playerSocket)
 
 	console.log("Player Match is match " + playerMatch);
 	console.log( matches.filter((match) => match.get_id() == playerMatch));
+	console.log(matches);
 	return matches.filter((match) => match.get_id() == playerMatch)[0];
 }
 
@@ -104,7 +105,12 @@ let message_handler = function(message, playerSocket)
 	}
 	else
 	{
-		find_player_match(playerSocket).message_handler(message, playerSocket);
+		let playerMatch = find_player_match(playerSocket);
+
+		if (playerMatch != null)
+		{
+			playerMatch.message_handler(message, playerSocket);
+		}
 	}
 }
 
