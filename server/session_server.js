@@ -22,6 +22,10 @@ let matches       = [];                                   // All matches on this
 let matchNumber   = 0;                                    // Next match id.
 let players       = [];                                   // All the players connected to this server.
 
+
+let testMatch = new match(23);
+testMatch.message_handler();
+
 // Finds the match the player is in.
 let find_player_match = function(playerSocket)
 {
