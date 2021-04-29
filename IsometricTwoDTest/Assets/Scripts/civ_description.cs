@@ -14,25 +14,20 @@ public class civ_description : MonoBehaviour
     {
         getText = GetComponent<Text>();
     }
-    
-    public void show_text()
-    {   
-        getText.text = inputText.text;
-    }
 
     void Update()
     {
         if (selectedCiv == 0)
         {
-            descriptionText.text = "Selected Civilization: Asian";
+            descriptionText.text = "Asian";
         }
         else if (selectedCiv == 1)
         {
-            descriptionText.text = "Selected Civilization: Greek";
+            descriptionText.text = "Greek";
         }
         else
         {
-            descriptionText.text = "Selected Civilization: Viking";
+            descriptionText.text = "Viking";
         }
     }
 }

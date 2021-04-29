@@ -195,7 +195,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1951941066997183547}
-  - component: {fileID: 532807965051433347}
+  - component: {fileID: 3734094240184435902}
+  - component: {fileID: -7023971662234231934}
   m_Layer: 0
   m_Name: Greek Tank
   m_TagString: Untagged
@@ -219,7 +220,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &532807965051433347
+--- !u!114 &3734094240184435902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179204933227736705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fdfb57c639781a438bc2f6fd21e1554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  damage: 0
+  attackRange: 0
+  moveRange: 0
+  attackCooldown: 0
+  moveCooldown: 0
+  nextAttack: 0
+  timeRemanining: 0
+  isAttacking: 0
+  startMoveCD: 0
+  canMove: 1
+  civilization: 0
+  printStats: {fileID: 0}
+  unit: {fileID: 11400000, guid: d56c77add73bae54488244d9854f3d0c, type: 2}
+  actualTargetTile: {fileID: 0}
+  currentTile: {fileID: 0}
+  anim: {fileID: 0}
+--- !u!95 &-7023971662234231934
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0

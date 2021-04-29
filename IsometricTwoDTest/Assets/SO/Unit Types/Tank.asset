@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Tank
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 6751f216af704174a951653dcfdd18ba, type: 3}
-  asian: {fileID: 4621492678046977175, guid: 70d53fb988231f146b26db2080952cba, type: 3}
-  viking: {fileID: 7963607904911265380, guid: cf88e477ada742243a49a89513d5960d, type: 3}
-  greek: {fileID: 1951941066997183547, guid: 4df1eb7fcbb56f44ba7dec38fb06d9fb, type: 3}
-  unitType: 2
+  asian: {fileID: -8679921383154817045, guid: 2d867757c02a7b44da3fa0ac812f7f83, type: 3}
+  viking: {fileID: -8679921383154817045, guid: fb2b4257eb8edab41a60f4940a63bee4, type: 3}
+  greek: {fileID: -8679921383154817045, guid: 53c9a5b87e7407e44a65c175c2d7c18e, type: 3}
+  unitType: 3
   health: 100
   attackRange: 4
+  moveRange: 2
   attackDamage: 25
   attackCooldown: 3
   movementCooldown: 3
+  food: 100

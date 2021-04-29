@@ -2,69 +2,83 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class civilization : MonoBehaviour
 {
-    public building_type[] building_type;
-    public int numberOfFarms;
-    public int numberOfMines;
+    // External Classes
+    match_manager  match_manager;
+    import_manager import_manager;
 
-    public int amountFood;
-    public int amountGold;
-
-    public float timeRemanining = 10;
+    public GameObject goldPopUp;        // Pop up for the Gold
+    public string goldToDisplay;        // string of gold amount that has been put into the users resources
+    public Tile currentTile = null;     // The tile this character is currently on.
 
     // External Classes
     civ_resources_display civ_resources_display;  // Import_Manager Class that facilitates cross class, player, and server function calls.
+    Building Building;
 
     // Start is called before the first frame update
     void Start()
     {
-        civ_resources_display = GameObject.Find("civManager").GetComponent<civ_resources_display>(); // Connects to the import_manager.
-    }
-
-    public void Awake()
-    {
-        amountGold = 1000;
-        Debug.Log("Civ Resources init to--> \n Civ Gold: " + amountGold + "\n Civ Food: " + amountFood);
+        civ_resources_display = GameObject.Find("civManager").GetComponent<civ_resources_display>();
+        Building = GameObject.Find("civManager").GetComponent<Building>();
+        match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
+        import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
     }
 
     public void Update()
     {
-        //numberOfFarms = GameObject.FindGameObjectsWithTag("Farm").Length;
-        //numberOfMines = GameObject.FindGameObjectsWithTag("Mine").Length;
-
-        civ_resources_display.update_resources();
-
-        if (timeRemanining > 0)
+        if (match_manager.game_status())
         {
-            timeRemanining -= Time.deltaTime;
-            // Debug.Log(timeRemanining);
-        }
-        else
-        {
-            Debug.Log("Resources Added");
-            timeRemanining = 10;
-
-            if (building_type[0])
+            match_manager.for_each_player((player) =>
             {
-                amountFood += (numberOfFarms * building_type[0].resourcesAmount);
-            }
-
-            if (building_type[1])
-            {
-                amountGold += (numberOfMines * building_type[1].resourcesAmount);
-            }
-
-            Debug.Log("Civ Resources init to--> \n Civ Gold: " + amountGold + "\n Civ Food: " + amountFood);
-   
+                if (player != null)
+                {
+                    update_resources(player.civilization);
+                }
+            });
         }
     }
 
-    public void deduct_cost(int buildingNumber)
+    // Updates the resource based on the buildings the given civilization owns.
+    public void update_resources(int civilization)
     {
-        amountGold = amountGold - building_type[buildingNumber].buildCost;
+        match_manager.choose_player(civilization).buildings.ForEach((Building building) =>
+        {
+            if (((int)building.building_type.unitType) != 0)
+            {
+                if (building.status == false)
+                {
+                    match_manager.choose_player(civilization).gold += building.building_type.goldAmount;
+                    match_manager.choose_player(civilization).food += building.building_type.foodAmount;
+
+                    if (match_manager.get_local_player().civilization == civilization)
+                    {
+                        resource_pop_up(building);
+                        civ_resources_display.update_resources();
+                    }
+                    building.status = true;
+                }
+            }
+        });
+    }
+
+    // The gold and food pop ups
+    public void resource_pop_up(Building building)
+    {
+        if (building.building_type.goldAmount > 0)
+        {
+            Vector3 tilePosition = building.currentTile.transform.position;                        // Get the tile position of the mine
+            GameObject goldInstance = Instantiate(goldPopUp, tilePosition, Quaternion.identity);   // Instantiate the prefab
+            goldInstance.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+ " + building.building_type.goldAmount.ToString(); // Display the string
+        }
+        
+        if (building.building_type.foodAmount > 0)
+        {
+            Vector3 tilePosition = building.currentTile.transform.position;                        // Get the tile position of the mine
+            GameObject goldInstance = Instantiate(goldPopUp, tilePosition, Quaternion.identity);   // Instantiate the prefab
+            goldInstance.transform.GetChild(0).GetComponent<TextMeshPro>().text = "+ " + building.building_type.foodAmount.ToString(); // Display the string
+        }
     }
 }
-
-

@@ -738,6 +738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5510017085608182199}
   - component: {fileID: -2519147834800149418}
+  - component: {fileID: 2192554988050114951}
   m_Layer: 0
   m_Name: Greek Melee
   m_TagString: Untagged
@@ -780,6 +781,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2192554988050114951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5133069982945647373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fdfb57c639781a438bc2f6fd21e1554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  damage: 0
+  attackRange: 0
+  moveRange: 0
+  cooldown: 0
+  nextAttack: 0
+  isAttacking: 0
+  civilization: 0
+  unit: {fileID: 11400000, guid: 170360ce56294104898532840e7bdc9f, type: 2}
+  actualTargetTile: {fileID: 0}
+  halfHeight: 0
+  currentTile: {fileID: 0}
+  anim: {fileID: 0}
 --- !u!1 &5448321529788020304
 GameObject:
   m_ObjectHideFlags: 0

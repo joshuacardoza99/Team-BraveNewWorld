@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Ranged
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 0485fc01f4ea3f649a2997262df7059e, type: 3}
-  asian: {fileID: 3480862566136248020, guid: a112f9a7f775e184a8ab17fe3b1e7e75, type: 3}
-  viking: {fileID: 3439820194571976798, guid: c09edde1a994af343bc32a3450dcf3e2, type: 3}
-  greek: {fileID: 5836595746069545413, guid: cdddc313cc9c2ec4d9c71541b393510e, type: 3}
-  unitType: 0
+  asian: {fileID: -8679921383154817045, guid: 9c2ec9f16d86deb45a98dd49de4a861f, type: 3}
+  viking: {fileID: -8679921383154817045, guid: 39a00b694c3a22445a4a1d244c2137ae, type: 3}
+  greek: {fileID: -8679921383154817045, guid: e3f474bde4c8d414c9edbd9a7f95659b, type: 3}
+  unitType: 1
   health: 50
   attackRange: 6
+  moveRange: 2
   attackDamage: 30
   attackCooldown: 3
   movementCooldown: 3
+  food: 100

@@ -16,18 +16,23 @@ public class building_type : ScriptableObject
     public Transform greek;                   // Greek civ prefabs
 
     [Space(5)]                                // 5 pixels of spacing here.
-    public bool isConquered = false;          // Ability for building to spawn units
-
+    [Header("Preview used for budiling")]     // Shows text in inspector
+    public Transform previewAsian;            // Asian civ prefabs
+    public Transform previewViking;           // Viking civ prefabs
+    public Transform previewGreek;            // Greek civ prefabs
 
     [Space(5)]                                // 5 pixels of spacing here.
-    public BuildingType unitType = new BuildingType(); // Adds drop down list for attack type
+    public BuildingType unitType = new BuildingType();
+                                              // Adds drop down list for attack type
 
     [Space(5)]                                // 5 pixels of spacing here.
     [Header("Building Attributes")]           // Shows text in inspector
-    public int   resourcesAmount;               // Amount of resources building generates
-    public int   buildCost;
+    public int   foodAmount;                  // Amount of food this building generates.
+    public int   goldAmount;                  // Amount of gold this building generates.
+    public int   buildCost;                   // Amount of gold it costs to build
+    public string type = "not a building";    // String with the type of building
 
-    public float resourceCooldown;              // Cooldown on resource
+    public float resourceCooldown;            // Cooldown on resource
 
     public void print_message()
     {
@@ -36,13 +41,34 @@ public class building_type : ScriptableObject
 
     public void print_attributes()
     {
-        Debug.Log("\nResource Cooldown: " + resourceCooldown + "\nResource Amount: " + resourcesAmount);
+        Debug.Log("\nResource Cooldown: " + resourceCooldown + "\nResource Amount: Food = " + foodAmount + " Gold = " + goldAmount);
+    }
+
+    // Return the correct transform for each civilization
+    public Transform get_building_of_civilization(int civilization)
+    {
+        Transform selectedBuilding = null;
+
+        if (civilization == 0)
+        {
+            selectedBuilding = asian;
+        }
+        else if (civilization == 1)
+        {
+            selectedBuilding = greek;
+        }
+        else if (civilization == 2)
+        {
+            selectedBuilding = viking;
+        }
+
+        return selectedBuilding;
     }
 }
 
 public enum BuildingType
 {
-    commandPost,
-    farm,
-    mine
+    commandPost, // 0
+    farm,        // 1
+    mine         // 2
 }
