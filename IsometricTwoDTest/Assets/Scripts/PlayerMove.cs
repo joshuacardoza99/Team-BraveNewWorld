@@ -198,11 +198,6 @@ public class PlayerMove : MonoBehaviour
             unit_maker.face_right_backward(this.gameObject);
         }
 
-        if (moveToTile.get_grid()[0] < grid[0])
-        {
-            Debug.Log("The Tiles Y position is greater");
-        }
-
 
         currentTile = moveToTile;
         grid[0] = moveToTile.get_grid()[0];
@@ -221,9 +216,7 @@ public class PlayerMove : MonoBehaviour
             currentTile.get_buidling().GetComponent<City>().check_for_enemy(); // send the thread to the afformentioned city
 
         startMoveCD = true;
-        Debug.Log(startMoveCD.ToString());
         canMove = false;
-        Debug.Log(canMove.ToString());
 
         attacking.reset_attack_range();
         attacking.reset_tiles();
@@ -305,7 +298,6 @@ public class PlayerMove : MonoBehaviour
 
     public void initiate_attack_cooldown(float cooldown)
     {
-        Debug.Log("IN COOLDOWN");
         nextAttack = Time.time + cooldown;
     }
 
