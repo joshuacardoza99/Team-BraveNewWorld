@@ -66,14 +66,11 @@ public class PlayerMove : MonoBehaviour
         unit_maker = GameObject.Find("unit_manager").GetComponent<unit_maker>();
         cooldowns = GameObject.Find("Cooldown").GetComponent<cooldown>();
         attacking = GameObject.Find("civManager").GetComponent<attack>();
-
-        //anim = this.GetComponent<Animator>();        
+        
         // Print Stats unto the screen
         canvas = GameObject.Find("Canvas").gameObject;
         panel = canvas.transform.GetChild(8).gameObject;
         anim = this.GetComponent<Animator>();
-        // Load and print the stats into the game
-        unit.print_attributes();
     }
 
     void Update()
@@ -198,22 +195,9 @@ public class PlayerMove : MonoBehaviour
             unit_maker.face_right_backward(this.gameObject);
         }
 
-        if (moveToTile.get_grid()[0] < grid[0])
-        {
-            Debug.Log("The Tiles Y position is greater");
-        }
-
-
         currentTile = moveToTile;
         grid[0] = moveToTile.get_grid()[0];
         grid[1] = moveToTile.get_grid()[1];
-
-        try
-        {
-            if (anim.GetBool("isWalking"))
-                anim.SetBool("isWalking", false);
-        }
-        catch { }
 
 
         // if the current tile has a enemy city on it, begin the takeover process
@@ -221,9 +205,7 @@ public class PlayerMove : MonoBehaviour
             currentTile.get_buidling().GetComponent<City>().check_for_enemy(); // send the thread to the afformentioned city
 
         startMoveCD = true;
-        Debug.Log(startMoveCD.ToString());
         canMove = false;
-        Debug.Log(canMove.ToString());
 
         attacking.reset_attack_range();
         attacking.reset_tiles();
@@ -305,7 +287,6 @@ public class PlayerMove : MonoBehaviour
 
     public void initiate_attack_cooldown(float cooldown)
     {
-        Debug.Log("IN COOLDOWN");
         nextAttack = Time.time + cooldown;
     }
 

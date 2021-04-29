@@ -116,7 +116,6 @@ namespace AI
                     building.AddComponent<BoxCollider>();
                     building.GetComponent<Building>().building_type = match_manager.buildingTypeList[((int)type.unitType)];
                     building.GetComponent<Building>().set_current_tile(tile);
-                    type.print_message();
                 }
 
             }

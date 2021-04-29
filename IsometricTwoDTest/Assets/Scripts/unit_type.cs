@@ -36,22 +36,6 @@ public class unit_type : ScriptableObject
     [Header("Cost")]                          // Shows text in inspector
     public int food;
 
-    public void print_message()
-    {
-        Debug.Log("A " + unitType + " unit has been spawned");
-    }
-
-    public void print_attributes()
-    {
-        Debug.Log("\nHealth: " + health + "\nAttack Range: " + attackRange + "\nAttack Damage: " + attackDamage);
-    }
-
-    public void print_cooldowns()
-    {
-        Debug.Log(attackCooldown);
-        Debug.Log(movementCooldown);
-    }
-
     public Transform get_unit_of_civilization(int civilization)
     {
         Transform selectedBuilding = null;
@@ -71,11 +55,6 @@ public class unit_type : ScriptableObject
 
         return selectedBuilding;
     }
-
-    //public Transform get_attack_holder()
-    //{
-      //  return attackPopup;
-    //}
 }
 
 

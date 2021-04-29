@@ -89,10 +89,6 @@ public class ai_thought_process : MonoBehaviour
             tools.join_match(civilization);
             running = true;
         }
-        else
-        {
-            Debug.LogError("Cannot start an AI without a civilization.");
-        }
     }
 
     // Stops the ai from running.
