@@ -35,9 +35,6 @@ let find_player_match = function(playerSocket)
 		}
 	})
 
-	console.log("Player Match is match " + playerMatch);
-	console.log( matches.filter((match) => match.get_id() == playerMatch));
-	console.log(matches);
 	return matches.filter((match) => match.get_id() == playerMatch)[0];
 }
 
@@ -53,9 +50,7 @@ let was_in = function(ip = "", championNmae = "")
 let find_match  = function (player)
 {
 	let matchFound = null; // Match Object for the next player to join.
-	console.log("Finding a match");
-	console.log(matches);
-	
+
 	if (matches.length > 0)
 	{
 		matches.forEach((match) =>
@@ -80,12 +75,9 @@ let find_match  = function (player)
 	
 	if (matchFound == null)
 	{
-		console.log("Creating a new match");
 		matchFound = new match(matchNumber++);
-		console.log(matchFound);
-		console.log(matches);
+	
 		matches.push(matchFound);
-		console.log(matches);
 	}
 
 	return matchFound;
@@ -109,6 +101,12 @@ let message_handler = function(message, playerSocket)
 		players.push(newPlayer)
 		match.add_player(newPlayer);
 	}
+	else if (message.gameObject == "database_functions")
+	{
+		let tempMatch = new match(-1);
+
+		tempMatch.message_handler(message, playerSocket);
+	}
 	else
 	{
 		let playerMatch = find_player_match(playerSocket);
@@ -126,7 +124,7 @@ let message_handler = function(message, playerSocket)
 server.on("connection", (playerSocket) =>
 {
 	let currentPlayer = playerSocket; // Socket connected to the current player.
-	console.log("A player connected");
+
 	try
 	{
 	    players.push(currentPlayer);
@@ -135,8 +133,6 @@ server.on("connection", (playerSocket) =>
 		{
 			try
 			{
-				console.log("Got a message");
-				console.log(message);
 				message_handler(JSON.parse(message), currentPlayer);
 			}
 			catch (error)
@@ -152,7 +148,6 @@ server.on("connection", (playerSocket) =>
 
 		playerSocket.on("close", () =>
 		{
-			console.log("Closing the connection");
 			let playerMatch = find_player_match(currentPlayer);
 			let currentPlayerObject = players = players.filter(player => player != currentPlayer);
 

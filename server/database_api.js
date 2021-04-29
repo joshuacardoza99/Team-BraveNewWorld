@@ -169,7 +169,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    // Gets of list of actions and relating info for decision making.
    this.get_movements = function(decisionNumber = 0, receiver = (result) => {})
    {
-      var sql = "SELECT decisionNumber, numberOfMoves, numberOfBuilds, numberOfAttacks, numberOfRecruits, numberOfCaptures, actions, weight " +
+      var sql = "SELECT decisionNumber, numberOfMoves, numberOfBuilds, numberOfAttacks, numberOfRecruits, numberOfCaptures, action, weight " +
                 "  FROM AI"                                                                                                                   +
                 " WHERE decisionNumber = " + decisionNumber +";";
 
@@ -190,7 +190,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
    this.record_movements = function(decisionNumber = 0, numberOfMoves = 0, numberOfBuilds = 0, numberOfAttacks = 0, numberOfRecruits = 0,
                                     numberOfCaptures = 0, actions = 0, weight = 0)
    {
-      var sql = "INSERT INTO AI (decisionNumber, numberOfMoves, numberOfBuilds, numberOfAttacks, numberOfRecruits, numberOfCaptures, actions, weight)" +
+      var sql = "INSERT INTO AI (decisionNumber, numberOfMoves, numberOfBuilds, numberOfAttacks, numberOfRecruits, numberOfCaptures, action, weight)" +
                 "  VALUES (" + decisionNumber + "," + numberOfMoves + "," + numberOfBuilds + "," + numberOfAttacks + "," + numberOfRecruits + "," + 
                 numberOfCaptures + "," + actions + "," + weight + ");";
 
@@ -215,7 +215,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
                 "       numberOfAttacks  = " + numberOfAttacks + "," +
                 "       numberOfRecruits = " + numberOfRecruits + "," +
                 "       numberOfCaptures = " + numberOfCaptures + "," +
-                "       actions          = " + actions          + ";";
+                "       action          = " + actions          + ";";
 
       connection.query(sql, (error) =>
       {
@@ -238,7 +238,7 @@ exports.database_api = function(serverName = "", username = "", password = "", d
                 "       numberOfAttacks  = " + numberOfAttacks + "," +
                 "       numberOfRecruits = " + numberOfRecruits + "," +
                 "       numberOfCaptures = " + numberOfCaptures + "," +
-                "       actions          = " + actions          + ";";
+                "       action          = " + actions          + ";";
 
       connection.query(sql, (error) =>
       {
