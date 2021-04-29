@@ -86,7 +86,6 @@ public class building_manager : MonoBehaviour
                         newBuilding.tag = "commandPost";
                         newBuilding.set_current_tile(tile);
                         activeBuildingType.print_message();
-                        Debug.Log(activeBuildingType.asian.name);
                     }
                     else if (tile.is_in_city()
                              && canPlace
@@ -103,7 +102,6 @@ public class building_manager : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Building cannot be placed here, destroying previews");
                         preview_object.destroy_previews();
                     }
 
@@ -116,7 +114,6 @@ public class building_manager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Don't have enough Gold");
                 preview_object.destroy_previews();
             }
         }

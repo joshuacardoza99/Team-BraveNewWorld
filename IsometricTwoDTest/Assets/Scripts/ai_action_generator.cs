@@ -21,6 +21,13 @@ namespace AI
         map_manager map_manager;
         ai_tools tools = new ai_tools();
 
+        private List<Action> attackActions = new List<Action>();
+        private List<Action> captureActions = new List<Action>();
+        private List<Action> buildActions = new List<Action>();
+        private List<Action> recruitActions = new List<Action>();
+        private List<Action> movementActions = new List<Action>();
+        int lastDecisionNumber = 0;
+
         // Finds all possible move any unit/champion of the given civilization can perform.
         public List<Action> find_unit_moves(int civilization)
         {
@@ -49,15 +56,18 @@ namespace AI
 
             units.ForEach((PlayerMove unit) =>
             {
-                List<Tile> useableTiles = map_manager.map[unit.get_grid()[0], unit.get_grid()[1]].ground.GetComponent<Tile>().get_walkable_tiles(unit.moveRange);
-
-                useableTiles.ForEach((Tile tile) =>
+                if (unit != null)
                 {
-                    moves.Add(() =>
+                    List<Tile> useableTiles = map_manager.map[unit.get_grid()[0], unit.get_grid()[1]].ground.GetComponent<Tile>().get_walkable_tiles(unit.moveRange);
+
+                    useableTiles.ForEach((Tile tile) =>
                     {
-                        tools.move_unit(tile, unit, civilization);
+                        moves.Add(() =>
+                        {
+                            tools.move_unit(tile, unit, civilization);
+                        });
                     });
-                });
+                }
             });
 
             return moves;
@@ -186,18 +196,21 @@ namespace AI
 
             units.ForEach((PlayerMove unit) =>
             {
-                List<Tile> useableTiles = map_manager.map[unit.get_grid()[0], unit.get_grid()[1]].ground.GetComponent<Tile>().get_walkable_tiles(unit.attackRange);
-
-                useableTiles.ForEach((Tile tile) =>
+                if (unit != null)
                 {
-                    if (tile.is_occupied() && tile.get_current_character().GetComponent<PlayerMove>().get_civilization() != civilization)
+                    List<Tile> useableTiles = map_manager.map[unit.get_grid()[0], unit.get_grid()[1]].ground.GetComponent<Tile>().get_walkable_tiles(unit.attackRange);
+
+                    useableTiles.ForEach((Tile tile) =>
                     {
-                        attacks.Add(() =>
+                        if (tile.is_occupied() && tile.get_current_character().GetComponent<PlayerMove>().get_civilization() != civilization)
                         {
-                            tools.attack_unit(tile.get_current_character().GetComponent<PlayerMove>(), unit);
-                        });
-                    }
-                });
+                            attacks.Add(() =>
+                            {
+                                tools.attack_unit(tile.get_current_character().GetComponent<PlayerMove>(), unit);
+                            });
+                        }
+                    });
+                }
             });
 
             return attacks;
@@ -217,23 +230,39 @@ namespace AI
         }
        
         // Gets the all available actions of a given type
-        public List<Action> get_actions(ActionType type, int civilization)
+        public List<Action> get_actions(ActionType type, int civilization, int decisionNumber)
         {
             List<Action> actions =  new List<Action>();
 
             switch (type)
             {
                 case ActionType.movement:
-                    actions = find_unit_moves(civilization);
+                    if (movementActions.Count < 0 || lastDecisionNumber != decisionNumber)
+                    {
+                        movementActions = find_unit_moves(civilization);
+                    }
+                    actions = movementActions;
                     break;
                 case ActionType.build:
-                    actions = find_new_builds(civilization);
+                    if (buildActions.Count < 0 || lastDecisionNumber != decisionNumber)
+                    {
+                        buildActions = find_new_builds(civilization);
+                    }
+                    actions = buildActions;
                     break;
                 case ActionType.recruit:
-                    actions = find_new_units(civilization);
+                    if (recruitActions.Count < 0 || lastDecisionNumber != decisionNumber)
+                    {
+                        recruitActions = find_new_units(civilization);
+                    }
+                    actions = recruitActions;
                     break;
                 case ActionType.attack:
-                    actions = find_unit_attacks(civilization);
+                    if (attackActions.Count < 0 || lastDecisionNumber != decisionNumber)
+                    {
+                        attackActions = find_unit_attacks(civilization);
+                    }
+                    actions = attackActions;
                     break;
                 case ActionType.capture:
                     break;

@@ -21,6 +21,7 @@ let server        = new web_socket.Server({"server": webServer}); // Holds the W
 let matches       = [];                                   // All matches on this server.
 let matchNumber   = 0;                                    // Next match id.
 let players       = [];                                   // All the players connected to this server.
+let databaseMatch = new match(-1);
 
 // Finds the match the player is in.
 let find_player_match = function(playerSocket)
@@ -76,6 +77,7 @@ let find_match  = function (player)
 	if (matchFound == null)
 	{
 		matchFound = new match(matchNumber++);
+	
 		matches.push(matchFound);
 	}
 
@@ -100,9 +102,18 @@ let message_handler = function(message, playerSocket)
 		players.push(newPlayer)
 		match.add_player(newPlayer);
 	}
+	else if (message.gameObject == "database_functions")
+	{
+		databaseMatch.message_handler(message, playerSocket);
+	}
 	else
 	{
-		find_player_match(playerSocket).message_handler(message, playerSocket);
+		let playerMatch = find_player_match(playerSocket);
+
+		if (playerMatch != null)
+		{
+			playerMatch.message_handler(message, playerSocket);
+		}
 	}
 }
 

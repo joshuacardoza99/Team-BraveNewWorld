@@ -153,6 +153,8 @@ exports.match = function(id = 0)
 			else if (message.function = "record_movements")
 			{
 				decision = JSON.parse(message.parameters[0]);
+				console.log("The decision that was passed is what follows:");
+				console.log(decision);
 
 				database_api.record_movements(decision.decisionNumber, decision.numberOfMoves, decision.numberOfBuilds, decision.numberOfAttacks,
 					                          decision.numberOfRecruits, decision.numberOfCaptures, decision.actions, decision.weight);

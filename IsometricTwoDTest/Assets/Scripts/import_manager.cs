@@ -35,7 +35,7 @@ public class import_manager : MonoBehaviour
     // Runs the given function on the local machine and all machines in the current match.
     public void run_function_all(string gameObject, string function, string[] parameters)
     {
-        if (gameObject != "server_functions")
+        if (gameObject != "server_functions" && gameObject != "database_functions")
         {
             run_function(gameObject, function, parameters);
         }
@@ -55,7 +55,7 @@ public class import_manager : MonoBehaviour
             functionParameters[index + 3] = parameters[0];
         }
 
-        run_function_all("server_function", function, functionParameters);
+        run_function_all("database_functions", function, functionParameters);
     }
 
     // Receives results from the database.

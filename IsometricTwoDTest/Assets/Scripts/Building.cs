@@ -41,7 +41,6 @@ public class Building : MonoBehaviour
     {
         match_manager = GameObject.Find("network_manager").GetComponent<match_manager>();
         preview_object = GameObject.Find("preview_object").GetComponent<preview_object>();
-        Debug.Log("A building has been placed!");
 
         // Print Stats unto the screen
         canvas = GameObject.Find("Canvas").gameObject;

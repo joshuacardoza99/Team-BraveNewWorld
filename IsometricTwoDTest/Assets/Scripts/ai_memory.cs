@@ -56,7 +56,6 @@ namespace AI
         public bool           recalling     = false;
 
         // Private Variables //
-        private List<decision> gameDecisions       = new List<decision>();
         private int            currentCivilization = -1;
 
         // Stores an action and a situation fingerprint.
@@ -67,7 +66,7 @@ namespace AI
                 import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
             }
 
-            import_manager.run_function_all("server_functions", "record_movements", new string[1] { JsonUtility.ToJson(decision) });
+            import_manager.run_function_all("database_functions", "record_movements", new string[1] { JsonUtility.ToJson(decision) });
         }
 
         // Recalls the best action types to take.
@@ -103,7 +102,7 @@ namespace AI
                 import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
             }
 
-            import_manager.run_function_all("server_functions", "promote_movements", new string[1] { JsonUtility.ToJson(decision) });
+            import_manager.run_function_all("database_functions", "promote_movements", new string[1] { JsonUtility.ToJson(decision) });
         }
 
         // Decreases the weight of a failed decision.
@@ -114,7 +113,7 @@ namespace AI
                 import_manager = GameObject.Find("network_manager").GetComponent<import_manager>();
             }
 
-            import_manager.run_function_all("server_functions", "demote_movements", new string[1] { JsonUtility.ToJson(decision) });
+            import_manager.run_function_all("database_functions", "demote_movements", new string[1] { JsonUtility.ToJson(decision) });
         }
     }
 }

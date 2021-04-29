@@ -36,13 +36,11 @@ public class building_type : ScriptableObject
 
     public void print_message()
     {
-        Debug.Log("A " + unitType + " has been spawned");
     }
 
     public void print_attributes()
     {
-        Debug.Log("\nResource Cooldown: " + resourceCooldown + "\nResource Amount: Food = " + foodAmount + " Gold = " + goldAmount);
-    }
+      }
 
     // Return the correct transform for each civilization
     public Transform get_building_of_civilization(int civilization)

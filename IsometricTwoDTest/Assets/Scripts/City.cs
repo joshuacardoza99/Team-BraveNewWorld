@@ -32,7 +32,6 @@ public class City : MonoBehaviour
         import_manager = GameObject.Find("network_manager").GetComponent<import_manager>(); // Connects to the import_manager.
 
         currentTile = this.GetComponent<Building>().currentTile;
-        Debug.Log("A City has been placed!");
         set_city_limits(1);
         get_buildings();
     }
@@ -81,14 +80,9 @@ public class City : MonoBehaviour
         {
             occupiedBy = character.civilization;
             StartCoroutine(conquer(character.civilization));
-            Debug.Log("Enemy on a command post!");
             // add code to transfer city ownership here
         }
-        else if ((character != null) && (character.civilization == gameObject.GetComponent<Building>().get_civilization()))
-        {
-            Debug.Log("frendly unit on command post");
-            // else if block is just for testing.
-        }
+
         Testing = true;
     }
 }

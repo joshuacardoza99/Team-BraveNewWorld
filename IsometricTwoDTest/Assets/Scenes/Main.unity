@@ -7303,7 +7303,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5752732040819822597, guid: 4e7d13eeaff274142b08f884ef0d2263, type: 3}
       propertyPath: cloudCover
-      value: 46
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 5752732040819822597, guid: 4e7d13eeaff274142b08f884ef0d2263, type: 3}
+      propertyPath: mapWidth
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5752732040819822598, guid: 4e7d13eeaff274142b08f884ef0d2263, type: 3}
       propertyPath: m_Name
