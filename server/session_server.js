@@ -53,7 +53,9 @@ let was_in = function(ip = "", championNmae = "")
 let find_match  = function (player)
 {
 	let matchFound = null; // Match Object for the next player to join.
-
+	console.log("Finding a match");
+	console.log(matches);
+	
 	if (matches.length > 0)
 	{
 		matches.forEach((match) =>
@@ -78,8 +80,8 @@ let find_match  = function (player)
 	
 	if (matchFound == null)
 	{
-		matchFound = new match(matchNumber++);
 		console.log("Creating a new match");
+		matchFound = new match(matchNumber++);
 		console.log(matchFound);
 		console.log(matches);
 		matches.push(matchFound);
@@ -150,6 +152,7 @@ server.on("connection", (playerSocket) =>
 
 		playerSocket.on("close", () =>
 		{
+			console.log("Closing the connection");
 			let playerMatch = find_player_match(currentPlayer);
 			let currentPlayerObject = players = players.filter(player => player != currentPlayer);
 
