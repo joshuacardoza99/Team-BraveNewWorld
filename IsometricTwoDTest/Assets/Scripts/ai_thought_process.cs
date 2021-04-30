@@ -43,7 +43,7 @@ public class ai_thought_process : MonoBehaviour
     {
         running = false;
 
-        List<Action> attackActions = actionMaker.get_actions(ActionType.attack, civilization, decisionCount);
+       /* List<Action> attackActions = actionMaker.get_actions(ActionType.attack, civilization, decisionCount);
         List<Action> captureActions = actionMaker.get_actions(ActionType.capture, civilization, decisionCount);
         List<Action> buildActions = actionMaker.get_actions(ActionType.build, civilization, decisionCount);
         List<Action> recruitActions = actionMaker.get_actions(ActionType.recruit, civilization, decisionCount);
@@ -53,11 +53,11 @@ public class ai_thought_process : MonoBehaviour
         List<decision> resonableDecisions = new List<decision>();
         int highestWeight = 0;
 
-        List<decision> recalledDecisions = recall(decisionCount, civilization);
+        List<decision> recalledDecisions = recall(decisionCount, civilization);*/
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(5);
 
-        if (recalledDecisions.Count > 0)
+        /*if (recalledDecisions.Count > 0)
         {
             recalledDecisions.ForEach((decision thought) =>
             {
@@ -80,7 +80,7 @@ public class ai_thought_process : MonoBehaviour
             });
         }
 
-        List<Action> availableMoves = actionMaker.find_player_actions(civilization);
+        
 
         if (resonableDecisions.Count > 0)
         {
@@ -89,42 +89,44 @@ public class ai_thought_process : MonoBehaviour
             availableMoves = actionMaker.get_actions((ActionType) nextDecision.action, civilization, decisionCount);
         }
         else
-        {
-            if (actionMaker.get_actions(ActionType.attack, civilization, decisionCount).Count > 0 && UnityEngine.Random.Range(0, 100) > 50)
+        {*/
+        List<Action> availableMoves = actionMaker.find_player_actions(civilization);
+
+        if (actionMaker.get_actions(ActionType.attack, civilization, decisionCount).Count > 0 && UnityEngine.Random.Range(0, 100) > 50)
             {
-                nextDecision.action = (int) ActionType.attack;
+               // nextDecision.action = (int) ActionType.attack;
                 availableMoves = actionMaker.get_actions(ActionType.attack, civilization, decisionCount);
             }
             else if (actionMaker.get_actions(ActionType.capture, civilization, decisionCount).Count > 0 && UnityEngine.Random.Range(0, 100) > 50)
             {
-                nextDecision.action = (int) ActionType.capture;
+              //  nextDecision.action = (int) ActionType.capture;
                 availableMoves = actionMaker.get_actions(ActionType.capture, civilization, decisionCount);
             }
             else if (actionMaker.get_actions(ActionType.recruit, civilization, decisionCount).Count > 0 && UnityEngine.Random.Range(0, 100) > 80)
             {
-                nextDecision.action = (int)ActionType.recruit;
+               // nextDecision.action = (int)ActionType.recruit;
                 availableMoves = actionMaker.get_actions(ActionType.recruit, civilization, decisionCount);
             }
             else if (actionMaker.get_actions(ActionType.build, civilization, decisionCount).Count > 0 && UnityEngine.Random.Range(0, 100) > 80)
             {
-                nextDecision.action = (int)ActionType.build;
+                //nextDecision.action = (int)ActionType.build;
                 availableMoves = actionMaker.get_actions(ActionType.build, civilization, decisionCount);
             }
             else if (actionMaker.get_actions(ActionType.movement, civilization, decisionCount).Count > 0 && UnityEngine.Random.Range(0, 100) > 50)
             {
-                nextDecision.action = (int)ActionType.movement;
+               // nextDecision.action = (int)ActionType.movement;
                 availableMoves = actionMaker.get_actions(ActionType.movement, civilization, decisionCount);
             }
-        }
+      //  }
 
-        memory.record(nextDecision);
+       // memory.record(nextDecision);
 
         if (availableMoves.Count > 0)
         {
             availableMoves[UnityEngine.Random.Range(0, availableMoves.Count)]();
         }
 
-        gameDecisions.Add(nextDecision);
+        //gameDecisions.Add(nextDecision);
         decisionCount++;
         running = true;
     }

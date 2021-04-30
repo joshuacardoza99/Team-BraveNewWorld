@@ -259,8 +259,11 @@ public class Tile : MonoBehaviour
         }
 
         // if the tile has a enemy city on it, begin the takeover process
-        if ((get_buidling() != null) && (get_buidling().GetComponent<City>() != null)) // check if its a city
+        if ((get_buidling() != null) && (get_buidling().GetComponent<City>() != null) && get_buidling().GetComponent<City>().currentTile != null
+             && get_buidling().GetComponent<City>().currentTile.get_current_character() != null) // check if its a city
+        {
             get_buidling().GetComponent<City>().check_for_enemy(); // send the thread to the afformentioned city
+        }
     }
 
     // Sets this tile into unoccupied mode.

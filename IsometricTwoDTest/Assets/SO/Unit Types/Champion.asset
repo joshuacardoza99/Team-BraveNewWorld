@@ -21,6 +21,6 @@ MonoBehaviour:
   attackRange: 3
   moveRange: 2
   attackDamage: 50
-  attackCooldown: 3
-  movementCooldown: 3
+  attackCooldown: 0
+  movementCooldown: 0
   food: 20
